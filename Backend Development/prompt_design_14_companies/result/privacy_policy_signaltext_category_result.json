@@ -1,0 +1,40 @@
+{
+    "First Party Collection/Use": [
+        "You register a phone number when you create a Signal account.",
+        "Phone numbers are used to provide our Services to you and other Signal users.",
+        "You may optionally add other information to your account, such as a profile name and profile picture."
+    ],
+    "Third Party Sharing/Collection": [
+        "We work with third parties to provide some of our Services.",
+        "For example, our Third-Party Providers send a verification code to your phone number when you register for our Services."
+    ],
+    "User Access/Edit/Deletion": [
+        "You can manage your personal information in Signal’s application Settings.",
+        "For example, you can update your profile information or choose to enable additional privacy features like a Registration Lock PIN."
+    ],
+    "Data Retention": [
+        "Signal cannot decrypt or otherwise access the content of your messages or calls.",
+        "Signal queues end-to-end encrypted messages on its servers for delivery to devices that are temporarily offline."
+    ],
+    "Data Security": [
+        "Signal utilizes state-of-the-art security and end-to-end encryption to provide private messaging and Internet calling services to users worldwide.",
+        "Your calls and messages are always encrypted, so they can never be shared or viewed by anyone but yourself and the intended recipients."
+    ],
+    "International/Specific Audiences": [
+        "You must be at least 13 years old to use our Services."
+    ],
+    "Policy Change": [
+        "We will update this privacy policy as needed so that it is current, accurate, and as clear as possible."
+    ],
+    "User Choice/Control": [
+        "You can manage your personal information in Signal’s application Settings."
+    ],
+    "Privacy contact information": [
+        "If you have questions about our Privacy Policy please contact us at privacy@signal.org."
+    ],
+    "Introductory/Generic": [
+        "Signal is designed to never collect or store any sensitive information."
+    ],
+    "Do Not Track": [],
+    "Practice not covered": []
+}

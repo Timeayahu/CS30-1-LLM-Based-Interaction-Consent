@@ -1,0 +1,47 @@
+{
+    "First Party Collection/Use": [
+        "At Reddit, we believe that privacy is a right. We want to empower our users to be the masters of their identity. In this privacy policy, we want to help you understand how and why Reddit ('Reddit,' 'we' or 'us') collects, uses, and shares information about you when you use our websites, mobile apps, widgets, APIs, emails, and other online products and services (collectively, the 'Services') or when you otherwise interact with us or receive a communication from us.",
+        "We collect minimal information that can be used to identify you by default. If you want to just browse, you don't need an account.",
+        "Any data we collect is used primarily to provide our Services, which are focused on allowing people to come together and form communities."
+    ],
+    "Third Party Sharing/Collection": [
+        "We may share information with vendors, consultants, and other service providers who need access to such information to carry out work for us.",
+        "If you link your Reddit account with a third-party service, Reddit will share the information you authorize with that third-party service.",
+        "For example, we may receive demographic or interest information about you from third parties, including advertisers..."
+    ],
+    "User Access/Edit/Deletion": [
+        "You can access your information and change or correct certain information through the Services.",
+        "You may delete your account information at any time from the user preferences page."
+    ],
+    "Data Retention": [
+        "We store the information we collect for as long as it is necessary for the purpose(s) for which we originally collected it.",
+        "After you submit a request to delete your account, our purge script commences the deletion process within 90 days."
+    ],
+    "Data Security": [
+        "We take measures to help protect information about you from loss, theft, misuse and unauthorized access, disclosure, alteration, and destruction.",
+        "For example, we use HTTPS while information is being transmitted."
+    ],
+    "International/Specific Audiences": [
+        "Children under the age of 13 are not allowed to create an account or otherwise use the Services.",
+        "If you live in the European Economic Area ('EEA'), Reddit Netherlands B.V., is the controller of information processed in connection with the Reddit platform and this policy."
+    ],
+    "Do Not Track": [
+        "Most modern web browsers give you the option to send a Do Not Track signal to the sites you visit, indicating that you do not wish to be tracked."
+    ],
+    "Policy Change": [
+        "We may change this Privacy Policy from time to time.",
+        "If the changes, in our sole discretion, are material, we may also notify you by sending an email to the address associated with your account."
+    ],
+    "User Choice/Control": [
+        "You have choices about how to protect and limit the collection, use, and sharing of information about you when you use the Services.",
+        "You may opt out of receiving some or all categories of promotional communications from us."
+    ],
+    "Introductory/Generic": [
+        "At Reddit, we believe that privacy is a right. We want to empower our users to be the masters of their identity."
+    ],
+    "Practice not covered": [],
+    "Privacy contact information": [
+        "If you have other questions about this Privacy Policy, please contact us at: Reddit, Inc. 548 Market St. #16093 San Francisco, California 94104",
+        "For email inquiries, you may reach our Data Protection Office at dpo@reddit.com."
+    ]
+}

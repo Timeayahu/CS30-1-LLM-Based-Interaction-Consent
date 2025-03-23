@@ -1,0 +1,37 @@
+{
+    "First Party Collection/Use": [
+        "Uber uses data to provide, personalize, maintain, and improve our services.",
+        "We maintain the value of personal data for Uber and our users by handling data as users expect, keeping it accurate and complete, and properly destroying it when it is no longer needed."
+    ],
+    "Third Party Sharing/Collection": [
+        "Uber shares your data with others as necessary to enable the services you request or provide through Uber.",
+        "We may also share your information with Uber affiliates, subsidiaries, service providers, and business partners, or for legal reasons or in the event of a dispute."
+    ],
+    "User Access/Edit/Deletion": [
+        "You can request a copy of your data here (login required).",
+        "Following an account deletion request, we delete your account and data, except as necessary for purposes of safety, security, fraud prevention or compliance with legal requirements."
+    ],
+    "Data Retention": [
+        "Uber retains your data for as long as necessary for the purposes in our Privacy Notice.",
+        "We retain trip or order information for 7 years."
+    ],
+    "Data Security": [
+        "We provide reasonable and appropriate safeguards to prevent loss, and unauthorized use or disclosure, of personal data."
+    ],
+    "International/Specific Audiences": [
+        "The legal basis that Uber relies on for each use of data under privacy laws such as the European Union's General Data Protection Regulation."
+    ],
+    "Do Not Track": [],
+    "Policy Change": [],
+    "User Choice/Control": [
+        "We give users clear choices about their privacy and controls that are easy to use so that they can manage their data.",
+        "Visit our Privacy Center to make choices about how we use your data, explore privacy products and manage your privacy settings."
+    ],
+    "Introductory/Generic": [
+        "Our Privacy Principles set the foundation for how we approach privacy at Uber."
+    ],
+    "Practice not covered": [],
+    "Privacy contact information": [
+        "You may submit questions to our DPO here."
+    ]
+}

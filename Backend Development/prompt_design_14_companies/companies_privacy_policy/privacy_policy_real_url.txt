@@ -1,0 +1,20 @@
+# 访问 Tesla 隐私政策页面
+#url = "https://www.tesla.com/legal/privacy"
+# 访问google
+#url = "https://policies.google.com/privacy?hl=en-US"
+#ibm
+#url = "https://www.ibm.com/us-en/privacy"
+#tiktok
+#url = "https://www.tiktok.com/legal/page/row/privacy-policy/en"
+#uber
+#url = "https://www.uber.com/global/en/privacy/overview/"
+#Reddit
+#url = "https://www.reddit.com/policies/privacy-policy?__hstc=53109431.bd1028bfa9b412cc559ab7e732b52496.1727735173021.1732200491510.1732209607383.87&__hssc=53109431.4951.1732209607383&__hsfp=810579359y"
+#dropbox
+#url = "https://www.dropbox.com/en_GB/terms"
+#apple
+#url = "https://www.apple.com/legal/privacy/en-ww/"
+#signal
+#url = "https://signal.org/legal/"
+#superhuman
+url = "https://superhuman.com/privacy"
