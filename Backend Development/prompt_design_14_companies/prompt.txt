@@ -1,0 +1,38 @@
+prompt = f"""
+Below is a privacy policy text:
+
+{privacy_text} # The content of each company's privacy policies
+
+Please classify this privacy policy based on the following 12 categories. Multiple categories may apply:
+
+1. **First Party Collection/Use** - how and why the information is collected.
+2. **Third Party Sharing/Collection** - how the information may be used or collected by third parties.
+3. **User Access/Edit/Deletion** - if users can modify their information and how.
+4. **Data Retention** - how long the information is stored.
+5. **Data Security** - how is users' data secured.
+6. **International/Specific Audiences** - practices that target a specific group of users (e.g., children, Europeans, etc.)
+7. **Do Not Track** - if and how Do Not Track signals are honored.
+8. **Policy Change** - if the service provider will change their policy and how the users are informed.
+9. **User Choice/Control** - choices and controls available to users.
+10. **Introductory/Generic** - Does it contain general or introductory information about the privacy policy?
+11. **Practice not covered** - Does it mention any privacy practices not covered by the above categories?
+12. **Privacy contact information** - Does it provide contact information for users to inquire about privacy-related issues?
+
+### **Instructions**
+- Extract relevant sections from the policy and classify them under the appropriate categories.
+- If a section belongs to multiple categories, list all applicable categories.
+- Return the output as a JSON object, where each category contains a list of text excerpts from the policy.
+
+### **Example Output Format**
+{{
+    "First Party Collection/Use": ["We collect user data to improve our services..."],
+    "Third Party Sharing/Collection": ["We may share your data with third-party advertisers..."],
+    "User Choice/Control": ["Users can opt out of data collection by adjusting their settings..."],
+    "User Access/Edit/Deletion": ["You can update or delete your information by contacting support..."],
+    "Data Retention": ["We retain user data for up to 2 years..."],
+    "Data Security": ["We implement encryption and access control to protect data..."],
+    "Policy Change": ["We may update this policy, and users will be notified via email..."],
+    "Do Not Track": ["We respect Do Not Track signals in supported browsers..."],
+    "International/Specific Audiences": ["Our service complies with GDPR for European users..."]
+}}
+"""
