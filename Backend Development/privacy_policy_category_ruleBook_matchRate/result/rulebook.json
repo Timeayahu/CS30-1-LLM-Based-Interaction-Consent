@@ -1,0 +1,178 @@
+{
+    "First Party Collection/Use": {
+        "description": "Universal Rules for Identifying First Party Collection/Use:",
+        "key_phrases": [
+            "\"Our website\"",
+            "\"Our app\"",
+            "\"User account\"",
+            "\"Customer data\"",
+            "\"Directly collected\""
+        ],
+        "sentence_structures": [
+            "\"We collect [data type] directly from users through [method] on our website.\"",
+            "\"Your user account information is used to personalize your experience on our platform.\"",
+            "\"We may use customer data to send you marketing emails about our products and services.\""
+        ],
+        "negation_patterns": [
+            "\"We do not share your data with third parties.\"",
+            "\"We will not use your information for any purpose other than [specified purpose].\""
+        ],
+        "note": "These rules are based on a limited dataset and may not be exhaustive. It's crucial to consider the specific context and legal requirements when determining whether data collection and use practices constitute first-party collection/use."
+    },
+    "Third Party Sharing/Collection": {
+        "description": "Based on the provided analyses indicating all instances as \"safe,\" it appears there are no clear universal rules for identifying Third Party Sharing/Collection in this context. ",
+        "key_phrases": [],
+        "sentence_structures": [],
+        "negation_patterns": [],
+        "note": ""
+    },
+    "User Access Edit and Deletion": {
+        "description": "Universal Rules for Identifying User Access Edit and Deletion",
+        "key_phrases": [
+            "Safe Access:  Indicates the action is permitted and doesn't pose a risk.",
+            "Authorized Modification:  Suggests the edit is within the user's permissions.",
+            "Controlled Deletion:  Implies a secure and regulated process for removing data.",
+            "Access Granted:  Confirms the user has the right to perform the action.",
+            "Permissioned Edit:  Highlights the user's explicit authorization for the change."
+        ],
+        "sentence_structures": [
+            "Subject + Verb + Object + Prepositional Phrase:  \"The user granted access to the document.\"",
+            "Subject + Verb + Adverbial Phrase:  \"The deletion was performed safely.\"",
+            "Subject + Verb + Object + Clause:  \"The system allows users to edit their profiles.\""
+        ],
+        "negation_patterns": [
+            "\"Not permitted\" or \"Unauthorized\":  These phrases would indicate actions that are not safe and should be avoided."
+        ],
+        "note": "These rules are based on the limited information provided.  A more comprehensive analysis would require a larger dataset and deeper understanding of the specific context."
+    },
+    "Data Retention": {
+        "description": "Universal Rules for Identifying Data Retention:",
+        "key_phrases": [],
+        "sentence_structures": [],
+        "negation_patterns": [],
+        "note": ""
+    },
+    "Data Security": {
+        "description": "Universal Rules for Identifying Data Security ",
+        "key_phrases": [],
+        "sentence_structures": [],
+        "negation_patterns": [],
+        "note": "These rules are based on limited information. A more comprehensive analysis would require a larger dataset and deeper understanding of the specific context."
+    },
+    "International and Specific Audiences": {
+        "description": "Based on the provided analyses, it seems like all the analyzed texts are classified as \"safe\".  ",
+        "key_phrases": [],
+        "sentence_structures": [],
+        "negation_patterns": [],
+        "note": ""
+    },
+    "Do Not Track": {
+        "description": "Universal Rules for Identifying \"Do Not Track\"",
+        "key_phrases": [
+            "Do Not Track",
+            "DNT",
+            "Track Me Not",
+            "Privacy Preference",
+            "Opt Out Tracking"
+        ],
+        "sentence_structures": [
+            "\"I want to Do Not Track my browsing activity.\"",
+            "\"Please respect my Do Not Track preference.\"",
+            "\"My browser is set to Do Not Track.\""
+        ],
+        "negation_patterns": [
+            "\"Do Not Track\" is the primary phrase and negation is implied.",
+            "\"Allow Tracking\" or \"Enable Tracking\" would be used to express the opposite.",
+            "Important Note:",
+            "While these rules provide a starting point, the specific context and phrasing used to indicate \"Do Not Track\" can vary.  It's crucial to consider the broader context and user intent for accurate identification."
+        ],
+        "note": ""
+    },
+    "Policy Change": {
+        "description": "Universal Rules for Identifying Policy Change:",
+        "key_phrases": [
+            "Amend, modify, alter, update, revision",
+            "New legislation, policy proposal, regulatory change",
+            "Effective date, implementation, enforcement",
+            "Guidelines, standards, procedures",
+            "Repeal, abolish, discontinue"
+        ],
+        "sentence_structures": [
+            "Subject + Verb (amend/modify/etc.) + Object (policy/law/regulation).",
+            "Example: The government will amend the existing environmental policy.",
+            "There will be a change in policy regarding [topic].",
+            "Example: There will be a change in policy regarding data privacy.",
+            "Effective [date], the new policy will come into effect.",
+            "Example: Effective January 1st, 2024, the new policy will come into effect."
+        ],
+        "negation_patterns": [
+            "Not applicable, no change, status quo",
+            "Example: There will be no change to the current tax policy.",
+            "Important Note:",
+            "These are just potential starting points.",
+            "Context is crucial: The specific language used to denote policy change will vary greatly depending on the subject matter, industry, and jurisdiction.",
+            "Machine learning: For accurate identification, a machine learning model trained on a large dataset of policy documents would be more effective."
+        ],
+        "note": ""
+    },
+    "User Choice/Control": {
+        "description": "Universal Rules for Identifying User Choice/Control:",
+        "key_phrases": [
+            "User selection",
+            "Choose",
+            "Opt for",
+            "Decide",
+            "Preference",
+            "Control",
+            "Customize",
+            "Configure",
+            "Input",
+            "Specify"
+        ],
+        "sentence_structures": [
+            "The user can choose from a variety of options.",
+            "Users have the option to customize their settings.",
+            "Input your preferred settings here."
+        ],
+        "negation_patterns": [
+            "The user is not allowed to change this setting.",
+            "There is no option to select a different language.",
+            "This feature cannot be customized."
+        ],
+        "note": "While these rules provide a general framework, context is crucial.  The specific wording and surrounding sentences will ultimately determine whether user choice and control are present."
+    },
+    "Introductory/Generic": {
+        "description": "Universal Rules for Identifying Introductory/Generic Statements:",
+        "key_phrases": [
+            "In general",
+            "Typically",
+            "Generally speaking",
+            "As a rule",
+            "On the whole"
+        ],
+        "sentence_structures": [
+            "Subject + Verb + Adverbial of Degree (e.g., generally, often) + Object/Clause:  Generally, cats are good hunters.",
+            "Introductory Phrase + Subject + Verb: In general, people enjoy spending time with friends.",
+            "Subject + Verb + Complement Clause (introducing a general statement): It is important to remember that everyone makes mistakes."
+        ],
+        "negation_patterns": [
+            "Not always/never: While dogs are often loyal, they are not always friendly towards strangers.",
+            "Exceptions: Generally, birds can fly, but penguins are an exception."
+        ],
+        "note": "These rules are not exhaustive and there can be variations in language and context."
+    },
+    "Practice not covered": {
+        "description": "Universal Rules for Identifying \"Practice Not Covered\"",
+        "key_phrases": [],
+        "sentence_structures": [],
+        "negation_patterns": [],
+        "note": ""
+    },
+    "Privacy contact information": {
+        "description": "Based on the provided analysis (\"safe\", \"safe\", \"safe\", \"safe\", \"safe\"), it appears that all instances are classified as safe.  ",
+        "key_phrases": [],
+        "sentence_structures": [],
+        "negation_patterns": [],
+        "note": ""
+    }
+}
