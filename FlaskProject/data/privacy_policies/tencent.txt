@@ -1,0 +1,5568 @@
+**We're sorry but 腾讯隐私保护平台 doesn't work properly without JavaScript enabled.
+Please enable it to continue.**
+
+[![](https://cl-privacy-1258638997.cos-dualstack.ap-
+guangzhou.myqcloud.com/imgs/logo.svg)](/)
+
+  * [ 首页 ](javascript:;)
+  * [ 用户中心 ](javascript:;)
+
+产品隐私管理指引
+
+隐私问题反馈
+
+  * [ 产品隐私中心 ](javascript:;)
+
+腾讯隐私政策
+
+产品隐私保护指引
+
+儿童隐私保护声明
+
+Cookie政策
+
+腾讯SDK隐私透明度信息
+
+接入第三方SDK目录
+
+  * [ 产品隐私设计 ](javascript:;)
+
+# 产品隐私中心
+
+为更好地让您了解我们对个人信息的处理方式，我们制定了《腾讯隐私政策》、《产品隐私保护指引》、《腾讯SDK隐私政策》、《儿童隐私保护声明》以及《Cookie政策》等一系列隐私政策文件。
+
+腾讯隐私政策
+
+产品隐私保护指引
+
+儿童隐私保护声明
+
+Cookie政策
+
+腾讯SDK隐私透明度信息
+
+接入第三方SDK目录
+
+腾讯隐私政策
+
+  * 引言
+  * 我们收集的信息
+  * 我们如何使用信息
+  * 我们如何使用cookie及相关技术
+  * 您分享的信息
+  * 您如何管理自己的信息
+  * 第三方数据处理及信息的公开披露
+  * 我们可能向您发送的信息
+  * 存储信息的地点和期限
+  * 信息安全
+  * 广告
+  * 未成年人保护
+  * 适用范围
+  * 联系我们
+  * 变更
+
+隐私政策更新（日期：2021年12月3日）
+
+引言Introduction
+
+腾讯严格遵守法律法规，遵循以下隐私保护原则，为您提供更加安全、可靠的服务：Tencent adheres to the following privacy
+protection principles and is committed to providing you with more secure and
+reliable service:
+
+![](https://mat1.gtimg.com/pingjs/ext2020/privacy2018/img/ys-yy.png)
+
+  * ·安全可靠：1\. Security Safeguard and Reliance:
+
+我们竭尽全力通过合理有效的信息安全技术及管理流程，防止您的信息泄露、损毁、丢失。We try our best to prevent your
+information from breach, damage or loss via effective and reasonable
+information security technology and administrative process;
+
+  * ·自主选择：2\. Choice:
+
+我们为您提供便利的信息管理选项，以便您做出合适的选择，管理您的个人信息。 We provide you convenient privacy
+management options so that you may make proper choices to control or manage
+your privacy;
+
+  * ·保护通信秘密：3\. Protection of Communication Secret:
+
+我们严格遵照法律法规，保护您的通信秘密，为您提供安全的通信服务。We will strictly protect your communication
+secrets in compliance with the applicable laws and regulations;
+
+  * ·合理必要：4\. Reasonableness and Necessity:
+
+为了向您和其他用户提供更好的服务，我们仅收集必要的信息。We will collect necessary data so that we can
+provide you and other users with better service in order to achieve products'
+functions;
+
+  * ·公开透明：5\. Transparency:
+
+我们努力使用简明易懂的表述，向您介绍隐私政策，以便您清晰地了解我们的信息处理方式。We endeavor to introduce our privacy
+policy in an easy and straightforward way and help you better understand our
+information process practice;
+
+  * ·将隐私保护融入产品设计：6\. Integrate Privacy PBD Principle with Tencent’s Product Designs:
+
+我们在产品和服务研发、运营的各个环节，融入隐私保护的理念。We take legal, product, design and other elements
+into considerations of every aspect of our product and service development, to
+integrate with Privacy PBD Principle, in order to carry out the methodology of
+Tencent PBD Privacy Protection.
+
+《腾讯隐私政策》主要向您说明：This Privacy Policy mainly explains:
+
+  * ![](https://mat1.gtimg.com/pingjs/ext2020/privacy2018/img/ys-yy-icon01.png)
+
+我们收集哪些信息What information we collect.
+
+  * ![](https://mat1.gtimg.com/pingjs/ext2020/privacy2018/img/ys-yy-icon02.png)
+
+我们收集信息的用途How we use that information.
+
+  * ![](https://mat1.gtimg.com/pingjs/ext2020/privacy2018/img/ys-yy-icon03.png)
+
+您所享有的权利Your Rights.
+
+您可以通过阅读《腾讯隐私政策》（以下简称“本隐私政策”），详细了解我们对个人信息的收集、使用方式，以便您更好地了解我们的服务并作出适当的选择。We hope
+that you will read this Privacy Policy (this "Privacy Policy") to understand
+how we collect and use information in order for you to further understand our
+services and to make appropriate selections.
+
+如果我们具体的产品和服务有具体的隐私保护指引，您可以查阅该特定隐私保护指引，以帮助您更好地保护您的个人信息。
+
+本隐私政策适用的产品和服务由深圳市腾讯计算机系统有限公司提供。注册地址为深圳市南山区粤海街道麻岭社区科技中一路腾讯大厦35层 。
+
+除另有约定外，本隐私政策所用术语与《[腾讯服务协议](https://www.qq.com/contract.shtml)》中的术语具有相同的涵义。By
+using Tencent service, you agree to the contents contained in this policy.
+Unless otherwise defined herein, the terms used in this privacy policy shall
+have the same meanings as those defined in the [ Tencent Service Agreement
+](https://www.qq.com/contract.shtml) .
+
+如您有问题，请[联系我们](javascript:;)。Should you have any queries, please [contact
+us](javascript:;).
+
+我们收集的信息Information We Collect
+
+我们根据法律法规的要求，遵循合法、正当、必要和诚信的原则，仅收集实现产品功能所必要的个人信息。这些信息包括： Based on the principle
+of lawfulness, fairness and necessity, we will only collect the following
+information that is necessary for the purpose of achieving the product's
+function.
+
+您在使用我们服务时主动提供的信息Information you provide to us
+
+  * ·您在注册或使用我们的产品或服务时，主动填写或上传的昵称、手机号码、头像、图片等。Information you provide to us when registering an account.
+
+  * ·您通过我们的客服或参加我们举办的活动时所提交的信息。Information provided by you via our customer service or whilst participating in our activities.
+
+  * ·我们一些特定的服务可能需要您提供特定的个人信息来实现相关功能。若您选择不提供该类信息，将不会影响您使用产品或服务中的其他功能。 Some of our service may need you to provide your selected sensitive personal information to achieve specific functions. If you choose not to provide such information, you may not be able to use specific functions in the service, but it will not affect the usage of other functions. If you provide your sensitive information for us voluntarily, you agree that we process your Personal Sensitive Information in accordance with the purposes and methods provided in this policy.
+
+我们在您使用服务时获取的信息Information we may collect when you use our services
+
+  * ·**日志信息****Server Logs.** We may [automatically collect](javascript:;) and store relevant information as the service log when you use our services.
+
+例如，当您使用我们的服务时，为了维护产品与服务的安全稳定运行，我们可能会收集设备信息、软件信息、服务日志信息等相关信息。
+
+  * ·**位置信息****Location data**
+
+例如，当您使用与位置有关的服务时，我们可能会记录您设备所在的位置信息，以便为您提供相关服务。We may collect location data of
+your device when you use the location-related services, in order to provide
+relevant service for you.
+
+您或其他用户在使用服务时提供的信息中可能包含您所在地理位置信息，例如您或其他人共享的照片包含的地理标记信息。
+
+GPS位置信息是敏感个人信息，若您拒绝提供该信息，不会影响您使用产品或服务的其他功能，仅会影响与地理位置相关的功能。
+
+  * ·**其他相关信息****Other relevant information**
+
+为了帮助您更好地使用我们的产品或服务，经您的明确授权我们可能会收集相关信息，例如，您选择开启导入通讯录功能，我们可能对您联系人的姓名和电话号码进行加密，并仅收集加密后的信息。For
+you to better use our product or service, we will collect relevant
+information, for example, the friends list, group list information, and voice
+print. Also, if you choose to turn on "import contacts" feature we will
+encrypt name and phone number of your contacts and collect encrypted
+information in order to connect you with people you know who also use our
+service.
+
+其他用户分享的信息中含有您的信息Your information contained in the information shared by other
+users.
+
+例如，其他用户发布的照片或分享的视频中可能包含您的信息。For example, photos or videos published by other
+users may contain your information.
+
+其他情况获取的信息Information from other partners.
+
+在法律允许的情况下，经过您的同意，我们可能会获得您在使用第三方合作伙伴服务时所产生或分享的信息。例如，您使用微信或QQ账户登录第三方合作伙伴服务时，我们会获得您登录第三方合作伙伴服务的名称等信息，以方便您进行授权管理。您可以阅读第三方合作伙伴服务的用户协议和隐私政策了解相关内容。We
+may have cooperation with third-party partners. Therefore, we may obtain the
+information that is shared or generated when you use a third-party service.
+For example, when you log in a third-party service with your WeChat or QQ
+account, we will know the name of such service and your log-in time so that it
+will be convenient for you to manage the authorization. Please read the third-
+party service user agreement or privacy policy carefully.
+
+我们如何使用信息How We Use the Information We Collect
+
+我们严格遵守法律法规的规定及与用户的约定，将收集的信息用于以下用途。若我们超出以下用途使用您的信息，我们将再次向您进行说明，并征得您的同意。Subject
+to applicable laws and regulations or agreements with users, we may use the
+collected information in the following ways. If we use your information for
+purposes beyond the following purposes, we will explain to you again and ask
+for consent.
+
+向您提供服务To provide you with our services.
+
+满足您的个性化需求To meet your personal needs.
+
+例如，语言设定、位置设定、个性化的帮助服务。For example, language settings, location settings and
+other personalized services.
+
+安全保障To ensure security.
+
+例如，我们会将您的信息用于身份验证、安全防范、反诈骗监测、存档备份、客户的安全服务等用途。例如，您下载或安装的安全软件会对恶意程序或病毒进行检测，或为您识别诈骗信息。For
+example, we will use your information for identity authentication, safety
+precautions, anti-fraud monitoring, storage and backup, customer safety
+service and other applications. For example, the safety software downloaded or
+installed by you will detect malicious programs or viruses, or identify
+fraudulent information.
+
+向您推荐您可能感兴趣的广告、资讯等To recommend ads, news etc. that you may be interested in to
+you.
+
+评估、改善我们的广告投放和其他促销及推广活动的效果To evaluate and improve the effect of ads and other
+promotions in our services.
+
+管理软件To manage software.
+
+例如，进行软件认证、软件升级等。For example, software certification and software updates, etc.
+
+邀请您参与有关我们服务的调查To include your participation in survey activities about our
+product and services.
+
+为了让您有更好的体验、改善我们的服务或经您同意的其他用途，在符合相关法律法规的前提下，我们可能将通过某些服务所收集的信息用于我们的其他服务。例如，将您在使用我们某项服务时的信息，用于个性化的服务体验、用户研究分析与统计等服务。Subject
+to applicable laws and regulations, in order to provide you with a better user
+experience and to improve our services, or upon your consent, we may apply the
+information collected from certain services to other services provided by us.
+For instance, we may use your information collected or generated when you use
+our certain services to show you personalized content or advertisement and for
+user analysis and statistic service.
+
+为了确保服务的安全，帮助我们更好地了解我们应用程序的运行情况，我们可能记录相关信息，例如，您使用应用程序的频率、故障信息、总体使用情况、性能数据以及应用程序的来源。我们不会将我们存储在分析软件中的信息与您在应用程序中提供的个人身份信息相结合。To
+ensure the security of our services, and to help us further understand the
+state of performance of our applications, we may record relevant information,
+for example, the frequency of your usage, crash logs information, overall
+usage, performance data and source of application. We do not link the
+information we store within the mobile analytics software to personally
+identifiable information you submit within the mobile application.
+
+随着业务的发展，我们提供的产品功能和服务可能会有所调整和变化，若处理目的因此发生变更，我们将再次向您进行说明，并征得您的同意。
+
+我们如何使用Cookie、标识符及相关技术How We Use Cookies and Relevant Technologies
+
+[Cookie](javascript:;)、[标识符](https://privacy.qq.com/document/priview/896637b6dc4f4b80b48163580d63e07e)及相关技术是互联网行业普遍使用的技术。按照法律法规的相关规定，我们或我们的第三方合作伙伴，可能通过放置安全的Cookie、标识符及相关技术收集您的信息，以便为您提供更好的用户体验和服务。我们会严格要求第三方合作伙伴遵守本隐私政策的相关规定。We
+and our third party partners may collect your information via safely inserted
+[Cookie and relevant technologies](javascript:;), for the purposes for
+providing you with more personalized user experience and service. We will
+strictly require such third party partners to observe relevant requirements of
+this policy.
+
+若您希望了解更多Cookie的安全性等信息，可参见《[Cookie政策说明](javascript:;)》。You may set or mange
+Cookie via your browser settings. But please be noted that you may not enjoy
+the best service experience and certain service may not be used if you stop
+using Cookie. If you hope to learn more information about the security of
+Cookie, you may refer to the [Cookie Policy Statement](javascript:;).
+
+您分享的信息Information You Share
+
+您可以通过我们的服务与您的好友、家人及其他用户分享您的相关信息。 Our services may allow you to share your
+relevant information with your friends and family and other users. For
+example, you can share texts and pictures publicly in your "WeChat Moments".
+
+请注意，这其中可能包含您的个人身份信息、个人财产信息等敏感信息。请您谨慎考虑披露您的相关个人敏感信息。Please be noted that such
+information may contain sensitive information including your personal identity
+information and personal property information. Please prudently consider
+disclosure of your relevant personal sensitive information.
+
+您可通过我们服务中的隐私设置来控制您分享信息的范围，也可通过服务中的设置或我们提供的指引删除您公开分享的信息。但请您注意，这些信息仍可能由其他用户或不受我们控制的非关联第三方独立地保存。You
+may control the scope of information shared by you and you may also delete the
+information publicly shared using the service setting or according to our
+guidance. Please note such information may still have been retained
+independently by other users or unrelated third parties which we are not able
+to control.
+
+您如何管理自己的信息How to Manage Your Own Information
+
+您在使用我们服务的过程中，
+可以通过查阅、复制、更正、补充、删除等方式来管理您的信息。当您使用我们的具体产品和服务时，您可以查阅其独立的隐私保护指引，我们在这些指引中具体描述了您管理自己的个人信息的途径和方式，以帮助您更好的保护您的个人信息。You
+may access, amend and delete information provided by you during the
+registration of your account or other personal information when using our
+services, or contact us via the notice guidelines. The scope and the way in
+which you access, amend or delete your personal information depend on the
+service you use.
+
+例如，若您在使用地理位置相关服务时，希望停止分享您的地理位置信息，您可通过手机定位关闭功能、软硬件服务商及通讯服务提供商的关闭方式停止分享，建议您仔细阅读相关指引。For
+example, when using geographical related service, to stop sharing your
+geographical information, you can stop it by turning off cellphone positioning
+function, or according to methods provided by software and hardware service
+providers and communication service providers. Please read relevant guidance
+carefully.
+
+在您行使上述权利时，我们可能会要求您进行身份验证，以保障账号的安全。如果您有任何问题，请通过本隐私政策列明的联系方式[ 与我们联系
+](javascript:;)。We will collect and use your information only for achieving
+the functions of our products or services in accordance with this policy.
+
+请您理解，由于技术所限、法律或监管要求，我们可能无法满足您的所有要求，我们会在法律法规规定的期限内进行反馈。同时我们将不断优化产品和服务来保障您的权利。Please
+understand that due to technical limitations, legal or regulatory
+requirements, we may not be able to meet all your requests. We endeavor to
+respond to your requests within a reasonable period of time.
+
+第三方数据处理及信息的公开披露Information We Share
+
+我们与第三方合作过程中，将遵守法律规定，按照最小必要原则，安全审慎地处理相关数据。We may share your personal
+information with a third party other than our data processors with your prior
+consent;
+
+我们将按照法律法规的规定，对数据处理涉及的第三方进行严格的限制。要求其严格遵守我们关于数据隐私保护的措施与要求，包括但不限于根据数据保护协议、承诺书及相关数据处理政策进行处理，保障数据安全。Should
+we share your personal information with third parties mentioned above, we will
+use encryption, anonymization or other means to protect your information
+security.
+
+出于为您提供服务的目的，我们可能委托第三方服务商处理您的个人信息，该等服务商将严格按照我们委托的目的和相关委托处理协议处理个人信息。
+
+我们将严格保护您的个人信息，不会主动公开披露您的个人信息，亦不会主动向合作伙伴分享可用于识别您个人身份的信息，除非经您单独同意或法律法规另有规定，例如：For
+the purpose of external processing, we may share your personal information
+with third-party business partners (third-party service providers,
+contractors, agents, advertising partners, application developers etc., for
+example, the telecommunication service providers who send out emails and push
+notifications on our behalf, or the map service providers who provide us with
+location service) (they may not be located in your jurisdiction), and require
+them to follow our instructions, the Privacy Policy and any other relevant
+confidentiality and security measures to process the above information for us
+and for the purposes of:
+
+  * ·为订立、履行个人作为一方当事人的合同所必需，或者按照法律制定的劳动规章制度和依法签订的集体合同实施人力资源管理所必需；Providing you with our services;
+
+  * ·为履行法定职责或者法定义务所必需；Implementing the purpose of the section "How We Use the Information We Collect";
+
+  * · 为应对突发公共卫生事件，或者紧急情况下为保护自然人的生命健康和财产安全所必需；Performing our obligations and excising our rights as provided in the [ Tencent Service Agreement ](https://www.qq.com/contract.shtml) and this Privacy Policy; 
+
+  * ·为公共利益实施新闻报道、舆论监督等行为，在合理的范围内处理个人信息；Understanding, maintaining and improving our services.
+
+  * ·依照法律规定在合理的范围内处理个人自行公开或者其他已经合法公开的个人信息；
+
+  * ·法律、行政法规规定的其他情形。
+
+随着我们业务的持续发展，当发生合并、收购、资产转让等交易导致向第三方转移您的个人信息时，我们将通过推送通知、公告等形式告知您相关情形，按照法律法规及不低于本隐私政策所要求的标准继续保护或要求新的管理者继续保护您的个人信息。With
+the development of our business, when mergers, acquisitions, asset transfer or
+other transactions happens, we will inform you of such circumstances by
+pushing notifications or notices, and continue to protect or require new
+controllers to continue to protect your personal information in accordance
+with the applicable laws and regulations and the standard of protection which
+will not be lower than that under this Privacy Policy.
+
+我们可能向您发送的信息Information We May Send to You
+
+![](https://mat1.gtimg.com/pingjs/ext2020/privacy2018/img/ys-push-
+info.png)信息通知Push notifications
+
+您在使用我们的服务时，我们可能向您发送电子邮件、短信、资讯或推送通知。
+
+您可以按照我们的相关提示，在设备上选择取消订阅。如特定的产品和服务存在个性化推送的信息，请您查阅该产品和服务具体的隐私保护指引获取更能多的信息、或关闭个性化推荐。
+
+When you use our services, we may send emails, text messages, news or push
+notifications to you.
+
+You may follow the relevant notice to unsubscribe on the device.
+
+![](https://mat1.gtimg.com/pingjs/ext2020/privacy2018/img/ys-push-
+service.png)与服务有关的公告Service announcements
+
+我们可能在必要时（例如，因系统维护而暂停某一项服务时）向您发出与服务有关的公告。
+
+您可能无法取消这些与服务有关、性质不属于广告的公告。
+
+We may send you announcements related to service if necessary (for example,
+the suspension of certain service due to system maintenance).
+
+You may not be able to cancel these non-promotional service-related
+announcements.
+
+存储信息的地点和期限Place and Period of Information Retention
+
+![](https://mat1.gtimg.com/pingjs/ext2020/privacy2018/img/ys-store-
+address.png)存储信息的地点Where we store information
+
+我们遵守法律法规的规定，将在中华人民共和国境内收集和产生的个人信息存储在境内。
+
+We will store users personal information collected within mainland China
+within the territory in accordance with applicable laws and regulations.
+
+![](https://mat1.gtimg.com/pingjs/ext2020/privacy2018/img/ys-store-
+time.png)存储信息的期限Period of information retention
+
+一般而言，我们仅在为实现目的所必需的最短时间内保留您的个人信息，但下列情况除外：
+
+In general, we will retain your personal information in the shortest possible
+time to fulfill the purpose of collection of such information. However, for
+the following purposes, we may change the retention period for the purposes of
+compliance:
+
+  * ·为遵守适用的法律法规等有关规定；To comply with the relevant laws and regulations;
+
+  * ·为遵守法院判决、裁定或其他法律程序的规定；To comply with court decisions, rulings or requirements of other legal procedures;
+
+  * ·为遵守相关政府机关执法的要求；To comply with the requirements of relevant government agencies or other legally authoritative entities;
+
+当我们的产品或服务发生停止运营的情形时，我们将采取例如，推送通知、公告等形式通知您，并在合理的期限内删除或匿名化处理您的个人信息。
+
+Should the operation of our products or service terminate, we will inform you
+in the form of push notifications, announcements, etc., and delete or
+anonymize your personal information within a reasonable period of time.
+
+信息安全Information Security
+
+我们为您的信息提供相应的安全保障，以防止信息的丢失、不当使用、未经授权访问或披露。We take security measures to protect
+your information against loss, improper use, unauthorized access or
+disclosure.
+
+我们严格遵守法律法规保护用户的通信秘密。We will strictly protect users communication in accordance
+with the applicable laws and regulations.
+
+我们将在合理的安全水平内使用各种安全保护措施以保障信息的安全。We will work within the reasonable security
+standards and use a variety of security measures to protect the security of
+information.
+
+例如，我们使用加密技术、匿名化处理等手段来保护您的个人信息。 For example, we will use encryption
+technologies (such as TLS, [SSL](javascript:;)), anonymization and other means
+to protect your personal information.
+
+我们建立专门的管理制度、流程和组织确保信息安全。We have established a specialized management, process
+and organization system to ensure information security.
+
+例如，我们严格限制访问信息的人员范围，要求他们遵守保密义务，并进行审查。For example, we strictly restrict the
+scope of personnel who can access information, and require them to comply with
+their confidentiality obligations and conduct audits.
+
+若发生个人信息泄露等安全事件，我们会启动应急预案，阻止安全事件扩大，并以推送通知、公告等形式告知您。In the event of a breach of
+security incident of personal information, we will activate emergency response
+plan to prevent the expansion of such security incident and inform you in the
+form of push notifications, public announcements and etc.
+
+广告Advertisements
+
+为了提供更丰富的广告体验，我们可能向您提供个性化广告服务，您在腾讯及合作第三方的网站、应用及其他渠道中可以接收到相关广告内容。您可以查阅具体产品的隐私保护指引了解更多。如您不希望接收个性化广告，也可以根据具体产品中的指引进行关闭。
+
+未成年人保护Protection of Minors
+
+我们非常重视对未成年人个人信息的保护。We attach great importance to the protection of personal
+information of minors.
+
+根据相关法律法规的规定，若您是18周岁以下的未成年人，在使用腾讯的服务前，应事先取得您的家长或法定监护人的同意。In accordance with the
+relevant laws and regulations, if you are a minor under 18 years old, you
+would be required to obtain you parents' or legal guardian's consent prior to
+using Tencent service.
+
+我们有专门面向14周岁以下的儿童提供的产品或服务、产品或服务中包含专门面向儿童的功能板块，或者需要用户输入生日、年龄信息等能识别用户年龄的产品或服务。
+
+根据相关法律法规的规定，若您是14周岁以下的儿童，在使用相关的产品或服务前，应当按照注册、使用流程，事先取得您的家长或法定监护人的同意，并由您的家长或法定监护人帮助您完成产品或服务注册流程，以便您能使用我们提供的产品或服务。
+
+若您是儿童的监护人，当您在帮助儿童完成产品或服务的注册、使用前，应当仔细阅读本政策、产品具体的隐私保护指引（如有）和《[儿童隐私保护声明](javascript:;)》，决定是否同意本政策、产品具体的隐私保护指引（如有）和《[儿童隐私保护声明](javascript:;)》并帮助儿童进行注册、使用，以便儿童能使用我们提供的产品或服务。
+
+如您对您所监护的儿童的个人信息保护有相关疑问或权利请求时，请通过《[儿童隐私保护声明](javascript:;)》中的第七部分中披露的联系方式与我们联系。我们会在合理的时间内处理并回复您。
+
+适用范围Application Scope
+
+本隐私政策适用的产品和服务由深圳市腾讯计算机系统有限公司提供。All of our services are subject to this Privacy
+Policy.
+
+某些服务有其特定的隐私指引/声明，该特定隐私指引/声明更具体地说明我们在该服务中如何处理您的信息。However, some services have
+their own specific privacy guidance/statement, such specific privacy
+guidance/statement describe how we process your information in the service
+more specifically.
+
+如本政策与特定服务的隐私指引/声明有不一致之处，请以该特定隐私指引声明为准。If this Privacy Policy is inconsistent
+with the privacy guidance/statement of a particular service, the privacy
+policy of that particular service shall prevail.
+
+请您注意，本政策不适用由其他公司或个人提供的服务。Please note this Privacy Policy is not applicable to
+services provided by other companies or individuals.
+
+例如，您通过使用微信账号登录其他公司或个人提供的服务。For example, you may log in services provided by
+other companies or individuals with WeChat account.
+
+您使用该等第三方服务须受其隐私政策（而非本政策）约束，您需要仔细阅读其政策内容。Your use of such third-party services
+is subject to the terms and privacy policy of such third-party services
+(rather than this Privacy Policy), and you need to read their privacy practice
+carefully.
+
+联系我们Contact Us
+
+我们设立了专门的个人信息保护团队和个人信息保护负责人，如果您对本隐私政策或个人信息保护相关事宜有任何疑问或投诉、建议时，您可以通过以下方式与我们联系：
+
+1\. 您可以填写 [ 个人信息保护和隐私问题反馈问卷 ](https://privacy.qq.com/questionnaire)与我们联系；  
+2\. 将问题发送至Dataprivacy@tencent.com；  
+3\. 通过<https://kf.qq.com/>与我们联系；  
+4\. 将您的问题邮寄至下列地址：
+
+中国广东省深圳市南山区海天二路33号腾讯滨海大厦 数据合规与隐私保护部（收）  
+邮编：518054
+
+我们将尽快审核所涉问题，并在15个工作日或法律法规规定的期限内予以反馈。We will review your queries and reply
+within 15 days after verifying your user identity.
+
+变更Changes to Privacy Policy
+
+我们可能适时修订本隐私政策内容。We may update and revise this Privacy Policy from time to
+time,
+
+如该等变更会导致您在本隐私政策项下权利的实质减损，我们将在变更生效前，通过在页面显著位置提示。特定产品和服务的隐私保护指引有关个人信息的处理目的、处理方式和处理的个人信息种类发生变更的，会重新取得您的同意。and
+if such changes result in a substantial impairment of your rights under this
+Privacy policy, we will notify you by sending you an e-mail and by reminding
+you at prominent place on the webpage before the changes take effect.
+
+产品隐私保护指引
+
+  * 全部
+  * 通讯与社交
+  * 数字内容
+  * 金融科技服务
+  * 工具
+
+产品隐私保护指引>全部
+
+您可以通过以下链接查看腾讯产品隐私保护指引：
+
+![](https://cl-privacy-1258638997.cos-dualstack.ap-
+guangzhou.myqcloud.com/imgs/search.png)
+
+[![](https://cl-privacy-1258638997.cos.ap-
+guangzhou.myqcloud.com/privacyplatform/FA6rwLpm6P3I9T-a_Js8RKCNizEGI51X)微信隐私保护指引
+→](https://weixin.qq.com/cgi-
+bin/readtemplate?lang=zh_CN&t=weixin_agreement&s=privacy)[![](https://cl-
+privacy-1258638997.cos.ap-
+guangzhou.myqcloud.com/privacyplatform/v-TxhTcDYMVpFDut3rUJr2ERlsjEWHuO)QQ隐私保护指引
+→](https://ti.qq.com/doc/redirect/qq-privacy-guild)[![](https://cl-
+privacy-1258638997.cos.ap-
+guangzhou.myqcloud.com/privacyplatform/QlOEM9PIWwUjyG4enTUasiQSJRUmzfjk)企业微信隐私保护指引
+→](https://work.weixin.qq.com/nl/privacy)[![](https://cl-
+privacy-1258638997.cos.ap-
+guangzhou.myqcloud.com/privacyplatform/5aAAVfL1aSlm6MyKFHQbjwFErKyeCSEn)腾讯游戏隐私保护指引
+→](http://game.qq.com/privacy_guide.shtml)[![](https://cl-
+privacy-1258638997.cos.ap-
+guangzhou.myqcloud.com/privacyplatform/qAdQRElOYz0PC-
+dHayBL-4cyT7PDwQTL)腾讯视频隐私保护指引
+→](https://privacy.qq.com/document/preview/3fab9c7fc1424ebda42c3ce488322c8a)[![](https://cl-
+privacy-1258638997.cos.ap-
+guangzhou.myqcloud.com/privacyplatform/tyVCeWn9BY681jLEdF-
+Bp4UYofNM4AiY)微视隐私保护指引
+→](https://privacy.qq.com/document/preview/6daf6fdb00a8485eaf37438c760b010a)[![](https://cl-
+privacy-1258638997.cos.ap-
+guangzhou.myqcloud.com/privacyplatform/iAbqRsmCnODUqSWl2JXh7651BIG_L3sZ)腾讯新闻隐私保护指引
+→](https://privacy.qq.com/document/preview/c89cd6bcfdde44b4b13f746b8edda4b8)[![](https://cl-
+privacy-1258638997.cos.ap-
+guangzhou.myqcloud.com/privacyplatform/OrK2ScOXlZO0J9wA_gFRp4fi5tAMd2ga)腾讯体育隐私保护指引
+→](https://privacy.qq.com/document/priview/adba5cb338074e70a0d54cbf777ce2b7)[![](https://cl-
+privacy-1258638997.cos.ap-
+guangzhou.myqcloud.com/privacyplatform/P8PHd_7yIpO30hDMZswGSWt1vD13nKlT)QQ音乐隐私保护指引
+→](https://privacy.qq.com/document/priview/0b0dc16a0f004a35b77b7fd48a0b125b)[![](https://cl-
+privacy-1258638997.cos.ap-
+guangzhou.myqcloud.com/privacyplatform/tPfscimOdZQ48sGiG0TZhOSHGfkigpKC)腾讯自选股隐私保护指引
+→](https://wzq.tenpay.com/mm/protocol?schemaid=protocol&appid=base&rowid=20&s=g&t=panda&skin=1&zd_color=0)[![](https://cl-
+privacy-1258638997.cos.ap-
+guangzhou.myqcloud.com/privacyplatform/sN1Ijh7Nc1LmKfRW8UAPOTtkfNKyr7SK)腾讯地图隐私保护指引
+→](https://map.wap.qq.com/vision/privacyv2-tmap/index.html)[![](https://cl-
+privacy-1258638997.cos.ap-
+guangzhou.myqcloud.com/privacyplatform/cvMC4fnSUEo9xWZU7dy0xmJUNBvLnCQQ)腾讯文档隐私保护指引
+→](https://docs.qq.com/doc/p/30cb57a3280b16bd48fb49001022ada97479339a?dver=2.1.0)[![](https://cl-
+privacy-1258638997.cos.ap-
+guangzhou.myqcloud.com/privacyplatform/Vryu1OZTRT3rS4uHAvH1HNFTcW0MPOe4)换机助手隐私保护指引
+→](https://privacy.qq.com/document/preview/b0254f9cfca84f868dc018331cb0369e)[![](https://cl-
+privacy-1258638997.cos.ap-
+guangzhou.myqcloud.com/privacyplatform/pw6PoAUVH6AigR6WZtRIRLT2pTMAkSNz)QQ同步助手隐私保护指引
+→](https://privacy.qq.com/document/preview/92ada2f0cfae411cb11945eb5ca49f1f)
+
+产品隐私保护指引>通讯与社交
+
+您可以通过以下链接查看腾讯产品隐私保护指引：
+
+![](https://cl-privacy-1258638997.cos-dualstack.ap-
+guangzhou.myqcloud.com/imgs/search.png)
+
+[![](https://cl-privacy-1258638997.cos.ap-
+guangzhou.myqcloud.com/privacyplatform/FA6rwLpm6P3I9T-a_Js8RKCNizEGI51X)微信隐私保护指引
+→](https://weixin.qq.com/cgi-
+bin/readtemplate?lang=zh_CN&t=weixin_agreement&s=privacy)[![](https://cl-
+privacy-1258638997.cos.ap-
+guangzhou.myqcloud.com/privacyplatform/v-TxhTcDYMVpFDut3rUJr2ERlsjEWHuO)QQ隐私保护指引
+→](https://ti.qq.com/doc/redirect/qq-privacy-guild)[![](https://cl-
+privacy-1258638997.cos.ap-
+guangzhou.myqcloud.com/privacyplatform/QlOEM9PIWwUjyG4enTUasiQSJRUmzfjk)企业微信隐私保护指引
+→](https://work.weixin.qq.com/nl/privacy)
+
+产品隐私保护指引>数字内容
+
+您可以通过以下链接查看腾讯产品隐私保护指引：
+
+![](https://cl-privacy-1258638997.cos-dualstack.ap-
+guangzhou.myqcloud.com/imgs/search.png)
+
+[![](https://cl-privacy-1258638997.cos.ap-
+guangzhou.myqcloud.com/privacyplatform/5aAAVfL1aSlm6MyKFHQbjwFErKyeCSEn)腾讯游戏隐私保护指引
+→](http://game.qq.com/privacy_guide.shtml)[![](https://cl-
+privacy-1258638997.cos.ap-
+guangzhou.myqcloud.com/privacyplatform/qAdQRElOYz0PC-
+dHayBL-4cyT7PDwQTL)腾讯视频隐私保护指引
+→](https://privacy.qq.com/document/preview/3fab9c7fc1424ebda42c3ce488322c8a)[![](https://cl-
+privacy-1258638997.cos.ap-
+guangzhou.myqcloud.com/privacyplatform/tyVCeWn9BY681jLEdF-
+Bp4UYofNM4AiY)微视隐私保护指引
+→](https://privacy.qq.com/document/preview/6daf6fdb00a8485eaf37438c760b010a)[![](https://cl-
+privacy-1258638997.cos.ap-
+guangzhou.myqcloud.com/privacyplatform/iAbqRsmCnODUqSWl2JXh7651BIG_L3sZ)腾讯新闻隐私保护指引
+→](https://privacy.qq.com/document/preview/c89cd6bcfdde44b4b13f746b8edda4b8)[![](https://cl-
+privacy-1258638997.cos.ap-
+guangzhou.myqcloud.com/privacyplatform/OrK2ScOXlZO0J9wA_gFRp4fi5tAMd2ga)腾讯体育隐私保护指引
+→](https://privacy.qq.com/document/priview/adba5cb338074e70a0d54cbf777ce2b7)[![](https://cl-
+privacy-1258638997.cos.ap-
+guangzhou.myqcloud.com/privacyplatform/P8PHd_7yIpO30hDMZswGSWt1vD13nKlT)QQ音乐隐私保护指引
+→](https://privacy.qq.com/document/priview/0b0dc16a0f004a35b77b7fd48a0b125b)
+
+产品隐私保护指引>金融科技服务
+
+您可以通过以下链接查看腾讯产品隐私保护指引：
+
+![](https://cl-privacy-1258638997.cos-dualstack.ap-
+guangzhou.myqcloud.com/imgs/search.png)
+
+[![](https://cl-privacy-1258638997.cos.ap-
+guangzhou.myqcloud.com/privacyplatform/tPfscimOdZQ48sGiG0TZhOSHGfkigpKC)腾讯自选股隐私保护指引
+→](https://wzq.tenpay.com/mm/protocol?schemaid=protocol&appid=base&rowid=20&s=g&t=panda&skin=1&zd_color=0)
+
+产品隐私保护指引>工具
+
+您可以通过以下链接查看腾讯产品隐私保护指引：
+
+![](https://cl-privacy-1258638997.cos-dualstack.ap-
+guangzhou.myqcloud.com/imgs/search.png)
+
+[![](https://cl-privacy-1258638997.cos.ap-
+guangzhou.myqcloud.com/privacyplatform/sN1Ijh7Nc1LmKfRW8UAPOTtkfNKyr7SK)腾讯地图隐私保护指引
+→](https://map.wap.qq.com/vision/privacyv2-tmap/index.html)[![](https://cl-
+privacy-1258638997.cos.ap-
+guangzhou.myqcloud.com/privacyplatform/cvMC4fnSUEo9xWZU7dy0xmJUNBvLnCQQ)腾讯文档隐私保护指引
+→](https://docs.qq.com/doc/p/30cb57a3280b16bd48fb49001022ada97479339a?dver=2.1.0)[![](https://cl-
+privacy-1258638997.cos.ap-
+guangzhou.myqcloud.com/privacyplatform/Vryu1OZTRT3rS4uHAvH1HNFTcW0MPOe4)换机助手隐私保护指引
+→](https://privacy.qq.com/document/preview/b0254f9cfca84f868dc018331cb0369e)[![](https://cl-
+privacy-1258638997.cos.ap-
+guangzhou.myqcloud.com/privacyplatform/pw6PoAUVH6AigR6WZtRIRLT2pTMAkSNz)QQ同步助手隐私保护指引
+→](https://privacy.qq.com/document/preview/92ada2f0cfae411cb11945eb5ca49f1f)
+
+儿童隐私保护声明
+
+  * · 儿童隐私保护声明
+  * · 我们收集哪些信息
+  * · 我们如何使用这些信息
+  * · 管理披露儿童个人信息的情形
+  * · 存储儿童个人信息
+  * · 更正、删除儿童个人信息
+  * · 本声明的适用
+  * · 联系我们
+
+儿童隐私保护声明
+
+更新日期：2022年9月29日  
+生效日期：2022年9月29日
+
+更新提示：  
+本版本依据《个人信息保护法》、《未成年人保护法》等相关法律法规更新相关内容，主要修改集中在 “我们收集哪些信息”
+、“管理儿童信息”等章节，更清晰、明确地向您告知我们收集儿童个人信息的场景、目的、方式和范围，帮助您更好地管理儿童的个人信息。
+
+腾讯致力于保护使用我们产品和服务的儿童的个人信息，本声明中“儿童”，是指不满14周岁的未成年人。《儿童隐私保护声明》（以下简称“本声明”）和《[腾讯隐私政策](javascript:;)》旨在向监护人（以下简称“您”）和儿童说明我们如何收集、使用、存储和处理儿童的个人信息，以及我们为您与儿童提供的访问、更正、删除和保护这些信息的方式。除另有约定外，本声明所用术语和缩略词与《[腾讯服务协议](https://www.qq.com/contract.shtml)》、《[腾讯隐私政策](javascript:;)》中的术语和缩略词具有相同的涵义。
+
+儿童监护人特别说明：
+
+如果您是儿童的监护人（父母或其他监护人），请您仔细阅读和选择是否同意本声明。我们希望您与我们共同保护儿童的个人信息，教育引导儿童增强个人信息保护意识和能力。
+
+儿童特别说明：
+
+如果您是儿童，您需要和您的监护人（父母或其他监护人）共同仔细阅读本声明，并在征得监护人同意后，使用我们的产品、服务或向我们提供信息。
+
+请监护人和儿童在仔细阅读并充分理解《[腾讯隐私政策](javascript:;)》、具体产品的隐私保护指引和本声明后，由监护人选择是否同意相关隐私政策以及是否同意儿童使用我们的产品和服务。如果监护人不同意相关隐私政策和本声明的内容或不同意提供服务所必要的信息，将可能导致我们的产品和服务无法正常运行，或者无法达到我们拟达到的服务效果，监护人和儿童可能无法正常使用我们的产品、服务或相关的具体业务功能。
+
+监护人点击“同意”即表示监护人同意我们按照《[腾讯隐私政策](javascript:;)》、具体产品的隐私保护指引和本声明的约定收集、使用和处理监护人和儿童的信息。
+
+请您理解，我们提供的产品和服务中可能包括第三方提供的产品和服务，您也可能通过我们产品（如QQ或微信）登录和使用第三方产品和服务。请您注意，该第三方可能收集、使用或处理儿童的相关信息，需要该第三方另行获得监护人的同意。我们建议监护人向儿童告知，在向第三方授权处理其个人信息之前需征得监护人的同意。
+
+我们提醒您，仔细阅读本声明并确认了解我们对儿童个人信息的处理规则，特别是采用粗体字进行标注提示的部分。
+
+如您在阅读本声明过程中有任何疑问或权利请求等个人信息相关事宜的，我们为您提供了专门的反馈渠道，具体参见本声明“联系我们”章节，我们会尽快为您作出解答。
+
+我们收集哪些信息
+
+腾讯严格遵守法律法规的规定及与用户的约定，根据用户选择产品和服务的具体情况，收集监护人和儿童的以下个人信息。
+
+当我们根据法律法规及行业管理要求，需要为儿童用户配置保护措施时，我们可能会提示您提供监护人的手机号码、电子邮箱或者通过“扫码验证”等方式，与我们建立联系。在某些涉及支付的产品和服务中，我们可能会要求监护人填写和绑定监护人的银行卡相关信息，以便监护人知悉和管理儿童的支付行为。
+
+在儿童使用产品和服务过程中，我们会要求您提供相关必要的信息，具体请查阅《[腾讯隐私政策](javascript:;)》“我们收集的信息”一节。
+
+如果我们需要收集监护人或儿童的其他个人信息，我们将再次告知监护人和儿童，并征得监护人的同意。
+
+监护人可以选择是否填写或向我们提供特定的信息。请您理解，监护人如果不填写或不提供某些特定的信息，可能会导致我们的产品和服务无法正常运行，或者无法实现我们拟提供的服务效果，监护人和儿童可能无法正常使用我们的产品、服务或相关的具体业务功能。
+
+我们如何使用这些信息
+
+我们严格遵守法律法规的规定及与用户的约定，将收集的监护人和儿童的信息用于以下用途：
+
+验证儿童和监护人身份
+
+提供必要的产品和服务、产品和服务的具体功能
+
+用于优化产品和服务、安全保障
+
+如果我们需要超出上述用途使用监护人或儿童的个人信息，我们将再次告知监护人和儿童，并征得监护人的同意。
+
+管理、披露儿童个人信息
+
+我们遵照法律法规的规定，严格管理儿童的个人信息。
+
+我们仅在监护人事先同意并采取符合《个人信息保护法》等法律法规要求的相关合规措施的情况下，才可能与监护人共享儿童的个人信息:  
+例如，我们会将部分儿童个人信息（如儿童用户名、账号，以及该儿童在我们某些产品和服务中的支付记录等）与监护人进行共享，监护人可以访问和管理相关个人信息。
+
+发生合并、收购、资产转让等  
+随着我们业务的持续发展，当发生合并、收购、资产转让等交易导致向第三方共享或转移监护人和儿童的个人信息时，我们将通过推送通知、公告等形式告知监护人和儿童相关情形，按照法律法规及不低于本声明所要求的标准继续保护或要求新的管理者继续保护监护人和儿童的个人信息。
+
+一般情况下，我们禁止披露儿童个人信息，但我们可能基于以下目的使用儿童的个人信息：
+
+  * · 遵守适用的法律法规等有关规定； regulations;
+
+  * · 遵守法院判决、裁定或其他法律程序的规定； regulations;
+
+  * · 遵守相关政府机关或其他法定授权组织的要求； regulations;
+
+  * ·我们有理由确信需要遵守法律法规等有关规定； regulations;
+
+  * ·为执行相关服务协议或本声明、维护社会公共利益，为保护我们的客户、我们或我们的关联公司、其他用户或雇员的人身财产安全或其他合法权益合理且必要的用途。 regulations;
+
+存储儿童个人信息
+
+腾讯会采取加密等技术措施存储儿童个人信息，确保信息安全。腾讯存储儿童个人信息，不会超过实现其收集、使用目的所必需的期限。请查阅《[腾讯隐私政策](javascript:;)》“存储信息的地点和期限”、“信息安全”章节，详细了解我们如何存储和保护儿童个人信息。
+
+当我们的产品和服务发生停止运营的情形或监护人和儿童的个人信息存储期限届满时，我们将采取例如，推送通知、公告等形式通知监护人和儿童，并在合理的期限内删除或匿名化处理监护人和儿童的个人信息。
+
+更正、删除儿童个人信息
+
+在儿童用户使用腾讯产品和服务期间，为了监护人和儿童可以更加便捷地访问、更正、删除相关个人信息，我们在产品设计中为监护人提供了相应的操作设置，监护人也可以通过我们提供的联系方式，来反馈和咨询相关信息。我们会在核实监护人反馈的问题后及时与监护人联系。请监护人理解，在核实过程中，我们可能需要监护人提供儿童账号、儿童身份信息、联系方式等个人信息，以便在完成身份验证和核实问题后继续响应监护人的需求。
+
+访问儿童个人信息
+
+监护人和儿童可以查看儿童在使用我们产品和服务中提供或产生的个人信息，包括但不限于用户名、密码、头像、昵称、性别、主动发布的内容等。
+
+更正儿童个人信息
+
+当监护人和儿童发现我们收集、使用和处理的儿童个人信息有错误时，可以联系我们进行更正。我们会在完成身份验证和核实问题后，及时采取措施予以更正。
+
+删除儿童个人信息
+
+如存在以下情况，监护人和儿童可以联系我们删除收集、使用和处理的儿童个人信息。我们会在完成身份验证和核实问题后，及时采取措施予以删除：
+
+  * · 若我们违反法律、行政法规的规定或者双方的约定收集、存储、使用、转移、披露儿童个人信息； regulations;
+
+  * · 若我们超出目的范围或者必要期限收集、存储、使用、转移、披露儿童个人信息； regulations;
+
+  * · 若监护人撤回同意； regulations;
+
+  * · 若监护人或儿童通过注销等方式终止使用产品或者服务的。 regulations;
+
+但请注意，若监护人和儿童要求我们删除特定儿童个人信息，可能导致该儿童用户无法继续使用我们的产品和服务或产品和服务中的某些具体业务功能。
+如监护人发现在未事先征得监护人同意的情况下收集了儿童的个人信息，请及时联系我们，我们会采取措施尽快删除相关数据。
+
+本声明的适用
+
+请您理解，如本声明未规定之处，参照适用《[腾讯隐私政策](javascript:;)》或具体产品的隐私保护指引。
+
+在适用本声明的情况下，如本声明与《[腾讯隐私政策](javascript:;)》和具体产品的隐私保护指引的条款规定存在不一致的，以本声明为准。
+
+联系我们Contact Us
+
+![](/static/img/contact1.09e4b848.png)如您对本声明有任何疑问和反馈，请通过<https://kf.qq.com/>与我们联系；
+
+![](data:image/png;base64,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)您也可按照我们提供的[个人信息咨询指引](https://privacy.qq.com/note.htm)
+，填写相关资料，将您的问题发送至dataprivacy-kids@tencent.com
+
+或寄到如下地址：
+
+  * · 地址：中国广东省深圳市南山区海天二路腾讯滨海大厦  regulations;
+
+  * · 数据合规与隐私保护部（收） regulations;
+
+  * · 邮编：518057 regulations;
+
+我们将尽快审核所涉问题，并在接到投诉后的十五日内予以回复。We will review your queries and reply within 15
+days after verifying your user identity.
+
+Cookie政策
+
+  * 什么是Cookie
+  * 腾讯使用Cookie的目的
+  * 如何管理Cookie
+
+Cookie政策说明
+
+什么是Cookie
+
+Cookie 是一种可让网站服务器将数据存储于客户端或从客户端中读取数据的中立技术。
+
+Cookie 文件是存储了一些与用户访问网站有关信息的文件，格式为.txt。
+
+Cookie 内容通常均经过加密。
+
+安全的Cookie技术会为用户在上网时提供更为便捷的服务。
+
+Cookie政策说明
+
+腾讯使用Cookie的目的
+
+Cookie 对提升用户的网络使用体验十分重要，腾讯使用Cookie一般出于以下目的：
+
+![](data:image/jpeg;base64,/9j/4AAQSkZJRgABAQIAJQAlAAD/2wBDAAMCAgICAgMCAgIDAwMDBAYEBAQEBAgGBgUGCQgKCgkICQkKDA8MCgsOCwkJDRENDg8QEBEQCgwSExIQEw8QEBD/2wBDAQMDAwQDBAgEBAgQCwkLEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBD/wAARCAAtAC0DAREAAhEBAxEB/8QAHAAAAQQDAQAAAAAAAAAAAAAABQQGBwgAAgMJ/8QANhAAAQMCBAQDBQYHAAAAAAAAAQIDBAURAAYSMQcTIUEIUZFhcYHB0RQWVpSh8BUiJDJCU7H/xAAcAQEAAQUBAQAAAAAAAAAAAAAABQIDBAYHCAH/xAA4EQABAwMBBQQGCQUAAAAAAAABAAIRAwQFEgYhMVFhFSKx0QcTU3GSwhQWFyMyQVJiw3JzgcHx/9oADAMBAAIRAxEAPwD1OkSGozRedNgPUnyGCIE/VZj56OctN+gR0/Xf97YIkeCLZtxxpWppxSDtdJtgiKwKwtTnKmKTpIsldrWPt7W/fuIi+CJu1V8vzFi50t/yAe7c+vywRR/I4u5NipcdekvpaaBUtwtgJCRuokkWFuvXGyfVXIadR0j/ACtG+0PDF+hmsmYEN4+7fO9Vr45eK2ot5sYgcOs0oapUaOhwuxlNr5zxJJ1KGoEAWGnbe+LttjKNs0tuIc48jIhZdTL1b8CpbBzG8nDSZ9x/JTVw38RWTs2ZXpkidVGnKyqGhydHjFClIc2USgKukE+Y74sDZ24uHE25aRynfHVUXO2dnjgG3jHg8J090noZgqRsu5rpGaEPqpTjhMcpDiVo0kar2P6H0xH5HFXGMLRXA70xB5cfFSmE2iss+15sye5EyI4zHgU9aI/zIxYNyWT0JN+hvb5/C2I1TqBYIqk0YJzLVYmXlOspTUXUxlF4akWX0Nwd+h277Y79esba276z2yGgmOa8h4wPvbylb036XOcADyM8fJdOInCDJeQ6vGppoNAlplMh1Kv4WyhSepFimx7jofpiFwotMvQdV9Q1ukxwB68YC2jaR2T2fuWUPpj3hwkd5wPGN4kojTOFVPozin6OzSIDjidClxqJMaUpO9iUxhcX7Y+07u0omadGD0NIfOqLjHZK7aG3F0Xgb97a58aakLw/yi+5mJoq1FlUVN7Ef7fOx7d8a5t5T0C2PPX8q3T0TOl163l6v+RS+QDvjnq7Gt3Wy04tpVroUUm3swRU94U13hXCkTJvEmU9z2VoTEj8p1SO+pStAuSDYWPT39vQu0NpmKrW08UBBnUZE9AJ/wBLyRspdYCg99XNk6hGkQ4jqTp/Pof+ODPmcODWYMsyZUWrLVmZsqVHdYjvpS6OYdDataQmwRYXNjcbnvG4jG5yzu2sez7g8QS3du3kQZ4qWzmU2byFg6o2pN0JggPAPe3AyAPwwJ4yOPOPaPxQqVJZcaWxGn8xWrVMU6tSemwssWGNmucDSuXBwJbH6YHiCtRs9pK9o0tID5/VqMe6HBTH4VJ6qgrNbxTYaoR6Xtc8/oMc69JlIURat/r+Rdd9DFU1jfO/t/yKw0SC/N1clSBotfUSN/gfLHK13JL6xAdU4ZjQBTpAWkDqCO/utb09CJruZby664p12g05a1kqUpUVBJJ3JNsZbchdtAa2q4AfuPmsB2KsHuLnUGEn9rfJa/dfLP4dpn5Rv6Yq7SvPbO+I+ap7Ix/sGfC3yWfdfLP4dpn5Rv6YdpXntnfEfNOyMf7Bnwt8kup9LiRP6al09hgOKvoYaSgE+ZAt64x6terXOqq4uPUk+KyqFtRtW6aDA0dAB4J2QoqYjCWk77qN91d8WlfXfBEOkUWM6dTKi0SST/kOvsO3/MEQIG4wRKYMT7a8WeZoskqva/cD54Ij0WGxETpaT17qP9x+OCLvgi//2Q==)身份验证
+
+Cookie可在您接入我们的服务时通知我们，以使我们可验证您的身份信息，以确保您的账号安全。
+
+例如，Cookie技术可在您登入腾讯服务时通知我们，因此，我们能够在您访问所有腾讯服务的站点时，识别是否您本人安全登录，向您显示与您相关的信息。
+
+![](data:image/jpeg;base64,/9j/4AAQSkZJRgABAQIAJQAlAAD/2wBDAAMCAgICAgMCAgIDAwMDBAYEBAQEBAgGBgUGCQgKCgkICQkKDA8MCgsOCwkJDRENDg8QEBEQCgwSExIQEw8QEBD/2wBDAQMDAwQDBAgEBAgQCwkLEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBD/wAARCAAtAC0DAREAAhEBAxEB/8QAHQAAAQQCAwAAAAAAAAAAAAAABQQGBwgCAwABCf/EADsQAAECBAMEBgcGBwAAAAAAAAECAwAEBREGEjEHExQhFyJBYYGRCCMyUVZxwRZYktPi8EKUoaOksdH/xAAcAQEAAQUBAQAAAAAAAAAAAAAABAIDBgcIBQH/xAA2EQABAwIEAgULBAMAAAAAAAABAAIRAxIEBSFREzEGByJBUhQVFhdTVJGhoqPiMmJjsnGx0f/aAAwDAQACEQMRAD8A9TpiYalmi86bAeZPuEEQJ+qzj55ObtN+QRy/rr+9IIkcEWTbjjSszTikHS6TaCIrIVhanN1OKTlIsldrWPf2W/fyIi8ETdqr5fnFi5yt9QD5anz+kEUZVXa4zTqpN05uhl0Sj62CszITmKTYm2U9o98ZhhOiTsTQZWNWLgDFs89dwtY5j1kNwGMq4VuGuscWzfEwYOlp/wBpL00I+HR/OfoiR6GH230/kofrSHun3PwXXTQn4d/zP0R89DD7b6fyT1pD3T7n4I7g/aEziyovU0UwyrjTJfB328BAUAR7It7Qjys46Puyqi2vfcCY5R3E7nZZH0Z6Zt6R4p+F4Nha279V3IgbDcKTKI/vJYsG5LJ5Em/I3t9fC0Y6s3QKCKqWK68JXHdabUymYCKrMgsqKrL9crq9Ug8+43jfGVYTiZXQIMTTbrt2RvouT8/xQp57igW3RVqaa69s6aQfgUVkK25LNN1p/Z8yJMX9Y2t5S0gkoDgbcWoEBXK6klJItEethQ8mg3Em7Y2gbxIA7tjMaqZh8SaTRin4IWbguJHdIa5xBAO7S0nRCsR4wlZxSly+HhKA5E8UtK0OOEJAJKQQ2Coi9kp8TqZmCy19PR1W7npoQNdz2jHLUrzszzSlXJLKFnLtagmBqSAbBPPRv/U7vR/qfHYynUZr2pjiv7rX/Yxvp3Q4WXMP7x/VyzTqprcXOao/id/din8gHWNTroFZutlpxbSrXQopNu6CKkW0SXxTJbSMQTEpT6iwtFWmnWXW2XEmxeUpK0qA7QQQRHSGQ1cFVyjDse9pHDaCCR4QCCP86FcfdKMNmNHP8XUp03g8V5BAdyLiQQRuIIKT/bLakZPhN9U82TdcVwyuKLefPu9/l3mTNzy5rXiR5uya+/s7xItmIm2bZjSYlRPOmf8AD4fbmIutN8TNt8XWzrEwhs7U9oNSY4aov12aZJCt2+X1puNDY8olUqWV0HX0rGncWhQq1XOcS2ytxHN2N5HzUsei5KVlGNKg/O02aZYRSnEF1xlSU51PNEJuRqQlRt3GME6yK2HdltNtN4J4gMAgmA10n5j4rZ/U/hcVTzitUq03BopESQQJL2ECT3wD8FaSUkX53NuVIGS18xI18D7o0wuikvrEg6pwzjQBTlAWkDmCO35Wt5eRFGOOtnlfxfUmJ+lbUsS4abZYDSpWmqZDTisxOc5kFWbnbW1gLAc73qdVrBBaCrVSmXmQ4hNroQxn94XHf45f8uK/KGeAK3wHeMrnQhjP7wuO/wAcv+XDyhngCcB3jKknCVBqFEospQ5uvVCvTLIUlU7PZN+9dRPWyJSnkDbTQC5OsWHuDnSBCvsaWiCZT6kpVMowlpOuqjfVXbFKqW+CIdMUWWdOZlRaJJJ/iHPuOn+oIgQNxBEpkZTjXizvMlklV7X7QPrBEelZNiUTlaTz7VH2j4wRb4Iv/9k=)偏好设置
+
+Cookie可帮助我们按照您所希望的服务样式、外观的个性化设置为您提供服务。
+
+例如，
+Cookie技术可记录您是否已经阅读过一些提示性的展现，防止重复提示对您造成骚扰；一些阅读展现(如字体大小等)方面您本人偏好的设定，我们也会存放于Cookie中，在您访问时自动为您调整到您上次设定的值。
+
+![](data:image/jpeg;base64,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)安全
+
+Cookie可帮助我们保障数据和服务的安全性，排查针对我们的产品和服务的作弊、黑客、欺诈行为。
+
+例如，Cookie可以存放票据信息，能够由服务器验证是否是您自主在本站点的正常登录，通过票据中的加密信息，阻止多种类型的攻击，防止跨站信息窃取访问，防止身份冒充访问。
+
+![](data:image/jpeg;base64,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)功能与服务
+
+Cookie可帮助我们为用户提供更好的产品和服务。
+
+例如，Cookie可以在您进行登录时，通过存储的信息，帮您填入您最后一次登入的账户名称，提高您的操作效率。
+
+![](data:image/jpeg;base64,/9j/4AAQSkZJRgABAQIAJQAlAAD/2wBDAAMCAgICAgMCAgIDAwMDBAYEBAQEBAgGBgUGCQgKCgkICQkKDA8MCgsOCwkJDRENDg8QEBEQCgwSExIQEw8QEBD/2wBDAQMDAwQDBAgEBAgQCwkLEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBD/wAARCAAtAC0DAREAAhEBAxEB/8QAGwAAAgIDAQAAAAAAAAAAAAAABQYDBAACBwn/xAA2EAACAQMCAwUDCwUAAAAAAAABAgMEBREABhIhMQcTQVFhIoGRCBQXMkJWcZXB0vAWUpKhsf/EABsBAQACAgMAAAAAAAAAAAAAAAACAwEFBAYH/8QAKxEAAQIEBQQBBAMAAAAAAAAAAQACAwQFEQYhMUFREhNCYZEVMqHBIiOB/9oADAMBAAIRAxEAPwD1OqKiKmiM0pwB8SfIaIgU91rJzyk7tc8gnL/fX+dNEVPRFtHJJE3FFIyHplTjREVoLw7Sd1WMvCRhXxjB9fDH8/AiL6Il26zmescZPDH7AH4dT8f00RU9EVekuNBXvPFRVkM70z91MsbhjG/kcdDq6LLxYAa6K0gOFxcaj0uNLzkvNOeyA8OLDZ1jex4KC7y3jDs6CnqaikWdJ2KACcI+QM8lI5j1HTl562dHpDqu9zGOsRnpcfPK0OJsStw3DZFfD6w42+4A/Fjce9v9Uuz91wbwtktzp6ZoFinaAqX4skKrZzgf3arq9LdSI4gPde4vxuR+ldhrEDMRyjppjOgBxba99ADfQcp6sk/eUxgOSYTyJOeRzj9fdjWqXYUC0Rco7X9/bot9zo9g7Qs9Ybhd19mrCEBl8VibpkDmzH6o+I71hWiSUeC+q1CI3tw/G/5cPew3PwfL8d4kqcvMQ6HSYTu7GH3223DDpceTvEfIU7xtDf8A2QUtLvSy14uCxRg3SKNCVTxOR9uPzbkQRnl4b+Vq1KxW91OmWdFz/AnU8WOzvWh0z36jN4cruA2Q6xIxO5Yf2gA2HNx5M95EHPLa3sPbW5O1y6f11vZpIrSzZpqcZXv1B5Kg+zGPPq3P1OqK1UpPC0D6XTc4vkdbHk8u9aD8LlYdoVQx1N/XK2SIHi3TqA0AGzBudXfJXY9vbate14aqltEbRQVVS1UYi2VjYqqkL5D2c49T4a88n6jHqTmPmDdzW9N+QCTn7zXr9Jo0rRGRIUmLNe4utsCQBYesr2/SKkA9dcBbVbyxmKR4mxlGKnHpoiTd39rPZpsO6Q2neW7rfaq6SAVMUVQxDmJmZQwwDyJRh7tXQ4USILsGSqfFhsI6zmgbfKQ7CHUo/aXZWVhgguxBH+OpCWjg3DSoGYguFiQsj+Ud2DxRrFF2lWREQBVVWYBQOgA4eQ1l0vHcS5wJJWGx4DGhrSAAnDaO99p79tst42dfaa60UM7U0k1OSVWUKrFTkdcOp941S+G6GbPFlcx7Ygu03THSUM9bxdyyDgxniJHX3Hy1BTV+8UErSGsiAK8IDqBzBHj+GMfD4ESrc9r7ZvdQtVedu2yvnRBGslVSRyuEBJCgsCcZJOPU6kHubkColjXZkKp9H+w/uTYPy2H9us91/JWO2zgLPo/2H9ybB+Ww/t07r+SnbZwEVtFjtlqjNBYbRSUUcjlzFSwLErOQAWIUAZwBz8gPLUS4uzJUg0NyAThRUq0kCxL16sc9W8dYWVPoiHVFlppTxQsYiSSftDn6Hp/zRECByNEVmhpPnsxh7zgwpbOM+IH66Ij1LRwUi8MS8/Fj9Y+/RFPoi//Z)效率
+
+Cookie可以避免不必要的服务器负载，提高服务效率，节省资源、能源。
+
+例如，Cookie可帮助我们优化在服务器之间路由流量，并且了解不同用户加载我们服务时的速度，有时，我们或会利用Cookie让您正在使用时加载及响应得更快。
+
+![](data:image/jpeg;base64,/9j/4AAQSkZJRgABAQIAJQAlAAD/2wBDAAMCAgICAgMCAgIDAwMDBAYEBAQEBAgGBgUGCQgKCgkICQkKDA8MCgsOCwkJDRENDg8QEBEQCgwSExIQEw8QEBD/2wBDAQMDAwQDBAgEBAgQCwkLEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBD/wAARCAAtAC0DAREAAhEBAxEB/8QAGwAAAgMBAQEAAAAAAAAAAAAABQYEBwgCAwn/xAA6EAABAwMBBQUEBgsAAAAAAAABAgMEAAUREgYHITFBCBNRYXGBkaHBFBUiMmLwGCNCUlZylaKx0dL/xAAbAQEAAgMBAQAAAAAAAAAAAAAABAcDBQYIAf/EADERAAEDAgIHBwMFAAAAAAAAAAEAAgQDEQUxBgcSIUFRcRQiI2GRobHB0fATQmKBkv/aAAwDAQACEQMRAD8A+p0iQ1GaLzpwB7yfAURAn7rMfPBzu054BHD48/zyoih0RdNuONK1NOKQeWUnFERWBeFqc7qYpOkjCV4xg+fTH59CIvREu3V8vzFjJ0t/YA9OZ9/yoiGzJkW3xnJk2QhhloalrWcACslGjUkPFOkLuPALBJk0YdJ1eQ4NaMyckvWjeFY77eU2a2JfcUpKlB1SQlB0jPDjn3gVuZej8qDGMmuQMt3Hf7e65jDdM8PxeeIMQOJN+8RYbhfnf2CyNu87eG10O5tRd5Njg3G2uKCXJMBosyWQeatJJQsD93CT59Kw1cPaR4Z3rc057gfEG5bSsd7tW0tnh3+xzm5lvnspfjvtn7K0KGQfLzB4g8DWpc0sOyc1tGuDhcJrsj/eRiwcksngSc8DnHz9mK+L6gVEVHb8trX/AK9Z2badKY8RpLziQfvOq4jPonGPU1Z+hWFsEV01w7ziQPID7nPoFROtDG6j5zcNabMYASObjz6C1upQnc1cPpG3cVrVnLLx/sNT9L6OxhTz5t+VqNXFXbx+mP4u+Cs0fobdoH+EYv8AVI3/AHVfduoc/ZXl2KtyWuOyrsRvE3dbupGyW8KCmK5FuDjsBKZLbwEdaUqKQUKIH6zvDj8RrWTKjKtTaYtjEY+mzZermIB51FUpdutlpxbSsZQopOPKiLN/aTsc617QRdqmm1KhT2UsOLA4IeRnAPhlOMfyq8Kt/V9NpyIjoLj32EkDm0/Y59QvPetvCq0aezFGjw6gDSeThwPUWt0Kpn63/H8asTsyqH9dTbKm4bQXWLZbUyp+XMcDTSE9Sep8AOZPQAmo8t1KDQdJrmzWi5/PhTIFCviclkOMNp7zYD84DMngN621Zrciz2iDaW1akwozUdKvEISE5+FebJcgy5FSuc3En1N17Lw+IIESlEabhjWt/wAgD6IpEgvzdXcqQNGM6iRz9h8KjqWp94gOqcMxoAp0gLSBxBHX0xj3e4iXbrabbfLe9arvCalxJCdLrLqcpUP99QeYNZ40qtDqtrx3FrhkQosyFHxGg6NKYHsduIOR/OBzHBVBc+ypsNLll+33m8QWVHJYS4hxKfJJUnUB6k138fWXidKns1abHnnYj1sbellVsvU5g1aqX0KtRjT+24IHQkX9SU87B7p9jd3aVOWKE45McToXNlLDjyk+AOAEjySBnrmuZxrSfEMeIEp1mDJrdzfqT/ZPkux0c0MwnRcF0JhLzuL3G7rcuAA6AX4p0bbceWG2klSlcABXPrq0yQoqYjCWk8+ajnmrrRF70RDpFljOnUyotEkk/tDj5Hl/iiIEDkURSYMT6a8We80YSVZxnqB86Ij0WGxETpaTx6qP3j7aIveiL//Z)分析与研究
+
+我们使用这些Cookie来了解、改善我们的产品和服务，为新产品或功能的研发提供参考数据。
+
+例如，我们会使用Cookie来了解您使用我们服务的方式，以求改善用户体验。
+
+例如您在接入我们服务时，在各个步骤所耗费的时间，我们会收集此信息用以分析研究能够进一步优化和改善的方面。
+
+![](data:image/jpeg;base64,/9j/4AAQSkZJRgABAQIAJQAlAAD/2wBDAAMCAgICAgMCAgIDAwMDBAYEBAQEBAgGBgUGCQgKCgkICQkKDA8MCgsOCwkJDRENDg8QEBEQCgwSExIQEw8QEBD/2wBDAQMDAwQDBAgEBAgQCwkLEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBD/wAARCAAtAC0DAREAAhEBAxEB/8QAHAAAAgEFAQAAAAAAAAAAAAAABQYEAAIDBwgJ/8QAMBAAAQMCBAQEBQUBAAAAAAAAAQIDEQAEBQYSIQcTMUEiUWGBCBRxkcEVMkKh8LH/xAAcAQEAAgIDAQAAAAAAAAAAAAAABgcBBQIECAP/xAAuEQABAwIDBgUEAwAAAAAAAAABAAIRAwQFITEGEhNBUWEHUnGhwSIycrEWQoH/2gAMAwEAAhEDEQA/APU64uGrZovOmAPuT5CiIE/it4+dnOWmdgjb++v+6URQ6Irm3HGlamnFIPSUmKIithjC1Ocq8UnSRCVxEH17R/voRF6Il3FXy/eLEnS34APp1P3/ABRFDoiVM98QsOyUy0ypv5nEboSxbAxtMaleQnbzJ9yN/geA1sZeXTu026u+B3/SiO1W1tvs1Ta2N+s/7W/J7e5OQ5ka+wTi3mG+x6zN9ctC1cfShxhtpITpUYO/7tpnr2qXXmyllRtH8Jp3wCQSTMj29lWmG+IOK3OJUjcPHDLgC0AAQTGuZymdVuyqyV8o7gj/ADLYsGSWTsSZ2Mx+faKIgVES3xBzvh3D7LNxmLEE8wpIat2QYLzyp0pnt0JJ8ga3GBYPWxy9baUsuZPQDU/A7kKP7T7Q0NmcOff1xMZNHmcdB+yewK5jt+LOK3uanM04qxbvXDykDwpKSy2nohrfw9p7ncEwVA3X/G6FvZCyoEhon/Sebss/jloI80O2vurzE3YndAF7o6jdA5Nzy/Z5mCZacrs4ZmfNGD4VgGh0IuA44ttpSCi1QEmXZABcMKJIkSoAEiANPilSrhtjWr3OWUCSDLjP29tNc4EwM53eCWlDGcVtrWyzh0kgEQxsH6p/sYMxlJgE5AdL1Si9OKiAetEV7rZacW0qJQopMelEQTNdvlpOFOY3mmxtbizwRDmIlT7QWGeWhRUsA7SE6q7Vrd3NsXC2eWlwgwYkdF0r2wtL0NN3Ta8MO8N4AwY1E81zRw0zDl74rsRzCq8yUrLGIYWEOs4pYucxDqVkhLb6SAFLgTIgkA7iN5Zhu01/s6G0w7iU/K7l+J1HuOyhGO7EYXtWXVXN4Vbzt5/kNHex7p5+GXLGI2X63mC9bUllTn6fbKIjm6FnmKE9pCR9QfKtz4iYlRrcC0pHON89pH0j1iT6R1UZ8I8Fr2pub6sIaTw2nruk7xHaQB6z0W9qrBXUpFpYv3urkqQNETqJHX2PlRFPxiwdU4bxoAp0gLSBuCO/0iPt9iJMzzlVnPGT8Xyhc3z1mzi9o5aOPsgFaErEGAdjtt71zpv4bg7ouFRnEaW9VF4dcOcq8LsssZVylY/L2rR1uOLOp24dI8Tjiv5KMD0AAAAAArNWq6s7ecsU6baTd1qZgAkQkAD0r5kzquYAGivbbceWG2klSlbACiymSytU2jCWk9eqjPVXeiLPREOuMFtnTqZUWiSSf5Df0PT/AJRECBkURSbG0+deLPM0QkqmJ7gfmiI9a2bFonS0nfuo/uPvRFnoi//Z)广告优化
+
+Cookie可提高广告对用户的吸引力并提升广告服务对广告主、发布商的价值。
+
+例如，Cookie可以帮助我们在腾讯网站或软件中向您显示您可能感兴趣的广告。
+
+我们也可使用Cookie来知道曾在腾讯的站点看见广告的人，之后是否浏览该广告商的网站。
+
+同样地，我们的合作伙伴可能会运用Cookie来确定我们是否已显示广告、了解广告的表现，或向我们提供他们与您之间的互动信息。
+
+Cookie政策说明
+
+如何管理Cookie
+
+大多数浏览器均为用户提供了管理Cookie 的功能。
+
+当用户在进行浏览器的Cookie设置时，可以允许自己信任的网站启用 Cookie功能，禁止其他网站使用Cookie功能。
+
+例如，您可在QQ浏览器设置中进行Cookie的管理。
+
+同时，您还可以开启“禁止跟踪（DNT）”功能。
+
+![](/static/img/sdkBill.e67d5eac.png)![](/static/img/sdkLink.ed04e4a1.png)
+
+![](https://images-75651.picgzc.qpic.cn/FT8FWULX51VDroaeCiwHNse5sW5uCtiG)
+
+移动推送TPNS
+
+Android
+
+![](https://images-75651.picgzc.qpic.cn/FT8FWULX51VDroaeCiwHNse5sW5uCtiG)
+
+移动推送TPNS
+
+iOS
+
+腾讯产品接入第三方SDK目录
+
+  * QQ
+  * 企业微信
+  * 腾讯视频
+  * 腾讯新闻
+  * QQ浏览器
+  * QQ邮箱
+  * QQ音乐
+  * 腾讯文档
+  * 微视
+  * 腾讯动漫
+  * 腾讯地图
+  * QQ同步助手
+  * 换机助手
+（持续更新中）
+
+QQ接入第三方SDK目录
+
+为保障QQ的稳定运行或实现相关功能，我们可能会接入由第三方提供的软件开发包（SDK）实现前述目的。我们会对合作方获取个人信息的SDK进行严格的审核，以保护您的个人信息安全。  
+  
+我们对接入的相关第三方SDK在以下目录中列明。您可以通过相关链接查看第三方的数据使用和保护规则。请注意，第三方SDK可能由于版本升级、策略调整等原因导致其个人信息处理类型发生变化，请以其公示的官方说明为准。
+
+[![](https://cl-privacy-1258638997.cos.ap-
+guangzhou.myqcloud.com/privacyplatform/8r01-WdtIgE9ndmmpVKJw4zVinxDmV1-)QQ]()
+
+Android第三方SDK列表
+
+1、信息分享（微博SDK）
+
+使用目的：登录及分享内容到新浪微博
+
+数据类型：设备标识信息（Android ID）、网络信息
+
+官网链接：[ https://open.weibo.com/ ](https://open.weibo.com/)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 北京微梦创科网络技术有限公司
+
+2、推送通知消息（华为推送SDK）
+
+使用目的：1.提供消息推送服务；2.统计华为推送SDK接口调用成功率。
+
+数据类型：本应用基本信息（AppID，推送服务和HMS
+Core应用版本号、华为推送SDK版本号，应用版本号和应用包名）、本应用内设备标识符（AAID和Push
+Token）、设备的硬件信息（设备类型，设备型号）、系统基本信息（系统类型，系统版本）、系统设置信息（国家码）
+
+官网链接：[ https://developer.huawei.com/consumer/cn/doc/development/HMSCore-
+Guides/sdk-data-security-0000001050042177
+](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/sdk-
+data-security-0000001050042177)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 华为软件技术有限公司
+
+3、推送通知消息（OPPO推送SDK）
+
+使用目的：用于在OPPO设备上推送消息
+
+数据类型：设备相关信息（OAID，User ID，Google Advertising ID，
+手机Region设置，设备型号，手机电量，手机操作系统版本及语言）、本应用信息（本APP包名及版本号，运行状态）、推送SDK版本号、网络相关信息（IP、域名连接结果，当前网络类型）、消息发送结果、通知栏状态（通知栏权限、用户点击行为），锁屏状态（是否锁屏，是否允许锁屏通知）
+
+官网链接：[ https://open.oppomobile.com/new/developmentDoc/info?id=10288
+](https://open.oppomobile.com/new/developmentDoc/info?id=10288)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 广东欢太科技有限公司
+
+4、推送通知消息（VIVO推送SDK）
+
+使用目的：用于在VIVO设备上推送消息
+
+数据类型：本应用内设备标识信息（vpush的regId）、使用推送服务的应用软件信息（应用包名、版本号、APPKEY、PushSDK版本）、设备类型、系统基本信息（系统类型和系统版本）
+
+官网链接：[ https://dev.vivo.com.cn/documentCenter/doc/706
+](https://dev.vivo.com.cn/documentCenter/doc/706)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 维沃移动通信有限公司
+
+5、QQ钱包支付
+
+使用目的：用户开通及登录使用QQ钱包服务/反洗钱/风险管理/保障支付安全
+
+数据类型：QQ登录信息，包括QQ号及用户标识信息；QQ帐号昵称、备注名、头像及用户标识信息；IP地址、设备识别码（MAC/IMEI）；硬件设备型号、终端系统类型、设备识别码（MAC/IMEI）、使用的软件版本信息、软件语言设置信息、所在的地区
+
+官网链接：[ https://www.tenpay.com/v3/helpcenter/low/privacy.shtml
+](https://www.tenpay.com/v3/helpcenter/low/privacy.shtml)
+
+处理方式： 后台接口传输
+
+公司名称： 财付通支付科技有限公司
+
+6、即时通讯（腾讯云即时通信IM）
+
+使用目的：为用户提供文字，图片和语音聊天的服务
+
+数据类型：设备型号、系统版本、网络连接状态
+
+官网链接：[
+https://rule.tencent.com/rule/preview/058bf5dc-c797-4ba5-89eb-d06d9196c516
+](https://rule.tencent.com/rule/preview/058bf5dc-c797-4ba5-89eb-d06d9196c516)
+
+处理方式： 第三方自行处理
+
+公司名称： 腾讯云计算（北京）有限责任公司
+
+7、推送通知消息（小米推送SDK）
+
+使用目的：用于在小米设备上推送消息
+
+数据类型：设备标识信息（OAID、加密的Android
+ID）、本应用信息（应用包名、版本号和运行状态）、推送消息内容、设备信息（设备厂商、型号、设备内存、操作系统版本、小米推送SDK版本、归属地、运营商名称）、通知栏设置、网络信息（ExtraInfo）
+
+官网链接：[ https://dev.mi.com/console/doc/detail?pId=1822
+](https://dev.mi.com/console/doc/detail?pId=1822)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 小米移动软件有限公司
+
+8、计步服务（VIVO计步SDK）
+
+使用目的：用于在VIVO设备上使用QQ运动功能时，展示更精准的步数信息
+
+数据类型：步数信息
+
+官网链接：[ https://www.vivo.com.cn/about-vivo/privacy-policy
+](https://www.vivo.com.cn/about-vivo/privacy-policy)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 维沃移动通信有限公司
+
+9、广告服务
+
+使用目的：帮助广告住投放、评估、检测、提升广告投放效果，具体详见《广告服务第三方信息共享清单》
+
+数据类型：设备标识符（IDFA、OAID）；设备信息（硬件型号、操作系统、系统语言、屏幕高宽、屏幕方向）；广告数据（曝光、点击数据）
+
+官网链接：[
+https://privacy.qq.com/document/preview/7c8439a1d632427180da2a497f05dba1
+](https://privacy.qq.com/document/preview/7c8439a1d632427180da2a497f05dba1)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 广告主和/或其委托的代理商、第三方广告监测服务商
+
+10、王卡用户身份识别
+
+使用目的：根据IP识别用户手机号，进而识别用户是否为王卡
+
+数据类型：IP地址
+
+官网链接：[ http://www.10010.com/net5/front/include/index_a/privacypolicy.html
+](http://www.10010.com/net5/front/include/index_a/privacypolicy.html)
+
+处理方式： 后台接口传输（将用户IP经加密、去标识传送给联通，联通根据IP进行王卡身份识别并返回识别结果。）
+
+公司名称： 中国联合网络通信有限公司
+
+11、推送通知消息（荣耀推送SDK）
+
+使用目的：用于在荣耀设备上推送消息
+
+数据类型：设备标识符（AAID、PushToken）
+
+官网链接：[ https://developer.hihonor.com/cn/promoteService
+](https://developer.hihonor.com/cn/promoteService)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 深圳荣耀软件技术有限公司
+
+12、虎牙（HUYA SDK）
+
+使用目的：在用户观看虎牙直播时，保障直播流推送功能的正常运行、统计直播流推送的效果、保障直播流推送功能的网络质量
+
+数据类型：设备厂商信息、设备型号、操作系统版本、操作系统语言、设备标识符(AndroidID、UUID） ；宿主APP包名；网络信息（网络类型、IP
+地址、wifi状态、网络状态）及运营商信息；宿主APP的账号验证信息及账号昵称（发弹幕场景下为了建立虎牙账号）、弹幕文案信息
+
+官网链接：[ https://app-agreements.huya.com/26ed6209/mobile/index.html
+](https://app-agreements.huya.com/26ed6209/mobile/index.html)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 广州虎牙信息科技有限公司
+
+iOS第三方SDK列表
+
+1、信息分享（微博SDK）
+
+使用目的：登录及分享内容到新浪微博
+
+数据类型：设备标识信息、网络信息
+
+官网链接：[ https://open.weibo.com/ ](https://open.weibo.com/)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 北京微梦创科网络技术有限公司
+
+2、苹果应用内支付（IAP）
+
+使用目的：帮助用户使用苹果应用内支付服务
+
+数据类型：用户标识信息，订单交易信息（苹果物品ID、折扣、物品数量）
+
+官网链接：[ https://www.apple.com.cn/legal/privacy/szh/
+](https://www.apple.com.cn/legal/privacy/szh/)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 云上艾珀（贵州）技术有限公司
+
+3、即时通讯（腾讯云即时通信IM）
+
+使用目的：为用户提供文字，图片和语音聊天的服务
+
+数据类型：用户标识信息，网络类型，系统语言类型
+
+官网链接：[
+https://rule.tencent.com/rule/preview/058bf5dc-c797-4ba5-89eb-d06d9196c516
+](https://rule.tencent.com/rule/preview/058bf5dc-c797-4ba5-89eb-d06d9196c516)
+
+处理方式： 第三方自行处理
+
+公司名称： 腾讯云计算（北京）有限责任公司
+
+4、广告服务
+
+使用目的：帮助广告主投放、评估、监测、提升广告投放效果，具体详见《广告服务第三方信息共享清单》https://privacy.qq.com/document/preview/7c8439a1d632427180da2a497f05dba1
+
+数据类型：如IDFA、OAID等设备标识符；如曝光、点击数据等广告数据；如系统语言、屏幕高宽、屏幕方向等设备信息
+
+官网链接：[ / ](/)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 广告主和/或其委托的代理商、第三方广告监测服务商
+
+5、QQ钱包支付
+
+使用目的：用户开通及登录使用QQ钱包服务/反洗钱/风险管理/保障支付安全
+
+数据类型：QQ登录信息，包括QQ号及用户标识信息；QQ账号昵称、备注名、头像及用户标识信息；IP地址、设备识别码（MAC/IMEI）；硬件设备型号、终端系统类型、设备识别码（MAC/IMEI）、使用的软件版本信息、软件语言设置信息、所在的地区
+
+官网链接：[ https://www.tenpay.com/v3/helpcenter/low/privacy.shtml
+](https://www.tenpay.com/v3/helpcenter/low/privacy.shtml)
+
+处理方式： 后台接口传输
+
+公司名称： 财付通支付科技有限公司
+
+6、王卡用户身份识别
+
+使用目的：根据IP识别用户手机号，进而识别用户是否为王卡
+
+数据类型：IP地址
+
+官网链接：[ http://www.10010.com/net5/front/include/index_a/privacypolicy.html
+](http://www.10010.com/net5/front/include/index_a/privacypolicy.html)
+
+处理方式： 后台接口传输（将用户IP经加密、去标识传送给联通，联通根据IP进行王卡身份识别并返回识别结果。）
+
+公司名称： 中国联合网络通信有限公司
+
+企业微信接入第三方SDK目录
+
+为保障企业微信的稳定运行或实现相关功能，我们可能会接入由第三方提供的软件开发包（SDK）实现前述目的。我们会对合作方获取个人信息的SDK进行严格的审核，以保护您的个人信息安全。  
+  
+我们对接入的相关第三方SDK在以下目录中列明。您可以通过相关链接查看第三方的数据使用和保护规则。请注意，第三方SDK可能由于版本升级、策略调整等原因导致其个人信息处理类型发生变化，请以其公示的官方说明为准。
+
+[![](https://cl-privacy-1258638997.cos.ap-
+guangzhou.myqcloud.com/privacyplatform/ugGF3EaVqJgssJTTCfsK_FM2QJoUHdt7)企业微信]()
+
+Android第三方SDK列表
+
+1、小米推送SDK
+
+使用目的：推送消息
+
+数据类型：设备标识(OAID、加密的Android ID)、推送消息内容、设备信息(设备厂商、型号、归属地、运营商名称等)、通知栏设置
+
+官网链接：[ https://dev.mi.com/console/doc/detail?pId=1822
+](https://dev.mi.com/console/doc/detail?pId=1822)
+
+处理方式： SDK本机采集
+
+公司名称： 北京小米移动软件有限公司
+
+2、华为推送SDK（Android版）
+
+使用目的：推送消息
+
+数据类型：应用信息、设备信息（设备的硬件信息、系统基本信息和系统设置）
+
+官网链接：[ https://consumer.huawei.com/cn/privacy/privacy-policy
+](https://consumer.huawei.com/cn/privacy/privacy-policy)
+
+处理方式： SDK本机采集
+
+公司名称： 华为软件技术有限公司
+
+3、vivo PUSH-SDK
+
+使用目的：推送消息
+
+数据类型：应用基本信息（如appid、应用包名，应用版本号）、应用内设备标识符（vpush的regId）、设备的硬件信息（设备类型）、系统基本信息（系统类型和系统版本）
+
+官网链接：[ https://dev.vivo.com.cn/documentCenter/doc/652
+](https://dev.vivo.com.cn/documentCenter/doc/652)
+
+处理方式： SDK本机采集
+
+公司名称： 维沃移动通信有限公司
+
+4、OPPO PUSH 客户端 SDK
+
+使用目的：推送消息
+
+数据类型：应用基本信息（MCS应用包名、应用版本号、OPUSH
+SDK版本号）、应用内设备标识符（RegistraterID、appKey、appSecret）
+
+官网链接：[ https://open.oppomobile.com/new/developmentDoc/info?id=11228
+](https://open.oppomobile.com/new/developmentDoc/info?id=11228)
+
+处理方式： SDK本机采集
+
+公司名称： 广东欢太科技有限公司
+
+5、卫士通第三方加密SDK
+
+使用目的：数据加密
+
+数据类型：用户身份标识、设备标识（Android ID）
+
+官网链接：[ http://www.weigutech.com/ ](http://www.weigutech.com/)
+
+处理方式： SDK本机采集
+
+公司名称： 网安卫谷（天津）科技有限公司
+
+6、腾讯云即时通信IM
+
+使用目的：用于会议沟通
+
+数据类型：设备信息（设备名称、设备硬件信息状态、Mac地址以及用于访问服务的设备设置信息等）
+
+官网链接：[ https://cloud.tencent.com/document/product/269/58094
+](https://cloud.tencent.com/document/product/269/58094)
+
+处理方式： SDK本机采集
+
+公司名称： 腾讯云计算（北京）有限责任公司
+
+7、微信支付/网络支付服务
+
+使用目的：在企业微信中使用转账、红包等支付功能，防范反欺诈、反套现、反电信网络诈骗等风险控制，保障支付安全。
+
+数据类型：个人账号信息（例如企业微信姓名、所在企业名称），安全风控类信息。
+
+官网链接：[ https://www.tenpay.com ](https://www.tenpay.com)
+
+处理方式： 接口传输
+
+公司名称： 财付通支付科技有限公司
+
+8、人脸核验与实人实名认证
+
+使用目的：在企业微信中使用人脸打卡功能时，用于人脸核验；在企业微信中进行人脸识别验证身份（例如实名认证）时，用于实人实名认证。
+
+数据类型：：人脸打卡场景为人脸信息 ，人脸识别验证身份场景为姓名、身份证号、人脸视频和照片
+、设备信息（光线传感器信息、设备型号、操作系统等，具体详见第三方个人信息处理规则）。
+
+官网链接：[ 人脸打卡场景为https://cloud.tencent.com/document/product/301/95282
+；人脸识别验证身份场景为https://privacy.qq.com/document/preview/8dfd927c145e49eda6d843e415baefae
+](人脸打卡场景为https://cloud.tencent.com/document/product/301/95282
+；人脸识别验证身份场景为https://privacy.qq.com/document/preview/8dfd927c145e49eda6d843e415baefae)
+
+处理方式： 人脸打卡场景为接口传输，人脸识别验证身份场景为SDK本机采集。
+
+公司名称： 腾讯云计算（北京）有限责任公司
+
+9、企业自主选择服务和用户自主选择服务
+
+使用目的：企业用户基于自身经营管理需要或你基于工作等需要，在“工作台”选择开通使用第三方服务
+
+数据类型：个人基础信息（如账号、头像等信息）和基础权限（如企业客户权限信息、审批借口权限信息等）
+
+官网链接：[ 具体以第三方公示的页面为准 ](具体以第三方公示的页面为准)
+
+处理方式： 接口传输
+
+公司名称： 企业用户管理员或你自主选择的服务提供方，具体以第三方公司的页面说载明的第三方名称为准
+
+iOS第三方SDK列表
+
+1、微信支付/网络支付服务
+
+使用目的：在企业微信中使用转账、红包等支付功能，防范反欺诈、反套现、反电信网络诈骗等风险控制，保障支付安全。
+
+数据类型：个人账号信息（例如企业微信姓名、所在企业名称），安全风控类信息。
+
+官网链接：[ https://www.tenpay.com ](https://www.tenpay.com)
+
+处理方式： 接口传输
+
+公司名称： 财付通支付科技有限公司
+
+2、企业自主选择服务和用户自选服务
+
+使用目的：企业用户基于自身经营管理需要或你基于工作等需要，在“工作台”选择开通使用第三方服务。
+
+数据类型：个人基础信息（如账号、头像等信息）和基础权限（如企业客户权限信息、审批接口权限信息等）。
+
+官网链接：[ 企业用户管理员或你自主选择的服务提供方，具体以第三方公示的页面所载明的第三方名称为准。
+](企业用户管理员或你自主选择的服务提供方，具体以第三方公示的页面所载明的第三方名称为准。)
+
+处理方式： 接口传输
+
+公司名称： 具体以第三方公示的页面为准。
+
+3、小米推送SDK
+
+使用目的：推送消息
+
+数据类型：设备标识(OAID、加密的Android ID)、推送消息内容、设备信息(设备厂商、型号、归属地、运营商名称等)、通知栏设置
+共享方式：SDK本机采集
+
+官网链接：[ https://dev.mi.com/console/doc/detail?pId=1822
+](https://dev.mi.com/console/doc/detail?pId=1822)
+
+处理方式： SDK本机采集
+
+公司名称： 北京小米移动软件有限公司
+
+4、华为推送SDK（Android版）
+
+使用目的：推送消息
+
+数据类型：应用信息、设备信息（设备的硬件信息、系统基本信息和系统设置）
+
+官网链接：[ https://consumer.huawei.com/cn/privacy/privacy-policy
+](https://consumer.huawei.com/cn/privacy/privacy-policy)
+
+处理方式： SDK本机采集
+
+公司名称： 华为软件技术有限公司
+
+5、vivo PUSH-SDK
+
+使用目的：推送消息
+
+数据类型：应用基本信息（如appid、应用包名，应用版本号）、应用内设备标识符（vpush的regId）、设备的硬件信息（设备类型）、系统基本信息（系统类型和系统版本）
+
+官网链接：[ https://dev.vivo.com.cn/documentCenter/doc/652
+](https://dev.vivo.com.cn/documentCenter/doc/652)
+
+处理方式： SDK本机采集
+
+公司名称： 维沃移动通信有限公司
+
+6、OPPO PUSH 客户端 SDK
+
+使用目的：推送消息
+
+数据类型：应用基本信息（MCS应用包名、应用版本号、OPUSH
+SDK版本号）、应用内设备标识符（RegistraterID、appKey、appSecret）
+
+官网链接：[ https://open.oppomobile.com/new/developmentDoc/info?id=11228
+](https://open.oppomobile.com/new/developmentDoc/info?id=11228)
+
+处理方式： SDK本机采集
+
+公司名称： 广东欢太科技有限公司
+
+7、卫士通第三方加密SDK
+
+使用目的：数据加密
+
+数据类型：用户身份标识、设备标识（Android ID）
+
+官网链接：[ http://www.weigutech.com/ ](http://www.weigutech.com/)
+
+处理方式： SDK本机采集
+
+公司名称： 中电科（天津）网络信息安全有限公司
+
+8、腾讯云即时通信IM
+
+使用目的：用于会议沟通
+
+数据类型：设备信息（设备名称、设备硬件信息状态、Mac地址以及用于访问服务的设备设置信息等）
+
+官网链接：[ https://cloud.tencent.com/document/product/269/58094
+](https://cloud.tencent.com/document/product/269/58094)
+
+处理方式： SDK本机采集
+
+公司名称： 腾讯云计算（北京）有限责任公司
+
+9、人脸核验与实人实名认证
+
+使用目的：在企业微信中使用人脸打卡功能时，用于人脸核验；在企业微信中进行人脸识别验证身份（例如实名认证）时，用于实人实名认证。
+
+数据类型：人脸打卡场景为人脸信息 ，人脸识别验证身份场景为姓名、身份证号码、人脸视频和照片
+、设备信息（光线传感器信息、设备型号、操作系统等，具体详见第三方个人信息处理规则）。
+
+官网链接：[ 人脸打卡场景为https://cloud.tencent.com/document/product/301/95282
+；人脸识别验证身份场景为https://privacy.qq.com/document/preview/8dfd927c145e49eda6d843e415baefae
+](人脸打卡场景为https://cloud.tencent.com/document/product/301/95282
+；人脸识别验证身份场景为https://privacy.qq.com/document/preview/8dfd927c145e49eda6d843e415baefae)
+
+处理方式： 人脸打卡场景为接口传输，人脸识别验证身份场景为SDK本机采集。
+
+公司名称： 腾讯云计算（北京）有限责任公司
+
+腾讯视频接入第三方SDK目录
+
+为保障腾讯视频的稳定运行或实现相关功能，我们可能会接入由第三方提供的软件开发包（SDK）实现前述目的。我们会对合作方获取个人信息的SDK进行严格的审核，以保护您的个人信息安全。  
+  
+我们对接入的相关第三方SDK在以下目录中列明。您可以通过相关链接查看第三方的数据使用和保护规则。请注意，第三方SDK可能由于版本升级、策略调整等原因导致其个人信息处理类型发生变化，请以其公示的官方说明为准。
+
+[![](https://cl-privacy-1258638997.cos.ap-
+guangzhou.myqcloud.com/privacyplatform/riDpF0BAB2qxg0y_DYciAc-N8i9PHc49)腾讯视频]()
+
+Android第三方SDK列表
+
+1、小米推送SDK
+
+使用目的：用于在小米设备上推送消息
+
+数据类型：设备标识信息（OAID、加密的Android
+ID）、本应用信息（应用包名、版本号和运行状态）、推送消息内容、设备信息（设备厂商、型号、设备内存、操作系统版本、小米推送SDK版本、归属地、运营商名称）、通知栏设置、网络信息（ExtraInfo）
+
+官网链接：[ https://dev.mi.com/console/doc/detail?pId=1822 ](
+https://dev.mi.com/console/doc/detail?pId=1822)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 北京小米移动软件有限公司
+
+2、VIVO推送SDK
+
+使用目的：用于在VIVO设备上推送消息
+
+数据类型：本应用内设备标识信息（vpush的regId）、使用推送服务的应用软件信息（应用包名、版本号、APPKEY、PushSDK版本）、设备类型、系统基本信息（系统类型和系统版本）
+
+官网链接：[ https://dev.vivo.com.cn/documentCenter/doc/706
+](https://dev.vivo.com.cn/documentCenter/doc/706)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 维沃移动通信有限公司
+
+3、OPPO推送SDK
+
+使用目的：用于在OPPO设备上推送消息
+
+数据类型：设备相关信息（OAID，User ID，Google Advertising ID，
+手机Region设置，设备型号，手机电量，手机操作系统版本及语言）、本应用信息（本APP包名及版本号，运行状态）、推送SDK版本号、网络相关信息（IP、域名连接结果，当前网络类型）、消息发送结果、通知栏状态（通知栏权限、用户点击行为），锁屏状态（是否锁屏，是否允许锁屏通知）
+
+官网链接：[ https://open.oppomobile.com/new/developmentDoc/info?id=10288
+](https://open.oppomobile.com/new/developmentDoc/info?id=10288)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 广东欢太科技有限公司
+
+4、魅族推送SDK
+
+使用目的：用于在魅族设备上推送消息
+
+数据类型：手机品牌、手机型号、系统版本、系统语言、设备标识符（通过相关标识符生成应用间不相关的用户标识：push ID）、消息内容；第三方应用基于push
+ID分类的、应用间不相关的标签、别名信息；第三方应用接收推送消息开关的状态信息，消息送达后的相关展示、划掉、点击行为类数据。
+
+官网链接：[ http://open.flyme.cn/docs?id=202 ](http://open.flyme.cn/docs?id=202)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 珠海星纪魅族信息技术有限公司
+
+5、新浪微博开放平台
+
+使用目的：分享内容到新浪微博
+
+数据类型：网络连接状态
+
+官网链接：[ https://open.weibo.com/wiki/Sdk/privacy
+](https://open.weibo.com/wiki/Sdk/privacy)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 北京微梦创科网络技术有限公司
+
+6、微信支付
+
+使用目的：帮助用户使用微信支付服务
+
+数据类型：微信账号标识符、网络IP地址、订单金额
+
+官网链接：[ https://www.tenpay.com/v3/helpcenter/low/privacy.shtml
+](https://www.tenpay.com/v3/helpcenter/low/privacy.shtml)
+
+处理方式： 采取去标识、加密等方式进行传输和处理
+
+公司名称： 财付通支付科技有限公司
+
+7、QQ钱包支付
+
+使用目的：帮助用户完成QQ钱包支付服务
+
+数据类型：QQ账号标识符、网络IP地址、订单金额
+
+官网链接：[ https://www.tenpay.com/v3/helpcenter/low/privacy.shtml
+](https://www.tenpay.com/v3/helpcenter/low/privacy.shtml)
+
+处理方式： 采取去标识化、加密传输和处理的安全处理方式
+
+公司名称： 财付通支付科技有限公司
+
+8、阅文阅读sdk
+
+使用目的：为用户提供阅读服务
+
+数据类型：累计阅读时长、读过本数、加入书架的书籍、购买的书籍或章节；发表的书评信息；搜索的字词、浏览记录；操作系统、手机/设备型号信息、阅文账号标识符。
+
+官网链接：[ https://v.book.qq.com/video/privacy
+](https://v.book.qq.com/video/privacy)
+
+处理方式： 通过加密传输和处理的安全处理方式
+
+公司名称： 上海阅文信息技术有限公司
+
+9、华为推送SDK
+
+使用目的：用于在华为设备上推送消息、华为登录依赖
+
+数据类型：本应用基本信息（AppID，推送服务和HMS
+Core应用版本号、华为推送SDK版本号，应用版本号和应用包名）、本应用内设备标识符（AAID和Push
+Token）、设备的硬件信息（设备类型，设备型号）、系统基本信息（系统类型，系统版本）、系统设置信息（国家码）
+
+官网链接：[ https://developer.huawei.com/consumer/cn/doc/development/HMSCore-
+Guides/sdk-data-security-0000001050042177
+](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/sdk-
+data-security-0000001050042177)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 华为软件技术有限公司
+
+10、腾讯云即时通信IM
+
+使用目的：为用户提供文字，图片和语音聊天的服务
+
+数据类型：网络连接状态设备型号、系统版本
+
+官网链接：[ https://cloud.tencent.com/document/product/269/58094
+](https://cloud.tencent.com/document/product/269/58094)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 腾讯云计算（北京）有限责任公司
+
+iOS第三方SDK列表
+
+1、小米推送SDK
+
+使用目的：用于在小米设备上推送消息
+
+数据类型：设备标识信息（OAID、加密的Android
+ID）、本应用信息（应用包名、版本号和运行状态）、推送消息内容、设备信息（设备厂商、型号、设备内存、操作系统版本、小米推送SDK版本、归属地、运营商名称）、通知栏设置、网络信息（ExtraInfo）
+
+官网链接：[ https://dev.mi.com/console/doc/detail?pId=1822 ](
+https://dev.mi.com/console/doc/detail?pId=1822)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 北京小米移动软件有限公司
+
+2、VIVO推送SDK
+
+使用目的：用于在VIVO设备上推送消息
+
+数据类型：本应用内设备标识信息（vpush的regId）、使用推送服务的应用软件信息（应用包名、版本号、APPKEY、PushSDK版本）、设备类型、系统基本信息（系统类型和系统版本）
+
+官网链接：[ https://dev.vivo.com.cn/documentCenter/doc/706
+](https://dev.vivo.com.cn/documentCenter/doc/706)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 维沃移动通信有限公司
+
+3、OPPO推送SDK
+
+使用目的：用于在OPPO设备上推送消息
+
+数据类型：设备相关信息（OAID，User ID，Google Advertising ID，
+手机Region设置，设备型号，手机电量，手机操作系统版本及语言）、本应用信息（本APP包名及版本号，运行状态）、推送SDK版本号、网络相关信息（IP、域名连接结果，当前网络类型）、消息发送结果、通知栏状态（通知栏权限、用户点击行为），锁屏状态（是否锁屏，是否允许锁屏通知）
+
+官网链接：[ https://open.oppomobile.com/new/developmentDoc/info?id=10288
+](https://open.oppomobile.com/new/developmentDoc/info?id=10288)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 广东欢太科技有限公司
+
+4、魅族推送SDK
+
+使用目的：用于在魅族设备上推送消息
+
+数据类型：手机品牌、手机型号、系统版本、系统语言、设备标识符（通过相关标识符生成应用间不相关的用户标识：push ID）、消息内容；第三方应用基于push
+ID分类的、应用间不相关的标签、别名信息；第三方应用接收推送消息开关的状态信息，消息送达后的相关展示、划掉、点击行为类数据。
+
+官网链接：[ http://open.flyme.cn/docs?id=202 ](http://open.flyme.cn/docs?id=202)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 珠海星纪魅族信息技术有限公司
+
+5、新浪微博开放平台
+
+使用目的：分享内容到新浪微博
+
+数据类型：网络连接状态
+
+官网链接：[ https://open.weibo.com/wiki/Sdk/privacy
+](https://open.weibo.com/wiki/Sdk/privacy)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 北京微梦创科网络技术有限公司
+
+6、微信支付
+
+使用目的：帮助用户使用微信支付服务
+
+数据类型：微信账号标识符、网络IP地址、订单金额
+
+官网链接：[ https://www.tenpay.com/v3/helpcenter/low/privacy.shtml
+](https://www.tenpay.com/v3/helpcenter/low/privacy.shtml)
+
+处理方式： 采取去标识、加密等方式进行传输和处理
+
+公司名称： 财付通支付科技有限公司
+
+7、QQ钱包支付
+
+使用目的：帮助用户完成QQ钱包支付服务
+
+数据类型：QQ账号标识符、网络IP地址、订单金额
+
+官网链接：[ https://www.tenpay.com/v3/helpcenter/low/privacy.shtml
+](https://www.tenpay.com/v3/helpcenter/low/privacy.shtml)
+
+处理方式： 采取去标识化、加密传输和处理的安全处理方式
+
+公司名称： 财付通支付科技有限公司
+
+8、阅文阅读sdk
+
+使用目的：为用户提供阅读服务
+
+数据类型：累计阅读时长、读过本数、加入书架的书籍、购买的书籍或章节；发表的书评信息；搜索的字词、浏览记录；操作系统、手机/设备型号信息、阅文账号标识符。
+
+官网链接：[ https://v.book.qq.com/video/privacy
+](https://v.book.qq.com/video/privacy)
+
+处理方式： 通过加密传输和处理的安全处理方式
+
+公司名称： 上海阅文信息技术有限公司
+
+9、华为推送SDK
+
+使用目的：用于在华为设备上推送消息、华为登录依赖
+
+数据类型：本应用基本信息（AppID，推送服务和HMS
+Core应用版本号、华为推送SDK版本号，应用版本号和应用包名）、本应用内设备标识符（AAID和Push
+Token）、设备的硬件信息（设备类型，设备型号）、系统基本信息（系统类型，系统版本）、系统设置信息（国家码）
+
+官网链接：[ https://developer.huawei.com/consumer/cn/doc/development/HMSCore-
+Guides/sdk-data-security-0000001050042177
+](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/sdk-
+data-security-0000001050042177)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 华为软件技术有限公司
+
+10、腾讯云即时通信IM
+
+使用目的：为用户提供文字，图片和语音聊天的服务
+
+数据类型：网络连接状态设备型号、系统版本
+
+官网链接：[ https://cloud.tencent.com/document/product/269/58094
+](https://cloud.tencent.com/document/product/269/58094)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 腾讯云计算（北京）有限责任公司
+
+腾讯新闻接入第三方SDK目录
+
+为保障腾讯新闻的稳定运行或实现相关功能，我们可能会接入由第三方提供的软件开发包（SDK）实现前述目的。我们会对合作方获取个人信息的SDK进行严格的审核，以保护您的个人信息安全。  
+  
+我们对接入的相关第三方SDK在以下目录中列明。您可以通过相关链接查看第三方的数据使用和保护规则。请注意，第三方SDK可能由于版本升级、策略调整等原因导致其个人信息处理类型发生变化，请以其公示的官方说明为准。
+
+[![](https://cl-privacy-1258638997.cos.ap-
+guangzhou.myqcloud.com/privacyplatform/8_7OHEv_X9075XlYF4rF5TZefdoSJxk8)腾讯新闻]()
+
+Android第三方SDK列表
+
+1、OPPO推送SDK
+
+使用目的：用于在OPPO设备上推送消息
+
+数据类型：设备相关信息（OAID，User ID，Android
+ID，设备型号，手机电量，手机操作系统版本及语言）、腾讯新闻的应用信息（本APP包名及版本号，运行状态）、推送SDK版本号、网络相关信息（IP或域名连接结果，当前网络类型）、消息发送结果、通知栏状态（通知栏权限、用户点击行为），锁屏状态（是否锁屏，是否允许锁屏通知）
+
+官网链接：[ https://open.oppomobile.com/new/developmentDoc/info?id=10288
+](https://open.oppomobile.com/new/developmentDoc/info?id=10288)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 广东欢太科技有限公司
+
+2、魅族推送SDK
+
+使用目的：用于在魅族设备上推送消息
+
+数据类型：手机品牌、手机型号、系统版本、系统语言、网络状态、本应用信息（应用的包名、名称、版本、接入 PushSDK 版本）
+
+官网链接：[ http://static.meizu.com/resources/term/privacy8.html
+](http://static.meizu.com/resources/term/privacy8.html)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 珠海市魅族通讯设备有限公司
+
+3、新浪微博开放平台
+
+使用目的：分享内容到新浪微博
+
+数据类型：无
+
+官网链接：[ https://open.weibo.com/wiki/Sdk/privacy
+](https://open.weibo.com/wiki/Sdk/privacy)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 北京微梦创科网络技术有限公司
+
+4、VIVO推送SDK
+
+使用目的：用于在VIVO设备上推送消息
+
+数据类型：设备标识信息（ANDROIDID、OAID、token、加密的Android ID）
+
+官网链接：[ https://dev.vivo.com.cn/documentCenter/doc/652
+](https://dev.vivo.com.cn/documentCenter/doc/652)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 维沃移动通信有限公司
+
+5、小米推送SDK
+
+使用目的：用于在小米设备上推送消息
+
+数据类型：设备标识信息（OAID、加密的Android
+ID、VAID、AAID）、推送消息内容、设备信息(设备厂商、型号、归属地、运营商名称)、通知栏设置、网络信息（ExtraInfo
+
+官网链接：[ https://dev.mi.com/console/doc/detail?pId=1822
+](https://dev.mi.com/console/doc/detail?pId=1822)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 北京小米移动软件有限公司
+
+6、MMA中国营销创新联盟OTT广告监测及验证统一SDK
+
+使用目的：为了净化数字广告生态环境，规范并为数字广告测量和验证提供统一性和便利性
+
+数据类型：设备硬件信息（MODEL）、设备系统信息（Android ID、OAID）
+
+官网链接：[ https://mmachina.cn/sdk-privacy/ ](https://mmachina.cn/sdk-privacy/)
+
+处理方式： 广告监测通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 上海亦拓广告有限公司
+
+7、QQ钱包支付
+
+使用目的：帮助用户使用QQ钱包支付服务
+
+数据类型：QQ帐号标识符、网络IP地址、订单金额
+
+官网链接：[ https://www.tenpay.com/v3/helpcenter/low/privacy.shtml
+](https://www.tenpay.com/v3/helpcenter/low/privacy.shtml)
+
+处理方式： 采取去标识、加密等方式进行传输和处理
+
+公司名称： 财付通支付科技有限公司
+
+8、微信支付
+
+使用目的：帮助用户使用微信支付服务
+
+数据类型：微信账号标识符、网络IP地址、订单金额
+
+官网链接：[ https://www.tenpay.com/v3/helpcenter/low/privacy.shtml
+](https://www.tenpay.com/v3/helpcenter/low/privacy.shtml)
+
+处理方式： 采取去标识、加密等方式进行传输和处理
+
+公司名称： 财付通支付科技有限公司
+
+9、华为HMS Core
+
+使用目的：华为推送、华为登录依赖
+
+数据类型：本应用基本信息（AppID，推送服务和HMS
+Core应用版本号、华为推送SDK版本号，应用版本号和应用包名）、本应用内设备标识符（AAID和Push
+Token）、设备的硬件信息（设备类型，如手机，平板等；设备型号）、系统基本信息（系统类型，如Android，HarmonyOS等；系统版本）、系统设置信息（国家码）
+
+官网链接：[ https://developer.huawei.com/consumer/cn/doc/development/hmscore-
+common-Guides/privacy-0000001261262707
+](https://developer.huawei.com/consumer/cn/doc/development/hmscore-common-
+Guides/privacy-0000001261262707)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 华为软件技术有限公司
+
+10、Yoga布局引擎库
+
+使用目的：页面元素布局
+
+数据类型：无
+
+官网链接：[ 暂无 ](暂无)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： Meta Platforms, Inc.
+
+iOS第三方SDK列表
+
+1、新浪微博开放平台
+
+使用目的：分享内容到新浪微博
+
+数据类型：无
+
+官网链接：[ https://open.weibo.com/wiki/Sdk/privacy
+](https://open.weibo.com/wiki/Sdk/privacy)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 北京微梦创科网络技术有限公司
+
+2、MMA中国营销创新联盟OTT广告监测及验证统一SDK
+
+使用目的：为了净化数字广告生态环境，规范并为数字广告测量和验证提供统一性和便利性
+
+数据类型：设备硬件信息（MODEL）、设备系统信息（Android ID、OAID）
+
+官网链接：[ https://mmachina.cn/sdk-privacy/ ](https://mmachina.cn/sdk-privacy/)
+
+处理方式： 广告监测通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 上海亦拓广告有限公司
+
+3、QQ钱包支付
+
+使用目的：帮助用户使用QQ钱包支付服务
+
+数据类型：QQ账号标识符、网络IP地址、订单金额
+
+官网链接：[ https://www.tenpay.com/v3/helpcenter/low/privacy.shtml
+](https://www.tenpay.com/v3/helpcenter/low/privacy.shtml)
+
+处理方式： 采取去标识、加密等方式进行传输和处理
+
+公司名称： 财付通支付科技有限公司
+
+4、微信支付
+
+使用目的：帮助用户使用微信支付服务
+
+数据类型：微信账号标识符、网络IP地址、订单金额
+
+官网链接：[ https://www.tenpay.com/v3/helpcenter/low/privacy.shtml
+](https://www.tenpay.com/v3/helpcenter/low/privacy.shtml)
+
+处理方式： 采取去标识、加密等方式进行传输和处理
+
+公司名称： 财付通支付科技有限公司
+
+5、Yoga布局引擎库
+
+使用目的：页面元素布局
+
+数据类型：无
+
+官网链接：[ 暂无 ](暂无)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： Meta Platforms, Inc.
+
+6、魅族推送SDK
+
+使用目的：用于在魅族设备上推送消息
+
+数据类型：手机品牌、手机型号、系统版本、系统语言、网络状态、本应用信息（应用的包名、名称、版本、接入PlusSDK版本）
+
+官网链接：[ http://static.meizu.com/resources/term/privacy8.html
+](http://static.meizu.com/resources/term/privacy8.html)
+
+处理方式： 通过标识化、加密传输和处理的安全处理方式
+
+公司名称： 珠海市魅族通讯设备有限公司
+
+7、VIVO推送SDK
+
+使用目的：用于在VIVO设备上推送消息
+
+数据类型：设备标识信息（ANDROIDID、OAID、token、加密的Android ID）
+
+官网链接：[ https://dev.vivo.com.cn/documentCenter/doc/652
+](https://dev.vivo.com.cn/documentCenter/doc/652)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 维沃移动通信有限公司
+
+8、小米推送SDK
+
+使用目的：用于在小米设备上推送消息
+
+数据类型：设备标识信息（OAID、加密的Android
+ID、VAID、AAID）、推送消息内容、设备信息(设备厂商、型号、归属地、运营商名称)、通知栏设置、网络信息（ExtraInfo）
+
+官网链接：[ https://dev.mi.com/console/doc/detail?pId=1822
+](https://dev.mi.com/console/doc/detail?pId=1822)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 北京小米移动软件有限公司
+
+9、OPPO推送SDK
+
+使用目的：用于在OPPO设备上推送消息
+
+数据类型：设备相关信息（OAID，User ID，Android
+ID，设备型号，手机电量，手机操作系统版本及语言）、腾讯新闻的应用信息（本APP包名及版本号，运行状态）、推送SDK版本号、网络相关信息（IP或域名连接结果，当前网络类型）、消息发送结果、通知栏状态（通知栏权限、用户点击行为），锁屏状态（是否锁屏，是否允许锁屏通知）
+
+官网链接：[ https://open.oppomobile.com/new/developmentDoc/info?id=10288
+](https://open.oppomobile.com/new/developmentDoc/info?id=10288)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 广东欢太科技有限公司
+
+10、华为HMS Core
+
+使用目的：华为推送、华为登录依赖
+
+数据类型：本应用基本信息（AppID，推送服务和HMS
+Core应用版本号、华为推送SDK版本号，应用版本号和应用包名）、本应用内设备标识符（AAID和Push
+Token）、设备的硬件信息（设备类型，如手机，平板等；设备型号）、系统基本信息（系统类型，如Android，HarmonyOS等；系统版本）、系统设置信息（国家码）
+
+官网链接：[ https://developer.huawei.com/consumer/cn/doc/development/hmscore-
+common-Guides/privacy-0000001261262707
+](https://developer.huawei.com/consumer/cn/doc/development/hmscore-common-
+Guides/privacy-0000001261262707)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 华为软件技术有限公司
+
+QQ浏览器接入第三方SDK目录
+
+为保障QQ浏览器的稳定运行或实现相关功能，我们可能会接入由第三方提供的软件开发包（SDK）实现前述目的。我们会对合作方获取个人信息的SDK进行严格的审核，以保护您的个人信息安全。  
+  
+我们对接入的相关第三方SDK在以下目录中列明。您可以通过相关链接查看第三方的数据使用和保护规则。请注意，第三方SDK可能由于版本升级、策略调整等原因导致其个人信息处理类型发生变化，请以其公示的官方说明为准。
+
+[![](https://cl-privacy-1258638997.cos.ap-
+guangzhou.myqcloud.com/privacyplatform/6FSR7HlisysulvT_WhOYLqHoDjL8jHjg)QQ浏览器]()
+
+Android第三方SDK列表
+
+1、小米推送SDK
+
+使用目的：用于在小米设备上推送消息
+
+数据类型：设备标识信息（OAID、加密的Android ID）、推送消息内容、设备信息(设备厂商、型号、归属地、运营商名称)、通知栏设置
+
+官网链接：[ https://dev.mi.com/console/doc/detail?pId=1822
+](https://dev.mi.com/console/doc/detail?pId=1822)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 北京小米移动软件有限公司
+
+2、华为推送SDK（含华为HMS Core SDK）
+
+使用目的：用于在华为设备上推送消息、华为登录依赖
+
+数据类型：本应用基本信息（AppID，推送服务和HMS
+Core应用版本号、华为推送SDK版本号，应用版本号和应用包名）、本应用内设备标识符（AAID和Push
+Token）、设备的硬件信息（设备类型（如手机，平板等）、设备型号）、系统基本信息（系统类型（如Android，HarmonyOS等）和系统版本）、系统设置信息（国家码）
+
+官网链接：[ https://developer.huawei.com/consumer/cn/doc/development/HMSCore-
+Guides/sdk-data-security-0000001050042177
+](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/sdk-
+data-security-0000001050042177)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 华为软件技术有限公司
+
+3、VIVO PUSH-SDK
+
+使用目的：用于在VIVO设备上推送消息
+
+数据类型：设备标识信息（如EmmCID、UFSID、ANDROIDID、OAID、token、加密的Android ID）、网络状态信息
+
+官网链接：[ https://dev.vivo.com.cn/documentCenter/doc/652
+](https://dev.vivo.com.cn/documentCenter/doc/652)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 维沃移动通信有限公司
+
+4、OPPO PUSH 客户端SDK
+
+使用目的：用于在OPPO设备上推送消息
+
+数据类型：设备相关信息（如OAID，User ID，Android ID,
+手机Region设置，设备型号，手机操作系统版本及语言）、使用推送服务的应用信息（如APP包名及版本号，运行状态）、推送SDK版本号、网络相关信息（如IP或域名连接结果，当前网络类型）、消息发送结果、通知栏状态（如通知栏权限、用户点击行为），锁屏状态（如是否锁屏，是否允许锁屏通知）
+
+官网链接：[ https://open.oppomobile.com/wiki/doc#id=10288
+](https://open.oppomobile.com/wiki/doc#id=10288)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 广东欢太科技有限公司
+
+5、魅族推送SDK
+
+使用目的：用于在魅族设备上推送消息
+
+数据类型：手机品牌、手机型号、系统版本、系统语言、网络状态、本应用包名、本应用名称、本应用版本、本应用接入 PushSDK 版本
+
+官网链接：[ https://open.flyme.cn/docs?id=202 ](https://open.flyme.cn/docs?id=202)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 珠海星纪魅族信息技术有限公司
+
+6、微信支付
+
+使用目的：帮助用户使用微信支付服务
+
+数据类型：用户标识信息、网络IP地址、订单金额
+
+官网链接：[ https://www.tenpay.com/v3/helpcenter/low/privacy.shtml
+](https://www.tenpay.com/v3/helpcenter/low/privacy.shtml)
+
+处理方式： 采取去标识、加密等方式进行传输和处理
+
+公司名称： 财付通支付科技有限公司
+
+7、QQ钱包支付SDK
+
+使用目的：帮助用户使用QQ钱包支付服务
+
+数据类型：用户标识信息、手机型号、网络IP地址、订单金额
+
+官网链接：[ https://www.tenpay.com/v3/helpcenter/low/privacy.shtml
+](https://www.tenpay.com/v3/helpcenter/low/privacy.shtml)
+
+处理方式： 采取去标识、加密等方式进行传输和处理
+
+公司名称： 财付通支付科技有限公司
+
+8、乐播投屏SDK
+
+使用目的：用于视频投屏
+
+数据类型：发送端的机型(Build.MODEL)、发送端设备名称(蓝牙名称)、系统语言、Android系统版本、网络类型、匿名化的android_id、生产厂商(Build.MANUFACTURER)、wifi名称、本机ip
+
+官网链接：[ https://cloud.lebo.cn/document/4cda03e5130de5e5.html
+](https://cloud.lebo.cn/document/4cda03e5130de5e5.html)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 深圳乐播科技有限公司
+
+9、QCloudCOSSMH SDK
+
+使用目的：云盘文件上传下载任务管理
+
+数据类型：（1）Android：网络状态、网络权限、IP地址、系统属性、存储权限、多媒体文件；（2）iOS：网络状态、网络权限、IP地址、手机型号、IDFV、相册权限
+
+官网链接：[
+https://privacy.qq.com/document/preview/0014f25ad09a4630b3a2da1a4c4a3c68
+](https://privacy.qq.com/document/preview/0014f25ad09a4630b3a2da1a4c4a3c68)
+
+处理方式： 通过去标识化、加密传输和处理的安全方式
+
+公司名称： 腾讯云计算（北京）有限责任公司
+
+10、COS V5 SDK
+
+使用目的：上传文件到云盘
+
+数据类型：（1）Android：网络状态、网络权限、IP地址、系统属性、存储权限、多媒体文件；（2）iOS：网络状态、网络权限、剪切板（仅在SDK内部读取，不进行传输）、相册权限
+
+官网链接：[ https://cloud.tencent.com/document/product/436/74059
+](https://cloud.tencent.com/document/product/436/74059)
+
+处理方式： 通过去标识化、加密传输和处理的安全方式
+
+公司名称： 腾讯云计算（北京）有限责任公司
+
+11、少年创境SDK
+
+使用目的：用于在移动设备上体验3D课程
+
+数据类型：设备信息（android
+id、设备型号、系统版本）、网络类型、网络权限、存储权限（保存和上传视频和照片用于课程互动）、摄像头权限（录制演讲视频）、麦克风权限（语音互动、录制演讲视频等）
+
+官网链接：[ https://app.chuangjing.com/editor/preview?projectId=989
+](https://app.chuangjing.com/editor/preview?projectId=989)
+
+处理方式： 通过去标识化、加密传输和处理的安全方式
+
+公司名称： 创境领域（深圳）科技有限公司
+
+12、讯飞SDK
+
+使用目的：语音评测、离线语音合成
+
+数据类型：设备信息（包括设备型号、操作系统版本）、语音数据（语音识别或语音合成功能）、本SDK日志信息（操作记录、错误信息等）
+
+官网链接：[ https://www.xfyun.cn/doc/tts/online_tts/online_tts_sdkprivacy.html
+](https://www.xfyun.cn/doc/tts/online_tts/online_tts_sdkprivacy.html)
+
+处理方式： 通过去标识化、加密传输和处理的安全方式
+
+公司名称： 科大讯飞股份有限公司
+
+13、Unity3D引擎SDK
+
+使用目的：用于制作创境课堂3D场景提供技术支持
+
+数据类型：设备信息（包括设备型号、AndroidlD、旋转矢量传感器）
+
+官网链接：[ https://unity.cn/legal/china-privacy-policy
+](https://unity.cn/legal/china-privacy-policy)
+
+处理方式： 通过去标识化、加密传输和处理的安全方式
+
+公司名称： 优美缔软件（上海）有限公司
+
+14、对象存储SDK
+
+使用目的：在使用少年创境服务时，读取本地的文件上传到对象存储或把对象存储的文件下载到本地
+
+数据类型：设备型号、设备操作系统信息、使用网络的权限、存储权限
+
+官网链接：[ https://terms.alicdn.com/legal-
+agreement/terms/privacy_policy_full/20240202100310511/20240202100310511.html
+](https://terms.alicdn.com/legal-
+agreement/terms/privacy_policy_full/20240202100310511/20240202100310511.html)
+
+处理方式： 采取去标识、加密等方式进行传输和处理
+
+公司名称： 阿里云计算有限公司
+
+15、移动解析 HTTPDNS SDK
+
+使用目的：在访问网络，本地DNS解析失败时辅助进行域名解析，让用户可以成功访问网络
+
+数据类型：IP地址、网络访问权限（Android）、网络状态（ Android）、无线数据（iOS）
+
+官网链接：[ https://cloud.tencent.com/document/product/379/72015
+](https://cloud.tencent.com/document/product/379/72015)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 腾讯云计算（北京）有限责任公司
+
+16、HUYA SDK
+
+使用目的：在用户观看虎牙直播时，保障直播流推送功能的正常运行、统计直播流推送的效果、保障直播流推送功能的网络质量
+
+数据类型：设备厂商信息、设备型号、操作系统版本、操作系统语言、设备标识符(AndroidID、UUID） ；宿主APP包名；网络信息（网络类型、IP
+地址、wifi状态、网络状态）及运营商信息；宿主APP的账号验证信息及账号昵称（发弹幕场景下为了建立虎牙账号）、弹幕文案信息
+
+官网链接：[ https://app-agreements.huya.com/26ed6209/mobile/index.html
+](https://app-agreements.huya.com/26ed6209/mobile/index.html)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 广州虎牙信息科技有限公司
+
+17、智聆口语评测SDK
+
+使用目的：帮助用户使用口语测评等功能
+
+数据类型：设备型号、操作系统版本、系统属性（仅Android）、IP地址、WIFI状态、用户主动输入的声音；麦克风权限
+
+官网链接：[ https://cloud.tencent.com/document/product/884/71808
+](https://cloud.tencent.com/document/product/884/71808)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 腾讯云计算（北京）有限责任公司
+
+iOS第三方SDK列表
+
+1、乐播投屏SDK
+
+使用目的：用于视频投屏
+
+数据类型：发送端的机型(Build.MODEL)、发送端设备名称(蓝牙名称)、系统语言、Android系统版本、网络类型、匿名化的android_id、生产厂商(Build.MANUFACTURER)、wifi名称、本机ip
+
+官网链接：[ https://cloud.lebo.cn/document/4cda03e5130de5e5.html
+](https://cloud.lebo.cn/document/4cda03e5130de5e5.html)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 深圳乐播科技有限公司
+
+2、微信支付SDK
+
+使用目的：帮助用户使用微信支付服务
+
+数据类型：用户标识信息、网络IP地址、订单金额
+
+官网链接：[ https://www.tenpay.com/v3/helpcenter/low/privacy.shtml
+](https://www.tenpay.com/v3/helpcenter/low/privacy.shtml)
+
+处理方式： 采取去标识、加密等方式进行传输和处理
+
+公司名称： 财付通支付科技有限公司
+
+3、QQ钱包支付SDK
+
+使用目的：帮助用户使用QQ钱包支付服务
+
+数据类型：用户标识信息、手机型号、网络IP地址、订单金额
+
+官网链接：[ https://www.tenpay.com/v3/helpcenter/low/privacy.shtml
+](https://www.tenpay.com/v3/helpcenter/low/privacy.shtml)
+
+处理方式： 采取去标识、加密等方式进行传输和处理
+
+公司名称： 财付通支付科技有限公司
+
+4、小米推送SDK
+
+使用目的：用于在小米设备上推送消息
+
+数据类型：设备标识信息（OAID、加密的Android ID）、推送消息内容、设备信息(设备厂商、型号、归属地、运营商名称)、通知栏设置
+
+官网链接：[ https://dev.mi.com/console/doc/detail?pId=1822
+](https://dev.mi.com/console/doc/detail?pId=1822)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 北京小米移动软件有限公司
+
+5、OPPO PUSH 客户端SDK
+
+使用目的：用于在OPPO设备上推送消息
+
+数据类型：设备相关信息（如OAID，User ID，Android
+ID，手机Region设置，设备型号，手机操作系统版本及语言）、使用推送服务的应用信息（如APP包名及版本号，运行状态）、推送SDK版本号、网络相关信息（如IP或域名连接结果，当前网络类型）、消息发送结果、通知栏状态（如通知栏权限、用户点击行为），锁屏状态（如是否锁屏，是否允许锁屏通知）
+
+官网链接：[ https://open.oppomobile.com/wiki/doc#id=10288
+](https://open.oppomobile.com/wiki/doc#id=10288)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 广东欢太科技有限公司
+
+6、华为推送SDK（含华为HMS Core SDK）
+
+使用目的：用于在华为设备上推送消息、华为登录依赖
+
+数据类型：本应用基本信息（AppID，推送服务和HMS
+Core应用版本号、华为推送SDK版本号，应用版本号和应用包名）、本应用内设备标识符（AAID和Push
+Token）、设备的硬件信息（设备类型（如手机，平板等）、设备型号）、系统基本信息（系统类型（如Android，HarmonyOS等）和系统版本）、系统设置信息（国家码）
+
+官网链接：[ https://developer.huawei.com/consumer/cn/doc/development/HMSCore-
+Guides/sdk-data-security-0000001050042177
+](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/sdk-
+data-security-0000001050042177)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 华为软件技术有限公司
+
+7、魅族推送SDK
+
+使用目的：用于在魅族设备上推送消息
+
+数据类型：手机品牌、手机型号、系统版本、系统语言、网络状态、本应用信息（本应用包名、应用名称、应用版本、应用接入 PushSDK 版本）
+
+官网链接：[ https://open.flyme.cn/docs?id=202 ](https://open.flyme.cn/docs?id=202)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 珠海星纪魅族信息技术有限公司
+
+8、vivo PUSH-SDK
+
+使用目的：用于在VIVO设备上推送消息
+
+数据类型：设备标识信息（如EmmCID、UFSID、ANDROIDID、OAID、token、加密的Android ID）、网络状态信息
+
+官网链接：[ https://dev.vivo.com.cn/documentCenter/doc/652
+](https://dev.vivo.com.cn/documentCenter/doc/652)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 维沃移动通信有限公司
+
+9、QCloudCOSSMH SDK
+
+使用目的：云盘文件上传下载任务管理
+
+数据类型：（1）Android：网络状态、网络权限、IP地址、系统属性、存储权限、多媒体文件；（2）iOS：网络状态、网络权限、IP地址、手机型号、IDFV、相册权限
+
+官网链接：[
+https://privacy.qq.com/document/preview/0014f25ad09a4630b3a2da1a4c4a3c68
+](https://privacy.qq.com/document/preview/0014f25ad09a4630b3a2da1a4c4a3c68)
+
+处理方式： 通过去标识化、加密传输和处理的安全方式
+
+公司名称： 腾讯云计算（北京）有限责任公司
+
+10、COS V5 SDK
+
+使用目的：上传文件到云盘
+
+数据类型：（1）Android：网络状态、网络权限、IP地址、系统属性、存储权限、多媒体文件；（2）iOS：网络状态、网络权限、剪切板（仅在SDK内部读取，不进行传输）、相册权限
+
+官网链接：[ https://cloud.tencent.com/document/product/436/74059
+](https://cloud.tencent.com/document/product/436/74059)
+
+处理方式： 通过去标识化、加密传输和处理的安全方式
+
+公司名称： 腾讯云计算（北京）有限责任公司
+
+11、少年创境SDK
+
+使用目的：用于在移动设备上体验3D课程
+
+数据类型：设备信息（android
+id、设备型号、系统版本）、网络类型、网络权限、存储权限（保存和上传视频和照片用于课程互动）、摄像头权限（录制演讲视频）、麦克风权限（语音互动、录制演讲视频等）
+
+官网链接：[ https://app.chuangjing.com/editor/preview?projectId=989
+](https://app.chuangjing.com/editor/preview?projectId=989)
+
+处理方式： 通过去标识化、加密传输和处理的安全方式
+
+公司名称： 创境领域（深圳）科技有限公司
+
+12、讯飞SDK
+
+使用目的：语音评测、离线语音合成
+
+数据类型：设备信息（包括设备型号、操作系统版本）、语音数据（语音识别或语音合成功能）、本SDK日志信息（操作记录、错误信息等）
+
+官网链接：[ https://www.xfyun.cn/doc/tts/online_tts/online_tts_sdkprivacy.html
+](https://www.xfyun.cn/doc/tts/online_tts/online_tts_sdkprivacy.html)
+
+处理方式： 通过去标识化、加密传输和处理的安全方式
+
+公司名称： 科大讯飞股份有限公司
+
+13、Unity3D引擎SDK
+
+使用目的：用于制作创境课堂3D场景提供技术支持
+
+数据类型：设备信息（包括设备型号、AndroidlD、旋转矢量传感器）
+
+官网链接：[ https://unity.cn/legal/china-privacy-policy
+](https://unity.cn/legal/china-privacy-policy)
+
+处理方式： 通过去标识化、加密传输和处理的安全方式
+
+公司名称： 优美缔软件（上海）有限公司
+
+14、对象存储SDK
+
+使用目的：在使用少年创境服务时，读取本地的文件上传到对象存储或把对象存储的文件下载到本地
+
+数据类型：设备型号、设备操作系统信息、使用网络的权限、存储权限
+
+官网链接：[ https://terms.alicdn.com/legal-
+agreement/terms/privacy_policy_full/20240202100310511/20240202100310511.html
+](https://terms.alicdn.com/legal-
+agreement/terms/privacy_policy_full/20240202100310511/20240202100310511.html)
+
+处理方式： 采取去标识、加密等方式进行传输和处理
+
+公司名称： 阿里云计算有限公司
+
+15、移动解析 HTTPDNS SDK
+
+使用目的：在访问网络，本地DNS解析失败时辅助进行域名解析，让用户可以成功访问网络
+
+数据类型：IP地址、网络访问权限（Android）、网络状态（ Android）、无线数据（iOS）
+
+官网链接：[ https://cloud.tencent.com/document/product/379/72015
+](https://cloud.tencent.com/document/product/379/72015)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 腾讯云计算（北京）有限责任公司
+
+16、HUYA SDK（Android 、iOS 适用）
+
+使用目的：在用户观看虎牙直播时，保障直播流推送功能的正常运行、统计直播流推送的效果、保障直播流推送功能的网络质量
+
+数据类型：设备厂商信息、设备型号、操作系统版本、操作系统语言、设备标识符(AndroidID、UUID） ；宿主APP包名；网络信息（网络类型、IP
+地址、wifi状态、网络状态）及运营商信息；宿主APP的账号验证信息及账号昵称（发弹幕场景下为了建立虎牙账号）、弹幕文案信息
+
+官网链接：[ https://app-agreements.huya.com/26ed6209/mobile/index.html
+](https://app-agreements.huya.com/26ed6209/mobile/index.html)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 广州虎牙信息科技有限公司
+
+17、智聆口语评测SDK
+
+使用目的：帮助用户使用口语测评等功能
+
+数据类型：设备型号、操作系统版本、系统属性（仅Android）、IP地址、WIFI状态、用户主动输入的声音；麦克风权限
+
+官网链接：[ https://cloud.tencent.com/document/product/884/71808
+](https://cloud.tencent.com/document/product/884/71808)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 腾讯云计算（北京）有限责任公司
+
+QQ邮箱接入第三方SDK目录
+
+为保障QQ邮箱的稳定运行或实现相关功能，我们可能会接入由第三方提供的软件开发包（SDK）实现前述目的。我们会对合作方获取个人信息的SDK进行严格的审核，以保护您的个人信息安全。  
+  
+我们对接入的相关第三方SDK在以下目录中列明。您可以通过相关链接查看第三方的数据使用和保护规则。请注意，第三方SDK可能由于版本升级、策略调整等原因导致其个人信息处理类型发生变化，请以其公示的官方说明为准。
+
+[![](https://cl-privacy-1258638997.cos.ap-
+guangzhou.myqcloud.com/privacyplatform/Uuj9uEbtEz_fZ1CIq2bIojQXOrjVG4Wm)QQ邮箱]()
+
+Android第三方SDK列表
+
+1、华为 Push SDK
+
+使用目的：通过华为手机系统向用户推送信息
+
+数据类型：使用推送服务的应用软件基本信息（AppID，推送服务和HMS
+Core应用版本号、华为推送SDK版本号，应用版本号和应用包名）、本应用内设备标识信息（AAID和Push
+Token）、设备的硬件信息（设备类型，设备型号）、系统基本信息（系统类型，系统版本）、系统设置信息（国家码）
+
+官网链接：[ https://developer.huawei.com/consumer/cn/doc/development/HMSCore-
+Guides/sdk-data-security-0000001050042177
+](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/sdk-
+data-security-0000001050042177)
+
+处理方式： 通过去标识化、加密传输和处理
+
+公司名称： 华为软件技术有限公司
+
+2、小米 Push SDK
+
+使用目的：通过小米手机系统向用户推送信息
+
+数据类型：本应用软件信息（如应用包名、版本号、运行状态）、设备信息（设备厂商、设备型号、设备内存、操作系统版本、小米推送SDK版本、设备归属地（国家或地区）、SIM卡运营商名称、当前网络类型、WiFi状态）
+
+官网链接：[ https://dev.mi.com/console/doc/detail?pId=1822
+](https://dev.mi.com/console/doc/detail?pId=1822)
+
+处理方式： 通过去标识化、加密传输和处理
+
+公司名称： 北京小米移动软件有限公司
+
+3、OPPO Push SDK
+
+使用目的：通过OPPO手机系统向用户推送信息
+
+数据类型：应用基本信息（MCS应用包名、应用版本号、OPUSH
+SDK版本号），应用内设备标识信息（RegistraterID、appKey、appSecret）
+
+官网链接：[ https://open.oppomobile.com/new/developmentDoc/info?id=10288
+](https://open.oppomobile.com/new/developmentDoc/info?id=10288)
+
+处理方式： 通过去标识化、加密传输和处理
+
+公司名称： 广东欢太科技有限公司
+
+4、VIVO Push SDK
+
+使用目的：通过VIVO手机系统向用户推送信息
+
+数据类型：使用推送服务的应用软件基本信息（App
+ID、应用包名、版本号、APPKEY、PushSDK版本）、应用内设备标识信息（vpush的regId）、设备类型、系统基本信息（系统类型和系统版本）
+
+官网链接：[ https://dev.vivo.com.cn/documentCenter/doc/366
+](https://dev.vivo.com.cn/documentCenter/doc/366)
+
+处理方式： 通过去标识化、加密传输和处理
+
+公司名称： 广东天宸网络科技有限公司
+
+5、MMA 中国广告监测通用SDK【七巧板通用SDK定制安卓版本】
+
+使用目的：广告监测
+
+数据类型：设备基础信息（系统版本、手机型号、屏幕宽高、分辨率）、网络环境（是否wifi）、该APP基础信息（APP包名、APP名称）
+
+官网链接：[ https://mmachina.cn/sdk-privacy/ ](https://mmachina.cn/sdk-privacy/)
+
+处理方式： 通过去标识化、加密传输和处理
+
+公司名称： 上海亦拓广告有限公司
+
+6、微信支付SDK
+
+使用目的：使用微信支付购买QQ邮箱付费增值服务时识别支付订单
+
+数据类型：用户标识信息、网络IP地址、订单金额
+
+官网链接：[ https://posts.tenpay.com/posts/18ed0968618e3db204d4931651708953.html
+](https://posts.tenpay.com/posts/18ed0968618e3db204d4931651708953.html)
+
+处理方式： 通过去标识化、加密传输和处理
+
+公司名称： 财付通支付科技有限公司
+
+7、QQ钱包支付SDK
+
+使用目的：使用QQ钱包购买QQ邮箱付费增值服务时识别支付订单
+
+数据类型：用户标识信息、网络IP地址、订单金额
+
+官网链接：[ https://posts.tenpay.com/posts/18ed0968618e3db204d4931651708953.html
+](https://posts.tenpay.com/posts/18ed0968618e3db204d4931651708953.html)
+
+处理方式： 通过去标识化、加密传输和处理
+
+公司名称： 财付通支付科技有限公司
+
+8、广告服务
+
+使用目的：程序化广告推荐、广告归因、广告落地页信息收集、广告监测
+
+数据类型：如IDFA、OAID等设备标识符；如硬件型号、操作系统等设备信息；姓名、电话等用户主动填写的信息
+
+官网链接：[
+https://privacy.qq.com/document/preview/7c8439a1d632427180da2a497f05dba1
+](https://privacy.qq.com/document/preview/7c8439a1d632427180da2a497f05dba1)
+
+处理方式： 后台接口传输/表单传输/终端发起传输
+
+公司名称： 广告主和/或其委托的代理商、第三方广告监测服务商
+
+9、荣耀 Push SDK
+
+使用目的：通过荣耀手机系统向用户推送信息
+
+数据类型：本应用内设备标识信息（AAID、Push Token）
+
+官网链接：[ https://developer.honor.com/cn/docs/11002/guides/introduction
+](https://developer.honor.com/cn/docs/11002/guides/introduction)
+
+处理方式： 通过去标识化、加密传输和处理
+
+公司名称： 深圳荣耀软件技术有限公司
+
+10、Glide SDK
+
+使用目的：用于高效便捷地加载、缓存和显示图片。在某些机型上，图片加载效率低，为了兼容机型，获取手机型号用于判断图片加载是否支持硬件加速
+
+数据类型：手机型号
+
+官网链接：[ https://github.com/bumptech/glide ](https://github.com/bumptech/glide)
+
+处理方式： 本地采集
+
+公司名称： 开源框架
+
+11、MMA 中国广告监测通用SDK【七巧板通用SDK定制iOS版本】
+
+使用目的：广告监测
+
+数据类型：设备标识信息（IDFA）、设备基础信息（系统版本、屏幕宽高、设备型号）、网络状态（是否wifi）、该APP基础信息（APP包名、APP名称）
+
+官网链接：[ https://mmachina.cn/sdk-privacy/ ](https://mmachina.cn/sdk-privacy/)
+
+处理方式： 通过去标识化、加密传输和处理
+
+公司名称： 上海亦拓广告有限公司
+
+iOS第三方SDK列表
+
+1、华为 Push SDK
+
+使用目的：通过华为手机系统向用户推送信息
+
+数据类型：使用推送服务的应用软件基本信息（AppID，推送服务和HMS
+Core应用版本号、华为推送SDK版本号，应用版本号和应用包名）、本应用内设备标识信息（AAID和Push
+Token）、设备的硬件信息（设备类型，设备型号）、系统基本信息（系统类型，系统版本）、系统设置信息（国家码）
+
+官网链接：[ https://developer.huawei.com/consumer/cn/doc/development/HMSCore-
+Guides/sdk-data-security-0000001050042177
+](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/sdk-
+data-security-0000001050042177)
+
+处理方式： 通过去标识化、加密传输和处理
+
+公司名称： 华为软件技术有限公司
+
+2、小米 Push SDK
+
+使用目的：通过小米手机系统向用户推送信息
+
+数据类型：本应用软件信息（如应用包名、版本号、运行状态）、设备信息（设备厂商、设备型号、设备内存、操作系统版本、小米推送SDK版本、设备归属地（国家或地区）、SIM卡运营商名称、当前网络类型、WiFi状态）
+
+官网链接：[ https://dev.mi.com/console/doc/detail?pId=1822
+](https://dev.mi.com/console/doc/detail?pId=1822)
+
+处理方式： 通过去标识化、加密传输和处理
+
+公司名称： 北京小米移动软件有限公司
+
+3、OPPO Push SDK
+
+使用目的：通过OPPO手机系统向用户推送信息
+
+数据类型：应用基本信息（MCS应用包名、应用版本号、OPUSH
+SDK版本号），应用内设备标识信息（RegistraterID、appKey、appSecret）
+
+官网链接：[ https://open.oppomobile.com/new/developmentDoc/info?id=10288
+](https://open.oppomobile.com/new/developmentDoc/info?id=10288)
+
+处理方式： 通过去标识化、加密传输和处理
+
+公司名称： 广东欢太科技有限公司
+
+4、VIVO Push SDK
+
+使用目的：通过VIVO手机系统向用户推送信息
+
+数据类型：使用推送服务的应用软件基本信息（App
+ID、应用包名、版本号、APPKEY、PushSDK版本）、应用内设备标识信息（vpush的regId）、设备类型、系统基本信息（系统类型和系统版本）
+
+官网链接：[ https://dev.vivo.com.cn/documentCenter/doc/366
+](https://dev.vivo.com.cn/documentCenter/doc/366)
+
+处理方式： 通过去标识化、加密传输和处理
+
+公司名称： 广东天宸网络科技有限公司
+
+5、Glide SDK
+
+使用目的：用于高效便捷地加载、缓存和显示图片。在某些机型上，图片加载效率低，为了兼容机型，获取手机型号用于判断图片加载是否支持硬件加速
+
+数据类型：手机型号
+
+官网链接：[ https://github.com/bumptech/glide ](https://github.com/bumptech/glide)
+
+处理方式： 本地采集
+
+公司名称： 开源框架
+
+6、MMA 中国广告监测通用SDK【七巧板通用SDK定制安卓版本】
+
+使用目的：广告监测
+
+数据类型：设备基础信息（系统版本、手机型号、屏幕宽高、分辨率）、网络环境（是否wifi）、该APP基础信息（APP包名、APP名称）
+
+官网链接：[ https://mmachina.cn/sdk-privacy/ ](https://mmachina.cn/sdk-privacy/)
+
+处理方式： 通过去标识化、加密传输和处理
+
+公司名称： 上海亦拓广告有限公司
+
+7、广告服务
+
+使用目的：程序化广告推荐、广告归因、广告落地页信息收集、广告监测
+
+数据类型：如IDFA、OAID等设备标识符；如硬件型号、操作系统等设备信息；姓名、电话等用户主动填写的信息
+
+官网链接：[
+https://privacy.qq.com/document/preview/7c8439a1d632427180da2a497f05dba1
+](https://privacy.qq.com/document/preview/7c8439a1d632427180da2a497f05dba1)
+
+处理方式： 后台接口传输/表单传输/终端发起传输
+
+公司名称： 广告主和/或其委托的代理商、第三方广告监测服务商
+
+8、微信支付SDK
+
+使用目的：使用微信支付购买QQ邮箱付费增值服务时识别支付订单
+
+数据类型：用户标识信息、网络IP地址、订单金额
+
+官网链接：[ https://posts.tenpay.com/posts/18ed0968618e3db204d4931651708953.html
+](https://posts.tenpay.com/posts/18ed0968618e3db204d4931651708953.html)
+
+处理方式： 通过去标识化、加密传输和处理
+
+公司名称： 财付通支付科技有限公司
+
+9、QQ钱包支付SDK
+
+使用目的：使用QQ钱包购买QQ邮箱付费增值服务时识别支付订单
+
+数据类型：用户标识信息、网络IP地址、订单金额
+
+官网链接：[ https://posts.tenpay.com/posts/18ed0968618e3db204d4931651708953.html
+](https://posts.tenpay.com/posts/18ed0968618e3db204d4931651708953.html)
+
+处理方式： 通过去标识化、加密传输和处理
+
+公司名称： 财付通支付科技有限公司
+
+10、广告服务
+
+使用目的：程序化广告推荐、广告归因、广告落地页信息收集、广告监测
+
+数据类型：如IDFA、OAID等设备标识符；如硬件型号、操作系统等设备信息；姓名、电话等用户主动填写的信息
+
+官网链接：[
+https://privacy.qq.com/document/preview/7c8439a1d632427180da2a497f05dba1
+](https://privacy.qq.com/document/preview/7c8439a1d632427180da2a497f05dba1)
+
+处理方式： 后台接口传输/表单传输/终端发起传输
+
+公司名称： 广告主和/或其委托的代理商、第三方广告监测服务商
+
+11、荣耀 Push SDK
+
+使用目的：通过荣耀手机手机系统向用户推送信息
+
+数据类型：本应用内设备标识信息（AAID、Push Token）
+
+官网链接：[ https://developer.honor.com/cn/docs/11002/guides/introduction
+](https://developer.honor.com/cn/docs/11002/guides/introduction)
+
+处理方式： 通过去标识化、加密传输和处理
+
+公司名称： 深圳荣耀软件技术有限公司
+
+12、Glide SDK
+
+使用目的：用于高效便捷地加载、缓存和显示图片。在某些机型上，图片加载效率低，为了兼容机型，获取手机型号用于判断图片加载是否支持硬件加速
+
+数据类型：手机型号
+
+官网链接：[ https://github.com/bumptech/glide ](https://github.com/bumptech/glide)
+
+处理方式： 本地采集
+
+公司名称： 开源框架
+
+13、MMA 中国广告监测通用SDK【七巧板通用SDK定制iOS版本】
+
+使用目的：广告监测
+
+数据类型：设备标识信息（IDFA）、设备基础信息（系统版本、屏幕宽高、设备型号）、网络状态（是否wifi）、该APP基础信息（APP包名、APP名称）
+
+官网链接：[ https://mmachina.cn/sdk-privacy/ ](https://mmachina.cn/sdk-privacy/)
+
+处理方式： 通过去标识化、加密传输和处理
+
+公司名称： 上海亦拓广告有限公司
+
+QQ音乐接入第三方SDK目录
+
+为保障QQ音乐的稳定运行或实现相关功能，我们可能会接入由第三方提供的软件开发包（SDK）实现前述目的。我们会对合作方获取个人信息的SDK进行严格的审核，以保护您的个人信息安全。  
+  
+我们对接入的相关第三方SDK在以下目录中列明。您可以通过相关链接查看第三方的数据使用和保护规则。请注意，第三方SDK可能由于版本升级、策略调整等原因导致其个人信息处理类型发生变化，请以其公示的官方说明为准。
+
+[![](https://cl-privacy-1258638997.cos.ap-
+guangzhou.myqcloud.com/privacyplatform/eZ6QZKDEqkF7T-umjYlD2YXjaLhgl5wc)QQ音乐]()
+
+Android第三方SDK列表
+
+1、SmartRefreshLayout
+
+使用目的：用于构建相关UI框架
+
+数据类型：无
+
+官网链接：[ https://github.com/scwang90/SmartRefreshLayout
+](https://github.com/scwang90/SmartRefreshLayout)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： scwang90等
+
+2、腾讯 Liteav
+
+使用目的：实现音视频推拉流
+
+数据类型：设备生产商、设备型号、操作系统版本、网络类型、系统语言、屏幕分辨率
+
+官网链接：[ https://cloud.tencent.com/document/product/647/57574
+](https://cloud.tencent.com/document/product/647/57574)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 腾讯云计算（北京）有限责任公司
+
+3、OPPO推送SDK
+
+使用目的：用于在OPPO设备上推送消息
+
+数据类型：设备标识信息、网络信息、设备状态信息、应用使用信息
+
+官网链接：[ https://open.oppomobile.com/new/developmentDoc/info?id=10288
+](https://open.oppomobile.com/new/developmentDoc/info?id=10288)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 广东欢太科技有限公司
+
+4、华为推送SDK
+
+使用目的：用于在华为设备上推送消息、华为登录依赖
+
+数据类型：应用标识信息、消息下发记录等
+
+官网链接：[ https://developer.huawei.com/consumer/cn/doc/development/HMSCore-
+Guides/sdk-data-security-0000001050042177
+](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/sdk-
+data-security-0000001050042177)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 华为软件技术有限公司
+
+5、VIVO推送SDK
+
+使用目的：用于在VIVO设备上推送消息
+
+数据类型：设备标识信息、网络状态信息
+
+官网链接：[ https://dev.vivo.com.cn/documentCenter/doc/652
+](https://dev.vivo.com.cn/documentCenter/doc/652)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 维沃移动通信有限公司
+
+6、小米推送SDK
+
+使用目的：用于在小米设备上推送消息
+
+数据类型：设备标识信息、设备设置信息、应用使用信息
+
+官网链接：[ https://dev.mi.com/console/doc/detail?pId=1822
+](https://dev.mi.com/console/doc/detail?pId=1822)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 北京小米移动软件有限公司
+
+7、QQ钱包支付
+
+使用目的：帮助用户使用QQ钱包支付服务
+
+数据类型：用户标识信息、手机型号、网络IP地址、订单金额
+
+官网链接：[ https://www.tenpay.com/v3/helpcenter/low/privacy.shtml
+](https://www.tenpay.com/v3/helpcenter/low/privacy.shtml)
+
+处理方式： 采取去标识、加密等方式进行传输和处理
+
+公司名称： 财付通支付科技有限公司
+
+8、云闪付SDK
+
+使用目的：帮助用户完成云闪付支付服务
+
+数据类型：商品名称、设备标识、网络IP地址、订单金额、交易时间、交易类型
+
+官网链接：[
+https://wallet.95516.com/s/wl/WebAPP/helpAgree/page/agreement/regPrivacy.html
+](https://wallet.95516.com/s/wl/WebAPP/helpAgree/page/agreement/regPrivacy.html)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 中国银联股份有限公司
+
+9、Auto Play SDK
+
+使用目的：用于BLE连接
+
+数据类型：读取已连接蓝牙地址，名称信息
+
+官网链接：[
+http://policies.songpal.sony.net/headphones/pp/cn/20200630/pp/hpc_pp_cn_zh-
+hans.html#pp_usage_description
+](http://policies.songpal.sony.net/headphones/pp/cn/20200630/pp/hpc_pp_cn_zh-
+hans.html#pp_usage_description)
+
+处理方式： SDK本机采集并仅在设备本地使用
+
+公司名称： 索尼（中国）有限公司上海分公司
+
+10、Qigsaw
+
+使用目的：插件初始化时获取app主进程名字及卸载插件时关闭当前APP正在运行的插件进程
+
+数据类型：正在运行进程信息
+
+官网链接：[ https://github.com/iqiyi/Qigsaw ](https://github.com/iqiyi/Qigsaw)
+
+处理方式： SDK本机采集，设备本地使用
+
+公司名称： iqiyi
+
+11、AndroidSupportLibraryFragment
+
+使用目的：构建项目基本框架
+
+数据类型：正在运行进程信息
+
+官网链接：[ https://policies.google.com/privacy?hl=zh-cn
+](https://policies.google.com/privacy?hl=zh-cn)
+
+处理方式： SDK本机采集，设备本地使用
+
+公司名称： GoogleInc
+
+12、360RA
+
+使用目的：360RA音乐格式解码器
+
+数据类型：无
+
+官网链接：[
+http://policies.songpal.sony.net/headphones/pp/cn/20200630/pp/hpc_pp_cn_zh-
+hans.html#pp_usage_description
+](http://policies.songpal.sony.net/headphones/pp/cn/20200630/pp/hpc_pp_cn_zh-
+hans.html#pp_usage_description)
+
+处理方式： SDK本机集成
+
+公司名称： Sony Corporation
+
+13、腾讯云即时通信IM
+
+使用目的：为用户提供文字，图片和语音聊天的服务
+
+数据类型：网络状态信息（网络类型、连接的Wi-Fi等）、设备标识信息（IMEI、手机型号等）、手机号码、应用列表
+
+官网链接：[ https://cloud.tencent.com/document/product/269/58094
+](https://cloud.tencent.com/document/product/269/58094)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 腾讯云计算（北京）有限责任公司
+
+14、新浪微博开放平台
+
+使用目的：分享内容到新浪微博
+
+数据类型：设备标识信息、网络信息
+
+官网链接：[ https://open.weibo.com/wiki/Sdk/privacy
+](https://open.weibo.com/wiki/Sdk/privacy)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 北京微梦创科网络技术有限公司
+
+15、MMA中国营销创新联盟OTT广告监测及验证统一SDK
+
+使用目的：为了净化数字广告生态环境，规范并为数字广告测量和验证提供统一性和便利性
+
+数据类型：设备硬件信息、设备系统信息、设备网络信息、设备定位信息、广告可见性信息、媒体信息
+
+官网链接：[ https://mmachina.cn/sdk-privacy/ ](https://mmachina.cn/sdk-privacy/)
+
+处理方式： 广告监测通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 上海亦拓广告有限公司
+
+16、荣耀推送SDK
+
+使用目的：提供荣耀手机上的消息通知功能
+
+数据类型：设备信息（AAID、PushToken）
+
+官网链接：[
+https://developer.hihonor.com/cn/kitdoc?category=%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1&kitId=11002&navigation=guides&docId=sdk-
+data-security.md
+](https://developer.hihonor.com/cn/kitdoc?category=%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1&kitId=11002&navigation=guides&docId=sdk-
+data-security.md)
+
+处理方式： AAID仅SDK本机采集，PushToken为加密传输和处理
+
+公司名称： 深圳荣耀软件技术有限公司或关联公司
+
+17、抖音分享SDK
+
+使用目的：根据用户实际使用选择，为用户提供将信息内容分享至抖音
+
+数据类型：分享图片、视频等内容
+
+官网链接：[ https://developer.open-douyin.com/docs/resource/zh-CN/dop/operation-
+standard/service-protocol/douyinsdk_pingtaiyinsizhengce
+](https://developer.open-douyin.com/docs/resource/zh-CN/dop/operation-
+standard/service-protocol/douyinsdk_pingtaiyinsizhengce)
+
+处理方式： SDK本机采集
+
+公司名称： 北京微播视界科技有限公司及其关联方
+
+18、华为更新 SDK
+
+使用目的：用于在华为设备上推送消息
+
+数据类型：设备信息（如IMEI号、HMS Core openId、手机型号、系统类型、系统版本）、缓存消息、消息下发记录、Push
+Token、AAID（应用匿名标识）
+
+官网链接：[ https://consumer.huawei.com/cn/privacy/privacy-policy/
+](https://consumer.huawei.com/cn/privacy/privacy-policy/)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 华为软件技术有限公司
+
+19、uCrop
+
+使用目的：图片裁剪
+
+数据类型：图片
+
+官网链接：[ https://yalantis.com/privacy-notice/ ](https://yalantis.com/privacy-
+notice/)
+
+处理方式： 本地处理传入的图片信息
+
+公司名称： Yalantis
+
+20、Cocos2d-x
+
+使用目的：在音乐世界、弹一弹功能中用于图形渲染
+
+数据类型：屏幕分辨率、手机运行内存
+
+官网链接：[
+https://download.cocos.com/CocosUdc/agreement/Cocos_Privacy_Policy_cn_20200904.html
+](https://download.cocos.com/CocosUdc/agreement/Cocos_Privacy_Policy_cn_20200904.html)
+
+处理方式： SDK本机采集，设备本地使用
+
+公司名称： 厦门雅基软件有限公司
+
+21、OPPO SDK
+
+使用目的：在弹一弹功能中用于oppo手机性能优化
+
+数据类型：屏幕分辨率、手机运行内存
+
+官网链接：[
+https://download.cocos.com/CocosUdc/agreement/Cocos_Privacy_Policy_cn_20200904.html
+](https://download.cocos.com/CocosUdc/agreement/Cocos_Privacy_Policy_cn_20200904.html)
+
+处理方式： SDK本机采集，设备本地使用
+
+公司名称： 厦门雅基软件有限公司
+
+22、BouncyCastl加密算法库
+
+使用目的：在弹一弹功能中计算用于后台通信的公/私钥
+
+数据类型：设备和用户标识信息、网络IP地址
+
+官网链接：[ https://www.bouncycastle.org/licence.html
+](https://www.bouncycastle.org/licence.html)
+
+处理方式： SDK本机采集，设备本地使用
+
+公司名称： the Bouncy Castle Inc
+
+23、Lottie
+
+使用目的：动画组件库
+
+数据类型：设备型号
+
+官网链接：[ https://github.com/airbnb/lottie-android
+](https://github.com/airbnb/lottie-android)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式，并在设备本地使用
+
+公司名称： Gabriel Peal等
+
+24、小红书分享SDK
+
+使用目的：通过接入小红书分享SDK实现将三方App信息分享至小红书
+
+数据类型：设备标识信息
+
+官网链接：[ https://agree.xiaohongshu.com/h5/terms/ZXXY20230525001/-1
+](https://agree.xiaohongshu.com/h5/terms/ZXXY20230525001/-1)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 行吟信息科技（上海）有限公司️
+
+25、腾讯云慧眼人脸核身增强版SDK
+
+使用目的：用于实人实名认证（人脸核验）
+
+数据类型：（1）身份证照片或姓名和身份证件号码、人脸视频和照片；（2）设备信息（包括OAID），网络信息、光线传感器信息。
+
+官网链接：[
+https://privacy.qq.com/document/preview/4661fcc5ceb04a4f878a5874c86b34a2
+](https://privacy.qq.com/document/preview/4661fcc5ceb04a4f878a5874c86b34a2)
+
+处理方式：
+加密传输和必要处理：（1）活体检测人脸视频，与合作的权威数据源存储的信息进行比对核验，得出是否一致的结果；（2）采集设备信息并进行去标识化处理，用于检测设备风险、判断认证结果。
+
+公司名称： 腾讯云计算（北京）有限责任公司
+
+26、AndroidX Webkit
+
+使用目的：谷歌公司提供的AndroidX辅助开发工具，基于WebKit浏览器引擎，提供网页浏览隐私政策、用户协议、用户信息收集清单、第三方信息共享清单、使用教程等功能
+
+数据类型：剪切板、SSID、BSSID、MAC地址、WIFI信息，AndroidX
+Webkit（chromium）需要监听WIFI开关和信号状态，会发生多次获取WIFI的信息（读取WIFI扫描结果、读取WIFI的BSSID）、MAC地址、SSID的情况、已安装APP信息和传感器信息。
+
+官网链接：[ https://policies.google.cn/privacy
+](https://policies.google.cn/privacy)
+
+处理方式： 系统组件本机收集，后台接口传输，并采用去标识化方式对个人信息进行脱敏展示
+
+公司名称： 谷歌公司
+
+27、Chromium浏览器内核（org.chromium）
+
+使用目的：系统组件本机收集，后台接口传输，并采用去标识化方式对个人信息进行脱敏展示
+
+数据类型：剪切板、SSID、BSSID、MAC地址、WIFI信息，AndroidX
+Webkit（chromium）需要监听WIFI开关和信号状态，会发生多次获取WIFI的信息（读取WIFI扫描结果、读取WIFI的BSSID）、MAC地址、SSID的情况、已安装APP信息和传感器信息。
+
+官网链接：[ https://www.chromium.org/Home/chromium-privacy/
+](https://www.chromium.org/Home/chromium-privacy/)
+
+处理方式： 提供网页浏览隐私政策、用户协议、用户信息收集清单、第三方信息共享清单、使用教程等基础功能。
+
+公司名称： 谷歌公司
+
+28、Multi-turbo SDK
+
+使用目的：给应用提供定制化的网络相关信息通知，包括QoE感知、弱网预加载、运营商网络信息等，还可以提供双数据网络并发功能，为应用带来更加智能、可靠以及更大带宽的网络体验。
+
+数据类型：无
+
+官网链接：[ https://dev.vivo.com.cn/documentCenter/doc/463
+](https://dev.vivo.com.cn/documentCenter/doc/463)
+
+处理方式： 不涉及处理用户个人信息，若开发者通过此开放能力接口处理用户个人信息时，开发者应当满足《个人信息保护法》及相关法律法规的要求。
+
+公司名称： 维沃移动通信有限公司
+
+iOS第三方SDK列表
+
+1、SmartRefreshLayout
+
+使用目的：用于构建相关UI框架
+
+数据类型：无
+
+官网链接：[ https://github.com/scwang90/SmartRefreshLayout
+](https://github.com/scwang90/SmartRefreshLayout)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： scwang90等
+
+2、腾讯 Liteav
+
+使用目的：实现音视频推拉流
+
+数据类型：设备生产商、设备型号、操作系统版本、网络类型、系统语言、屏幕分辨率
+
+官网链接：[ https://cloud.tencent.com/document/product/647/57574
+](https://cloud.tencent.com/document/product/647/57574)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 腾讯云计算（北京）有限责任公司
+
+3、QQ钱包支付
+
+使用目的：帮助用户使用QQ钱包支付服务
+
+数据类型：用户标识信息、手机型号、网络IP地址、订单金额
+
+官网链接：[ https://www.tenpay.com/v3/helpcenter/low/privacy.shtml
+](https://www.tenpay.com/v3/helpcenter/low/privacy.shtml)
+
+处理方式： 采取去标识、加密等方式进行传输和处理
+
+公司名称： 财付通支付科技有限公司
+
+4、云闪付SDK
+
+使用目的：帮助用户完成云闪付支付服务
+
+数据类型：商品名称、设备标识、网络IP地址、订单金额、交易时间、交易类型
+
+官网链接：[
+https://wallet.95516.com/s/wl/WebAPP/helpAgree/page/agreement/regPrivacy.html
+](https://wallet.95516.com/s/wl/WebAPP/helpAgree/page/agreement/regPrivacy.html)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 中国银联股份有限公司
+
+5、Auto Play SDK
+
+使用目的：用于BLE连接
+
+数据类型：读取已连接蓝牙地址，名称信息
+
+官网链接：[
+http://policies.songpal.sony.net/headphones/pp/cn/20200630/pp/hpc_pp_cn_zh-
+hans.html#pp_usage_description
+](http://policies.songpal.sony.net/headphones/pp/cn/20200630/pp/hpc_pp_cn_zh-
+hans.html#pp_usage_description)
+
+处理方式： SDK本机采集并仅在设备本地使用
+
+公司名称： 索尼（中国）有限公司上海分公司
+
+6、Qigsaw
+
+使用目的：插件初始化时获取app主进程名字及卸载插件时关闭当前APP正在运行的插件进程
+
+数据类型：正在运行进程信息
+
+官网链接：[ https://github.com/iqiyi/Qigsaw ](https://github.com/iqiyi/Qigsaw)
+
+处理方式： SDK本机采集，设备本地使用
+
+公司名称： iqiyi
+
+7、AndroidSupportLibraryFragment
+
+使用目的：构建项目基本框架
+
+数据类型：正在运行进程信息
+
+官网链接：[ https://policies.google.com/privacy?hl=zh-cn
+](https://policies.google.com/privacy?hl=zh-cn)
+
+处理方式： SDK本机采集，设备本地使用
+
+公司名称： GoogleInc
+
+8、360RA
+
+使用目的：360RA音乐格式解码器
+
+数据类型：无
+
+官网链接：[
+http://policies.songpal.sony.net/headphones/pp/cn/20200630/pp/hpc_pp_cn_zh-
+hans.html#pp_usage_description
+](http://policies.songpal.sony.net/headphones/pp/cn/20200630/pp/hpc_pp_cn_zh-
+hans.html#pp_usage_description)
+
+处理方式： SDK本机集成
+
+公司名称： Sony Corporation
+
+9、腾讯云即时通信IM SDK
+
+使用目的：用于搭建IM通信相关功能
+
+数据类型：网络IP地址、 设备生产商、 设备型号、网络类型
+
+官网链接：[ https://cloud.tencent.com/document/product/269/58094
+](https://cloud.tencent.com/document/product/269/58094)
+
+处理方式： SDK本机采集，后台接口传输
+
+公司名称： 腾讯云计算（北京）有限责任公司
+
+10、新浪微博开放平台
+
+使用目的：分享内容到新浪微博
+
+数据类型：设备标识信息、网络信息
+
+官网链接：[ https://open.weibo.com/wiki/Sdk/privacy
+](https://open.weibo.com/wiki/Sdk/privacy)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 北京微梦创科网络技术有限公司
+
+11、MMA中国营销创新联盟OTT广告监测及验证统一SDK
+
+使用目的：为了净化数字广告生态环境，规范并为数字广告测量和验证提供统一性和便利性
+
+数据类型：设备硬件信息、设备系统信息、设备网络信息、设备定位信息、广告可见性信息、媒体信息
+
+官网链接：[ https://mmachina.cn/sdk-privacy/ ](https://mmachina.cn/sdk-privacy/)
+
+处理方式： 广告监测通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 上海亦拓广告有限公司
+
+12、抖音分享SDK
+
+使用目的：实现抖音分享功能
+
+数据类型：用户主动选择的图片、视频等内容
+
+官网链接：[ https://developer.open-douyin.com/docs/resource/zh-CN/dop/operation-
+standard/service-protocol/douyin-sdk-privacy-policy ](https://developer.open-
+douyin.com/docs/resource/zh-CN/dop/operation-standard/service-protocol/douyin-
+sdk-privacy-policy)
+
+处理方式： SDK本机采集
+
+公司名称： 北京微播视界科技有限公司及其关联方
+
+13、uCrop
+
+使用目的：图片裁剪
+
+数据类型：图片
+
+官网链接：[ https://yalantis.com/privacy-notice/ ](https://yalantis.com/privacy-
+notice/)
+
+处理方式： 本地处理传入的图片信息
+
+公司名称： Yalantis
+
+14、Cocos2d-x
+
+使用目的：在音乐世界、弹一弹功能中用于图形渲染
+
+数据类型：屏幕分辨率、手机运行内存
+
+官网链接：[
+https://download.cocos.com/CocosUdc/agreement/Cocos_Privacy_Policy_cn_20200904.html
+](https://download.cocos.com/CocosUdc/agreement/Cocos_Privacy_Policy_cn_20200904.html)
+
+处理方式： SDK本机采集，设备本地使用
+
+公司名称： 厦门雅基软件有限公司
+
+15、oppoSDK
+
+使用目的：在弹一弹功能中用于oppo手机性能优化
+
+数据类型：屏幕分辨率、手机运行内存
+
+官网链接：[
+https://download.cocos.com/CocosUdc/agreement/Cocos_Privacy_Policy_cn_20200904.html
+](https://download.cocos.com/CocosUdc/agreement/Cocos_Privacy_Policy_cn_20200904.html)
+
+处理方式： SDK本机采集，设备本地使用
+
+公司名称： 厦门雅基软件有限公司
+
+16、BouncyCastl加密算法库
+
+使用目的：在弹一弹功能中计算用于后台通信的公/私钥
+
+数据类型：设备和用户标识信息、网络IP地址
+
+官网链接：[ https://www.bouncycastle.org/licence.html
+](https://www.bouncycastle.org/licence.html)
+
+处理方式： SDK本机采集，设备本地使用
+
+公司名称： the Bouncy Castle Inc
+
+17、Lottie
+
+使用目的：动画组件库
+
+数据类型：设备型号
+
+官网链接：[ https://github.com/airbnb/lottie-android
+](https://github.com/airbnb/lottie-android)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式，并在设备本地使用
+
+公司名称： Gabriel Peal等
+
+18、小红书分享SDK
+
+使用目的：实现小红书分享功能
+
+数据类型：用户主动选择的图片、视频等内容
+
+官网链接：[ https://agora.xiaohongshu.com/doc/compliance
+](https://agora.xiaohongshu.com/doc/compliance)
+
+处理方式： SDK本机采集
+
+公司名称： 行吟信息科技（上海）有限公司️
+
+19、腾讯云慧眼人脸核身增强版SDK
+
+使用目的：用于实人实名认证（人脸核验）
+
+数据类型：（1）身份证照片或姓名和身份证件号码、人脸视频和照片；（2）设备信息（包括OAID），网络信息、光线传感器信息。
+
+官网链接：[
+https://privacy.qq.com/document/preview/e70cec2c3067459d941441fa669997ff
+](https://privacy.qq.com/document/preview/e70cec2c3067459d941441fa669997ff)
+
+处理方式： SDK本机采集
+
+公司名称： 腾讯云计算（北京）有限责任公司
+
+20、Chromium浏览器内核（org.chromium）
+
+使用目的：系统组件本机收集，后台接口传输，并采用去标识化方式对个人信息进行脱敏展示
+
+数据类型：剪切板、SSID、BSSID、MAC地址、WIFI信息，AndroidX
+Webkit（chromium）需要监听WIFI开关和信号状态，会发生多次获取WIFI的信息（读取WIFI扫描结果、读取WIFI的BSSID）、MAC地址、SSID的情况、已安装APP信息和传感器信息。
+
+官网链接：[ https://www.chromium.org/Home/chromium-privacy/
+](https://www.chromium.org/Home/chromium-privacy/)
+
+处理方式： 提供网页浏览隐私政策、用户协议、用户信息收集清单、第三方信息共享清单、使用教程等基础功能。
+
+公司名称： 谷歌公司
+
+21、广告主和/或其委托的代理商、第三方广 告监测服务商
+
+使用目的：程序化广告推荐、广告归因、广告落地页信息收集、 广告监测
+
+数据类型：如IDFA、OAID 等设备标识符；如硬件型号、操作系统等设备信息； 姓名、电话等用户主动填写 的信息。
+
+官网链接：[ 具体详见《广告服务第三方信息共享清单》https://privacy.qq.com
+/document/preview/7c8439a1d632427180da2a497f05dba1
+](具体详见《广告服务第三方信息共享清单》https://privacy.qq.com
+/document/preview/7c8439a1d632427180da2a497f05dba1)
+
+处理方式： 后台接口传输/ 表单传输/终端 发起传输
+
+公司名称： /
+
+22、广告服务（MMA 广告测量通用SDK）
+
+使用目的：帮助广告主实现广告测量及验证的作用
+
+数据类型：如OAID等设备信息、设备位置信息，应用使用信息
+
+官网链接：[ https://mmachina.cn/sdk-privacy/ ](https://mmachina.cn/sdk-privacy/)
+
+处理方式： SDK本机采集
+
+公司名称： 上海亦拓广告有限公司
+
+23、微博SDK
+
+使用目的：根据用户实际使用选择，为用户提供将信息分享给对应的第三方平台及绑定微博账号自动生成歌单功能
+
+数据类型：设备标识信 息、网络信息、QQ音乐账号信息
+
+官网链接：[ https://open.weibo.com/wiki/Sdk/privacy
+](https://open.weibo.com/wiki/Sdk/privacy)
+
+处理方式： SDK本机采集
+
+公司名称： 北京微梦创科网络技术有限公司
+
+腾讯文档接入第三方SDK目录
+
+为保障腾讯文档的稳定运行或实现相关功能，我们可能会接入由第三方提供的软件开发包（SDK）实现前述目的。我们会对合作方获取个人信息的SDK进行严格的审核，以保护您的个人信息安全。  
+  
+我们对接入的相关第三方SDK在以下目录中列明。您可以通过相关链接查看第三方的数据使用和保护规则。请注意，第三方SDK可能由于版本升级、策略调整等原因导致其个人信息处理类型发生变化，请以其公示的官方说明为准。
+
+[![](https://cl-privacy-1258638997.cos.ap-
+guangzhou.myqcloud.com/privacyplatform/sZSY1oT4Okm0PHkkaiRrzxAVvEtQUx5M)腾讯文档]()
+
+Android第三方SDK列表
+
+1、OPPO推送SDK
+
+使用目的：用于在OPPO设备上推送消息
+
+数据类型：设备标识信息、网络信息、设备状态信息、应用使用信息
+
+官网链接：[ ttps://open.oppomobile.com/wiki/doc#id=10288
+](ttps://open.oppomobile.com/wiki/doc#id=10288)
+
+处理方式： 通过去标识化、加密传输和处理的安全方式
+
+公司名称： 广东欢太科技有限公司
+
+2、华为推送SDK
+
+使用目的：用于在华为设备上推送消息
+
+数据类型：应用标识信息、消息下发记录等
+
+官网链接：[ https://developer.huawei.com/consumer/cn/doc/development/HMSCore-
+Guides/privacy-statement-0000001050042021
+](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-
+Guides/privacy-statement-0000001050042021)
+
+处理方式： 通过去标识化、加密传输和处理的安全方式
+
+公司名称： 华为软件技术有限公司
+
+3、魅族推送SDK
+
+使用目的：用于在魅族设备上推送消息
+
+数据类型：设备标识信息、位置信息、网络状态信息、运营商信息
+
+官网链接：[ https://www.meizu.com/legal.html ](https://www.meizu.com/legal.html)
+
+处理方式： 通过去标识化、加密传输和处理的安全方式
+
+公司名称： 珠海市魅族通讯设备有限公司
+
+4、VIVO推送SDK
+
+使用目的：用于在VIVO设备上推送消息
+
+数据类型：设备标识信息、网络状态信息、有通知服务的应用列表
+
+官网链接：[ https://dev.vivo.com.cn/documentCenter/doc/366#w1-08512613
+](https://dev.vivo.com.cn/documentCenter/doc/366#w1-08512613)
+
+处理方式： 通过去标识化、加密传输和处理的安全方式
+
+公司名称： 维沃移动通信有限公司及其全球的企业附属公司
+
+5、小米推送SDK
+
+使用目的：用于在小米设备上推送消息
+
+数据类型：设备标识信息、设备设置信息、应用使用信息
+
+官网链接：[ https://dev.mi.com/console/doc/detail?pId=1822
+](https://dev.mi.com/console/doc/detail?pId=1822)
+
+处理方式： 通过去标识化、加密传输和处理的安全方式
+
+公司名称： 小米科技有限责任公司
+
+6、制作证件照（证件照随拍）
+
+使用目的：提供在线制作证件照
+
+数据类型：用户撰写的文档内容，按用户授权共享登录信息（如头像、昵称等），用户指定的图片信息，用户本地相册，用户相机
+
+官网链接：[ https://o.666visa.cn/privacy-policy-terms-of-use/idsp-privacy-
+policy.html ](https://o.666visa.cn/privacy-policy-terms-of-use/idsp-privacy-
+policy.html)
+
+处理方式： 通过加密传输和处理的安全方式，传递内容数据，然后由该第三方加工处理内容数据
+
+公司名称： 深圳市六六六网络服务有限公司
+
+7、智能抠图
+
+使用目的：提供在线编辑图片，抠出物品，一键消除背景
+
+数据类型：用户撰写的文档内容，按用户授权共享登录信息（如头像、昵称等），用户指定的图片信息
+
+官网链接：[ https://o.666visa.cn/privacy-policy-terms-of-use/idsp-privacy-
+policy.html ](https://o.666visa.cn/privacy-policy-terms-of-use/idsp-privacy-
+policy.html)
+
+处理方式： 通过加密传输和处理的安全方式，传递内容数据，然后由该第三方加工处理内容数据
+
+公司名称： 深圳市六六六网络服务有限公司
+
+8、魔法擦除笔
+
+使用目的：提供在线解析图像，根据涂抹标记处，填充相近内容
+
+数据类型：用户撰写的文档内容，按用户授权共享登录信息（如头像、昵称等），用户指定的图片信息
+
+官网链接：[ https://o.666visa.cn/privacy-policy-terms-of-use/idsp-privacy-
+policy.html ](https://o.666visa.cn/privacy-policy-terms-of-use/idsp-privacy-
+policy.html)
+
+处理方式： 通过加密传输和处理的安全方式，传递内容数据，然后由该第三方加工处理内容数据
+
+公司名称： 深圳市六六六网络服务有限公司
+
+9、iSlide
+
+使用目的：提供在线PPT素材
+
+数据类型：按用户授权共享登录信息（如头像、昵称等）
+
+官网链接：[ https://www.islide.cc/privacy-policy ](https://www.islide.cc/privacy-
+policy)
+
+处理方式： 通过加密传输和处理的安全方式，传递内容数据，然后由该第三方加工处理内容数据
+
+公司名称： 成都艾斯莱德网络科技有限公司
+
+10、小米打印
+
+使用目的：文档内直接唤起打印机，一键打印
+
+数据类型：用户撰写的文档内容，按用户授权共享登录信息（如头像、昵称等）
+
+官网链接：[ https://www.hannto.com/s/h5/agreements/mi/miprint-
+tencent/PrivacyPolicy_zh.html
+](https://www.hannto.com/s/h5/agreements/mi/miprint-
+tencent/PrivacyPolicy_zh.html)
+
+处理方式： 通过加密传输和处理的安全方式，传递内容数据，然后由该第三方加工处理内容数据
+
+公司名称： 小米公司及其关联公司
+
+11、酷狗音乐
+
+使用目的：提供歌曲为内容配乐
+
+数据类型：按用户授权共享登录信息（如头像、昵称等）
+
+官网链接：[ https://activity.kugou.com/privacy4pcweb/v-d45bb170/index.html
+](https://activity.kugou.com/privacy4pcweb/v-d45bb170/index.html)
+
+处理方式： 通过加密传输和处理的安全方式，传递内容数据，然后由该第三方加工处理内容数据
+
+公司名称： 广州酷狗计算机科技有限公司
+
+12、镝数图表
+
+使用目的：在线图表制作工具，可编辑数据、解锁创意图表，进行图片输出
+
+数据类型：用户撰写的文档内容，按用户授权共享登录信息（如头像、昵称等）
+
+官网链接：[ https://dycharts.com/vis/protocol.html
+](https://dycharts.com/vis/protocol.html)
+
+处理方式： 通过加密传输和处理的安全方式，传递内容数据，然后由该第三方加工处理内容数据
+
+公司名称： 武汉镝次元数据科技有限公司
+
+13、闪萌表情
+
+使用目的：提供表情动图搜索和下载
+
+数据类型：按用户授权共享登录信息（如头像、昵称等）
+
+官网链接：[ https://himob.weshineapp.com/agreement/
+](https://himob.weshineapp.com/agreement/)
+
+处理方式： 通过加密传输和处理的安全方式，传递内容数据，然后由该第三方加工处理内容数据
+
+公司名称： 北京艾享科技有限责任公司
+
+14、摹客设计稿
+
+使用目的：一键插入摹客中的Figma/Sketch/PS/XD设计稿及摹客RP/Axure原型稿
+
+数据类型：按用户授权共享登录信息（如头像、昵称等）
+
+官网链接：[ https://www.mockplus.cn/privacy ](https://www.mockplus.cn/privacy)
+
+处理方式： 通过加密传输和处理的安全方式，传递内容数据，然后由该第三方加工处理内容数据
+
+公司名称： 成都摹客科技有限公司
+
+15、MasterGo
+
+使用目的：供团队使用的 UI/UX 设计工具
+
+数据类型：按用户授权共享登录信息（如头像、昵称等）
+
+官网链接：[ https://mastergo.com/privacyPolicy
+](https://mastergo.com/privacyPolicy)
+
+处理方式： 通过加密传输和处理的安全方式，传递内容数据，然后由该第三方加工处理内容数据
+
+公司名称： 北京尽微致广信息技术有限公司
+
+16、BoardMix协同白板
+
+使用目的：集多种工具的可视化协同白板
+
+数据类型：按用户授权共享登录信息（如头像、昵称等）
+
+官网链接：[ https://boardmix.cn/private-policy/ ](https://boardmix.cn/private-
+policy/)
+
+处理方式： 通过加密传输和处理的安全方式，传递内容数据，然后由该第三方加工处理内容数据
+
+公司名称： 深圳市博思云创科技有限公司
+
+17、Pixso 协同设计
+
+使用目的：Pixso，原型、设计、交互、交付与管理的一体化产品设计工具
+
+数据类型：按用户授权共享登录信息（如头像、昵称等）
+
+官网链接：[ https://pixso.cn/private-policy/ ](https://pixso.cn/private-policy/)
+
+处理方式： 通过加密传输和处理的安全方式，传递内容数据，然后由该第三方加工处理内容数据
+
+公司名称： 深圳市博思云创科技有限公司
+
+18、草料二维码
+
+使用目的：提供图案美化、文字编辑、设计排版等功能，可制作出所需的二维码样式
+
+数据类型：用户撰写的文档内容和文档链接，按用户授权共享登录信息（如头像、昵称等），用户指定的图片信息
+
+官网链接：[ https://cli.im/help/49902 ](https://cli.im/help/49902)
+
+处理方式： 通过加密传输和处理的安全方式，传递内容数据，然后由该第三方加工处理内容数据
+
+公司名称： 宁波邻家网络科技有限公司
+
+19、生成像素画
+
+使用目的：上传图片，一键生成在线表格像素画
+
+数据类型：按用户授权共享登录信息（如头像、昵称等），用户指定的图片信息，用户本地相册，用户相机
+
+官网链接：[
+https://docs.qq.com/doc/p/951151583a06e8b1c3bfa01aed25398e3d50094d?dver=3.0.27601058
+](https://docs.qq.com/doc/p/951151583a06e8b1c3bfa01aed25398e3d50094d?dver=3.0.27601058)
+
+处理方式： 通过加密传输和处理的安全方式，传递内容数据，然后由该第三方加工处理内容数据
+
+公司名称： 深圳市世纪汇祥科技有限公司
+
+20、简历辅写
+
+使用目的：提供简历续写、润色以及智能自我评价生成
+
+数据类型：用户撰写的文档内容，按用户授权共享登录信息（如头像、昵称等）
+
+官网链接：[ https://www.yoo-ai.com/agreement-policy.html?key=agreement-privacy-
+policy ](https://www.yoo-ai.com/agreement-policy.html?key=agreement-privacy-
+policy)
+
+处理方式： 通过加密传输和处理的安全方式，传递内容数据，然后由该第三方加工处理内容数据
+
+公司名称： 珠海必优科技有限公司
+
+21、简历分析匹配
+
+使用目的：通过智能算法，深度挖掘JD和简历内容，实现简历分析和人岗匹配。
+
+数据类型：用户撰写的文档内容，按用户授权共享登录信息（如头像、昵称等）
+
+官网链接：[ https://www.yoo-ai.com/agreement-policy.html?key=agreement-privacy-
+policy ](https://www.yoo-ai.com/agreement-policy.html?key=agreement-privacy-
+policy)
+
+处理方式： 通过加密传输和处理的安全方式，传递内容数据，然后由该第三方加工处理内容数据
+
+公司名称： 珠海必优科技有限公司
+
+22、电子合同（腾讯电子签）
+
+使用目的：为企业及个人提供安全、便捷的电子合同签约及证据保存服务
+
+数据类型：用户撰写的文档内容，按用户授权共享登录信息（如头像、昵称等）
+
+官网链接：[
+https://privacy.qq.com/document/preview/152eae8650934de7a658241df44db554
+](https://privacy.qq.com/document/preview/152eae8650934de7a658241df44db554)
+
+处理方式： 通过加密传输和处理的安全方式，传递内容数据，然后由该第三方加工处理内容数据
+
+公司名称： 腾讯云计算（北京）有限责任公司
+
+23、正版图库
+
+使用目的：提供照片、插画、模版、元素等版权素材
+
+数据类型：按用户授权共享登录信息（如头像、昵称等）
+
+官网链接：[ https://cloud.tencent.com/document/product/301/11470
+](https://cloud.tencent.com/document/product/301/11470)
+
+处理方式： 通过加密传输和处理的安全方式，传递内容数据，然后由该第三方加工处理内容数据
+
+公司名称： 腾讯云计算（北京）有限责任公司
+
+24、声咖配音（腾讯智影）
+
+使用目的：将文字生成音频内容
+
+数据类型：用户撰写的文档内容，按用户授权共享登陆信息（如头像、昵称等）
+
+官网链接：[
+https://privacy.qq.com/document/preview/c9377bd8e41045acbd3cf778d6b73cc4
+](https://privacy.qq.com/document/preview/c9377bd8e41045acbd3cf778d6b73cc4)
+
+处理方式： 通过加密传输和处理的安全方式，传递内容数据，然后由该第三方加工处理内容数据
+
+公司名称： 深圳市腾讯计算机系统有限公司
+
+25、视频剪辑（腾讯智影）
+
+使用目的：在线视频剪辑制作工具，进行视频截取、画面裁剪，一键导出
+
+数据类型：按用户授权共享登陆信息（如头像、昵称等），用户指定的视频信息
+
+官网链接：[
+https://privacy.qq.com/document/preview/c9377bd8e41045acbd3cf778d6b73cc4
+](https://privacy.qq.com/document/preview/c9377bd8e41045acbd3cf778d6b73cc4)
+
+处理方式： 通过加密传输和处理的安全方式，传递内容数据，然后由该第三方加工处理内容数据
+
+公司名称： 深圳是腾讯计算机系统有限公司
+
+26、弹幕动图
+
+使用目的：生成创意弹幕特效、跑马灯样式或多种文字动图效果，一键插入到文档/表格/演示文稿中
+
+数据类型：按用户授权共享登陆信息（如头像、昵称等）
+
+官网链接：[ https://privacy.qq.com/policy/tencent-privacypolicy
+](https://privacy.qq.com/policy/tencent-privacypolicy)
+
+处理方式： 通过加密传输和处理的安全方式，传递内容数据，然后由该第三方加工处理内容数据
+
+公司名称： 深圳市腾讯计算机系统有限公司
+
+27、生成主题地图
+
+使用目的：在文档列中插入地点信息，可一键生成自定义地图
+
+数据类型：用户撰写的文档内容，按用户授权共享登陆信息（如头像、昵称等），用户位置信息
+
+官网链接：[ https://docs.qq.com/doc/p/c6365c3d087700902b93ef2a180c74bc57832909
+](https://docs.qq.com/doc/p/c6365c3d087700902b93ef2a180c74bc57832909)
+
+处理方式： 通过加密传输和处理的安全方式，传递内容数据，然后由该第三方加工处理内容数据
+
+公司名称： 深圳市腾讯计算机系统有限公司
+
+28、写作助手
+
+使用目的：提供纠错、润色，解决口语化、用词干瘪的问题，提升创作效率和质量
+
+数据类型：用户撰写的文档内容，按用户授权共享登陆信息（如头像、昵称等）
+
+官网链接：[ https://privacy.qq.com/policy/tencent-privacypolicy
+](https://privacy.qq.com/policy/tencent-privacypolicy)
+
+处理方式： 通过加密传输和处理的安全方式，传递内容数据，然后由该第三方加工处理内容数据
+
+公司名称： 深圳市腾讯计算机系统有限公司
+
+29、Flutter
+
+使用目的：用户实现腾讯文档的基础产品功能，如提供快速识别剪切板链接能力给用户打开腾讯文档详情页
+
+数据类型：剪切板内容
+
+官网链接：[ https://policies.google.cn/?gl=CN&hl=zh-CN
+](https://policies.google.cn/?gl=CN&hl=zh-CN)
+
+处理方式： 本地不储存，不上传，仅用于帮助用户快速识别分享链接等内容
+
+公司名称： Google
+
+30、词云助手
+
+使用目的：提取文本词频，生成词云，快速了解关键词分布
+
+数据类型：按用户授权共享登录信息（如头像、昵称等），用户指定的图片信息，用户本地相册，用户相机
+
+官网链接：[ https://docs.qq.com/doc/p/b7a6868c16962ebe5906795b291094adad389c81
+](https://docs.qq.com/doc/p/b7a6868c16962ebe5906795b291094adad389c81)
+
+处理方式： 通过加密传输和处理的安全方式，传递内容数据，然后由该第三方加工处理内容数据
+
+公司名称： 深圳市世纪汇祥科技有限公司
+
+31、广点通转化
+
+使用目的：为开发者提供广告监测、广告归因、广告效果优化的基本功能
+
+数据类型：设备标识符、设备型号、设备启动时间、系统语言、开发者应用包名、使用状态
+
+官网链接：[ https://datanexus.qq.com/doc/develop/compliance/android/privacy_policy
+](https://datanexus.qq.com/doc/develop/compliance/android/privacy_policy)
+
+处理方式： 通过加密传输和处理的安全方式，传递内容数据，然后由该第三方加工处理内容数据
+
+公司名称： 深圳市腾讯计算机系统有限公司
+
+iOS第三方SDK列表
+
+1、OPPO推送SDK
+
+使用目的：用于在OPPO设备上推送消息
+
+数据类型：设备标识信息、网络信息、设备状态信息、应用使用信息
+
+官网链接：[ ttps://open.oppomobile.com/wiki/doc#id=10288
+](ttps://open.oppomobile.com/wiki/doc#id=10288)
+
+处理方式： 通过去标识化、加密传输和处理的安全方式
+
+公司名称： 广东欢太科技有限公司
+
+2、华为推送SDK
+
+使用目的：用于在华为设备上推送消息
+
+数据类型：应用标识信息、消息下发记录等
+
+官网链接：[ https://developer.huawei.com/consumer/cn/doc/development/HMSCore-
+Guides/privacy-statement-0000001050042021
+](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-
+Guides/privacy-statement-0000001050042021)
+
+处理方式： 通过去标识化、加密传输和处理的安全方式
+
+公司名称： 华为软件技术有限公司
+
+3、魅族推送SDK
+
+使用目的：用于在魅族设备上推送消息
+
+数据类型：设备标识信息、位置信息、网络状态信息、运营商信息
+
+官网链接：[ https://www.meizu.com/legal.html ](https://www.meizu.com/legal.html)
+
+处理方式： 通过去标识化、加密传输和处理的安全方式
+
+公司名称： 珠海市魅族通讯设备有限公司
+
+4、VIVO推送SDK
+
+使用目的：用于在VIVO设备上推送消息
+
+数据类型：设备标识信息、网络状态信息、有通知服务的应用列表
+
+官网链接：[ https://dev.vivo.com.cn/documentCenter/doc/366#w1-08512613
+](https://dev.vivo.com.cn/documentCenter/doc/366#w1-08512613)
+
+处理方式： 通过去标识化、加密传输和处理的安全方式
+
+公司名称： 维沃移动通信有限公司及其全球的企业附属公司
+
+5、小米推送SDK
+
+使用目的：用于在小米设备上推送消息
+
+数据类型：设备标识信息、设备设置信息、应用使用信息
+
+官网链接：[ https://dev.mi.com/console/doc/detail?pId=1822
+](https://dev.mi.com/console/doc/detail?pId=1822)
+
+处理方式： 通过去标识化、加密传输和处理的安全方式
+
+公司名称： 小米科技有限责任公司
+
+6、声咖配音（腾讯智影）
+
+使用目的：将文字生成音频内容
+
+数据类型：用户撰写的文档内容，按用户授权共享登陆信息（如头像、昵称等）
+
+官网链接：[
+https://privacy.qq.com/document/preview/c9377bd8e41045acbd3cf778d6b73cc4
+](https://privacy.qq.com/document/preview/c9377bd8e41045acbd3cf778d6b73cc4)
+
+处理方式： 通过加密传输和处理的安全方式，传递内容数据，然后由该第三方加工处理内容数据
+
+公司名称： 深圳市腾讯计算机系统有限公司
+
+7、制作证件照（证件照随拍）
+
+使用目的：提供在线制作证件照
+
+数据类型：用户撰写的文档内容，按用户授权共享登录信息（如头像、昵称等），用户指定的图片信息，用户本地相册，用户相机
+
+官网链接：[ https://o.666visa.cn/privacy-policy-terms-of-use/idsp-privacy-
+policy.html ](https://o.666visa.cn/privacy-policy-terms-of-use/idsp-privacy-
+policy.html)
+
+处理方式： 通过加密传输和处理的安全方式，传递内容数据，然后由该第三方加工处理内容数据
+
+公司名称： 深圳市六六六网络服务有限公司
+
+8、智能抠图
+
+使用目的：提供在线编辑图片，抠出物品，一键消除背景
+
+数据类型：用户撰写的文档内容，按用户授权共享登录信息（如头像、昵称等），用户指定的图片信息
+
+官网链接：[ https://o.666visa.cn/privacy-policy-terms-of-use/cutout-privacy-
+policy.html ](https://o.666visa.cn/privacy-policy-terms-of-use/cutout-privacy-
+policy.html)
+
+处理方式： 通过加密传输和处理的安全方式，传递内容数据，然后由该第三方加工处理内容数据
+
+公司名称： 深圳市六六六网络服务有限公司
+
+9、魔法擦除笔
+
+使用目的：提供在线解析图像，根据涂抹标记处，填充相近内容
+
+数据类型：用户撰写的文档内容，按用户授权共享登录信息（如头像、昵称等），用户指定的图片信息
+
+官网链接：[ https://o.666visa.cn/privacy-policy-terms-of-use/fill-privacy-
+policy.html ](https://o.666visa.cn/privacy-policy-terms-of-use/fill-privacy-
+policy.html)
+
+处理方式： 通过加密传输和处理的安全方式，传递内容数据，然后由该第三方加工处理内容数据
+
+公司名称： 深圳市六六六网络服务有限公司
+
+10、iSlide
+
+使用目的：提供在线PPT素材
+
+数据类型：按用户授权共享登录信息（如头像、昵称等）
+
+官网链接：[ https://www.islide.cc/privacy-policy ](https://www.islide.cc/privacy-
+policy)
+
+处理方式： 通过加密传输和处理的安全方式，传递内容数据，然后由该第三方加工处理内容数据
+
+公司名称： 成都艾斯莱德网络科技有限公司
+
+11、电子合同（腾讯电子签）
+
+使用目的：为企业及个人提供安全、便捷的电子合同签约及证据保存服务
+
+数据类型：用户撰写的文档内容，按用户授权共享登录信息（如头像、昵称等）
+
+官网链接：[
+https://privacy.qq.com/document/preview/152eae8650934de7a658241df44db554
+](https://privacy.qq.com/document/preview/152eae8650934de7a658241df44db554)
+
+处理方式： 通过加密传输和处理的安全方式，传递内容数据，然后由该第三方加工处理内容数据
+
+公司名称： 腾讯云计算（北京）有限责任公司
+
+12、视频剪辑（腾讯智影）
+
+使用目的：在线剪辑视频制作工具，进行视频截取、画面裁剪，一键导出
+
+数据类型：按用户授权共享登录信息（如头像、昵称等），用户制定的视频信息
+
+官网链接：[
+https://privacy.qq.com/document/preview/c9377bd8e41045acbd3cf778d6b73cc4
+](https://privacy.qq.com/document/preview/c9377bd8e41045acbd3cf778d6b73cc4)
+
+处理方式： 通过加密传输和处理的安全方式，传递内容数据，然后由该第三方加工处理内容数据
+
+公司名称： 深圳市腾讯计算机系统有限公司
+
+13、正版图库
+
+使用目的：提供照片、插画、模板、元素等版权素材
+
+数据类型：按用户授权共享登录信息（如头像、昵称等）
+
+官网链接：[ https://cloud.tencent.com/document/product/301/11470
+](https://cloud.tencent.com/document/product/301/11470)
+
+处理方式： 通过加密传输和处理的安全方式，传递内容数据，然后由该第三方加工处理内容数据
+
+公司名称： 腾讯云计算（北京）有限责任公司
+
+14、小米打印
+
+使用目的：文档内直接唤起打印机，一键打印
+
+数据类型：用户撰写的文档内容，按用户授权共享登录信息（如头像、昵称等）
+
+官网链接：[ https://www.hannto.com/s/h5/agreements/mi/miprint-
+tencent/PrivacyPolicy_zh.html
+](https://www.hannto.com/s/h5/agreements/mi/miprint-
+tencent/PrivacyPolicy_zh.html)
+
+处理方式： 通过加密传输和处理的安全方式，传递内容数据，然后由该第三方加工处理内容数据
+
+公司名称： 小米公司及其关联公司
+
+15、酷狗音乐
+
+使用目的：提供歌曲为内容配乐
+
+数据类型：按用户授权共享登录信息（如头像、昵称等）
+
+官网链接：[ https://activity.kugou.com/privacy4pcweb/v-d45bb170/index.html
+](https://activity.kugou.com/privacy4pcweb/v-d45bb170/index.html)
+
+处理方式： 通过加密传输和处理的安全方式，传递内容数据，然后由该第三方加工处理内容数据
+
+公司名称： 广州酷狗计算机科技有限公司
+
+16、镝数图表
+
+使用目的：在线图标制作工具，可编辑数据、解锁创意图标，进行图片输出
+
+数据类型：用户撰写的文档内容，按用户授权共享登录信息（如头像、昵称等）
+
+官网链接：[ https://dycharts.com/vis/protocol.html
+](https://dycharts.com/vis/protocol.html)
+
+处理方式： 通过加密传输和处理的安全方式，传递内容数据，然后由该第三方加工处理内容数据
+
+公司名称： 武汉镝次元数据科技有限公司
+
+17、闪萌表情
+
+使用目的：提供表情动图搜索和下载
+
+数据类型：按用户授权共享登录信息（如头像、昵称等）
+
+官网链接：[ https://himob.weshineapp.com/agreement/
+](https://himob.weshineapp.com/agreement/)
+
+处理方式： 通过加密传输和处理的安全方式，传递内容数据，然后由该第三方加工处理内容数据
+
+公司名称： 北京艾享科技有限责任公司
+
+18、摹客设计稿
+
+使用目的：一键插入摹客中的Figma/Sketch/PS/XD设计稿及摹客RP/Axure原型稿
+
+数据类型：按用户授权共享登录信息（如头像、昵称等）
+
+官网链接：[ https://www.mockplus.cn/privacy ](https://www.mockplus.cn/privacy)
+
+处理方式： 通过加密传输和处理的安全方式，传递内容数据，然后由该第三方加工处理内容数据
+
+公司名称： 成都摹客科技有限公司
+
+19、MasterGo
+
+使用目的：供团队使用的 UI/UX 设计工具
+
+数据类型：按用户授权共享登录信息（如头像、昵称等）
+
+官网链接：[ https://mastergo.com/privacyPolicy
+](https://mastergo.com/privacyPolicy)
+
+处理方式： 通过加密传输和处理的安全方式，传递内容数据，然后由该第三方加工处理内容数据
+
+公司名称： 北京尽微致广信息技术有限公司
+
+20、BoardMix 协同白板
+
+使用目的：集多种工具的可视化协同白板
+
+数据类型：按用户授权共享登录信息（如头像、昵称等）
+
+官网链接：[ https://boardmix.cn/private-policy/ ](https://boardmix.cn/private-
+policy/)
+
+处理方式： 通过加密传输和处理的安全方式，传递内容数据，然后由该第三方加工处理内容数据
+
+公司名称： 深圳市博思云创科技有限公司
+
+21、Pixso 协同设计
+
+使用目的：Pixso，原型、设计、交互、交付与管理的一体化产品设计工具
+
+数据类型：按用户授权共享登录信息（如头像、昵称等）
+
+官网链接：[ https://pixso.cn/private-policy/ ](https://pixso.cn/private-policy/)
+
+处理方式： 通过加密传输和处理的安全方式，传递内容数据，然后由该第三方加工处理内容数据
+
+公司名称： 深圳市博思云创科技有限公司
+
+22、草料二维码
+
+使用目的：提供图案美化、文字编辑、设计排版等功能，可制作出所需的二维码样式
+
+数据类型：用户撰写的文档内容和文档链接，按用户授权共享登录信息（如头像、昵称等），用户指定的图片信息
+
+官网链接：[ https://cli.im/help/49902 ](https://cli.im/help/49902)
+
+处理方式： 通过加密传输和处理的安全方式，传递内容数据，然后由该第三方加工处理内容数据
+
+公司名称： 宁波邻家网络科技有限公司
+
+23、弹幕动图
+
+使用目的：生成创意弹幕特效、跑马灯样式或多种文字动画效果，一键插入到文档/表格/演示文稿中
+
+数据类型：按用户授权共享登录信息（如头像、昵称等）
+
+官网链接：[ https://privacy.qq.com/policy/tencent-privacypolicy
+](https://privacy.qq.com/policy/tencent-privacypolicy)
+
+处理方式： 通过加密传输和处理的安全方式，传递内容数据，然后由该第三方加工处理内容数据
+
+公司名称： 深圳市腾讯计算机系统有限公司
+
+24、生成像素画
+
+使用目的：上传图片，一键生成在线表格像素画
+
+数据类型：按用户授权共享登录信息（如头像、昵称等），用户指定的图片信息，用户本地相册，用户相机
+
+官网链接：[
+https://docs.qq.com/doc/p/951151583a06e8b1c3bfa01aed25398e3d50094d?dver=3.0.27601058
+](https://docs.qq.com/doc/p/951151583a06e8b1c3bfa01aed25398e3d50094d?dver=3.0.27601058)
+
+处理方式： 通过加密传输和处理的安全方式，传递内容数据，然后由该第三方加工处理内容数据
+
+公司名称： 深圳市世纪汇祥科技有限公司
+
+25、生成主题地图
+
+使用目的：在文档列中插入地点信息，可一键生成自定义地图
+
+数据类型：用户撰写的文档内容，按用户授权共享登录信息（如头像、昵称等），用户位置信息
+
+官网链接：[ https://docs.qq.com/doc/p/c6365c3d087700902b93ef2a180c74bc57832909
+](https://docs.qq.com/doc/p/c6365c3d087700902b93ef2a180c74bc57832909)
+
+处理方式： 通过加密传输和处理的安全方式，传递内容数据，然后由该第三方加工处理内容数据
+
+公司名称： 深圳市腾讯计算机系统有限公司
+
+26、简历辅写
+
+使用目的：提供简历续写、润色以及智能自我评价生成
+
+数据类型：用户撰写的文档内容，按用户授权共享登录信息（如头像、昵称等）
+
+官网链接：[ https://www.yoo-ai.com/agreement-policy.html?key=agreement-privacy-
+policy ](https://www.yoo-ai.com/agreement-policy.html?key=agreement-privacy-
+policy)
+
+处理方式： 通过加密传输和处理的安全方式，传递内容数据，然后由该第三方加工处理内容数据
+
+公司名称： 珠海必优科技有限公司
+
+27、简历分析匹配
+
+使用目的：通过智能算法，深度挖掘JD和简历内容，实现建立分析和人岗匹配。
+
+数据类型：用户撰写的文档内容，按用户授权共享登录信息（如头像、昵称等）
+
+官网链接：[ https://www.yoo-ai.com/agreement-policy.html?key=agreement-privacy-
+policy ](https://www.yoo-ai.com/agreement-policy.html?key=agreement-privacy-
+policy)
+
+处理方式： 通过加密传输和处理的安全方式，传递内容数据，然后由该第三方加工处理内容数据
+
+公司名称： 珠海必优科技有限公司
+
+28、写作助手
+
+使用目的：提供纠错、润色，解决口语化、用词干瘪的问题，提升创作效率和质量
+
+数据类型：用户撰写的文档内容，按用户授权共享登录信息（如头像、昵称等）
+
+官网链接：[ https://privacy.qq.com/policy/tencent-privacypolicy
+](https://privacy.qq.com/policy/tencent-privacypolicy)
+
+处理方式： 通过加密传输和处理的安全方式，传递内容数据，然后由该第三方加工处理内容数据
+
+公司名称： 深圳市腾讯计算机系统有限公司
+
+29、Flutter
+
+使用目的：用户实现腾讯文档的基础产品功能，如提供快速识别剪切板链接能力给用户打开腾讯文档详情页
+
+数据类型：剪贴板内容
+
+官网链接：[ https://policies.google.cn/?gl=CN&hl=zh-CN
+](https://policies.google.cn/?gl=CN&hl=zh-CN)
+
+处理方式： 本地不储存，不上传，仅用于帮助用户快速识别分享链接等内容
+
+公司名称： Google
+
+30、词云助手
+
+使用目的：提取文本词频，生成词云，快速了解关键词分布
+
+数据类型：按用户授权共享登录信息（如头像、昵称等），用户指定的图片信息，用户本地相册，用户相机
+
+官网链接：[ https://docs.qq.com/doc/p/b7a6868c16962ebe5906795b291094adad389c81
+](https://docs.qq.com/doc/p/b7a6868c16962ebe5906795b291094adad389c81)
+
+处理方式： 通过加密传输和处理的安全方式，传递内容数据，然后由该第三方加工处理内容数据
+
+公司名称： 深圳市世纪汇祥科技有限公司
+
+31、广点通转化
+
+使用目的：为开发者提供广告监测、广告归因、广告效果优化的基本功能
+
+数据类型：设备标识符、设备型号、设备启动时间、系统语言、开发者应用包名、使用状态
+
+官网链接：[ https://datanexus.qq.com/doc/develop/compliance/android/privacy_policy
+](https://datanexus.qq.com/doc/develop/compliance/android/privacy_policy)
+
+处理方式： 通过加密传输和处理的安全方式，传递内容数据，然后由该第三方加工处理内容数据
+
+公司名称： 深圳市腾讯计算机系统有限公司
+
+微视接入第三方SDK目录
+
+为保障微视的稳定运行或实现相关功能，我们可能会接入由第三方提供的软件开发包（SDK）实现前述目的。我们会对合作方获取个人信息的SDK进行严格的审核，以保护您的个人信息安全。  
+  
+我们对接入的相关第三方SDK在以下目录中列明。您可以通过相关链接查看第三方的数据使用和保护规则。请注意，第三方SDK可能由于版本升级、策略调整等原因导致其个人信息处理类型发生变化，请以其公示的官方说明为准。
+
+[![](https://cl-privacy-1258638997.cos.ap-
+guangzhou.myqcloud.com/privacyplatform/OsoEPayFwAuPwyPVZauMDqmtmcpuqZX8)微视]()
+
+Android第三方SDK列表
+
+1、腾讯云即时通信IM SDK
+
+使用目的：为用户提供文字，图片和语音聊天的服务
+
+数据类型：网络连接状态、设备型号、系统版本
+
+官网链接：[ https://cloud.tencent.com/document/product/269/58094
+](https://cloud.tencent.com/document/product/269/58094)
+
+处理方式： 采取去标识、加密等方式进行传输和处理
+
+公司名称： 腾讯云计算 （北京）有限责任公司
+
+2、新浪微博开放平台
+
+使用目的：分享内容到新浪微博
+
+数据类型：无
+
+官网链接：[ https://open.weibo.com/wiki/Sdk/privacy
+](https://open.weibo.com/wiki/Sdk/privacy)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 北京微梦创科技网络技术有限公司
+
+3、微信支付
+
+使用目的：帮助用户使用微信支付服务
+
+数据类型：微信账号标识符、网络IP地址、订单金额；姓名、证件类型、证件号码
+
+官网链接：[ https://www.tenpay.com/v3/helpcenter/low/privacy.shtml
+](https://www.tenpay.com/v3/helpcenter/low/privacy.shtml)
+
+处理方式： 采取去标识、加密等方式进行传输和处理
+
+公司名称： 财付通支付科技有限公司
+
+4、QQ钱包支付
+
+使用目的：帮助用户使用QQ钱包支付服务
+
+数据类型：QQ账号标识符、网络IP地址、订单金额
+
+官网链接：[ https://www.tenpay.com/v3/helpcenter/low/privacy.shtml
+](https://www.tenpay.com/v3/helpcenter/low/privacy.shtml)
+
+处理方式： 采取去标识、加密等方式进行传输和处理
+
+公司名称： 财付通支付科技有限公司
+
+5、vivo推送SDK
+
+使用目的：用于在VIVO设备上推送消息
+
+数据类型：设备标识信息（ANDROIDID、OAID、token、加密的Android ID）
+
+官网链接：[ https://dev.vivo.com.cn/documentCenter/doc/652#w1-08512613 ](
+https://dev.vivo.com.cn/documentCenter/doc/652#w1-08512613)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 维沃移动通信有限公司
+
+6、OPPO推送SDK
+
+使用目的：用于在OPPO设备上推送消息
+
+数据类型：设备相关信息（OAID，User ID，Android
+ID，设备型号，手机电量）、使用推送服务的应用信息（APP包名及版本号，运行状态）、推送SDK版本号、网络相关信息（IP、域名连接结果，当前网络类型）、消息发送结果、通知栏状态（通知栏权限、用户点击行为），锁屏状态（是否锁屏，是否允许锁屏通知）
+
+官网链接：[ https://open.oppomobile.com/new/developmentDoc/info?id=10288
+](https://open.oppomobile.com/new/developmentDoc/info?id=10288)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 广东欢太科技有限公司
+
+7、小米推送SDK
+
+使用目的：用于在小米设备上推送消息
+
+数据类型：设备标识信息（OAID、加密的Android
+ID、VAID、AAID）、推送消息内容、设备信息(设备厂商、型号、归属地、运营商名称)、通知栏设置、网络信息（ExtraInfo）
+
+官网链接：[ https://dev.mi.com/console/doc/detail?pId=1822
+](https://dev.mi.com/console/doc/detail?pId=1822)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 北京小米科技有限责任公司
+
+8、Glide 图片加载 SDK
+
+使用目的：用于图片加载
+
+数据类型：无
+
+官网链接：[ https://github.com/bumptech/glide ](https://github.com/bumptech/glide)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： Bump technologies
+
+9、华为推送SDK
+
+使用目的：用于在华为设备上推送消息
+
+数据类型：本应用基本信息（AppID，推送服务和HMS
+Core应用版本号、华为推送SDK版本号，应用版本号和应用包名）、本应用内设备标识符（AAID和Push
+Token）、设备的硬件信息（设备类型，如手机，平板等；设备型号）、系统基本信息（系统类型，如Android，HarmonyOS等；）、系统设置信息（国家码）
+
+官网链接：[ https://developer.huawei.com/consumer/cn/doc/HMSCore-Guides/sdk-data-
+security-0000001050042177
+](https://developer.huawei.com/consumer/cn/doc/HMSCore-Guides/sdk-data-
+security-0000001050042177   )
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 华为软件技术有限公司
+
+iOS第三方SDK列表
+
+1、QQ钱包支付
+
+使用目的：帮助用户使用QQ钱包支付服务
+
+数据类型：用户标识信息、网络IP地址、订单金额
+
+官网链接：[ https://www.tenpay.com/v3/helpcenter/low/privacy.shtml
+](https://www.tenpay.com/v3/helpcenter/low/privacy.shtml)
+
+处理方式： 采取去标识、加密等方式进行传输和处理
+
+公司名称： 财付通支付科技有限公司
+
+2、微信支付
+
+使用目的：帮助用户使用微信支付服务
+
+数据类型：用户标识信息、网络IP地址、订单金额
+
+官网链接：[ https://www.tenpay.com/v3/helpcenter/low/privacy.shtml
+](https://www.tenpay.com/v3/helpcenter/low/privacy.shtml)
+
+处理方式： 通过去标识、加密传输和处理的安全处理方式
+
+公司名称： 财付通支付科技有限公司
+
+3、信息分享（微博）
+
+使用目的：根据用户实际使用选择，为用户提供将信息分享给对应的第三方平台功能
+
+数据类型：AppKey、PackageName、分享的消息、uid、access_token、phone_num
+
+官网链接：[ https://open.weibo.com/wiki/ ](https://open.weibo.com/wiki/)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 北京微梦创科网络技术有限公司
+
+4、广告服务
+
+使用目的：序化广告推荐、广告归因、广告落地页信息收集、广告监测
+
+数据类型：如IDFA、OAID等设备标识 符；如硬件型号、操作系统等设备信息；姓名、电话等用户主动填写的信息
+
+官网链接：[
+具体详见《广告服务第三方信息共享清单》https://privacy.qq.com/document/preview/7c8439a1d632427180da2a497f05dba1
+](具体详见《广告服务第三方信息共享清单》https://privacy.qq.com/document/preview/7c8439a1d632427180da2a497f05dba1)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 广告主和/或其委托的代理商、第三方广告检测服务商
+
+5、MMA中国广告监测通用SDK
+
+使用目的：广告监测
+
+数据类型：设备标识信息、网络信息
+
+官网链接：[ https://mmachina.cn/sdk-privacy/ ](https://mmachina.cn/sdk-privacy/)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 上海亦拓广告有限公司
+
+6、苹果应用内支付（IAP）
+
+使用目的：帮助用户使用苹果应用内支付服务
+
+数据类型：用户标识信息，订单交易信息（苹果物品ID、折扣、物品数量）
+
+官网链接：[ https://www.apple.com.cn/legal/privacy/szh/
+](https://www.apple.com.cn/legal/privacy/szh/)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： Apple Inc.
+
+7、王卡用户身份识别
+
+使用目的：根据ip识别用户手机号，进而识别用户是否为王卡
+
+数据类型：内网IP
+
+官网链接：[ http://www.10010.com/net5/front/include/index_a/privacypolicy.html
+](http://www.10010.com/net5/front/include/index_a/privacypolicy.html)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 中国联合网络通信有限公司
+
+8、慧眼个人信息验证
+
+使用目的：验证用户个人信息是否真实
+
+数据类型：用户姓名、身份证号、手机号、人脸
+
+官网链接：[
+https://privacy.qq.com/document/preview/4661fcc5ceb04a4f878a5874c86b34a2
+](https://privacy.qq.com/document/preview/4661fcc5ceb04a4f878a5874c86b34a2)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 腾讯云计算（北京）有限责任公司
+
+腾讯动漫接入第三方SDK目录
+
+为保障腾讯动漫的稳定运行或实现相关功能，我们可能会接入由第三方提供的软件开发包（SDK）实现前述目的。我们会对合作方获取个人信息的SDK进行严格的审核，以保护您的个人信息安全。  
+  
+我们对接入的相关第三方SDK在以下目录中列明。您可以通过相关链接查看第三方的数据使用和保护规则。请注意，第三方SDK可能由于版本升级、策略调整等原因导致其个人信息处理类型发生变化，请以其公示的官方说明为准。
+
+[![](https://cl-privacy-1258638997.cos.ap-
+guangzhou.myqcloud.com/privacyplatform/hSPTzF4uaiN2aZQy0X0Mq5oV0PtZ_7j2)腾讯动漫]()
+
+Android第三方SDK列表
+
+1、小米推送SDK
+
+使用目的：用于在小米设备上推送消息
+
+数据类型：设备标识信息、设备设置信息、应用使用信息
+
+官网链接：[ https://dev.mi.com/console/doc/detail?pId=1822
+](https://dev.mi.com/console/doc/detail?pId=1822)
+
+处理方式： 加密传输
+
+公司名称： 北京小米移动软件有限公司
+
+2、华为推送SDK
+
+使用目的：帮助用户编辑制作短视频，用于后续上传
+
+数据类型：应用标识信息、消息下发记录
+
+官网链接：[ https://developer.huawei.com/consumer/cn/doc/development/HMSCore-
+Guides/privacy-statement-0000001050042021
+](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-
+Guides/privacy-statement-0000001050042021)
+
+处理方式： 加密传输
+
+公司名称： 华为软件技术有限公司
+
+3、VIVO推送SDK
+
+使用目的：用于在VIVO设备上推送消息
+
+数据类型：设备标识信息、网络状态信息
+
+官网链接：[ https://dev.vivo.com.cn/documentCenter/doc/366#w1-08512613
+](https://dev.vivo.com.cn/documentCenter/doc/366#w1-08512613)
+
+处理方式： 加密传输
+
+公司名称： 维沃移动通信有限公司
+
+4、OPPO推送SDK
+
+使用目的：用于在OPPO设备上推送消息
+
+数据类型：设备标识信息、网络信息、设备状态信息、应用使用信息
+
+官网链接：[ https://open.oppomobile.com/wiki/doc#id=10288
+](https://open.oppomobile.com/wiki/doc#id=10288)
+
+处理方式： 加密传输
+
+公司名称： 广东欢太科技有限公司
+
+5、魅族推送SDK
+
+使用目的：用于在魅族设备上推送消息
+
+数据类型：设备标识信息、位置信息、网络状态信息、运营商信息
+
+官网链接：[ https://www.meizu.com/legal.html ](https://www.meizu.com/legal.html)
+
+处理方式： 加密传输
+
+公司名称： 珠海星纪魅族信息技术有限公司及其关联公司
+
+6、新浪微博开放平台
+
+使用目的：登录及分享内容到新浪微博
+
+数据类型：设备标识信息、网络信息
+
+官网链接：[
+https://open.weibo.com/wiki/%E5%BC%80%E5%8F%91%E8%80%85%E5%8D%8F%E8%AE%AE#.E9.9A.90.E7.A7.81.E7.9B.B8.E5.85.B3.E6.9D.
+](https://open.weibo.com/wiki/%E5%BC%80%E5%8F%91%E8%80%85%E5%8D%8F%E8%AE%AE#.E9.9A.90.E7.A7.81.E7.9B.B8.E5.85.B3.E6.9D.)
+
+处理方式： 加密传输
+
+公司名称： 北京微梦创科网络技术有限公司
+
+7、有赞
+
+使用目的：帮助用户进行动漫周边衍生品的在线购买
+
+数据类型：设备标识信息、网络信息、音视频信息
+
+官网链接：[ https://www.youzan.com/intro/rule/detail?alias=132atyi19&pageType=rules
+](https://www.youzan.com/intro/rule/detail?alias=132atyi19&pageType=rules)
+
+处理方式： 采用 SSL 加密保护技术，同时对网站本身提供 https 安全浏览方式处理
+
+公司名称： 杭州有赞科技有限公司
+
+8、微信支付
+
+使用目的：帮助用户使用微信支付服务
+
+数据类型：用户标识信息（微信openid），网络IP地址，订单交易信息（商品名称、金额），身份证号和姓名（仅
+用于调用微信支付实名信息校验接口实现验证微信用户的姓名和身份证信息是否匹配的功能）
+
+官网链接：[ https://www.tenpay.com/v3/helpcenter/low/privacy.shtml
+](https://www.tenpay.com/v3/helpcenter/low/privacy.shtml)
+
+处理方式： 通过去标识化、数据加密传输、防火墙和加密存储、物理访问控制以及信息访问授权控制等手段来保障信息安全
+
+公司名称： 财付通支付科技有限公司
+
+9、QQ钱包
+
+使用目的：帮助用户使用QQ钱包支付服务
+
+数据类型：网络IP地址，订单交易信息（商品名称、金额）
+
+官网链接：[ https://www.tenpay.com/v3/helpcenter/low/privacy.shtml
+](https://www.tenpay.com/v3/helpcenter/low/privacy.shtml )
+
+处理方式： 加密传输
+
+公司名称： 财付通支付科技有限公司
+
+10、腾讯移动推送SDK
+
+使用目的：在移动终端设备进行消息推送
+
+数据类型：设备信息（手机型号，系统类型、系统版本等）用于标签化推送以及识别是否是真机、网络信息（网络类型）支持根据不同网络类型进行不同类型推送、账号绑定信息（根据您所选用的不同推送渠道，QQ号、微信号Union
+ID、手机号、邮箱等）用于根据账号信息进行推送
+
+官网链接：[ Https://cloud.tencent.com/product/tpns
+](Https://cloud.tencent.com/product/tpns)
+
+处理方式： 通过去标识化、加密传输及其他安全方式
+
+公司名称： 深圳市腾讯计算机系统有限公司
+
+11、QQ互联SDK
+
+使用目的：根据用户选择，为用户提供第三方账号登录和分享功能
+
+数据类型：操作系统信息、设备型号信息、内存卡信息（用于用户分享至QQ、QQ空间或进行头像设置）、QQ和TIM
+App安装信息（判断用户手机上是否安装QQ或TIM）
+
+官网链接：[
+https://wiki.connect.qq.com/qq%E4%BA%92%E8%81%94sdk%E9%9A%90%E7%A7%81%E4%BF%9D%E6%8A%A4%E5%A3%B0%E6%98%8E
+](https://wiki.connect.qq.com/qq%E4%BA%92%E8%81%94sdk%E9%9A%90%E7%A7%81%E4%BF%9D%E6%8A%A4%E5%A3%B0%E6%98%8E
+)
+
+处理方式： SDK本机采集，不涉及数据共享
+
+公司名称： 深圳市腾讯计算机系统有限公司
+
+12、微信open SDK
+
+使用目的：根据用户选择，为用户提供第三方账号登录和分享功能
+
+数据类型：用户在第三方应用中主动选择的图片或内容、用户主动选择的微信头像、昵称信息、安装微信APP的状态（判断用户手机上是否安装微信）
+
+官网链接：[ https://support.weixin.qq.com/cgi-bin/mmsupportacctnodeweb-
+bin/pages/RYiYJkLOrQwu0nb8 ](https://support.weixin.qq.com/cgi-
+bin/mmsupportacctnodeweb-bin/pages/RYiYJkLOrQwu0nb8)
+
+处理方式： SDK本机采集，不涉及数据共享
+
+公司名称： 深圳市腾讯计算机系统有限公司
+
+13、七巧板通用SDK
+
+使用目的：程序化广告推送、广告监测与归因
+
+数据类型：设备制造商、设备型号、操作系统版本、屏幕分辨率、屏幕方向、屏幕DPI、基于url解析的IP地址、系统UserAgent、系统属性、WIFI状态（不含WiFi
+MAC地址/BSSID/SSID）、网络类型、软件系统版本、运营商信息、加速度/陀螺仪/重力/方向传感器信息（展示摇一摇广告时使用）、OAID、本App的包名及版本号、本App的进程名称、产品交互数据、广告数据（展示、点击、转化广告数据）
+
+官网链接：[ https://rule.tencent.com/rule/496d77fa-ee6d-4583-b16b-610fdcebbc57
+](https://rule.tencent.com/rule/496d77fa-ee6d-4583-b16b-610fdcebbc57 )
+
+处理方式： SDK本机采集，不涉及数据共享
+
+公司名称： 深圳市腾讯计算机系统有限公司
+
+14、灯塔SDK
+
+使用目的：提供数据上报服务
+
+数据类型：SDK版本、平台、时间戳、本应用标识符、本应用程序版本、终端制造厂商、终端设备操作系统版本、当地语言、时区、网络状态（Wi-Fi状态等，不含Wi-
+Fi
+MAC地址/BSSID/SSID）、网络日志信息以及使用灯塔SDK服务的频率、崩溃数据及使用情况、IP地址、访问网络权限、查看网络状态权限、访问WIFI状态权限（以上均不含Wi-
+Fi MAC地址/BSSID/SSID）
+
+官网链接：[
+https://privacy.qq.com/document/preview/a19a8cf4f2354306b137a7db39d32024
+](https://privacy.qq.com/document/preview/a19a8cf4f2354306b137a7db39d32024)
+
+处理方式： SDK本机采集，不涉及数据共享
+
+公司名称： 深圳市腾讯计算机系统有限公司
+
+15、腾讯Bugly
+
+使用目的：保障您正常使用我们的服务，维护我们服务的正常运行，改善及优化您的服务体验
+
+数据类型：手机型号、收集品牌、Android系统版本、Android系统api等级、厂商系统版本、cpu架构类型、设备是否root、磁盘空间占用大小、sdcard空间占用大小、内存空间占用大小、网络类型、应用当前正在运行的进程名和PID、访问网络权限、获取Wi-
+Fi状态权限（不含Wi-Fi MAC地址/ BSSID/SSID）
+
+官网链接：[
+https://privacy.qq.com/document/preview/fc748b3d96224fdb825ea79e132c1a56
+](https://privacy.qq.com/document/preview/fc748b3d96224fdb825ea79e132c1a56)
+
+处理方式： SDK本机采集，不涉及数据共享
+
+公司名称： 深圳市腾讯计算机系统有限公司
+
+16、腾讯x5内核
+
+使用目的：保证活动页面的流畅性，方便用户搜索、分享复制的内容
+
+数据类型：设备信息（设备型号、操作系统、CPU类型）、本应用信息（宿主应用包名、版本号）、Wi-Fi状态和参数（不含Wi-Fi MAC地址/
+BSSID/SSID）、网络权限（不含Wi-Fi MAC地址/ BSSID/SSID）
+
+官网链接：[ https://rule.tencent.com/rule/1c4e2b4b-d0f6-4a75-a5c6-1cfce00a390d
+](https://rule.tencent.com/rule/1c4e2b4b-d0f6-4a75-a5c6-1cfce00a390d )
+
+处理方式： SDK本机采集，不涉及数据共享
+
+公司名称： 深圳市腾讯计算机系统有限公司
+
+17、QQ小游戏
+
+使用目的：提供小游戏服务
+
+数据类型：手机型号、剪贴板、磁场传感器、加速度传感器、陀螺仪传感器、方向传感器、访问网络权限、获取定位、相机、麦克风、存储权限
+
+官网链接：[ https://rule.tencent.com/rule/5c8c693c-8bd0-45e5-a5ea-850a5af02da4
+](https://rule.tencent.com/rule/5c8c693c-8bd0-45e5-a5ea-850a5af02da4)
+
+处理方式： 使用加密技术、匿名化处理
+
+公司名称： 深圳市腾讯计算机系统有限公司
+
+18、阅文游戏平台
+
+使用目的：提供小游戏服务
+
+数据类型：Android ID、OAID、软件安装列表、Wi-Fi状态和参数（不含Wi-Fi MAC地址/ BSSID/SSID）、网络权限（不含Wi-Fi
+MAC地址/ BSSID/SSID）
+
+官网链接：[ https://qdgame.qidian.com/user/privacy
+](https://qdgame.qidian.com/user/privacy)
+
+处理方式： 使用加密技术、匿名化处理
+
+公司名称： 上海玄霆娱乐信息科技有限公司
+
+19、腾讯视频SDK
+
+使用目的：提供视频播放功能
+
+数据类型：AndroidID、OAID、设备型号、系统版本、Wi-Fi状态和参数（不含Wi-Fi MAC地址/ BSSID/SSID）、网络权限（不含Wi-
+Fi MAC地址/ BSSID/SSID）
+
+官网链接：[
+https://privacy.qq.com/document/preview/3fab9c7fc1424ebda42c3ce488322c8a
+](https://privacy.qq.com/document/preview/3fab9c7fc1424ebda42c3ce488322c8a)
+
+处理方式： 使用加密技术、匿名化处理
+
+公司名称： 深圳市腾讯计算机系统有限公司
+
+20、QIMEI SDK
+
+使用目的：为实现服务稳定性分析、服务异常分析、识别黑产等虚假设备、服务异常定位功能
+
+数据类型：设备信息（设备型号、AndroidID、IDFA、IDFV、OAID）、网络信息（网络类型、网络连接状态）、IP地址、应用进程信息
+
+官网链接：[
+https://privacy.qq.com/document/preview/91754d6dd7824e3689f17782c580e06e
+](https://privacy.qq.com/document/preview/91754d6dd7824e3689f17782c580e06e)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 深圳市腾讯计算机系统有限公司
+
+21、米大师
+
+使用目的：判断是否成功调起支付界面（含QQ支付及微信支付渠道）
+
+数据类型：本应用账号标识符、IDFV、设备机型、设备系统、网络类型、终端IP、屏幕分辨率、可用内存、cpu信息、运营商、移动网络、应用版本、是否安装微信（不会收集或上传应用列表信息）、是否安装QQ（不会收集或上传应用列表信息）、是否安装云闪付（不会收集或上传应用列表信息）、系统版本
+
+官网链接：[ https://wiki.midas.qq.com/post/index/1/32/280/0
+](https://wiki.midas.qq.com/post/index/1/32/280/0)
+
+处理方式： 加密传输
+
+公司名称： 深圳市腾讯计算机系统有限公司
+
+iOS第三方SDK列表
+
+1、微信open SDK（当前版本V1.8.9）
+
+使用目的：根据用户选择，为用户提供第三方账号登录和分享功能
+
+数据类型：剪切板信息（传递信息实现第三方App登录、分享能力）、用户在第三方应用中主动选择的图片或内容、用户主动选择的微信头像、昵称信息、安装微信APP的状态（判断用户手机上是否安装微信）
+
+官网链接：[ https://developer.qiniu.com/pili/8027/sdk-privacy-policy
+](https://developer.qiniu.com/pili/8027/sdk-privacy-policy)
+
+处理方式： SDK本机采集，不涉及数据共享
+
+公司名称： 深圳市腾讯计算机系统有限公司
+
+2、有赞
+
+使用目的：帮助用户进行动漫周边衍生品的在线购买
+
+数据类型：设备标识信息、网络信息、音视频信息
+
+官网链接：[ https://www.youzan.com/intro/rule/detail?alias=132atyi19&pageType=rules
+](https://www.youzan.com/intro/rule/detail?alias=132atyi19&pageType=rules)
+
+处理方式： 采用 SSL 加密保护技术，同时对网站本身提供 https 安全浏览方式处理
+
+公司名称： 杭州有赞科技有限公司
+
+3、QQ互联SDK（合规版本，当前版本V3.5.15）
+
+使用目的：根据用户选择，为用户提供第三方账号登录和分享功能
+
+数据类型：剪切板信息（传递信息实现第三方App登录、分享能力）、操作系统信息、设备型号信息、QQ
+App安装信息（判断用户手机上是否安装QQ）、内存卡信息（用于用户分享至QQ、QQ空间或进行头像设置）
+
+官网链接：[
+https://wiki.connect.qq.com/qq%E4%BA%92%E8%81%94sdk%E9%9A%90%E7%A7%81%E4%BF%9D%E6%8A%A4%E5%A3%B0%E6%98%8E
+](https://wiki.connect.qq.com/qq%E4%BA%92%E8%81%94sdk%E9%9A%90%E7%A7%81%E4%BF%9D%E6%8A%A4%E5%A3%B0%E6%98%8E
+)
+
+处理方式： SDK本机采集，不涉及数据共享
+
+公司名称： 深圳市腾讯计算机系统有限公司
+
+4、腾讯移动推送 SDK
+
+使用目的：在移动终端设备进行消息推送
+
+数据类型：设备信息(手机型号，系统类型、系统版本等)用于标签化推送以及识别是否是真机、网络信息(网络类型)支持根据不同网络类型进行不同类型推送、账号绑定信息(根据您所选用的不同推送渠道，QQ号、微信Union
+ID、 手机号、邮箱等)用于根据账号信息进行推送。
+
+官网链接：[ https://cloud.tencent.com/product/tpns
+](https://cloud.tencent.com/product/tpns)
+
+处理方式： 通过去标识化、加密传输及其他安全方式
+
+公司名称： 深圳市腾讯计算机系统有限公司
+
+5、七巧板通用SDK（合规版本，当前版本 4.586.0）
+
+使用目的：程序化广告推送、广告监测与归因
+
+数据类型：设备制造商、设备型号、操作系统版本、屏幕分辨率、屏幕方向、屏幕DPI、基于url解析的IP地址、系统UserAgent、系统属性、WIFI状态（不含WiFi
+MAC地址/BSSID/SSID）、网络类型、软件系统版本、运营商信息、加速度/陀螺仪/重力/方向传感器信息（展示摇一摇广告时使用）、本App的包名及版本号、本App的进程名称、产品交互数据、广告数据（展示、点击、转化广告数据）
+
+官网链接：[ https://rule.tencent.com/rule/496d77fa-ee6d-4583-b16b-610fdcebbc57
+](https://rule.tencent.com/rule/496d77fa-ee6d-4583-b16b-610fdcebbc57 )
+
+处理方式： SDK本机采集，不涉及数据共享
+
+公司名称： 深圳市腾讯计算机系统有限公司
+
+6、灯塔SDK（合规版本）
+
+使用目的：提供数据上报服务
+
+数据类型：SDK版本、平台、时间戳、本应用标识符、本应用程序版本、终端制造厂商、终端设备操作系统版本、当地语言、时区、网络状态（Wi-Fi状态等，不含Wi-
+Fi
+MAC地址/BSSID/SSID）、网络日志信息以及使用灯塔SDK服务的频率、崩溃数据及使用情况、IP地址、访问网络权限、查看网络状态权限、访问WIFI状态权限（以上均不含Wi-
+Fi MAC地址/BSSID/SSID）
+
+官网链接：[
+https://privacy.qq.com/document/preview/a19a8cf4f2354306b137a7db39d32024
+](https://privacy.qq.com/document/preview/a19a8cf4f2354306b137a7db39d32024)
+
+处理方式： SDK本机采集，不涉及数据共享
+
+公司名称： 深圳市腾讯计算机系统有限公司
+
+7、腾讯Bugly（合规版本）
+
+使用目的：保障您正常使用我们的服务，维护我们服务的正常运行，改善及优化您的服务体验
+
+数据类型：机型、Wi-
+Fi状态及运营商名称、系统版本、设备制造商、设备产品名称以及设备硬件名称、CPU信息、内存剩余空间、磁盘空间/磁盘剩余空间、idfv、是否越狱、地区编码、访问网络权限、获取Wi-
+Fi状态权限（不含Wi-Fi MAC地址/ BSSID/SSID）
+
+官网链接：[
+https://privacy.qq.com/document/preview/fc748b3d96224fdb825ea79e132c1a56
+](https://privacy.qq.com/document/preview/fc748b3d96224fdb825ea79e132c1a56)
+
+处理方式： SDK本机采集，不涉及数据共享
+
+公司名称： 深圳市腾讯计算机系统有限公司
+
+8、QQ小游戏
+
+使用目的：提供小游戏服务
+
+数据类型：手机型号、剪贴板、磁场传感器、加速度传感器、陀螺仪传感器、方向传感器、访问网络权限、获取定位、相机、麦克风、存储权限
+
+官网链接：[ https://rule.tencent.com/rule/5c8c693c-8bd0-45e5-a5ea-850a5af02da4
+](https://rule.tencent.com/rule/5c8c693c-8bd0-45e5-a5ea-850a5af02da4   )
+
+处理方式： 使用加密技术、匿名化处理
+
+公司名称： 深圳市腾讯计算机系统有限公司
+
+9、阅文游戏平台
+
+使用目的：提供小游戏服务
+
+数据类型：软件安装列表、Wi-Fi状态和参数（不含Wi-Fi MAC地址/ BSSID/SSID）、网络权限（不含Wi-Fi MAC地址/
+BSSID/SSID）
+
+官网链接：[ https://qdgame.qidian.com/user/privacy
+](https://qdgame.qidian.com/user/privacy)
+
+处理方式： 使用加密技术、匿名化处理
+
+公司名称： 上海玄霆娱乐信息科技有限公司
+
+10、腾讯视频SDK
+
+使用目的：提供视频播放功能
+
+数据类型：设备型号、系统版本、Wi-Fi状态和参数（不含Wi-Fi MAC地址/ BSSID/SSID）、网络权限（不含Wi-Fi MAC地址/
+BSSID/SSID）
+
+官网链接：[
+https://privacy.qq.com/document/preview/3fab9c7fc1424ebda42c3ce488322c8a
+](https://privacy.qq.com/document/preview/3fab9c7fc1424ebda42c3ce488322c8a)
+
+处理方式： 使用加密技术、匿名化处理
+
+公司名称： 深圳市腾讯计算机系统有限公司
+
+11、QIMEI SDK
+
+使用目的：为实现服务稳定性分析、服务异常分析、识别黑产等虚假设备、服务异常定位功能
+
+数据类型：设备信息（设备型号、AndroidID、IDFA、IDFV、OAID）、网络信息（网络类型、网络连接状态）、IP地址、应用进程信息
+
+官网链接：[
+https://privacy.qq.com/document/preview/91754d6dd7824e3689f17782c580e06e
+](https://privacy.qq.com/document/preview/91754d6dd7824e3689f17782c580e06e)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 深圳市腾讯计算机系统有限公司
+
+12、ToolyHP SDK
+
+使用目的：持续运营和体验优化
+
+数据类型：操作系统版本、手机厂商、手机型号
+
+官网链接：[
+https://privacy.qq.com/document/preview/373326d4216b4d8497b48ffe10202960
+](https://privacy.qq.com/document/preview/373326d4216b4d8497b48ffe10202960)
+
+处理方式： 加密传输和处理
+
+公司名称： 深圳市腾讯计算机系统有限公司
+
+13、米大师
+
+使用目的：断是否成功调起支付界面（含QQ支付及微信支付渠道）
+
+数据类型：本应用账号标识符、是否挂载代理、IDFV、是否包含动态库注入、设备机型、设备系统、网络类型、当前语言代码、当前币种代码、当前国家代码、本应用版本、本应用包名BundleID、是否越狱、是否安装微信（不会收集或上传应用列表信息）、是否安装QQ（不会收集或上传应用列表信息）、是否挂载Debugger、应用构建号
+
+官网链接：[ https://wiki.midas.qq.com/post/index/1/32/280/0
+](https://wiki.midas.qq.com/post/index/1/32/280/0)
+
+处理方式： SDK本机采集，不涉及数据共享
+
+公司名称： 深圳市腾讯计算机系统有限公司
+
+腾讯地图接入第三方SDK目录
+
+为保障腾讯地图的稳定运行或实现相关功能，我们可能会接入由第三方提供的软件开发包（SDK）实现前述目的。我们会对合作方获取个人信息的SDK进行严格的审核，以保护您的个人信息安全。  
+  
+我们对接入的相关第三方SDK在以下目录中列明。您可以通过相关链接查看第三方的数据使用和保护规则。请注意，第三方SDK可能由于版本升级、策略调整等原因导致其个人信息处理类型发生变化，请以其公示的官方说明为准。
+
+[![](https://cl-privacy-1258638997.cos.ap-
+guangzhou.myqcloud.com/privacyplatform/D9ehOmMIHTcxJTd6qVxjdteAQOxDDdvc)腾讯地图]()
+
+Android第三方SDK列表
+
+1、小米 push
+
+使用目的：用于腾讯地图APP向小米手机用户推送消息
+
+数据类型：设备标识OAID和加密的Android
+ID，以及使用推送服务的应用信息如应用包名、版本号和运行状态；设备相关信息如设备厂商、设备型号、设备内存、操作系统版本、小米推送SDK版本、设备归属地（国家或地区）、SIM卡运营商名称、当前网络类型、WiFi状态。其中当前网络类型、SIM卡运营商名称仅在设备本地读取，不会上传至小米服务器；
+
+官网链接：[ https://dev.mi.com/console/doc/detail?pid=1822
+](https://dev.mi.com/console/doc/detail?pid=1822)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式。
+
+公司名称： 北京小米移动软件有限公司
+
+2、讯飞TTS
+
+使用目的：提供语音合成能力，实现导航语音播报、语音助手播报功能
+
+数据类型：呼叫语音助手后，协助合成语音播报信息
+
+官网链接：[ https://www.iflytek.com/privacy ](https://www.iflytek.com/privacy)
+
+处理方式： 无信息传输
+
+公司名称： 科大讯飞股份有限公司
+
+3、新浪微博SDK
+
+使用目的：用于将腾讯地图APP生成的内容分享到新浪微博APP
+
+数据类型：无
+
+官网链接：[ https://open.weibo.com/wiki/Sdk/privacy
+](https://open.weibo.com/wiki/Sdk/privacy)
+
+处理方式： 无
+
+公司名称： 北京微梦创科网络技术有限公司
+
+4、动画制作
+
+使用目的：用于制作bodymovin动画
+
+数据类型：无
+
+官网链接：[ http://airbnb.io/lottie/#/ ](http://airbnb.io/lottie/#/)
+
+处理方式： 无
+
+公司名称： Airbnb（爱彼迎）Lottie sdk
+
+5、爱奇艺SDK
+
+使用目的：用于上报用户crash事件、及时发现严重crash问题
+
+数据类型：手机型号、操作系统版本，cpu架构、生产厂商、品牌、型号
+
+官网链接：[ https://privacy.iqiyi.com/policies?type=2
+](https://privacy.iqiyi.com/policies?type=2)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 北京爱奇艺科技有限公司
+
+6、腾讯云SDK
+
+使用目的：用于帮助开发者查看用户日志、排查突发问题
+
+数据类型：设备信息（如手机型号、系统类型、系统版本）、网页浏览/检索记录、操作系统版本、AndroidID
+
+官网链接：[ https://cloud.tencent.com/document/product/301/11470 ](
+https://cloud.tencent.com/document/product/301/11470)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 腾讯云计算（北京）有限责任公司
+
+7、小红书分享
+
+使用目的：内容分享
+
+数据类型：Android ID、操作系统、系统版本、设备型号
+
+官网链接：[ https://agree.xiaohongshu.com/h5/terms/ZXXY20230525001/-1?source=agora
+](https://agree.xiaohongshu.com/h5/terms/ZXXY20230525001/-1?source=agora)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 行吟信息科技（上海）有限公司️
+
+8、抖音分享
+
+使用目的：用于将腾讯地图APP生成的内容分享到抖音APP
+
+数据类型：设备信息（包括设备型号、设备标识符（如 IDFA/ OPENUDID/ GUID/ OAID））、电信运营商信息、用户选择分享的图片或视频
+
+官网链接：[ https://developer.open-douyin.com/docs/resource/zh-CN/dop/operation-
+standard/service-protocol/douyinsdk_pingtaiyinsizhengce
+](https://developer.open-douyin.com/docs/resource/zh-CN/dop/operation-
+standard/service-protocol/douyinsdk_pingtaiyinsizhengce)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 北京微播视界科技有限公司
+
+9、华为push
+
+使用目的：用于腾讯地图APP向华为手机用户以及集 成HMS PUSH SDK 的其他品牌设备的用户推送消息
+
+数据类型：应用信息、设备信息（设备的硬件信息、系统基本信息和系统设置）
+
+官网链接：[ https://developer.huawei.com/consumer/cn/doc/HMSCore-Guides/sdk-data-
+security-0000001050042177
+](https://developer.huawei.com/consumer/cn/doc/HMSCore-Guides/sdk-data-
+security-0000001050042177)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式。
+
+公司名称： 华为软件技术有限公司
+
+10、vivo push
+
+使用目的：用于腾讯地图APP向VIVO手机用户推送消息
+
+数据类型：通过去标识化、加密传输和处理的安全处理方式。
+
+官网链接：[ https://dev.vivo.com.cn/documentCenter/doc/706
+](https://dev.vivo.com.cn/documentCenter/doc/706)
+
+处理方式： appid，appkey，应用包名，应用版本号，pushSDK版本，vpush的regId，设备类型，系统类型和系统版本
+
+公司名称： 维沃移动通信有限公司
+
+11、荣耀push
+
+使用目的：用于腾讯地图APP向荣耀手机用户推送消息
+
+数据类型：设备标识符（AAID、PushToken）
+
+官网链接：[ https://developer.honor.com/cn/docs/11002/guides/sdk-data-security
+](https://developer.honor.com/cn/docs/11002/guides/sdk-data-security)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式。
+
+公司名称： 深圳荣耀软件技术有限公司
+
+12、oppo推送
+
+使用目的：用于腾讯地图APP向OPPO手机用户推送消息
+
+数据类型：应用基本信息（MCS应用包名、应用版本号、OPUSH
+SDK版本号），应用内设备标识符（RegistraterID、appKey、appSecret）
+
+官网链接：[ https://open.oppomobile.com/new/developmentDoc/info?id=11228
+](https://open.oppomobile.com/new/developmentDoc/info?id=11228)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式。
+
+公司名称： 广东欢太科技有限公司
+
+13、腾讯图灵盾风险识别SDK
+
+使用目的：用于在用户打车时获取风控信息，减少风险
+
+数据类型：网络状态、系统设置、系统属性、设备型号、操作系统、IP地址、运营商信息
+
+官网链接：[
+https://privacy.qq.com/document/preview/5331f064a91a47eb93993fdacb91c8f7
+](https://privacy.qq.com/document/preview/5331f064a91a47eb93993fdacb91c8f7)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 深圳市腾讯计算机系统有限公司
+
+iOS第三方SDK列表
+
+1、讯飞TTS
+
+使用目的：提供语音合成能力，实现导航语音播报、语音助手播报功能
+
+数据类型：呼叫语音助手后，协助合成语音播报信息
+
+官网链接：[ https://www.iflytek.com/privacy ](https://www.iflytek.com/privacy)
+
+处理方式： 无信息传输
+
+公司名称： 科大讯飞股份有限公司
+
+2、新浪微博SDK
+
+使用目的：用于将腾讯地图APP生成的内容分享到新浪微博APP
+
+数据类型：设备信息（包括设备型号、设备标识符（如IDFA/ OPENUDID/ GUID/ OAID）、电信运营商信息、用户选择分享的图片或视频
+
+官网链接：[ https://open.weibo.com/wiki/Sdk/privacy
+](https://open.weibo.com/wiki/Sdk/privacy)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 北京微梦创科网络技术有限公司
+
+3、抖音SDK
+
+使用目的：用于将腾讯地图APP生成的内容分享到抖音APP
+
+数据类型：设备信息（包括设备型号、设备标识符（如 IDFA/ OPENUDID/ GUID/ OAID））、电信运营商信息、用户选择分享的图片或视频
+
+官网链接：[
+https://www.douyin.com/draft/douyin_agreement/douyin_agreement_privacy.html
+](https://www.douyin.com/draft/douyin_agreement/douyin_agreement_privacy.html)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 北京微播视界科技有限公司
+
+4、腾讯云SDK
+
+使用目的：用于帮助开发者查看用户日志、排查突发问题
+
+数据类型：设备信息（包括设备型号、设备标识符（如IDFA/ OPENUDID/ GUID/ OAID）、网页浏览/检索记录、操作系统版本
+
+官网链接：[ https://cloud.tencent.com/document/product/301/11470 ](
+https://cloud.tencent.com/document/product/301/11470)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 腾讯云计算（北京）有线责任公司
+
+5、腾讯图灵盾风险识别SDK
+
+使用目的：用于在用户打车时获取风控信息，减少风险
+
+数据类型：网络状态、系统设置、系统属性、设备型号、操作系统、IP地址、运营商信息
+
+官网链接：[
+https://privacy.qq.com/document/preview/5331f064a91a47eb93993fdacb91c8f7
+](https://privacy.qq.com/document/preview/5331f064a91a47eb93993fdacb91c8f7)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 深圳市腾讯计算机系统有限公司
+
+QQ同步助手接入第三方SDK目录
+
+为保障QQ同步助手的稳定运行或实现相关功能，我们可能会接入由第三方提供的软件开发包（SDK）实现前述目的。我们会对合作方获取个人信息的SDK进行严格的审核，以保护您的个人信息安全。  
+  
+我们对接入的相关第三方SDK在以下目录中列明。您可以通过相关链接查看第三方的数据使用和保护规则。请注意，第三方SDK可能由于版本升级、策略调整等原因导致其个人信息处理类型发生变化，请以其公示的官方说明为准。
+
+[![](https://cl-privacy-1258638997.cos.ap-
+guangzhou.myqcloud.com/privacyplatform/Oli3UdD-Y0EzISIfAAmK2pWBpQiTXjmV)QQ同步助手]()
+
+Android第三方SDK列表
+
+1、微信支付
+
+使用目的：帮助用户使用微信支付服务
+
+数据类型：用户标识信息、网络IP地址、订单金额
+
+官网链接：[ https://www.tenpay.com/v3/helpcenter/low/privacy.shtml
+](https://www.tenpay.com/v3/helpcenter/low/privacy.shtml)
+
+处理方式： 采取去标识、加密等方式进行传输和处理
+
+公司名称： 财付通支付科技有限公司
+
+2、QQ钱包支付
+
+使用目的：帮助用户使用QQ钱包支付服务
+
+数据类型：用户标识信息、网络IP地址、订单金额
+
+官网链接：[ https://www.tenpay.com/v4/helpcenter/low/privacy.shtml
+](https://www.tenpay.com/v4/helpcenter/low/privacy.shtml)
+
+处理方式： 采取去标识、加密等方式进行传输和处理
+
+公司名称： 财付通支付科技有限公司
+
+3、推送通知消息（OPPO 推送 SDK）
+
+使用目的：对 OPPO 品牌手机消息推送
+
+数据类型：设备相关信息（如IMEI号，Serial Number，IMSI，User ID，Android ID，Google Advertising
+ID,
+手机Region设置，设备型号，手机电量，手机操作系统版本及语言）、使用推送服务的应用信息（如APP包名及版本号，运行状态）、推送SDK版本号、网络相关信息（如IP或域名连接结果，当前网络类型）、消息发送结果，通知栏状态（如通知栏权限、用户点击行为），锁屏状态（如是否锁屏，是否允许锁屏通知）
+
+官网链接：[ https://open.oppomobile.com/wiki/doc#id=10288
+](https://open.oppomobile.com/wiki/doc#id=10288)
+
+处理方式： 对 OPPO 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 广东欢太科技有限公司
+
+4、推送通知消息（小米推送 SDK）
+
+使用目的：对小米品牌手机消息推送
+
+数据类型：1.设备标识（OAID和加密的Android
+ID），以及使用推送服务的应用信息如应用包名、版本号和运行状态；2.消息创建、送达和点击时间并暂存从第三方应用处获得并推送给您的消息内容；3.设备相关信息如设备厂商、设备型号、设备内存、操作系统版本、小米推送SDK版本、设备归属地（国家或地区）、SIM卡运营商名称、当前网络类型、WiFi状态。其中当前网络类型、SIM卡运营商名称仅在设备本地读取，不会上传至小米服务；4.通知栏设置信息，包括是否屏蔽通知栏、是否设置锁屏弹出消息等。（基于设备推送的目的，小米推送SDK可能存在自启动行为）
+
+官网链接：[ https://dev.mi.com/console/doc/detail?pId=1822
+](https://dev.mi.com/console/doc/detail?pId=1822)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 北京小米移动软件有限公司
+
+5、推送通知消息（vivo 推送 SDK）
+
+使用目的：对 vivo 品牌手机消息推送
+
+数据类型：设备标识信息（如IMEI、EmmCID、UFSID、ANDROIDID、GUID、GAID、OPENID、VAID、OAID、RegID、加密的Android
+ID）、使用推送服务的应用软件信息（如应用包名、版本号、APPID、安装、卸载、恢复出厂设置、运行状态）、设备制造商、网络类型、国家码、设备类型、消息创建/送达和点击的时间戳、消息内容、推送SDK版本号、设备型号、操作系统版本、当前网络类型、消息发送结果、通知栏状态（如通知栏权限、用户点击行为）、锁屏状态（如是否锁屏，是否允许锁屏通知）
+
+官网链接：[ https://dev.vivo.com.cn/documentCenter/doc/366#w1-08512613 ](
+https://dev.vivo.com.cn/documentCenter/doc/366#w1-08512613)
+
+处理方式： 通过加密处理的安全处理方式
+
+公司名称： 维沃移动通信有限公司
+
+6、华为推送SDK
+
+使用目的：应用标识信息、消息下发记录等 （基于设备推送的目的，华为推送SDK可能存在自启动行为）
+
+数据类型：应用标识信息、消息下发记录等
+
+官网链接：[ https://developer.huawei.com/consumer/cn/doc/development/HMSCore-
+Guides/privacy-statement-0000001050042021
+](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-
+Guides/privacy-statement-0000001050042021)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 华为软件技术有限公司
+
+7、广告服务
+
+使用目的：帮助广告主投放、评估、监测、提升广告投放效果，具体详见《广告服务第三方信息共享清单》腾讯隐私保护平台
+
+数据类型：如OAID等设备信息；如曝光、点击数据等广告数据；如系统语言、屏幕高宽、屏幕方向等设备信息
+
+官网链接：[ / ](/)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 广告主和/或其委托的代理商、第三方广告监测服务商
+
+8、广告服务
+
+使用目的：帮助广告主实现广告测量及验证的作用
+
+数据类型：如OAID等设备信息、设备位置信息，应用使用信息
+
+官网链接：[ https://mmachina.cn/sdk-privacy/ ](https://mmachina.cn/sdk-privacy/)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 上海亦拓广告有限公司
+
+9、Matisse
+
+使用目的：用于系统相册选取的UI库
+
+数据类型：多媒体文件（图片）
+
+官网链接：[ GitHub - zhihu/Matisse: :fireworks: A well-designed local image and
+video selector for Android ](GitHub - zhihu/Matisse: :fireworks: A well-
+designed local image and video selector for Android)
+
+处理方式： 仅在本地提供功能，不涉及个人信息的共享
+
+公司名称： 开源框架
+
+10、PdfBox- Android
+
+使用目的：用于实现PDF生成工具
+
+数据类型：无
+
+官网链接：[ GitHub - TomRoush/PdfBox-Android: The Apache PdfBox project ported to
+work on Android ](GitHub - TomRoush/PdfBox-Android: The Apache PdfBox project
+ported to work on Android)
+
+处理方式： 无
+
+公司名称： 开源框架
+
+iOS第三方SDK列表
+
+1、苹果应用内支付（IAP）
+
+使用目的：帮助用户使用苹果应用内支付服务
+
+数据类型：用户标识信息，订单交易信息（苹果物品ID、折扣、物品数量）
+
+官网链接：[ https://www.apple.com.cn/legal/privacy/szh/
+](https://www.apple.com.cn/legal/privacy/szh/)
+
+处理方式： 采取去标识、加密等方式进行传输和处理
+
+公司名称： Apple Inc.
+
+2、广告服务
+
+使用目的：帮助广告主投放、评估、检测、提升广告投放效果
+
+数据类型：如OAID等设备标识符；如曝光、点击数等广告数据；如系统语言、屏幕高、屏幕方向等设备信息
+
+官网链接：[ / ](/)
+
+处理方式： 通过去标识化、加密传输和处理的安全处理方式
+
+公司名称： 广告主和/或其委托的代理商，第三方广告监测服务商
+
+换机助手接入第三方SDK目录
+
+为保障换机助手的稳定运行或实现相关功能，我们可能会接入由第三方提供的软件开发包（SDK）实现前述目的。我们会对合作方获取个人信息的SDK进行严格的审核，以保护您的个人信息安全。  
+  
+我们对接入的相关第三方SDK在以下目录中列明。您可以通过相关链接查看第三方的数据使用和保护规则。请注意，第三方SDK可能由于版本升级、策略调整等原因导致其个人信息处理类型发生变化，请以其公示的官方说明为准。
+
+[![](https://cl-privacy-1258638997.cos.ap-
+guangzhou.myqcloud.com/privacyplatform/OZKi3UyQa6oPsAqwElsYk1H5bZLtefR7)换机助手]()
+
+Android第三方SDK列表
+
+1、动画制作
+
+使用目的：用于制作bodymovin动画
+
+数据类型：无（仅在设备本地处理，不涉及个人信息收集或上传）
+
+官网链接：[ http://airbnb.io/lottie/#/ ](http://airbnb.io/lottie/#/)
+
+处理方式： 无（仅在设备本地处理，不涉及个人信息收集或上传）
+
+公司名称： Airbnb（爱彼迎）Lottie
+
+2、广告服务
+
+使用目的：帮助广告主投放、评估、监测、提升广告投放效果，具体详见《广告服务第三方信息共享清单》
+https://privacy.qq.com/document/preview/7c8439a1d632427180da2a497f05dba1
+
+数据类型：如OAID等设备标识符；如曝光、点击数据等广告数据；如系统语言、屏幕高宽、屏幕方向等设备信息
+
+官网链接：[ / ](/)
+
+处理方式：
+由腾讯提供无法直接识别用户的去身份化的数据，第三方通过自动化方式自行决策是否下发广告及用于广告业务。腾讯要求第三方严格遵守腾讯关于数据隐私保护的措施与要求，包括但不限于根据数据保护协议、承诺书及相关数据处理政策进行处理，并严格按照相关用户授权范围处理数据，避免识别出用户个人身份，保障隐私安全。
+
+公司名称： 广告主和/或其委托的代理商、第三方广告监测服务商
+
+3、鲸鸿动能SDK
+
+使用目的：程序化广告投放、广告监测归因、广告防欺诈与运营维护
+
+数据类型：设备标识符（OAID）、设备信息（设备型号、设备硬件信息、操作系统、系统设置、设备使用信息）、应用信息、传感器信息（陀螺仪、加速度计、旋转矢量传感器、磁力计、气压计）、网络信息、运营商信息、IP地址、Wi-
+Fi信息（Wi-Fi状态、Wi-Fi 参数与Wi-Fi列表）、Wi-Fi、蓝牙列表等粗略位置信息、广告互动信息
+（当您在华为设备或者荣耀设备使用广告服务时，此SDK可能会关联启动华为应用市场或HMS Core应用。）
+
+官网链接：[ https://developer.huawei.com/consumer/cn/doc/HMSCore-Guides/whale-hong-
+kinetic-energy-sdk-privacy-statement-0000001658283582
+](https://developer.huawei.com/consumer/cn/doc/HMSCore-Guides/whale-hong-
+kinetic-energy-sdk-privacy-statement-0000001658283582)
+
+处理方式： 通过去标识化、加密传输等方式进行传输和处理
+
+公司名称： 华为软件技术有限公司
+
+iOS第三方SDK列表
+
+1、广告服务
+
+使用目的：在广告投放过程中用于广告归因
+
+数据类型：如曝光、点击数据等广告数据
+
+官网链接：[ / ](/)
+
+处理方式：
+由腾讯提供无法直接识别用户的去身份化的数据。腾讯要求第三方严格遵守腾讯关于数据隐私保护的措施与要求，包括但不限于根据数据保护协议、承诺书及相关数据处理政策进行处理，并严格按照相关用户授权范围处理数据，避免识别出用户个人身份，保障隐私安全
+
+公司名称： 广告主和/或其委托的代理商
+
+[关于腾讯](https://www.tencent.com/) | [ About Tencent ](https://www.tencent.com/index_e.shtml) | [服务协议](https://www.qq.com/contract.shtml) | [隐私政策](https://privacy.qq.com/) | [开放平台](https://open.qq.com/) | [广告服务](https://e.qq.com/ads/) | [腾讯招聘](https://hr.tencent.com/) | [腾讯公益](https://gongyi.qq.com/) | [腾讯云](https://cloud.tencent.com/?from=txwdibu) | [客服中心](https://kf.qq.com) | [ 举报中心 ](http://szwljb.sz.gov.cn) | [网站导航](https://www.qq.com/map/)
+
+Copyright © 1998 - 2023 Tencent. All Rights Reserved
+
+[腾讯公司](https://www.tencent.com/)[ 版权所有 ](https://www.tencent.com/zh-
+cn/le/copyrightstatement.shtml)
+
