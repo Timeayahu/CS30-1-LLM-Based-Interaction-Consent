@@ -1,9 +1,3 @@
-import sys
-import os
-
-# Add project root (e.g., FlaskProject) to the import path
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
-
 from services.crawler import call_crawler
 from services.split import call_split
 import queue
