@@ -2,6 +2,7 @@ from flask import Flask
 from flask_cors import CORS
 from routes.privacy_routes import privacy_bp
 from routes.crawler_routes import crawler_bp
+from routes.scheduling_routes import scheduling_bp
 
 def create_app():
     app = Flask(__name__)
@@ -10,6 +11,7 @@ def create_app():
     # 注册路由
     app.register_blueprint(privacy_bp)
     app.register_blueprint(crawler_bp)
+    app.register_blueprint(scheduling_bp)
     
     @app.route('/')
     def index():
@@ -19,4 +21,4 @@ def create_app():
 
 if __name__ == '__main__':
     app = create_app()
-    app.run(debug=True)
+    app.run(debug=False, use_reloader=False)
