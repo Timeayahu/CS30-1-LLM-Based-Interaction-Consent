@@ -1,4 +1,3 @@
-
 from .service import CrawlerService
 import os
 from urllib.parse import urlparse
