@@ -8,3 +8,4 @@ beautifulsoup4
 requests
 langchain_text_spliters
 langchain
+webdriver_manager
