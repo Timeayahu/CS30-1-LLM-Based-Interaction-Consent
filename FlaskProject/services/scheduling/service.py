@@ -1,9 +1,10 @@
 from services.crawler import call_crawler
 from services.split import call_split
+from services.classification import call_classification
 import queue
 import threading
-#from flask import jsonify
-from routes.privacy_routes import classification_privacy_service
+from urllib.parse import urlparse
+
 
 
 class Scheduling:
@@ -14,6 +15,7 @@ class Scheduling:
         self.methods = {'Collect': None, 'Use': None, 'Share': None}
         self.result = None
         self.status = None
+        self.company_name = None
         self.result_queue = queue.Queue()
     
     def crawler(self, data):
@@ -22,20 +24,24 @@ class Scheduling:
         self.status = status
         self.html_content = result.get('html', None)
         self.markdown_content = result.get('markdown', None)
+        url = data['url']
+        domain = urlparse(url).netloc
+        company_name = domain.split('.')[0]
+        self.company_name = company_name
 
     def split(self):
         self.sections = call_split.extract_webpage_content(self.html_content)
 
-    def analyse_global(self, data):
+    def analyse_global(self):
         # Replace your real function here
-        self.crawler(data)
-
-        url = self.result.get('url', None)
-        html_content = self.html_content
-        markdown_content = self.markdown_content
-
-        classification_result = classification_privacy_service.generate_classification_content(url, html_content, markdown_content)
-        self.result_queue.put(classification_result)
+        global_processing = call_classification.classify_privacy_global
+        result = global_processing(self.company_name, self.html_content, self.markdown_content)
+        output = ' '
+        if 'error' in result:
+            output = result['error']
+        elif 'classification_content' in result:
+            output = result['classification_content']
+        self.result_queue.put(output)
 
 
     def analyse_sections(self):
@@ -50,7 +56,7 @@ class Scheduling:
         #self.split()
         #self.analyse_()
         global_thread.join()
-        self.result = {'global_result': self.result_queue.get(),
-                       'section_result': None}
+        self.result = {'summary': {'global_result': self.result_queue.get(),
+                       'section_result': None}}
 
         return self.result, self.status
