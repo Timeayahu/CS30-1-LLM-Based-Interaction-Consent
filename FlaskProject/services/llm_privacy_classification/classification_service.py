@@ -13,18 +13,18 @@ class ClassificationPrivacyService:
 
     def generate_classification_content(self, url, html_content, markdown_content):
         try:
-            # Check whether the html is None or doesn't have content
-            if html_content is None or len(html_content) == 0:
-                return {
-                    'success': False,
-                    'error': 'No HTML content.'
-                }
+            errors = []
 
-            # Check whether the markdown is None or doesn't have content
+            if html_content is None or len(html_content) == 0:
+                errors.append('No HTML content.')
+
             if markdown_content is None or len(markdown_content) == 0:
+                errors.append('No Markdown content.')
+
+            if errors:
                 return {
                     'success': False,
-                    'error': 'No Markdown content.'
+                    'error': ', '.join(errors)
                 }
 
             # Get the company name
