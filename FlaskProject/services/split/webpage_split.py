@@ -1,7 +1,7 @@
 import os
-from langchain.chat_models import init_chat_model
+from langchain_community.chat_models import ChatOpenAI as init_chat_model
 from langchain_core.messages import HumanMessage
-from langchain.text_splitter import HTMLHeaderTextSplitter
+from langchain_community.text_splitter import HTMLHeaderTextSplitter
 from collections import Counter
 from .webpage_split_markdown import split_by_markdown
 import html2text
