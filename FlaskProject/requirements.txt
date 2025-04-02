@@ -6,3 +6,5 @@ selenium
 html2text
 beautifulsoup4
 requests
+langchain_text_spliters
+langchain
