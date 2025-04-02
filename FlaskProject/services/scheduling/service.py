@@ -3,6 +3,7 @@ from services.split import call_split
 import queue
 import threading
 #from flask import jsonify
+from routes.privacy_routes import classification_privacy_service
 
 
 class Scheduling:
@@ -25,11 +26,16 @@ class Scheduling:
     def split(self):
         self.sections = call_split.extract_webpage_content(self.html_content)
 
-    def analyse_global(self):
+    def analyse_global(self, data):
         # Replace your real function here
-        global_processing = lambda x: "test for your classification result"
-        result = global_processing(self.markdown_content)
-        self.result_queue.put(result)
+        self.crawler(data)
+
+        url = self.result.get('url', None)
+        html_content = self.html_content
+        markdown_content = self.markdown_content
+
+        classification_result = classification_privacy_service.generate_classification_content(url, html_content, markdown_content)
+        self.result_queue.put(classification_result)
 
 
     def analyse_sections(self):
