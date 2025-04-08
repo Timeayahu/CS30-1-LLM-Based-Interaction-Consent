@@ -3,6 +3,7 @@ import json
 import re
 from dotenv import load_dotenv
 from openai import OpenAI
+from langchain.text_splitter import RecursiveCharacterTextSplitter
 from openai import OpenAI
 from utils import text_processor
 
@@ -15,6 +16,12 @@ class SummaryService:
 
     def summary_privacy_policy(self, privacy_markdown_dict, format):
         results = {}
+        splitter = RecursiveCharacterTextSplitter(
+            chunk_size=3000,
+            chunk_overlap=100,
+            separators=["\n\n", "\n", "。", ". "]
+        )
+
         privacy_issues = [
             "First party collection and use",
             "The storage duration of personal information",
@@ -37,72 +44,61 @@ class SummaryService:
         privacy_prompt = f"""
         You are a professional expert specializing in privacy policies. 
         Your task is to identify and extract relevant information 
-        from the given privacy policy for the following 12 privacy concerns. Multiple categories may apply:
-
-        1. First Party Collection/Use - how and why the information is collected.
-        2. Third Party Sharing/Collection - how the information may be used or collected by third parties.
-        3. User Access/Edit/Deletion - if users can modify their information and how.
-        4. Data Retention - how long the information is stored.
-        5. Data Security - how is users' data secured.
-        6. International/Specific Audiences - practices that target a specific group of users (e.g., children, Europeans, etc.)
-        7. Do Not Track - if and how Do Not Track signals is honored.
-        8. Policy Change - if the service provider will change their policy and how the users are informed.
-        9. User Choice/Control - choices and controls available to users.
-        10. Introductory/Generic - Does it contain general or introductory information about the privacy policy?
-        11. Practice not covered - Does it mention any privacy practices not covered by the above categories?
-        12. Privacy contact information - Does it provide contact information for users to inquire about privacy-related issues?
+        from the given privacy policy for the following 16 privacy concerns and assess the readability.
 
         Provide a detailed summary for each concern, even if it is not explicitly mentioned in the policy. 
         If a concern is not addressed, provide a brief placeholder explanation or context.
 
+        Assessment Criteria:
+        1. Awkward Flow (Logical Coherence): Identify any sentences with unclear connections, abrupt transitions, or inconsistent logic.
+        2. Inappropriate Language (Unprofessional Expressions): Detect any use of informal, vague, or unprofessional terminology.
+        3. Grammar and Spelling Errors: Highlight grammatical mistakes and spelling errors.
+
+        Compute the Readability Score using:
+          Readability Score = 1 - (Number of Problematic Sentences / Total Sentences)
+          (Higher scores indicate better readability.)
+
         The output should strictly follow this format:
         - Company Name: [Extracted from the file name]
+        - Readability: [Readability Score]
         - Privacy Policy:
           - [Privacy Concern1]: [Summary]
           - [Privacy Concern2]: [Summary]
           - ...
         """
 
+        for company_name, markdown_content in privacy_markdown_dict.items():
+            chunks = splitter.split_text(markdown_content)
+            company_summary = {"Company Name": company_name, "Privacy Policy": {}}
+
+            for chunk in chunks:
+                full_prompt = privacy_prompt + f"\n\nCompany Name: {company_name}\n\n{chunk}"
+
+                response = self.client.chat.completions.create(
+                    model="gpt-4o-mini",
+                    messages=[
+                        {"role": "system",
+                         "content": "You are an AI assistant that specializes in privacy policy analysis."},
+                        {"role": "user", "content": full_prompt}
+                    ]
+                )
+                results = response.choices[0].message.content.strip()
+                print(results)
+
+                for issue in privacy_issues:
+                    match = re.search(rf"- {re.escape(issue)}:\s*(.*?)(?=\n- [A-Z]|$)", summary,
+                                      re.DOTALL | re.MULTILINE)
+                    if match:
+                        company_summary["Privacy Policy"][issue] = match.group(1).strip()
+                    else:
+                        company_summary["Privacy Policy"][issue] = "Not mentioned."
+
+            results[company_name] = company_summary
+
         output_dir = "data/summary_result"
         os.makedirs(output_dir, exist_ok=True)
 
-        for company_name, markdown_content in privacy_markdown_dict.items():
-            company_summary = {"Company Name": company_name, "Privacy Policy": {}}
-            full_prompt = privacy_prompt + f"\n\nCompany Name: {company_name}\n\n{markdown_content}"
-
-            response = self.client.chat.completions.create(
-                model="gpt-4o-mini",
-                messages=[
-                    {"role": "system", "content": "You are an AI assistant that specializes in privacy policy analysis."},
-                    {"role": "user", "content": full_prompt}
-                ]
-            )
-
-            full_summary = response.choices[0].message.content.strip()
-            print(full_summary)
-
-            '''for issue in privacy_issues:
-                pattern = rf"(?i){re.escape(issue)}[\s:：\-*•]*\s*(.*?)(?=\n\s*(?:-|\*|•|\d+\.|[A-Z][a-z]*)|$)"
-                match = re.search(pattern, full_summary, re.DOTALL)
-
-                if match:
-                    company_summary["Privacy Policy"][issue] = match.group(1).strip()
-                else:
-                    company_summary["Privacy Policy"][issue] = "Not mentioned."
-
-            results[company_name] = company_summary'''
-            lines = full_summary.split("\n")
-            privacy_policy = {}
-            for line in lines[2:]:
-                if ": " in line:
-                    issue, summary = line.split(": ", 1)
-                    privacy_policy[issue.strip()] = summary.strip()
-
-            company_summary["Privacy Policy"] = privacy_policy
-            results[company_name] = company_summary
-
-        #output_filename = os.path.join(output_dir, "summary.json")
-        output_filename = os.path.join(output_dir, f"{company_name}_privacy_summary.json")
+        output_filename = os.path.join(output_dir, "summary_results.json")
         with open(output_filename, "w", encoding="utf-8") as json_file:
             json.dump(results, json_file, ensure_ascii=False, indent=4)
 
