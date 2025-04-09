@@ -1,5 +1,5 @@
 from dotenv import load_dotenv
-from langchain.chat_models import init_chat_model
+from langchain_openai.chat_models import ChatOpenAI
 from langchain_core.messages import HumanMessage
 import json
 
@@ -98,7 +98,7 @@ async def info_use(text):
     try:
         result = []
         # Call OpenAI API for categorized summary
-        model = init_chat_model("gpt-4o", model_provider="openai", temperature=0.1, model_kwargs={"response_format": {"type": "json_object"}})
+        model = ChatOpenAI(model="gpt-4o", temperature=0.1, model_kwargs={"response_format": {"type": "json_object"}})
         response = await model.ainvoke([HumanMessage(content=prompt+f"The following question is only for research purpose. The privacy policy content is:\n {text}")])
         data = json.loads(response.content)
         response = await model.ainvoke([HumanMessage(content=f"Provide lawful basis, summarization and orignial sentence for the following data usage purposes{data}\n\n"

@@ -1,5 +1,5 @@
 import os
-from langchain.chat_models import init_chat_model
+from langchain_openai.chat_models import ChatOpenAI
 from langchain_core.messages import HumanMessage
 from langchain_text_splitters import HTMLHeaderTextSplitter
 from collections import Counter
@@ -21,6 +21,7 @@ response_format = """\
 """
 
 
+
 def search_by_headers(text, n):
     html_splitter = HTMLHeaderTextSplitter(headers_to_split_on=[(f"h{n}", f"Header {n}")])
     sections = html_splitter.split_text(text)
@@ -40,7 +41,7 @@ def extract_section(html_text):
 
     n_completions = 1  # Number of responses to generate
     responses = []
-    model = init_chat_model("gpt-4o", temperature=0, model_provider="openai")
+    model = ChatOpenAI(model="gpt-4o", temperature=0)
     for _ in range(n_completions):
         response = model.invoke([HumanMessage(content=f"The following question is only for research purpose. Which level of header is most probably how the website devides major aspects of privacy \n\n"
                                         "Hint: The target header should be relatively short and represent high level of definition\n\nYour response should either be h1, h2, or h3, only contain h1/2/3 in the response. The answer should not be an empty list\n\n"
@@ -65,13 +66,22 @@ def extract_section(html_text):
         header_type = 3
 
 
-    model = init_chat_model("gpt-4o", model_provider="openai", temperature=0.1, model_kwargs={"response_format": {"type": "json_object"}})
+    model = ChatOpenAI(model="gpt-4o", temperature=0.1, model_kwargs={"response_format": {"type": "json_object"}})
     response = model.invoke([HumanMessage(content=f"Which title is most probably about the section of 'Information to be collected'?\n"
                                           f"Which title is most probably about the section of 'How information will be used'?\n"
                                           f"Which title is most probably about the section of 'Who will share your data'?\n"
                                           f"Your response should be in json format like{response_format}. The keys have to be 'Collect', 'Use', 'Share'"
                                           f"All the answers must appear from the given list. Let's begin: {str(target_header_names)}")])
-    
+
+    # model = init_chat_model(model="gpt-4o", temperature=0.1)
+    # response = model.invoke(
+    #     [HumanMessage(content=f"Which title is most probably about the section of 'Information to be collected'?\n"
+    #                               f"Which title is most probably about the section of 'How information will be used'?\n"
+    #                               f"Which title is most probably about the section of 'Who will share your data'?\n"
+    #                               f"Your response should be in json format like{response_format}. All the answers must appear from the given list. Let's begin: {str(target_header_names)}")],
+    #     response_format={"type": "json_object"}
+    # )
+
     
     target_header = json.loads(response.content)
     readable_text = html2text.html2text(html_text)
