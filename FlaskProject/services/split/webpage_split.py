@@ -1,5 +1,5 @@
 import os
-from langchain_openai import ChatOpenAI as init_chat_model
+from langchain.chat_models import init_chat_model
 from langchain_core.messages import HumanMessage
 from langchain_text_splitters import HTMLHeaderTextSplitter
 from collections import Counter
@@ -19,10 +19,6 @@ response_format = """\
  'Use': 'How we will use your data',
  'Share': 'Who will share your data'}
 """
-
-
-model = init_chat_model("gpt-4o-mini", model_provider="openai")
-
 
 
 def search_by_headers(text, n):
@@ -73,7 +69,8 @@ def extract_section(html_text):
     response = model.invoke([HumanMessage(content=f"Which title is most probably about the section of 'Information to be collected'?\n"
                                           f"Which title is most probably about the section of 'How information will be used'?\n"
                                           f"Which title is most probably about the section of 'Who will share your data'?\n"
-                                          f"Your response should be in json format like{response_format}. All the answers must appear from the given list. Let's begin: {str(target_header_names)}")])
+                                          f"Your response should be in json format like{response_format}. The keys have to be 'Collect', 'Use', 'Share'"
+                                          f"All the answers must appear from the given list. Let's begin: {str(target_header_names)}")])
     
     
     target_header = json.loads(response.content)

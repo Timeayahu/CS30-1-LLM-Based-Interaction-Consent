@@ -7,7 +7,6 @@ scheduling_service = Scheduling()
 @scheduling_bp.route('/api/scheduling', methods=['POST'])
 def schedule_traffic():
     data = request.get_json()
-    scheduling_service.crawler(data)
-    result, status = scheduling_service.schedule()
+    result, status = scheduling_service.schedule(data)
 
     return jsonify(result), status 
