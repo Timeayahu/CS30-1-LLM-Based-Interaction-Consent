@@ -9,7 +9,7 @@
 
 2. **常用命令**
    **镜像 & 容器管理命令**
-   命令	用法
+   
    docker build -t myimage .	手动根据 Dockerfile 构建镜像（开发阶段一般用 docker-compose）
    docker images	查看已有镜像
    docker rmi <镜像ID>	删除镜像
@@ -18,13 +18,20 @@
    
    
    **docker-compose 常用命令**
-   命令	用法
+   
    docker-compose up	启动容器（如果镜像不存在，会自动 build）
    docker-compose up --build	重新构建镜像并启动（代码改了必须用这个）
    docker-compose down	停止并移除容器（保留镜像和卷）
    docker-compose down --volumes	同时清除数据卷（慎用，数据库也会被清）
    docker-compose down --rmi all	清除所有容器 + 镜像
    docker-compose logs -f	实时查看服务输出日志（调试用）
+
+   **写完代码后常用命令：**
+   每次写完新代码在push前使用
+   1. docker-compose down    # 停止并移除旧容器（可选）
+   2. docker-compose up --build  # 重新构建并启动新容器
+
+
 
 ### 方法二：直接使用Python
 
