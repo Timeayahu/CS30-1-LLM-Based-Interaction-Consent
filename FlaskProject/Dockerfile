@@ -59,4 +59,5 @@ ENV PYTHONPATH=/app
 EXPOSE 5000
 
 # 启动应用
-CMD ["python", "app.py"] 
+ENV FLASK_ENV=development
+CMD ["python", "app.py"]

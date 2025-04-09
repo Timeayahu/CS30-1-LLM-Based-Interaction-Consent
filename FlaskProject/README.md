@@ -13,13 +13,22 @@
    输入docker ps查看容器是否正常启动
    如果正常启动，那么打开浏览器输入网址：http://localhost:5000应该会弹出一个页面显示：欢迎使用隐私政策爬取和分析系统，API文档请访问/api/docs
 
-   容器构建一次即可。后续只需要docker-compose start就可以重新启动。
-   
+   容器构建一次即可。后续只需要docker-compose up -d就可以重新启动。
 
-   **写完代码后常用命令：**
-   每次写完新代码在push前使用
-   1. docker-compose down    # 停止并移除旧容器（可选）
-   2. docker-compose up --build  # 重新构建并启动新容器
+
+   **开发中常用命令：**
+   第一次构建启动：docker-compose up --build -d
+
+   日常开发（已构建过）：docker-compose up -d
+
+   修改代码：无需重启，因为自动从本地同步到容器
+
+   修改requirement/dockerfile等配置文件：docker-compose down（服务下线）+ docker-compose up --build -d
+
+   暂时关闭/下线：docker-compose down/ docker-compose stop
+
+   查看日志：docker-compose logs -f
+
 
 
 2. **常用命令**
