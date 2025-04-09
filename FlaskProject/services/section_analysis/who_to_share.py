@@ -114,7 +114,8 @@ async def info_share(text):
                                         "- If you can not find any matching type for a third party, then mark it as consent\n"
                                         "- If the name of a third party is longer than 4, you should summarize it to <=4\n"
                                         f"- The output format should be a json object like: {response_format}, and you should only include the original text from the document in 'original sentence' attribute\n"
-                                        "- The key of the output should be the name of the mentioned third party\n\n"
+                                        "- In the summary attribute, You need to introduce each third party in detail, including any mentioned examples or activities\n"
+                                        "- The key of the output should be the name of the mentioned third party, and its length is strictly limited to 4 words in English\n\n"
                                         f"Let's begin: The text of the privacy policy is {text}")])
         summary = json.loads(response.content)
         for key in summary.keys():

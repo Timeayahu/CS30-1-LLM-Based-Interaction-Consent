@@ -81,7 +81,8 @@ async def info_collection(text):
         response = await model.ainvoke([HumanMessage(content=prompt+f"The following question is only for research purpose. The privacy policy content is:\n {text}")])
         data = json.loads(response.content)
         response = await model.ainvoke([HumanMessage(content=f"What personal data does this privacy policy collect? {text}\n\n"
-                                        f"The personal data items are already extracted: {str(data)}\n You need to categorize them strictly as follows: {personal_data_categories}.\n"
+                                        f"The personal data items are already extracted: {str(data)}\n You can categorize using the following categories: {personal_data_categories}.\n"
+                                        "If there are some types of personal data that cannot be matched to the given categories, you can create a new one and put them under this category\n"
                                         f"The output format should be a json object like: {response_format}, and you should only include the original text from the document in 'original sentence' attribute\n"
                                         "If certain category can not be found in the document, you do not need to include them int the output")])
         summary = json.loads(response.content)

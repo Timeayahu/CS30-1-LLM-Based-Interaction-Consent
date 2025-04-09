@@ -105,8 +105,9 @@ async def info_use(text):
                                          "Guidelines:\n"     
                                         f"- You can only choose from the following lawful basis: {personal_data_processing_purposes}.\n"
                                         "- If you can not find any matching basis for a purpose, then mark it as consent\n"
-                                        "- If the name of a purpose is longer than 4, you should summarize it to <=4\n"
-                                        f"- The output format should be a json object like: {response_format}, and you should only include the original text from the document in 'original sentence' attribute\n\n"
+                                        "- If the name of a purpose is longer than 4 words, you should summarize it to <= 4 words\n"
+                                        f"- The output format should be a json object like: {response_format}, and you should only include the original text from the document in 'original sentence' attribute\n"
+                                        "- In the 'explanation' attribute, You need to introduce each purpose in detail, including any mentioned examples or activities\n\n"
                                         f"Let's begin: The text of the privacy policy is {text}")])
         summary = json.loads(response.content)
         for key in summary.keys():
