@@ -59,7 +59,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
           .then(res => res.text())
           .then(pageText => {
             // Call backend API for summarization
-            return fetch('http://localhost:5000/summarize', {
+            return fetch('http://localhost:5000/api/scheduling', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',

@@ -200,7 +200,7 @@ function createPopup() {
     opacity: '0',
     transition: 'opacity 0.3s ease, transform 0.3s ease',
     color: '#333',  // Darker text color
-    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif'  // Modern font stack
+    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif'
   });
   
   // Insert overlay + container into the document
