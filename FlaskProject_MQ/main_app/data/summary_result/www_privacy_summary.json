@@ -1,0 +1,19 @@
+{
+    "www": {
+        "Company Name": "www",
+        "Privacy Policy": {
+            "- First Party Collection/Use": "Apple collects personal data for various purposes, including powering services, processing transactions, communicating with users, security and fraud prevention, and complying with laws. The personal data collected includes account details, device information, contact data, payment information, transaction history, usage data, location information, health data, and more.",
+            "- Third Party Sharing/Collection": "Apple may share personal data with affiliated companies, service providers, partners, and others at the user's direction. They explicitly state that they do not sell personal data or share it with third parties for marketing purposes.",
+            "- User Access/Edit/Deletion": "Users have rights to know, access, correct, transfer, restrict processing of, and delete their personal data. To exercise these rights, users can visit the Apple Data and Privacy page and must verify their identity.",
+            "- Data Retention": "Apple retains personal data only for as long as necessary to fulfill the purposes for which it was collected or required by law, minimizing retention times when possible.",
+            "- Data Security": "Apple employs administrative, technical, and physical safeguards to protect user personal data against unauthorized access, maintaining high security standards.",
+            "- International/Specific Audiences": "Apple has specific practices for children under 13 and adheres to international privacy laws, ensuring compliance with data transfer regulations, like Standard Contractual Clauses for European users.",
+            "- Do Not Track": "The policy does not assert a clear commitment to honoring Do Not Track signals; it mainly focuses on user choices regarding personalized advertising.",
+            "- Policy Change": "Apple commits to informing users of material changes to its privacy policy at least a week in advance and will contact users directly if they have their data on file.",
+            "- User Choice/Control": "Users have the option to manage their privacy settings, including opting out of personalized advertisements and controlling cookie settings through their device settings.",
+            "- Introductory/Generic": "The policy starts with a generic introduction explaining Apple's commitment to user privacy and a brief overview of what the policy entails.",
+            "- Practice not covered": "The policy covers various practices but does not explicitly mention any unusual or specific privacy practices that fall outside of the outlined categories.",
+            "- Privacy contact information": "Apple provides clear contact information for users to reach out with privacy inquiries or complaints, including a dedicated Data Protection Officer and a support number."
+        }
+    }
+}
