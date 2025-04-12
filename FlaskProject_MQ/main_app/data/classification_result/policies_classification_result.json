@@ -1,0 +1,44 @@
+{
+    "First Party Collection/Use": [
+        "We collect information to provide better services to all our users...",
+        "We collect information about the apps, browsers, and devices you use to access Google services...",
+        "We use your information to deliver our services...",
+        "We use your information to ensure our services are working as intended...",
+        "We use the information we collect for the following purposes: Provide our services, Maintain & improve our services, Develop new services, Provide personalized services, including content and ads..."
+    ],
+    "Third Party Sharing/Collection": [
+        "We share non-personally identifiable information publicly and with our partners...",
+        "We do not share your personal information with companies, organizations, or individuals outside of Google except in the following cases: With your consent, With domain administrators, For external processing, For legal reasons..."
+    ],
+    "User Access/Edit/Deletion": [
+        "When you’re signed in, you can always review and update information by visiting the services you use...",
+        "You can export a copy of content in your Google Account if you want to back it up or use it with a service outside of Google...",
+        "To delete your information, you can: Delete your content from specific Google services, Search for and then delete specific items from your account using My Activity, Delete specific Google products, including your information associated with those products, Delete your entire Google Account..."
+    ],
+    "Data Retention": [
+        "We retain the data we collect for different periods of time depending on what it is, how we use it...",
+        "Other data is deleted or anonymized automatically after a set period of time, such as advertising data in server logs."
+    ],
+    "Data Security": [
+        "We build security into our services to protect your information...",
+        "We use encryption to keep your data private while in transit..."
+    ],
+    "International/Specific Audiences": [
+        "If you’re a user in the EU, the decisions you make on linking services will affect how certain Google services can use the data across our services."
+    ],
+    "Do Not Track": [],
+    "Policy Change": [
+        "We change this Privacy Policy from time to time. We will not reduce your rights under this Privacy Policy without your explicit consent..."
+    ],
+    "User Choice/Control": [
+        "You have choices regarding the information we collect and how it's used...",
+        "Manage your preferences about the ads shown to you on Google and on sites and apps that partner with Google..."
+    ],
+    "Introductory/Generic": [
+        "This Privacy Policy is meant to help you understand what information we collect, why we collect it, and how you can update, manage, export, and delete your information."
+    ],
+    "Practice not covered": [],
+    "Privacy contact information": [
+        "If you have any questions about this Privacy Policy, you can contact us."
+    ]
+}
