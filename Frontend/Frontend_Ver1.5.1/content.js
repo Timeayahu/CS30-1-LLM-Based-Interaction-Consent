@@ -542,42 +542,42 @@ function updatePopup(popup, isLoading, text, isError) {
           category.data.forEach((item, itemIndex) => {
             const bubble = document.createElement('div');
             
-            // 根据重要性级别确定气泡颜色
+            // Determine bubble color based on importance level
             let bubbleColor = '';
             let bubbleShadow = '';
             
-            // 检查是否存在importance属性，并设置相应的颜色
+            // Check if importance attribute exists and set corresponding color
             if (item.importance !== undefined) {
-              // 重要性分级：5-非常重要(红色)、4-重要(橙色)、3-中等(黄色)、2-较低(浅绿)、1-低(绿色)、0-未知(灰色)
+              // Importance levels: 5-Very Important(Red), 4-Important(Orange), 3-Medium(Yellow), 2-Low(Light Green), 1-Very Low(Green), 0-Unknown(Gray)
               switch(item.importance) {
-                case 5: // 非常重要 - 红色
+                case 5: // Very Important - Red
                   bubbleColor = 'linear-gradient(135deg, #d32f2f, #f44336)';
                   bubbleShadow = '0 3px 8px rgba(244, 67, 54, 0.3)';
                   break;
-                case 4: // 重要 - 橙色
+                case 4: // Important - Orange
                   bubbleColor = 'linear-gradient(135deg, #e64a19, #ff5722)';
                   bubbleShadow = '0 3px 8px rgba(255, 87, 34, 0.3)';
                   break;
-                case 3: // 中等 - 黄色
+                case 3: // Medium - Yellow
                   bubbleColor = 'linear-gradient(135deg, #ffa000, #ffc107)';
                   bubbleShadow = '0 3px 8px rgba(255, 193, 7, 0.3)';
                   break;
-                case 2: // 较低 - 浅绿色
+                case 2: // Low - Light Green
                   bubbleColor = 'linear-gradient(135deg, #7cb342, #8bc34a)';
                   bubbleShadow = '0 3px 8px rgba(139, 195, 74, 0.3)';
                   break;
-                case 1: // 低 - 绿色
+                case 1: // Very Low - Green
                   bubbleColor = 'linear-gradient(135deg, #388e3c, #4caf50)';
                   bubbleShadow = '0 3px 8px rgba(76, 175, 80, 0.3)';
                   break;
-                case 0: // 未知 - 灰色
+                case 0: // Unknown - Gray
                 default:
                   bubbleColor = 'linear-gradient(135deg, #757575, #9e9e9e)';
                   bubbleShadow = '0 3px 8px rgba(158, 158, 158, 0.3)';
                   break;
               }
             } else {
-              // 默认颜色 - 蓝色
+              // Default color - Blue
               bubbleColor = 'linear-gradient(135deg, #1976d2, #2196f3)';
               bubbleShadow = '0 3px 8px rgba(33, 150, 243, 0.3)';
             }
@@ -605,7 +605,7 @@ function updatePopup(popup, isLoading, text, isError) {
             
             bubble.innerText = item.keyword;
             
-            // 添加关键帧动画
+            // Add keyframe animation
             if (!document.querySelector('style#bubble-animations')) {
               const styleSheet = document.createElement('style');
               styleSheet.id = 'bubble-animations';
@@ -618,57 +618,57 @@ function updatePopup(popup, isLoading, text, isError) {
               document.head.appendChild(styleSheet);
             }
             
-            // 监听动画结束，移除动画属性以便悬停效果可以正常工作
+            // Listen for animation end, remove animation properties to allow hover effect
             bubble.addEventListener('animationend', function() {
               this.style.opacity = '1';
               this.style.transform = 'translateY(0)';
               this.style.animationName = '';
             });
             
-            // 根据重要性级别调整鼠标悬停效果
+            // Adjust mouse hover effect based on importance level
             bubble.addEventListener('mouseover', function() {
-              // 确保没有动画进行中
+              // Ensure no animation is in progress
               this.style.animationName = '';
               this.style.transform = 'translateY(-5px) scale(1.03)';
               
-              // 根据原始颜色类型增强阴影效果和稍微调暗颜色
+              // Enhance shadow effect and slightly darken color based on original color type
               if (item.importance !== undefined) {
                 switch(item.importance) {
-                  case 5: // 非常重要 - 红色
+                  case 5: // Very Important - Red
                     this.style.boxShadow = '0 5px 12px rgba(244, 67, 54, 0.4)';
                     this.style.background = 'linear-gradient(135deg, #c62828, #e53935)';
                     break;
-                  case 4: // 重要 - 橙色
+                  case 4: // Important - Orange
                     this.style.boxShadow = '0 5px 12px rgba(255, 87, 34, 0.4)';
                     this.style.background = 'linear-gradient(135deg, #d84315, #f4511e)';
                     break;
-                  case 3: // 中等 - 黄色
+                  case 3: // Medium - Yellow
                     this.style.boxShadow = '0 5px 12px rgba(255, 193, 7, 0.4)';
                     this.style.background = 'linear-gradient(135deg, #ff8f00, #ffb300)';
                     break;
-                  case 2: // 较低 - 浅绿色
+                  case 2: // Low - Light Green
                     this.style.boxShadow = '0 5px 12px rgba(139, 195, 74, 0.4)';
                     this.style.background = 'linear-gradient(135deg, #689f38, #7cb342)';
                     break;
-                  case 1: // 低 - 绿色
+                  case 1: // Very Low - Green
                     this.style.boxShadow = '0 5px 12px rgba(76, 175, 80, 0.4)';
                     this.style.background = 'linear-gradient(135deg, #2e7d32, #388e3c)';
                     break;
-                  case 0: // 未知 - 灰色
+                  case 0: // Unknown - Gray
                   default:
                     this.style.boxShadow = '0 5px 12px rgba(158, 158, 158, 0.4)';
                     this.style.background = 'linear-gradient(135deg, #616161, #757575)';
                     break;
                 }
               } else {
-                // 默认蓝色悬停效果
+                // Default blue hover effect
                 this.style.boxShadow = '0 5px 12px rgba(33, 150, 243, 0.4)';
                 this.style.background = 'linear-gradient(135deg, #1565c0, #1e88e5)';
               }
             });
             
             bubble.addEventListener('mouseout', function() {
-              // 恢复到初始状态
+              // Restore to initial state
               this.style.animationName = '';
               this.style.transform = 'translateY(0) scale(1)';
               this.style.boxShadow = bubbleShadow;
@@ -677,41 +677,41 @@ function updatePopup(popup, isLoading, text, isError) {
             
             // Click bubble to show summary
             bubble.addEventListener('click', () => {
-              // 如果已有展开的弹出框，先关闭它
+              // If there is an expanded popup, close it first
               if (currentExpandedSummary) {
-                // 获取当前弹出框的关闭按钮并触发点击事件
+                // Get the close button of current popup and trigger click event
                 const closeBtn = currentExpandedSummary.querySelector('div[role="button"], div.close-btn');
                 if (closeBtn) {
                   closeBtn.click();
                 } else {
-                  // 如果找不到关闭按钮，直接移除当前弹出框
+                  // If close button not found, directly remove current popup
                   currentExpandedSummary.remove();
                   
-                  // 重置跟踪变量
+                  // Reset tracking variable
                   currentExpandedSummary = null;
                 }
                 
-                // 给一点时间让前一个弹出框关闭动画完成
+                // Give some time for previous popup closing animation to complete
                 setTimeout(() => {
                   showExpandedSummary();
                 }, 300);
                 return;
               }
               
-              // 没有已展开的弹出框，直接创建新的
+              // No expanded popup, create new one directly
               showExpandedSummary();
               
-              // 展示展开的摘要
+              // Show expanded summary
               function showExpandedSummary() {
-                // 获取当前气泡的位置和尺寸
+                // Get current bubble position and size
                 const bubbleRect = bubble.getBoundingClientRect();
                 const categoryRect = categoryDiv.getBoundingClientRect();
                 
-                // 计算气泡在类别容器内的相对位置
+                // Calculate bubble position relative to category container
                 const relativeLeft = bubbleRect.left - categoryRect.left;
                 const relativeTop = bubbleRect.top - categoryRect.top;
                 
-                // 创建展开的摘要框
+                // Create expanded summary box
                 const expandedSummary = document.createElement('div');
                 expandedSummary.className = 'expanded-summary';
                 Object.assign(expandedSummary.style, {
@@ -739,19 +739,19 @@ function updatePopup(popup, isLoading, text, isError) {
                   fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
                 });
                 
-                // 将展开的摘要框添加到气泡容器中
+                // Add expanded summary box to bubble container
                 bubbleContainer.appendChild(expandedSummary);
                 
-                // 设置全局变量跟踪当前展开的弹出框
+                // Set global variable to track current expanded popup
                 currentExpandedSummary = expandedSummary;
                 
-                // 隐藏原始气泡
+                // Hide original bubble
                 bubble.style.opacity = '0';
                 
-                // 计算展开后的尺寸
+                // Calculate expanded size
                 const expandedWidth = categoryDiv.clientWidth - 30;
                 
-                // 创建临时内容元素以计算所需高度
+                // Create temporary content element to calculate required height
                 const tempContent = document.createElement('div');
                 tempContent.style.position = 'absolute';
                 tempContent.style.visibility = 'hidden';
@@ -760,7 +760,7 @@ function updatePopup(popup, isLoading, text, isError) {
                 tempContent.style.fontFamily = "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
                 tempContent.style.boxSizing = 'border-box';
                 
-                // 添加标题和内容
+                // Add title and content
                 const tempTitle = document.createElement('h4');
                 tempTitle.innerText = item.keyword;
                 tempTitle.style.margin = '0 0 12px 0';
@@ -795,53 +795,53 @@ function updatePopup(popup, isLoading, text, isError) {
                 tempLink.style.fontSize = '0.9rem';
                 tempLink.style.border = '1px solid #ccc';
                 
-                // 添加关闭按钮占位
+                // Add close button placeholder
                 const tempCloseBtn = document.createElement('div');
                 tempCloseBtn.style.height = '24px';
                 tempCloseBtn.style.marginBottom = '10px';
                 
-                // 添加所有元素到临时容器
+                // Add all elements to temporary container
                 tempContent.appendChild(tempCloseBtn);
                 tempContent.appendChild(tempTitle);
                 tempContent.appendChild(tempText);
                 tempContent.appendChild(tempLink);
                 document.body.appendChild(tempContent);
                 
-                // 更精确地计算内容所需高度
+                // Calculate content height more precisely
                 const titleHeight = tempTitle.offsetHeight;
                 const textHeight = tempText.offsetHeight;
                 const linkHeight = tempLink.offsetHeight;
                 const closeBtnHeight = tempCloseBtn.offsetHeight;
-                const totalPadding = 40; // 上下各20px的padding
-                const margins = 15 + 10 + 10; // 标题下方12px + 文本下方15px + 链接下方10px的间距
+                const totalPadding = 40; // 20px padding for top and bottom each
+                const margins = 15 + 10 + 10; // Margins: 12px below title + 15px below text + 10px below link
                 
-                // 精确计算所需总高度
+                // Calculate exact required height
                 const exactContentHeight = titleHeight + textHeight + linkHeight + closeBtnHeight + margins + totalPadding;
                 document.body.removeChild(tempContent);
                 
-                // 设置最小和最大高度限制
-                const minHeight = 170; // 基本显示所需的最小高度
-                const maxHeight = Math.min(500, window.innerHeight * 0.7); // 最大高度限制
+                // Set minimum and maximum height limits
+                const minHeight = 170; // Basic minimum height required for display
+                const maxHeight = Math.min(500, window.innerHeight * 0.7); // Maximum height limit
                 
-                // 根据内容长度确定最终高度，添加5px缓冲区确保内容完全显示
+                // Determine final height based on content length, add 5px buffer to ensure content is fully displayed
                 const dynamicHeight = Math.max(minHeight, Math.min(exactContentHeight + 5, maxHeight));
                 
-                // 记录类别容器的原始高度和样式
+                // Record original height and style of category container
                 const originalHeight = categoryDiv.style.height;
                 const originalMinHeight = categoryDiv.style.minHeight;
                 
-                // 设置展开动画
+                // Set expansion animation
                 setTimeout(() => {
-                  // 计算展开后的位置，确保不会超出容器边界
+                  // Calculate expanded position to ensure it doesn't exceed container boundaries
                   let finalLeft = relativeLeft;
                   
-                  // 如果气泡不在最左边，调整位置以避免超出右边界
+                  // If bubble is not at leftmost position, adjust position to avoid right boundary overflow
                   if (relativeLeft + expandedWidth > categoryDiv.clientWidth - 15) {
-                    // 将展开框向左移动，使其右边缘与容器右边缘对齐（留出15px边距）
+                    // Move expanded box left to align its right edge with container right edge (15px margin)
                     finalLeft = categoryDiv.clientWidth - expandedWidth - 15;
                   }
                   
-                  // 展开摘要框
+                  // Expand summary box
                   expandedSummary.style.width = `${expandedWidth}px`;
                   expandedSummary.style.height = `${dynamicHeight}px`;
                   expandedSummary.style.left = `${finalLeft}px`;
@@ -851,43 +851,43 @@ function updatePopup(popup, isLoading, text, isError) {
                   expandedSummary.style.justifyContent = 'flex-start';
                   expandedSummary.style.overflow = 'auto';
                   
-                  // 获取气泡的颜色，用于边框
+                  // Get bubble color for border
                   const bubbleColor = bubble.style.background;
                   let borderColor = '';
                   
-                  // 提取渐变颜色的第二个颜色值用于边框
+                  // Extract second color value from gradient for border
                   if (bubbleColor.includes('linear-gradient')) {
                     const colorMatch = bubbleColor.match(/,\s*([^)]+)\)/);
                     if (colorMatch && colorMatch[1]) {
                       borderColor = colorMatch[1].trim();
                     } else {
-                      borderColor = '#1976d2'; // 默认蓝色
+                      borderColor = '#1976d2'; // Default blue
                     }
                   } else {
                     borderColor = bubbleColor;
                   }
                   
-                  // 设置背景为白色，添加与重要性相关的边框颜色
+                  // Set white background and add border color based on importance
                   expandedSummary.style.background = '#fff';
                   expandedSummary.style.border = `2px solid ${borderColor}`;
                   expandedSummary.style.color = '#333';
                   expandedSummary.style.boxShadow = `0 10px 30px rgba(0, 0, 0, 0.2)`;
                   
-                  // 计算展开后摘要框的底部位置（相对于类别容器）
-                  const summaryBottom = relativeTop + dynamicHeight + 20; // 加上底部边距
+                  // Calculate bottom position of expanded summary box (relative to category container)
+                  const summaryBottom = relativeTop + dynamicHeight + 20; // Add bottom margin
                   
-                  // 检查是否会超出类别容器的底部
+                  // Check if it will exceed category container bottom
                   if (summaryBottom > categoryDiv.clientHeight) {
-                    // 计算需要额外增加的高度
-                    const extraHeight = summaryBottom - categoryDiv.clientHeight + 20; // 额外边距
+                    // Calculate additional height needed
+                    const extraHeight = summaryBottom - categoryDiv.clientHeight + 20; // Extra margin
                     
-                    // 设置类别容器的新高度
+                    // Set new height for category container
                     categoryDiv.style.transition = 'height 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
                     categoryDiv.style.height = 'auto';
                     categoryDiv.style.minHeight = `${categoryDiv.clientHeight + extraHeight}px`;
                   }
                   
-                  // 添加关闭按钮
+                  // Add close button
                   const closeBtn = document.createElement('div');
                   closeBtn.innerHTML = '×';
                   closeBtn.className = 'close-btn';
@@ -901,7 +901,7 @@ function updatePopup(popup, isLoading, text, isError) {
                     height: '24px',
                     borderRadius: '50%',
                     backgroundColor: 'rgba(25, 118, 210, 0.1)',
-                    color: borderColor, // 使用与边框相同的颜色
+                    color: borderColor, // Use same color as border
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -920,11 +920,11 @@ function updatePopup(popup, isLoading, text, isError) {
                     closeBtn.style.backgroundColor = 'rgba(25, 118, 210, 0.1)';
                   });
                   
-                  // 添加关闭功能
+                  // Add close functionality
                   closeBtn.addEventListener('click', (e) => {
                     e.stopPropagation();
                     
-                    // 收起摘要框
+                    // Collapse summary box
                     expandedSummary.classList.add('collapsing');
                     expandedSummary.style.width = `${bubbleRect.width}px`;
                     expandedSummary.style.height = `${bubbleRect.height}px`;
@@ -936,15 +936,15 @@ function updatePopup(popup, isLoading, text, isError) {
                     expandedSummary.style.overflow = 'hidden';
                     expandedSummary.style.opacity = '0';
                     
-                    // 恢复类别容器的原始高度和样式
+                    // Restore original height and style of category container
                     categoryDiv.style.transition = 'height 0.5s cubic-bezier(0.4, 0, 0.2, 1), min-height 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
                     categoryDiv.style.height = originalHeight;
                     categoryDiv.style.minHeight = originalMinHeight;
                     
-                    // 显示原始气泡
+                    // Show original bubble
                     bubble.style.opacity = '1';
                     
-                    // 移除展开的摘要框并清除引用
+                    // Remove expanded summary box and clear reference
                     setTimeout(() => {
                       expandedSummary.remove();
                       if (currentExpandedSummary === expandedSummary) {
@@ -955,17 +955,17 @@ function updatePopup(popup, isLoading, text, isError) {
                   
                   expandedSummary.appendChild(closeBtn);
                   
-                  // 添加摘要内容
+                  // Add summary content
                   const summaryContent = document.createElement('div');
                   Object.assign(summaryContent.style, {
                     width: '100%',
                     height: '100%',
                     overflow: 'auto',
                     paddingRight: '10px',
-                    textAlign: 'left' // 确保内容靠左排列
+                    textAlign: 'left' // Ensure content aligns to left
                   });
                   
-                  // 创建摘要标题
+                  // Create summary title
                   const summaryTitle = document.createElement('h4');
                   summaryTitle.innerText = item.keyword;
                   Object.assign(summaryTitle.style, {
@@ -982,7 +982,7 @@ function updatePopup(popup, isLoading, text, isError) {
                     fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
                   });
                   
-                  // 添加标题下划线，与摘要页面风格统一
+                  // Add title underline to match summary page style
                   const titleUnderline = document.createElement('div');
                   Object.assign(titleUnderline.style, {
                     position: 'absolute',
@@ -990,14 +990,14 @@ function updatePopup(popup, isLoading, text, isError) {
                     left: '0',
                     width: '40px',
                     height: '2px',
-                    backgroundColor: borderColor, // 使用与边框相同的颜色
+                    backgroundColor: borderColor, // Use same color as border
                     borderRadius: '2px'
                   });
                   summaryTitle.appendChild(titleUnderline);
                   
                   summaryContent.appendChild(summaryTitle);
                   
-                  // 创建摘要内容
+                  // Create summary content
                   const summaryText = document.createElement('div');
                   summaryText.innerText = item.summary;
                   Object.assign(summaryText.style, {
@@ -1012,21 +1012,21 @@ function updatePopup(popup, isLoading, text, isError) {
                     transition: 'opacity 0.3s ease, transform 0.3s ease',
                     transitionDelay: '0.1s',
                     fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
-                    fontWeight: '300' // 设置为细字体
+                    fontWeight: '300' // Set thin font
                   });
                   summaryContent.appendChild(summaryText);
                   
-                  // 创建原始文本链接
+                  // Create original text link
                   const contextLink = document.createElement('a');
                   contextLink.innerText = "View Original Text";
                   contextLink.href = "#";
                   Object.assign(contextLink.style, {
-                    color: borderColor, // 使用与边框相同的颜色
+                    color: borderColor, // Use same color as border
                     textDecoration: 'none',
                     fontSize: '0.9rem',
                     display: 'inline-block',
                     padding: '6px 12px',  
-                    margin: '0 0 10px 0', // 确保底部有足够的间距
+                    margin: '0 0 10px 0', // Ensure sufficient bottom margin
                     backgroundColor: `rgba(${hexToRgb(borderColor)}, 0.1)`,
                     border: `1px solid ${borderColor}`,
                     borderRadius: '4px',
@@ -1037,7 +1037,7 @@ function updatePopup(popup, isLoading, text, isError) {
                     transitionDelay: '0.2s'
                   });
                   
-                  // 添加悬停效果
+                  // Add hover effect
                   contextLink.addEventListener('mouseover', () => {
                     contextLink.style.backgroundColor = `rgba(${hexToRgb(borderColor)}, 0.2)`;
                   });
@@ -1046,17 +1046,17 @@ function updatePopup(popup, isLoading, text, isError) {
                     contextLink.style.backgroundColor = `rgba(${hexToRgb(borderColor)}, 0.1)`;
                   });
                   
-                  // 处理点击查看原始文本
+                  // Handle click to view original text
                   contextLink.onclick = (e) => {
                     e.preventDefault();
                     e.stopPropagation();
                     const searchText = item.context;
                     
-                    // 获取当前标签页ID
+                    // Get current tab ID
                     chrome.runtime.sendMessage({ action: "getCurrentTabId" }, (response) => {
                       const sourceTabId = response.tabId;
                       
-                      // 存储原始URL和搜索文本
+                      // Store original URL and search text
                       chrome.storage.local.set({
                         originalTextHighlight: {
                           text: searchText,
@@ -1065,7 +1065,7 @@ function updatePopup(popup, isLoading, text, isError) {
                           sourceTabId: sourceTabId
                         }
                       }, () => {
-                        // 在新标签页中打开原始隐私政策URL
+                        // Open original privacy policy URL in new tab
                         chrome.runtime.sendMessage({
                           action: "openOriginalText",
                           url: originalUrl
@@ -1077,9 +1077,9 @@ function updatePopup(popup, isLoading, text, isError) {
                   summaryContent.appendChild(contextLink);
                   expandedSummary.appendChild(summaryContent);
                   
-                  // 使用requestAnimationFrame确保DOM更新后再应用动画
+                  // Use requestAnimationFrame to ensure DOM updates before applying animation
                   requestAnimationFrame(() => {
-                    // 延迟显示内容元素以创建级联效果
+                    // Delay showing content elements to create cascade effect
                     setTimeout(() => {
                       summaryTitle.style.opacity = '1';
                       summaryTitle.style.transform = 'translateY(0)';
@@ -1324,21 +1324,21 @@ function updatePopup(popup, isLoading, text, isError) {
   container.appendChild(closeBtn);
 }
 
-// 辅助函数：将十六进制颜色转换为RGB
+// Helper function: Convert hex color to RGB
 function hexToRgb(hex) {
-  // 如果是简写形式，展开
+  // If in shorthand form, expand
   if (hex.startsWith('#')) {
     hex = hex.substring(1);
   }
   
-  // 标准6位十六进制
+  // Standard 6-digit hexadecimal
   if (hex.length === 6) {
     const r = parseInt(hex.substring(0, 2), 16);
     const g = parseInt(hex.substring(2, 4), 16);
     const b = parseInt(hex.substring(4, 6), 16);
     return `${r}, ${g}, ${b}`;
   }
-  // 简写3位十六进制
+  // Shorthand 3-digit hexadecimal
   else if (hex.length === 3) {
     const r = parseInt(hex.charAt(0) + hex.charAt(0), 16);
     const g = parseInt(hex.charAt(1) + hex.charAt(1), 16);
@@ -1346,6 +1346,6 @@ function hexToRgb(hex) {
     return `${r}, ${g}, ${b}`;
   }
   
-  // 默认返回蓝色
+  // Default return blue
   return '25, 118, 210';
 }
