@@ -62,7 +62,7 @@ legal obligation: Processing necessary to comply with a legal obligation under E
 vital interests: Processing necessary to protect someone's life or physical integrity. 
     Example: Accessing a patient's medical records in an emergency.
 
-public interest or official_authority: Processing necessary for a task in the public interest or under official authority. 
+public interest or official authority: Processing necessary for a task in the public interest or under official authority. 
     Example: Public health authorities tracking vaccination records during a pandemic.
 
 legitimate interests: Processing necessary for the legitimate interests of the controller or a third party, unless overridden by individual rights. 
@@ -80,6 +80,30 @@ archiving in public interest: Long-term preservation of data for historical or c
 healthcare management and public health: Processing necessary for healthcare delivery or public health emergencies. 
     Example: Managing patient appointments or contact tracing during a disease outbreak.
 """
+
+
+sensitivity_level_definition = {
+    'Level 5': ['consent'],
+    'Level 4': ['contractual necessity', 'legitimate interests'],
+    'Level 3': ['scientific or historical research', 'healthcare management and public health', 'archiving in public interest'],
+    'Level 2': ['statistical purposes', 'public interest or official authority'],
+    'Level 1': ['legal obligation', 'vital interests']
+}
+
+
+def sensitivity_level(data_type, definition):
+    if sum([1 if item in data_type else 0 for item in definition['Level 5']]):
+        return 5
+    elif sum([1 if item in data_type else 0 for item in definition['Level 4']]):
+        return 4
+    elif sum([1 if item in data_type else 0 for item in definition['Level 3']]):
+        return 3
+    elif sum([1 if item in data_type else 0 for item in definition['Level 2']]):
+        return 2
+    elif sum([1 if item in data_type else 0 for item in definition['Level 1']]):
+        return 1
+    else:
+        return 0
 
 
 response_format = """\
@@ -116,8 +140,10 @@ async def info_use(text):
             new_content['keyword'] = key
             new_content['summary'] = f"Lawful basis: {content['lawful basis']}\n\nExplanation: {content['explanation']}"
             new_content['context'] = content['original sentence']
+            new_content['importance'] = sensitivity_level(content['lawful basis'], sensitivity_level_definition)
             result.append(new_content)
 
+        result.sort(key=lambda x: x['importance'], reverse=True)
         summary = {'data_usage': result}
 
         return summary

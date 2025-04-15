@@ -66,6 +66,25 @@ psychological profiles and mental state: Personality test results, stress levels
 criminal records or legal cases: Data on past convictions, ongoing legal cases, court orders, police reports.
 """
 
+sensitivity_level_definition = {'Level 5': ['identification number', 'biometric data', 'genetic data', 'health data', 'financial data',
+                                'political opinions', 'religious or philosophical_beliefs', 'sexual orientation and sex life',
+                                'trade union membership', 'psychological profiles and mental state', 'criminal records or legal cases'],
+                                'Level 4': ['location data', 'photographs and videos', 'smart home and iot data', 'social behavior and connections'],
+                                'Level 3': ['online identifiers', 'contact details', 'employment data', 'educational data', 'personal habits and interests', 'device and technology data'],
+                                'Level 2': ['name']}
+
+def sensitivity_level(data_type, definition):
+    if data_type in definition['Level 5']:
+        return 5
+    elif data_type in definition['Level 4']:
+        return 4
+    elif data_type in definition['Level 3']:
+        return 3
+    elif data_type in definition['Level 2']:
+        return 2
+    else:
+        return 0
+
 
 response_format = """\
 {"name": {"content": ["name"], "original sentence": "We may collect your name, ..."},
@@ -92,8 +111,10 @@ async def info_collection(text):
             new_content['keyword'] = key
             new_content['summary'] = ','.join(content['content'])
             new_content['context'] = content['original sentence']
+            new_content['importance'] = sensitivity_level(key, sensitivity_level_definition)
             result.append(new_content)
-            
+
+        result.sort(key=lambda x: x['importance'], reverse=True)
         summary = {'collected_info': result}
 
         return summary

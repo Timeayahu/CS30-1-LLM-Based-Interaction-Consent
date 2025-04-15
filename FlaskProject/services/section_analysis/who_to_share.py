@@ -83,6 +83,26 @@ certification bodies and supervisory authorities: Organizations verifying GDPR c
 """
 
 
+sensitivity_level_definition = {'Level 5': ['international organisations and third countries', 'consent'],
+                                'Level 4': ['legitimate interest parties'],
+                                'Level 3': ['processors and subprocessors', 'group of undertakings'],
+                                'Level 2': ['certification bodies and supervisory authorities', 'judicial authorities'],
+                                'Level 1': ['emergency services', 'public authorities']}
+
+
+def sensitivity_level(data_type, definition):
+    if data_type in definition['Level 5']:
+        return 5
+    elif data_type in definition['Level 4']:
+        return 4
+    elif data_type in definition['Level 3']:
+        return 3
+    elif data_type in definition['Level 2']:
+        return 2
+    elif data_type in definition['Level 1']:
+        return 1
+    else:
+        return 0
 
 response_format = """\
 {
@@ -124,8 +144,10 @@ async def info_share(text):
             new_content['keyword'] = key
             new_content['summary'] = f"Type: {content['type']}\n\nSummary: {content['summary']}"
             new_content['context'] = content['original sentence']
+            new_content['importance'] = sensitivity_level(content['type'], sensitivity_level_definition)
             result.append(new_content)
 
+        result.sort(key=lambda x: x['importance'], reverse=True)
         summary = {'data_sharing': result}
 
         return summary
