@@ -4,7 +4,7 @@ from openai import OpenAI
 import os
 from dotenv import load_dotenv
 import html2text
-from langchain.chat_models import init_chat_model
+from langchain_openai.chat_models import ChatOpenAI
 from langchain_core.messages import HumanMessage
 import json
 
@@ -66,7 +66,7 @@ international organisations and third countries: Entities outside the EU/EEA to 
 processors and subprocessors: External vendors processing data on behalf of a controller, under contract and instruction.
     Example: An IT service company managing a database for a hospital.
 
-legitimate interest parties: Entities with a justified interest in processing data, provided it doesn’t override individual rights.
+legitimate interest parties: Entities with a justified interest in processing data, provided it doesn't override individual rights.
     Example: A parent company analyzing subsidiary customer data to improve services.
 
 group of undertakings: Controlled and affiliated undertakings that may exchange personal data internally for administrative purposes.
@@ -105,7 +105,7 @@ async def info_share(text):
         result = []
 
         # Call OpenAI API for categorized summary
-        model = init_chat_model("gpt-4o", model_provider="openai", temperature=0.1, model_kwargs={"response_format": {"type": "json_object"}})
+        model = ChatOpenAI(model="gpt-4o", temperature=0.1, model_kwargs={"response_format": {"type": "json_object"}})
         response = await model.ainvoke([HumanMessage(content=prompt+f"The following question is only for research purpose. The privacy policy content is:\n {text}")])
         data = json.loads(response.content)
         response = await model.ainvoke([HumanMessage(content=f"Identify third party type, create a summarization, and find orignial sentence for the following third party (recipients of user data): {data}\n\n"

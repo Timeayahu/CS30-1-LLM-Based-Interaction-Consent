@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  webapp:
+    build: .
+    container_name: privacy-policy-analyzer
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app  
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped
