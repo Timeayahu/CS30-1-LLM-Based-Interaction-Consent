@@ -2,6 +2,7 @@ import os
 from langchain_openai.chat_models import ChatOpenAI
 from langchain_core.messages import HumanMessage
 from langchain_text_splitters import HTMLHeaderTextSplitter
+from langchain_text_splitters import MarkdownHeaderTextSplitter
 from collections import Counter
 from .webpage_split_markdown import split_by_markdown
 import html2text
@@ -65,6 +66,11 @@ def extract_section(html_text):
         target_header_names = header_names_h3
         header_type = 3
 
+    readable_text = html2text.html2text(html_text)
+
+    if len(target_header_names) <= 2:
+        return {'Collect': readable_text, 'Use': readable_text, 'Share': readable_text}
+
 
     model = ChatOpenAI(model="gpt-4o", temperature=0.1, model_kwargs={"response_format": {"type": "json_object"}})
     response = model.invoke([HumanMessage(content=f"Which title is most probably about the section of 'Information to be collected'?\n"
@@ -84,7 +90,6 @@ def extract_section(html_text):
 
     
     target_header = json.loads(response.content)
-    readable_text = html2text.html2text(html_text)
     content = split_by_markdown(readable_text, header_type, target_header)
 
     return content
