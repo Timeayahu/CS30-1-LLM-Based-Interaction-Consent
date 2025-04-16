@@ -2,23 +2,127 @@
 
 // Initialize the extension state
 chrome.runtime.onInstalled.addListener(() => {
-  chrome.storage.local.set({ isEnabled: true });
+  chrome.storage.local.set({ 
+    isEnabled: true,
+    serviceWorkerLastActive: Date.now() // Track when service worker was last active
+  });
   updateIcon(true);
   console.log("Extension installed and initialized");
+  
+  // Set up periodic storage check to detect service worker failures
+  setupServiceWorkerMonitoring();
 });
+
+// Create a more robust service worker monitoring system
+function setupServiceWorkerMonitoring() {
+  // Store initial startup time
+  const startupTime = Date.now();
+  chrome.storage.local.set({ 
+    serviceWorkerStartupTime: startupTime,
+    serviceWorkerHeartbeats: [] 
+  });
+  
+  // Schedule regular heartbeat checks
+  setInterval(recordHeartbeat, 30000); // Every 30 seconds
+  setInterval(checkServiceWorkerHealth, 60000); // Every minute
+  setInterval(verifyServiceWorkerActivity, 5 * 60000); // Every 5 minutes
+  
+  console.log("Service worker monitoring initialized");
+}
+
+// Record heartbeat to track service worker activity
+function recordHeartbeat() {
+  chrome.storage.local.get(['serviceWorkerHeartbeats'], function(data) {
+    const heartbeats = data.serviceWorkerHeartbeats || [];
+    const now = Date.now();
+    
+    // Keep only the last 30 heartbeats (15 minutes of history with 30s intervals)
+    while (heartbeats.length > 30) {
+      heartbeats.shift();
+    }
+    
+    heartbeats.push(now);
+    
+    chrome.storage.local.set({ 
+      serviceWorkerHeartbeats: heartbeats,
+      serviceWorkerLastActive: now
+    });
+  });
+}
 
 // Simple health check for Service Worker
 function checkServiceWorkerHealth() {
   console.log("Service Worker health check executed");
-  // Attempt to keep service worker alive
+  
+  // Check registration status
+  if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+    console.log("Service worker controller active");
+  }
+  
+  // Attempt to keep service worker alive with a meaningful operation
   chrome.runtime.getPlatformInfo(function(info) {
     // Just a simple operation to ensure service worker is responsive
     console.log("Service worker active, platform: " + info.os);
   });
+  
+  // Also check storage to ensure data persistence
+  chrome.storage.local.get(['isEnabled'], function(data) {
+    if (data.isEnabled !== undefined) {
+      console.log("Storage access successful, extension state: " + (data.isEnabled ? "enabled" : "disabled"));
+    } else {
+      console.warn("Storage access issue - extension state missing");
+      // Try to reset the state
+      chrome.storage.local.set({ isEnabled: true });
+    }
+  });
 }
 
-// Periodically check Service Worker health
-setInterval(checkServiceWorkerHealth, 60000); // Check every minute
+// Deeper verification of service worker activity 
+function verifyServiceWorkerActivity() {
+  chrome.storage.local.get(['serviceWorkerLastActive', 'serviceWorkerStartupTime'], function(data) {
+    const now = Date.now();
+    const lastActive = data.serviceWorkerLastActive || 0;
+    const startupTime = data.serviceWorkerStartupTime || now;
+    const inactiveTime = now - lastActive;
+    
+    console.log(`Service worker last active ${inactiveTime/1000} seconds ago`);
+    
+    // If service worker hasn't been active for more than 10 minutes and 
+    // the extension has been running for at least 15 minutes
+    if (inactiveTime > 10 * 60 * 1000 && (now - startupTime) > 15 * 60 * 1000) {
+      console.warn("Service worker may be inactive, attempting recovery");
+      attemptServiceWorkerRecovery();
+    }
+  });
+}
+
+// Try to recover service worker if it becomes inactive
+function attemptServiceWorkerRecovery() {
+  // Send a wake-up ping to ensure service worker is active
+  chrome.runtime.sendMessage({ action: "serviceWorkerWakeUp" }, function(response) {
+    if (response) {
+      console.log("Service worker responded to wake-up ping");
+      recordHeartbeat(); // Record successful ping
+    } else {
+      console.error("Service worker recovery failed, attempting last resort measures");
+      
+      // Force storage update to trigger activity
+      chrome.storage.local.set({ 
+        serviceWorkerRecoveryAttempt: Date.now()
+      }, function() {
+        // Check if this operation succeeded
+        chrome.storage.local.get(['serviceWorkerRecoveryAttempt'], function(data) {
+          if (data.serviceWorkerRecoveryAttempt) {
+            console.log("Storage write successful, service worker may be recovering");
+          } else {
+            console.error("Storage write failed, service worker may need manual restart");
+            // At this point, the extension may need to be manually restarted
+          }
+        });
+      });
+    }
+  });
+}
 
 // Update the icon state
 function updateIcon(isEnabled) {
@@ -40,6 +144,9 @@ chrome.action.onClicked.addListener((tab) => {
     chrome.storage.local.set({ isEnabled: newState });
     updateIcon(newState);
     
+    // Record interaction to show service worker is active
+    recordHeartbeat();
+    
     // Notify the content script of the state change
     chrome.tabs.sendMessage(tab.id, {
       action: "toggleEnabled",
@@ -48,8 +155,18 @@ chrome.action.onClicked.addListener((tab) => {
   });
 });
 
+// Handle wake-up pings for service worker recovery
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.action === "serviceWorkerWakeUp") {
+    // Just respond to confirm service worker is active
+    sendResponse({ status: "active", timestamp: Date.now() });
+    return true;
+  }
+  
   if (message.action === "summarizePolicy") {
+    // Record activity to show service worker is handling requests
+    recordHeartbeat();
+    
     // Check if the extension is enabled
     chrome.storage.local.get(['isEnabled'], (result) => {
       if (!result.isEnabled) {
@@ -128,6 +245,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
                   summary: data.summary
                 });
                 console.log("Summary sent to content script successfully");
+                
+                // Record successful operation
+                recordHeartbeat();
               } catch (e) {
                 throw new Error("Invalid summary format: " + e.message);
               }
@@ -157,6 +277,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       }
     });
   } else if (message.action === "openOriginalText") {
+    // Record activity to show service worker is active
+    recordHeartbeat();
+    
     // Open URL in new tab
     chrome.tabs.create({ url: message.url }, (tab) => {
       // Execute content script after page loads
@@ -283,6 +406,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       });
     });
   } else if (message.action === "getCurrentTabId") {
+    // Record activity to show service worker is active
+    recordHeartbeat();
+    
     // Return the current tab ID
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       if (tabs.length > 0) {
@@ -291,6 +417,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     });
     return true; // Keep the message channel open for asynchronous response
   } else if (message.action === "returnToSummary") {
+    // Record activity to show service worker is active
+    recordHeartbeat();
+    
     // Handle the request to return to the summary page
     chrome.storage.local.get(['originalTextHighlight'], (data) => {
       if (data.originalTextHighlight && data.originalTextHighlight.sourceTabId) {
@@ -322,3 +451,18 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     });
   }
 });
+
+// Additional safety check to periodically verify service worker is running
+setInterval(() => {
+  // Verify storage is accessible
+  chrome.storage.local.get(['serviceWorkerStartupTime'], data => {
+    if (data.serviceWorkerStartupTime) {
+      const uptime = (Date.now() - data.serviceWorkerStartupTime) / (1000 * 60 * 60);
+      console.log(`Service worker uptime: ${uptime.toFixed(2)} hours`);
+    } else {
+      console.warn("Service worker may have restarted, startup time not found");
+      // Reinitialize if needed
+      setupServiceWorkerMonitoring();
+    }
+  });
+}, 30 * 60000); // Every 30 minutes
