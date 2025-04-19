@@ -1,0 +1,19 @@
+{
+    "www": {
+        "Company Name": "www",
+        "Privacy Policy": {
+            "- [First Party Collection/Use]": "Microsoft collects personal data directly from users through interactions such as account creation, support requests, and usage of their products, to operate effectively, improve services, personalize experiences, and for advertising purposes.",
+            "- [Third Party Sharing/Collection]": "Microsoft may share personal data with third parties for advertising, but does not sell personal data. Data can be shared with service providers, affiliates, or in the context of legal compliance.",
+            "- [User Access/Edit/Deletion]": "Users can access and manage their personal data through various tools provided by Microsoft, including the privacy dashboard, where they can view, edit, or delete some data.",
+            "- [Data Retention]": "Personal data is retained for as long as necessary to fulfill the purposes outlined in the policy, with specific retention periods depending on data type and user interactions.",
+            "- [Data Security]": "Microsoft utilizes a range of security technologies such as encryption and restricted access to protect users' data from unauthorized access and disclosure.",
+            "- [International/Specific Audiences]": "Microsoft complies with various international data protection frameworks and has specific protections for children, ensuring that data collection is limited and requires parental consent under certain conditions.",
+            "- [Do Not Track]": "Microsoft does not respond to “Do Not Track” signals at this time but provides users with various controls for data collection and advertising preferences.",
+            "- [Policy Change]": "Users will be notified of material changes to the privacy policy and can find a history of changes on their designated page.",
+            "- [User Choice/Control]": "Users have choices regarding data collection, including opt-outs for personalized advertising and can configure privacy settings across various Microsoft products.",
+            "- [Introductory/Generic]": "The policy includes introductory sections about Microsoft’s commitment to user privacy and the importance of data security.",
+            "- [Practice not covered]": "Practices regarding data handling by third-party services accessed through Microsoft products are mentioned, though those services have their own privacy policies.",
+            "- [Privacy contact information]": "The policy provides contact information for Microsoft’s Chief Privacy Officer and data protection officers, enabling users to reach out with privacy concerns or inquiries."
+        }
+    }
+}
