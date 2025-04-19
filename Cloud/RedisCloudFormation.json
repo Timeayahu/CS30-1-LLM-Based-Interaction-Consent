@@ -1,0 +1,119 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "CloudFormation for VPC, subnets, route table, security groups, and IAM policy.",
+    "Resources": {
+        "RedisVPC": {
+            "Type": "AWS::EC2::VPC",
+            "Properties": {
+                "CidrBlock": "10.0.0.0/16",
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "my-redis-vpc"
+                    }
+                ]
+            }
+        },
+        "PrivateSubnet": {
+            "Type": "AWS::EC2::Subnet",
+            "Properties": {
+                "VpcId": {
+                    "Ref": "RedisVPC"
+                },
+                "CidrBlock": "10.0.1.0/24",
+                "AvailabilityZone": "ap-southeast-2a",
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "redis-private-subnet"
+                    }
+                ]
+            }
+        },
+        "PublicSubnet": {
+            "Type": "AWS::EC2::Subnet",
+            "Properties": {
+                "VpcId": {
+                    "Ref": "RedisVPC"
+                },
+                "CidrBlock": "10.0.2.0/24",
+                "AvailabilityZone": "ap-southeast-2b",
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "redis-public-subnet"
+                    }
+                ]
+            }
+        },
+        "RedisRouteTable": {
+            "Type": "AWS::EC2::RouteTable",
+            "Properties": {
+                "VpcId": {
+                    "Ref": "RedisVPC"
+                },
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "redis-route-table"
+                    }
+                ]
+            }
+        },
+        "RedisSecurityGroup": {
+            "Type": "AWS::EC2::SecurityGroup",
+            "Properties": {
+                "VpcId": {
+                    "Ref": "RedisVPC"
+                },
+                "GroupDescription": "Security group for Redis",
+                "SecurityGroupIngress": [
+                    {
+                        "IpProtocol": "tcp",
+                        "FromPort": 6379,
+                        "ToPort": 6379,
+                        "SourceSecurityGroupId": {
+                            "Ref": "BastionSecurityGroup"
+                        }
+                    }
+                ]
+            }
+        },
+        "BastionSecurityGroup": {
+            "Type": "AWS::EC2::SecurityGroup",
+            "Properties": {
+                "VpcId": {
+                    "Ref": "RedisVPC"
+                },
+                "GroupDescription": "Security group for Bastion host",
+                "SecurityGroupIngress": [
+                    {
+                        "IpProtocol": "tcp",
+                        "FromPort": 22,
+                        "ToPort": 22,
+                        "CidrIp": "203.30.15.122/32"
+                    }
+                ]
+            }
+        },
+        "ElastiCacheReadOnlyPolicy": {
+            "Type": "AWS::IAM::ManagedPolicy",
+            "Properties": {
+                "ManagedPolicyName": "ElastiCacheReadOnlyPolicy",
+                "PolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Effect": "Allow",
+                            "Action": [
+                                "elasticache:Describe*",
+                                "elasticache:List*"
+                            ],
+                            "Resource": "*"
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}
