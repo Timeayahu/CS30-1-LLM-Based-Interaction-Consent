@@ -1,6 +1,6 @@
 FROM python:3.10-slim
 
-# 安装Chrome和依赖，用于Selenium
+# download Chrome and dependencies, for Selenium
 RUN apt-get update && apt-get install -y \
     wget \
     gnupg \
@@ -25,39 +25,38 @@ RUN apt-get update && apt-get install -y \
     xdg-utils \
     --no-install-recommends
 
-# 安装Chrome
+# install Chrome
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
     && echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list \
     && apt-get update \
     && apt-get install -y google-chrome-stable \
     && rm -rf /var/lib/apt/lists/*
 
-# 设置工作目录
 WORKDIR /app
 
-# 复制项目依赖文件
+# copy project dependencies
 COPY requirements.txt .
 
-# 安装依赖
+# install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# 下载ChromeDriver
-RUN LATEST=$(wget -q -O - https://chromedriver.storage.googleapis.com/LATEST_RELEASE) \
-    && wget -q "https://chromedriver.storage.googleapis.com/${LATEST}/chromedriver_linux64.zip" \
-    && unzip chromedriver_linux64.zip \
-    && rm chromedriver_linux64.zip \
-    && mv chromedriver /usr/bin/chromedriver \
-    && chmod +x /usr/bin/chromedriver
+# 删除现有的ChromeDriver
+RUN rm -f /usr/bin/chromedriver
 
-# 复制项目文件
+# 安装135版本的ChromeDriver
+RUN wget -q "https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/135.0.7049.84/linux64/chromedriver-linux64.zip" && \
+    unzip chromedriver-linux64.zip && \
+    mv chromedriver-linux64/chromedriver /usr/bin/chromedriver && \
+    chmod +x /usr/bin/chromedriver && \
+    rm -rf chromedriver-linux64.zip chromedriver-linux64
+
+# copy project files
 COPY . .
 
-# 设置Python路径
 ENV PYTHONPATH=/app
 
-# 暴露端口
 EXPOSE 5000
 
-# 启动应用
+# start application
 ENV FLASK_ENV=development
 CMD ["python", "app.py"]

@@ -15,5 +15,6 @@ try:
 except Exception as e:
     print(f"Unable to connect to DocumentDB: {e}")
 
+
 # Close the connection
 client.close()
