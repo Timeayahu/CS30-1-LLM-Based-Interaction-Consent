@@ -109,7 +109,6 @@ class ChatService:
                 }
             ]
             
-            # 调用OpenAI API (使用新版API)
             response = self.client.chat.completions.create(
                 model=self.model,
                 messages=messages,
@@ -118,19 +117,18 @@ class ChatService:
                 response_format={"type": "json_object"}
             )
             
-            # 解析响应
             response_content = response.choices[0].message.content
             
             try:
                 json_response = json.loads(response_content)
             except json.JSONDecodeError:
-                # 如果无法解析为JSON，则将纯文本响应包装为JSON
+                # IF the response cannot be parsed as JSON, wrap the pure text response as JSON
                 json_response = {
                     "answer": response_content,
                     "source": []
                 }
             
-            # 构建最终响应
+            # Build the final response
             result = {
                 "success": True,
                 "response": json_response,

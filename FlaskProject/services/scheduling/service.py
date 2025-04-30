@@ -75,6 +75,10 @@ class Scheduling:
             
             try:
                 # check if the url is already in the database
+
+                #Todo: still need to check whether the content has been updated by the website
+                #If updated, get the latest one
+                #If not, return result
                 existing_policy = get_policy_by_url(url)
                 if existing_policy:
                     
@@ -117,7 +121,7 @@ class Scheduling:
         #self.result = {'summary': {'global_result': self.result_queue.get(),
         #               'section_result': None}}
         
-        # 将结果保存到数据库
+        # save data to MongoDB
         if 'url' in data:
             try:
                 print(f"====== database storage debug information ======")
@@ -126,16 +130,16 @@ class Scheduling:
                 print(f"Markdown content length: {len(self.markdown_content) if self.markdown_content else 0}")
                 print(f"current environment variables: MONGODB_HOST={os.getenv('MONGODB_HOST', 'localhost')}, MONGODB_DB={os.getenv('MONGODB_DB', 'CS307')}")
                 
-                
-                policy_id = save_policy(data['url'], self.html_content, self.markdown_content)
-                print(f"save policy id result: {policy_id}")
+                policy_id = save_policy(
+                    url=data['url'],
+                    html_content=self.html_content,
+                    markdown_content=self.markdown_content,
+                    summary_content=summary_json
+                )
+                print(f"save policy and summary result: {policy_id}")
                 
                 if policy_id:
-                    # 保存摘要
-                    summary_id = save_summary(policy_id, summary_json)
-                    print(f"save summary id result: {summary_id}")
-                    
-                    # 设置policy_id并添加到返回结果中
+                    # set policy_id and add to the result
                     self.policy_id = policy_id
                     self.result['policy_id'] = str(policy_id)
                     print(f"successfully save data to MongoDB: policy_id={policy_id}")
