@@ -97,6 +97,39 @@ def get_summary(policy_id):
         print(f"Get summary failed: {e}")
         return None
 
+# update last checked time
+def update_last_checked_time(policy_id):
+    """
+    Updates the 'last_checked' timestamp of a policy without changing other fields
+    
+    Args:
+        policy_id: The ID of the policy to update
+        
+    Returns:
+        bool: True if the update was successful, False otherwise
+    """
+    try:
+        # Handle different ID formats
+        object_id = policy_id
+        if isinstance(policy_id, str) and len(policy_id) == 24:
+            try:
+                object_id = ObjectId(policy_id)
+            except:
+                pass
+                
+        # Update the last_checked field
+        result = privacy_data.update_one(
+            {"_id": object_id},
+            {"$set": {
+                "last_checked": datetime.datetime.now()
+            }}
+        )
+        
+        return result.modified_count > 0
+    except Exception as e:
+        print(f"Update last checked time failed: {e}")
+        return False
+
 #save privacy policy with summary
 def save_policy(url, html_content, markdown_content, summary_content):
     try:
@@ -109,7 +142,8 @@ def save_policy(url, html_content, markdown_content, summary_content):
                 "html_content": html_content,
                 "markdown_content": markdown_content,
                 "summary_content": summary_content,  
-                "updated_at": datetime.datetime.now()
+                "updated_at": datetime.datetime.now(),
+                "last_checked": datetime.datetime.now()
             }
                 
             privacy_data.update_one(
@@ -128,7 +162,8 @@ def save_policy(url, html_content, markdown_content, summary_content):
             "html_content": html_content,
             "markdown_content": markdown_content,
             "summary_content": summary_content,  
-            "created_at": datetime.datetime.now()  
+            "created_at": datetime.datetime.now(),
+            "last_checked": datetime.datetime.now()
         }
             
         privacy_data.insert_one(policy_data)

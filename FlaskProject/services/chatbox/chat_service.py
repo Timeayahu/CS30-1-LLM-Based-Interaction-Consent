@@ -7,22 +7,21 @@ from openai import OpenAI
 from models.mongodb_local import get_policy_by_id, get_summary
 
 class ChatService:
-    """处理与OpenAI API的聊天交互的服务类"""
+    
 
     def __init__(self):
-        """初始化ChatService"""
-        # 创建OpenAI客户端实例
+   
         self.client = OpenAI(
             api_key=os.environ.get("OPENAI_API_KEY")
         )
         
         if not os.environ.get("OPENAI_API_KEY"):
-            logging.error("OPENAI_API_KEY未设置")
-            raise ValueError("OPENAI_API_KEY环境变量未设置")
+            logging.error("OPENAI_API_KEY is not set")
+            raise ValueError("OPENAI_API_KEY environment variable is not set")
             
         self.model = "gpt-4-turbo"
         
-        # 初始化日志记录器
+        # initialize the logger
         self.logger = logging.getLogger(__name__)
         self.logger.setLevel(logging.INFO)
     
@@ -41,20 +40,19 @@ class ChatService:
             dict: 包含AI响应和相关元数据的字典
         """
         try:
-            # 提取请求参数
+            # extract parameter
             policy_id = data.get('policy_id')
             category_name = data.get('category_name', '')
             bubble_summary = data.get('bubble_summary', '')
             user_question = data.get('user_question', '')
             
-            # 获取全局摘要（如果有policy_id）
+            # get summary by policy_id
             global_summary = "This policy covers data collection, usage, and sharing practices."
             if policy_id:
                 try:
                     summary_data = get_summary(policy_id)
                     if summary_data and 'summary_content' in summary_data:
-                        summary_content = summary_data.get('summary_content', {})
-                        # 如果是字典格式，格式化为文本
+                        summary_content = summary_data.get('summary_content', {})             
                         if isinstance(summary_content, dict):
                             formatted_summary = []
                             if "Company Name" in summary_content:
@@ -70,11 +68,11 @@ class ChatService:
                         else:
                             global_summary = str(summary_content)
                 except Exception as e:
-                    self.logger.error(f"获取摘要时出错: {str(e)}")
+                    self.logger.error(f"get the summary error: {str(e)}")
             
-            # 构建三段式prompt
+            # build the three-part prompt
             messages = [
-                # 1️⃣ 系统消息
+                # system message
                 {
                     "role": "system",
                     "content": (
@@ -90,7 +88,7 @@ class ChatService:
                     )
                 },
                 
-                # 2️⃣ 上下文消息
+                # context message
                 {
                     "role": "assistant",
                     "content": (
@@ -99,7 +97,7 @@ class ChatService:
                     )
                 },
                 
-                # 3️⃣ 用户消息
+                # user message
                 {
                     "role": "user",
                     "content": (
@@ -138,7 +136,7 @@ class ChatService:
             return result
             
         except Exception as e:
-            self.logger.error(f"处理聊天时出错: {str(e)}")
+            self.logger.error(f"solve the chat request error: {str(e)}")
             self.logger.error(traceback.format_exc())
             return {
                 "success": False,
@@ -147,7 +145,7 @@ class ChatService:
             
     def process_general_chat(self, data):
         """
-        处理通用聊天请求并返回响应 (不需要类别和气泡摘要)
+        solve the general chat request and return the response (no category and bubble summary)
         
         参数:
             data (dict): 包含聊天请求数据的字典
@@ -158,18 +156,18 @@ class ChatService:
             dict: 包含AI响应和相关元数据的字典
         """
         try:
-            # 提取请求参数
+            # extract parameter
             policy_id = data.get('policy_id')
             user_question = data.get('user_question', '')
             
-            # 获取全局摘要（如果有policy_id）
+            # get summary by policy_id
             global_summary = "This policy covers data collection, usage, and sharing practices."
             if policy_id:
                 try:
                     summary_data = get_summary(policy_id)
                     if summary_data and 'summary_content' in summary_data:
                         summary_content = summary_data.get('summary_content', {})
-                        # 如果是字典格式，格式化为文本
+                        # if the summary_content is a dictionary, format it as text
                         if isinstance(summary_content, dict):
                             formatted_summary = []
                             if "Company Name" in summary_content:
@@ -185,11 +183,11 @@ class ChatService:
                         else:
                             global_summary = str(summary_content)
                 except Exception as e:
-                    self.logger.error(f"获取摘要时出错: {str(e)}")
+                    self.logger.error(f"get the summary error: {str(e)}")
             
-            # 构建双段式prompt (没有上下文消息)
+            # build the two-part prompt (no context message)
             messages = [
-                # 1️⃣ 系统消息
+                # system message
                 {
                     "role": "system",
                     "content": (
@@ -205,7 +203,7 @@ class ChatService:
                     )
                 },
                 
-                # 2️⃣ 用户消息
+                # user message
                 {
                     "role": "user",
                     "content": (
@@ -215,7 +213,7 @@ class ChatService:
                 }
             ]
             
-            # 调用OpenAI API (使用新版API)
+            # call the OpenAI API 
             response = self.client.chat.completions.create(
                 model=self.model,
                 messages=messages,
@@ -224,19 +222,19 @@ class ChatService:
                 response_format={"type": "json_object"}
             )
             
-            # 解析响应
+           
             response_content = response.choices[0].message.content
             
             try:
                 json_response = json.loads(response_content)
             except json.JSONDecodeError:
-                # 如果无法解析为JSON，则将纯文本响应包装为JSON
+                # if the response cannot be parsed as JSON, wrap the pure text response as JSON
                 json_response = {
                     "answer": response_content,
                     "source": []
                 }
             
-            # 构建最终响应
+            # build the final response
             result = {
                 "success": True,
                 "response": json_response,
@@ -246,7 +244,7 @@ class ChatService:
             return result
             
         except Exception as e:
-            self.logger.error(f"处理通用聊天时出错: {str(e)}")
+            self.logger.error(f"solve the general chat request error: {str(e)}")
             self.logger.error(traceback.format_exc())
             return {
                 "success": False,
