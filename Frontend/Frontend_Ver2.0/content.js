@@ -1258,7 +1258,14 @@ function updatePopup(popup, isLoading, text, isError) {
       const categories = [
         { title: "What personal information will be collected?", data: summary.collected_info },
         { title: "What will the personal information be used for?", data: summary.data_usage },
-        { title: "Who else will your personal information be shared with?", data: summary.data_sharing }
+        { title: "Who else will your personal information be shared with?", data: summary.data_sharing },
+        { title: "User Access/Edit/Deletion", data: summary.user_access_edit_deletion },
+        { title: "Data Retention", data: summary.data_retention },
+        { title: "Data Security", data: summary.data_security },
+        { title: "International & Specific Audiences", data: summary.international_specific_audiences },
+        { title: "User Choice & Control", data: summary.user_choice_control },
+        { title: "Introduction", data: summary.introductory_generic },
+        { title: "Privacy Contact Information", data: summary.privacy_contact_information }
       ];
 
       categories.forEach((category, index) => {
