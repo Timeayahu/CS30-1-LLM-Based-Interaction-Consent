@@ -28,36 +28,21 @@ class ClassificationPrivacyService:
 
             privacy_dict = dict()
             privacy_dict['company_name'] = company_name
-            privacy_dict['content'] = html_content
-            privacy_dict['format'] = 'HTML'
-          
-
-            classification_folder_path = "data/classification_result"
-            file_name = company_name + "_classification_result.json"
-            path = os.path.join(classification_folder_path, file_name)
-            if os.path.exists(path):
-                # file_name = company_name + "_classification_result.json"
-                classification_content = text_processor.load_text_file(classification_folder_path, file_name)[file_name]
-                return {
-                    'success': True,
-                    'classification_content': classification_content
-                }
-            if not os.path.exists(path):
-                # Generate the classification result
+            privacy_dict['content'] = markdown_content
+            privacy_dict['format'] = 'Markdown'
+            classification_content = self.classification_service.classification_privacy_policy(privacy_dict)
+            if "error" in classification_content:
+                privacy_dict['content'] = html_content
+                privacy_dict['format'] = 'HTML'
                 classification_content = self.classification_service.classification_privacy_policy(privacy_dict)
-                print("Classification Privacy in Markdown format")
-                if "error" in classification_content:
-                    privacy_dict['content'] = html_content
-                    privacy_dict['format'] = 'HTML'
-                    classification_content = self.classification_service.classification_privacy_policy(privacy_dict)
-                    print("Classification Privacy in HTML format")
-                    if 'error' in classification_content:
-                        classification_content['success'] = False
-                        return classification_content
-                return {
-                    'success': True,
-                    'classification_content': classification_content.get('result', '')
-                }
+                print("Classification Privacy in HTML format")
+                if 'error' in classification_content:
+                    classification_content['success'] = False
+                    return classification_content
+            return {
+                'success': True,
+                'classification_content': classification_content.get('result', '')
+            }
         except Exception as e:
             return {
                 'success': False,
