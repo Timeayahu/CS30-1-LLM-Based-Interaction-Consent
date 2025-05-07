@@ -232,7 +232,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
                   headers: {
                     'Content-Type': 'application/json',
                   },
-                  body: JSON.stringify({ text: pageText })
+                  body: JSON.stringify({ text: pageText, url: url })
                 }).then(response => {
                   if (!response.ok) {
                     throw new Error(`API response error: ${response.status}`);
