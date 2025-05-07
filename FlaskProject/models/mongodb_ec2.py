@@ -20,24 +20,48 @@ username = os.getenv('MONGODB_USERNAME', 'cs30admin')
 password = os.getenv('MONGODB_PASSWORD', 'cs30_123456')
 cluster_endpoint = os.getenv('MONGODB_CLUSTER_ENDPOINT', 'cs30-1-docdbcluster.cluster-c5m0iqmyku0l.us-east-1.docdb.amazonaws.com')
 
-connection_string = f'mongodb://{username}:{password}@{cluster_endpoint}:{port}/?tls=true&tlsCAFile=global-bundle.pem&replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false'
+client = None
+db = None
+privacy_data = None
 
+def connect_to_mongodb():
+    """
+    Establishes connection to MongoDB and initializes the database and collection.
+    Returns True if connection is successful, False otherwise.
+    """
+    global client, db, privacy_data
+    
+    try:
+        connection_string = f'mongodb://{username}:{password}@{cluster_endpoint}:{port}/?tls=true&tlsCAFile=global-bundle.pem&replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false'
+        
+        client = pymongo.MongoClient(connection_string)
+        
+        # Test the connection
+        client.server_info()
+        
+        # Initialize database and collection
+        db = client[database_name]
+        privacy_data = db['privacy_data']
+        
+        print(f"Successfully connected to MongoDB: {cluster_endpoint}:{port}")
+        print(f"Using database: {database_name}")
+        print(f"Using collection: privacy_data")
+        
+        return client, db, privacy_data
+    except Exception as e:
+        print(f"MongoDB connection error: {e}")
+        return None, None, None
 
-client = pymongo.MongoClient(
-    connection_string
-)
-
-db = client[database_name]
-privacy_data = db['privacy_data']
-
-# check the connection status
-try:
-    client.server_info()
-    print(f"Successfully connected to MongoDB: {cluster_endpoint}:{port}")
-    print(f"Using database: {database_name}")
-    print(f"Using collection: privacy_data")
-except Exception as e:
-    print(f"MongoDB connection error: {e}")
+def close_mongodb_connection(client):
+    """
+    Closes the MongoDB connection.
+    """
+    if client:
+        try:
+            client.close()
+            print("MongoDB connection closed successfully")
+        except Exception as e:
+            print(f"Error closing MongoDB connection: {e}")
 
 # generate unique id
 def generate_policy_id():
@@ -57,7 +81,7 @@ def handle_id(id_value):
     return id_value
 
 # get the privacy policy by url
-def get_policy_by_url(url):
+def get_policy_by_url(url, privacy_data):
     try:
         doc = privacy_data.find_one({"url": url})
         if doc and '_id' in doc:
@@ -68,7 +92,7 @@ def get_policy_by_url(url):
         return None
 
 # get privacy policy by id
-def get_policy_by_id(policy_id):
+def get_policy_by_id(policy_id, privacy_data):
     try:
         # try to query by id, not convert to ObjectId
         doc = privacy_data.find_one({"_id": policy_id})
@@ -87,7 +111,7 @@ def get_policy_by_id(policy_id):
         return None
 
 # get summary
-def get_summary(policy_id):
+def get_summary(policy_id, privacy_data):
     try:
         policy = privacy_data.find_one({"_id": policy_id})
         if not policy and len(policy_id) == 24:
@@ -107,7 +131,7 @@ def get_summary(policy_id):
         return None
 
 # update last checked time
-def update_last_checked_time(policy_id):
+def update_last_checked_time(policy_id, privacy_data):
     """
     Updates the 'last_checked' timestamp of a policy without changing other fields
     
@@ -140,7 +164,7 @@ def update_last_checked_time(policy_id):
         return False
 
 #save privacy policy with summary
-def save_policy(url, html_content, markdown_content, summary_content):
+def save_policy(url, html_content, markdown_content, summary_content, privacy_data):
     try:
         # check if policy already exists
         existing = privacy_data.find_one({"url": url})
@@ -182,7 +206,7 @@ def save_policy(url, html_content, markdown_content, summary_content):
         return None
 
 #save or update summary
-def save_summary(policy_id, summary_content):
+def save_summary(policy_id, summary_content, privacy_data):
     try:
         # directly use policy_id, not convert to ObjectId
         result = privacy_data.update_one(
