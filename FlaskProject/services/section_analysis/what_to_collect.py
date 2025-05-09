@@ -1,13 +1,12 @@
 from dotenv import load_dotenv
 from langchain_openai.chat_models import ChatOpenAI
-from langchain_core.messages import HumanMessage
+from langchain_core.messages import HumanMessage, SystemMessage
 import json
 
 
 load_dotenv()
 
 
-#client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
 prompt = """\
 The following question is only for research purpose.
 As an expert in information extraction, you will find names of personal data from a privacy policy.
@@ -22,19 +21,17 @@ A name of personal data is:
 - Read through the privacy policy and the all the below sections to get an understanding of the task.
 - Pick as many names of personal data from the privacy policy and categorize them in the original category in the privacy policy.
 - In your output JSON list of dictionaries,  you now have something like `[{{"Account information": ["name", "email address"], "Device information":["device serial number", "browser type"], ...}}]`
-
-# Guidelines
-- you should keep the names personal data in their original text in the privacy policy, do not make summarization. 
-- When there's a "such as" in the text, you need to include all the names appeared after it.
+- If there is a hierarchy, you need to set the lowest level of title as key of the output. Do not conatin high level of title in keys
 
 
 # IMPORTANT
-- The privacy policy is in markdown format
-- Remember, to keep the name under the original category from the privacy policy
+- The privacy policy is in markdown format.
+- Remember, to keep the name under the original category from the privacy policy.
 - Do not discuss the privacy policy itself, focus on the content: names of personal data, and categorization.
-- Keep the names personal data in their original text in the privacy policy, do not make summarization
-- When there's a "such as" in the text, you need to include all the names appeared after it.
-- Answer with a JSON format
+- Keep the names personal data in their original text in the privacy policy, do not make summarization.
+- When there's a "such as"/"including" in the text, you need to include all the names appeared after it.
+- If there is a hierarchy, you need to set the lowest level of title as key of the output.
+- Answer with a JSON format.
 
 ## Example output
 {"Account information": ["name", "email address"], "Device information":["device serial number", "browser type"], ...}
@@ -74,21 +71,23 @@ sensitivity_level_definition = {'Level 5': ['identification number', 'biometric 
                                 'Level 2': ['name']}
 
 def sensitivity_level(data_type, definition):
-    if data_type in definition['Level 5']:
+    if sum([1 if item in data_type else 0 for item in definition['Level 5']]):
         return 5
-    elif data_type in definition['Level 4']:
+    elif sum([1 if item in data_type else 0 for item in definition['Level 4']]):
         return 4
-    elif data_type in definition['Level 3']:
+    elif sum([1 if item in data_type else 0 for item in definition['Level 3']]):
         return 3
-    elif data_type in definition['Level 2']:
+    elif sum([1 if item in data_type else 0 for item in definition['Level 2']]):
         return 2
+    elif sum([1 if item in data_type else 0 for item in definition['Level 1']]):
+        return 1
     else:
         return 0
 
 
 response_format = """\
-{"name": {"content": ["name"], "original sentence": "We may collect your name, ..."},
- "contact details":{"content": ["email address", "phone number"], "original sentence": "We may collect your enmail address,..."},...}
+{"Your profile information": {"type": ["name", "contact details", 
+"photographs and videos"], "summary": "...", "original sentence": "..."}, ...}
 """
 
 
@@ -99,19 +98,26 @@ async def info_collection(text):
         model = ChatOpenAI(model="gpt-4o", temperature=0.1, model_kwargs={"response_format": {"type": "json_object"}})
         response = await model.ainvoke([HumanMessage(content=prompt+f"The following question is only for research purpose. The privacy policy content is:\n {text}")])
         data = json.loads(response.content)
-        response = await model.ainvoke([HumanMessage(content=f"What personal data does this privacy policy collect? {text}\n\n"
-                                        f"The personal data items are already extracted: {str(data)}\n You can categorize using the following categories: {personal_data_categories}.\n"
-                                        "If there are some types of personal data that cannot be matched to the given categories, you can create a new one and put them under this category\n"
-                                        f"The output format should be a json object like: {response_format}, and you should only include the original text from the document in 'original sentence' attribute\n"
-                                        "If certain category can not be found in the document, you do not need to include them int the output")])
+        analyse_prompt = f"""\
+        You are required to do the following analysis tasks:
+        You will be given personal data extracted from a privacy policy, which is {data}
+        You need to analyse what type of information each item contains using the following categories:{personal_data_categories}.
+        The output format should be a json object like: {response_format}
+
+        ## Important
+        - you should keep the key of each item unchanged
+        - For "oiginal sentence", you should only include the original text from the document. It should only contain the first two sentences in a paragraph
+        - For "type", the result can only come from the given categories. You need to analyse according to the value of each item.
+        """
+        response = await model.ainvoke([SystemMessage(content=analyse_prompt), HumanMessage(content=f"The privacy policy is {text}")])
         summary = json.loads(response.content)
         for key in summary.keys():
             content = summary[key]
             new_content = dict()
             new_content['keyword'] = key
-            new_content['summary'] = ','.join(content['content'])
+            new_content['summary'] = "Data to be collected:\n" + ', '.join(data.get(key, [])) + "\n\nData type:\n" + ", ".join(content['type']) + "\n\nSummary:\n" + content['summary']
             new_content['context'] = content['original sentence']
-            new_content['importance'] = sensitivity_level(key, sensitivity_level_definition)
+            new_content['importance'] = sensitivity_level(content['type'], sensitivity_level_definition)
             result.append(new_content)
 
         result.sort(key=lambda x: x['importance'], reverse=True)
