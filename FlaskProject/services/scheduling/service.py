@@ -102,7 +102,7 @@ class Scheduling:
     def schedule(self, data):
         client, db, privacy_data = connect_to_mongodb()
         if client == None:
-            return {'error': 'Database connection failed!'}
+            return {'error': 'Database connection failed!'}, 503
         if 'url' in data:
             url = data['url']
 
@@ -144,7 +144,7 @@ class Scheduling:
                     if not self.check_content_changed(url, stored_hash):
                         # no change, update last checked time
                         print(f"Content unchanged, updating last checked time")
-                        update_last_checked_time(policy_id, privacy_data, privacy_data)
+                        update_last_checked_time(policy_id, privacy_data)
 
                         existing_summary = get_summary(policy_id, privacy_data)
                         if existing_summary and "summary_content" in existing_summary:
@@ -171,11 +171,11 @@ class Scheduling:
             except Exception as e:
                 print(f"Error during freshness check: {str(e)}")
                 close_mongodb_connection(client)
-                return {"error": "Error during freshness check!"}
+                return {"error": "Error during freshness check!"}, 503
 
         else:
             close_mongodb_connection(client)
-            return {"error": "Not valid request!"}
+            return {"error": "Not valid request!"}, 400
 
         global_thread = threading.Thread(target=self.analyse_global)
         global_thread.start()
