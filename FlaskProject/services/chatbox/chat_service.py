@@ -94,6 +94,7 @@ class ChatService:
             "- Step 1: Check if the answer can be found in the Bubble Context.\n"
             "- Step 2: If not found there, check the Global Summary.\n"
             "- Step 3: If still not found, reply that the provided summary does not contain relevant information.\n\n"
+            "IMPORTANT: You have access to the complete conversation history. If the user asks about previous questions or wants to see past interactions, you should review the conversation history and provide that information. You CAN track, recall, and summarize previous questions and answers when asked.\n\n"
             "Always respond in the same language as the user's question.\n"
             "Ensure your answer is semantically accurate, concise, and directly grounded in the provided summary or context.\n"
             "After providing your main answer, always include a follow-up question or suggestion to guide the user deeper into the topic.\n"
