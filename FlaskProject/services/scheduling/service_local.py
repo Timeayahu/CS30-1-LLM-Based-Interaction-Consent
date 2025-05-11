@@ -13,21 +13,18 @@ import datetime
 from ..section_analysis.what_to_collect import info_collection
 from ..section_analysis.how_to_use import info_use
 from ..section_analysis.who_to_share import info_share
-
-from models.mongodb_ec2 import (
-    connect_to_mongodb,
-    close_mongodb_connection,
+from models.mongodb_local import (
     get_policy_by_url,
     save_policy,
     save_summary,
     get_summary,
     update_last_checked_time
 )
-from bson import ObjectId
+# from bson import ObjectId
+
 
 # set refresh interval, default is 7 days
 REFRESH_INTERVAL = datetime.timedelta(days=7)
-
 
 
 class Scheduling:
@@ -40,13 +37,10 @@ class Scheduling:
         self.company_name = None
         self.policy_id = None  
         self.result_queue = queue.Queue()
-
     def get_content(self, data):
         self.html_content = data.get('text', None)
         converter = html2text.HTML2Text()
         self.markdown_content = converter.handle(self.html_content)
-        print(self.markdown_content[:100])
-
     def crawler(self, data):
         result, status = call_crawler.crawl_privacy_policy(data)
         self.result = result
@@ -63,16 +57,16 @@ class Scheduling:
         # crawl the current website content (only crawl, not save)
         current_data = {'url': url}
         result, status = call_crawler.crawl_privacy_policy(current_data)
-        
+
         if status != 200 or 'html' not in result:
             # crawl failed, cannot compare, assume content has changed
             print(f"Failed to fetch current content for comparison: {url}")
             return True
-            
+
         # calculate hash value of current content
         current_html = result.get('html', '')
         current_hash = hashlib.md5(current_html.encode('utf-8')).hexdigest()
-        
+
         # compare hash value
         is_changed = current_hash != stored_content_hash
         print(f"Content check for {url}: {'Changed' if is_changed else 'Unchanged'}")
@@ -80,7 +74,7 @@ class Scheduling:
 
     def split(self):
         self.sections = call_split.extract_webpage_content(self.html_content)
-
+  
     def analyse_global(self):
         # Replace your real function here
         global_processing = call_classification.classify_privacy_global
@@ -91,7 +85,6 @@ class Scheduling:
         elif 'classification_content' in result:
             output = result['classification_content']
         self.result_queue.put(output)
-
     async def analyse_sections(self):
         results = await asyncio.gather(
         info_collection(self.sections['Collect']),
@@ -99,18 +92,12 @@ class Scheduling:
         info_share(self.sections['Share'])
         )
         return results
-    
-
     def schedule(self, data):
-        client, db, privacy_data = connect_to_mongodb()
-        if client == None:
-            return {'error': 'Database connection failed!'}, 503
         if 'url' in data:
             url = data['url']
-
             try:
                 # check if the url is already in the database
-                existing_policy = get_policy_by_url(url, privacy_data)
+                existing_policy = get_policy_by_url(url)
                 if existing_policy:
 
                     policy_id = existing_policy["policy_id"] if "policy_id" in existing_policy else existing_policy["_id"]
@@ -126,10 +113,9 @@ class Scheduling:
                     if time_elapsed < REFRESH_INTERVAL:
                         print(f"Content is recent (updated {time_elapsed.days} days ago), using cached version")
 
-                        existing_summary = get_summary(policy_id, privacy_data)
+                        existing_summary = get_summary(policy_id)
                         if existing_summary and "summary_content" in existing_summary:
                             self.policy_id = policy_id
-                            close_mongodb_connection(client)
                             return {
                                 'summary': existing_summary["summary_content"],
                                 'policy_id': str(policy_id)
@@ -146,12 +132,11 @@ class Scheduling:
                     if not self.check_content_changed(url, stored_hash):
                         # no change, update last checked time
                         print(f"Content unchanged, updating last checked time")
-                        update_last_checked_time(policy_id, privacy_data)
+                        update_last_checked_time(policy_id)
 
-                        existing_summary = get_summary(policy_id, privacy_data)
+                        existing_summary = get_summary(policy_id)
                         if existing_summary and "summary_content" in existing_summary:
                             self.policy_id = policy_id
-                            close_mongodb_connection(client)
                             return {
                                 'summary': existing_summary["summary_content"],
                                 'policy_id': str(policy_id)
@@ -160,59 +145,47 @@ class Scheduling:
                     # changed, continue and re-crawl
                     print(f"Content changed, re-crawling and updating")
 
-                # if the url or summary does not exist, the content is outdated or the content has changed, crawl new content
-                self.crawler(data)
-                if self.status != 200 or len(self.html_content)<0.5*len(data.get('text', ' ')):
-                    if "text" in data:
-                        print("data from frontend")
-                        self.get_content(data)
-                    else:
-                        close_mongodb_connection(client)
-                        return {"error": "Unable to get the content"}, self.status
-
             except Exception as e:
                 print(f"Error during freshness check: {str(e)}")
-                close_mongodb_connection(client)
-                return {"error": "Error during freshness check!"}, 503
 
+
+            # if the url or summary does not exist, the content is outdated or the content has changed, crawl new content
+            self.crawler(data)
+            if self.status != 200:
+                self.result['error_type'] = 'crawler'
+                return self.result, self.status
+        elif 'text' in data:
+            self.get_content(data)
         else:
-            close_mongodb_connection(client)
-            return {"error": "Not valid request!"}, 400
-
-        global_thread = threading.Thread(target=self.analyse_global)
-        global_thread.start()
+            return {"error": "Not valid request!"}
 
         self.split()
         result = asyncio.run(self.analyse_sections())
         merged = dict()
         for d in result:
             merged.update(d)
-
-        global_thread.join()
-
-        merged.update(self.result_queue.get())
+            
         summary_json = json.dumps(merged, indent=4)
         self.result = {'summary': summary_json}
         self.status = 200
 
         # save data to MongoDB
-        if 'url' in data:
+        if 'url' in data:  
             try:
                 print(f"====== database storage debug information ======")
                 print(f"prepare to save to database: URL={data['url']}")
                 print(f"HTML content length: {len(self.html_content) if self.html_content else 0}")
                 print(f"Markdown content length: {len(self.markdown_content) if self.markdown_content else 0}")
                 print(f"current environment variables: MONGODB_HOST={os.getenv('MONGODB_HOST', 'localhost')}, MONGODB_DB={os.getenv('MONGODB_DB', 'CS307')}")
-
+                
                 policy_id = save_policy(
                     url=data['url'],
                     html_content=self.html_content,
                     markdown_content=self.markdown_content,
-                    summary_content=summary_json,
-                    privacy_data=privacy_data
+                    summary_content=summary_json
                 )
                 print(f"save policy and summary result: {policy_id}")
-
+                
                 if policy_id:
                     # set policy_id and add to the result
                     self.policy_id = policy_id
@@ -221,8 +194,7 @@ class Scheduling:
                 else:
                     print("save policy failed, no valid id returned")
             except Exception as e:
-
+                
                 print(f"database save error: {e}")
-
-        close_mongodb_connection(client)
+                
         return self.result, self.status
