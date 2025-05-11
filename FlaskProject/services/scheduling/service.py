@@ -10,6 +10,23 @@ import json
 from ..section_analysis.what_to_collect import info_collection
 from ..section_analysis.how_to_use import info_use
 from ..section_analysis.who_to_share import info_share
+<<<<<<< Updated upstream
+=======
+from models.mongodb_ec2 import (
+    connect_to_mongodb,
+    close_mongodb_connection,
+    get_policy_by_url,
+    save_policy,
+    save_summary,
+    get_summary,
+    update_last_checked_time
+)
+
+from bson import ObjectId
+
+# set refresh interval, default is 7 days
+REFRESH_INTERVAL = datetime.timedelta(days=7)
+>>>>>>> Stashed changes
 
 
 class Scheduling:

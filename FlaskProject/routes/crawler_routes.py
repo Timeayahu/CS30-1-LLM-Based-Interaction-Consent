@@ -3,29 +3,28 @@ from services.crawler import CrawlerService
 import os
 from urllib.parse import urlparse
 
-# 创建爬虫Blueprint
 crawler_bp = Blueprint('crawler', __name__)
 crawler_service = CrawlerService()
 
-# 设置隐私政策保存目录
+# set the privacy policy save directory
 PRIVACY_DATA_DIR = os.path.join("data", "privacy_policies")
 
 def ensure_dir_exists(directory):
-    """确保目录存在，如不存在则创建"""
+    """ensure the directory exists, if not, create it"""
     if not os.path.exists(directory):
         os.makedirs(directory)
 
 @crawler_bp.route('/api/crawl', methods=['POST'])
 def crawl_privacy_policy():
     """
-    接收前端发送的URL，爬取内容并保存到data/privacy_policies目录
+    receive the url from the frontend, crawl the content and save it to the data/privacy_policies directory
     
-    请求格式:
+    request format:
     {
         "url": "https://example.com/privacy"
     }
     
-    返回格式:
+    return format:
     {
         "success": true,
         "url": "https://example.com/privacy",
@@ -34,7 +33,7 @@ def crawl_privacy_policy():
     }
     """
     try:
-        # 获取请求数据
+        # get the request data
         data = request.get_json()
         if not data or 'url' not in data:
             return jsonify({
@@ -44,37 +43,37 @@ def crawl_privacy_policy():
         
         url = data['url']
         
-        # 从URL中提取域名作为文件名
+        # extract the domain as the file name
         domain = urlparse(url).netloc
-        company_name = domain.split('.')[0]  # 使用域名第一部分作为公司名
+        company_name = domain.split('.')[0]  # use the first part of the domain as the company name
         
-        # 确保目录存在
+        # ensure the directory exists
         ensure_dir_exists(PRIVACY_DATA_DIR)
         
-        # 设置保存路径
+        # set the save path
         file_path = os.path.join(PRIVACY_DATA_DIR, f"{company_name}.txt")
         
-        # 调用爬虫服务爬取内容
+        # call the crawler service to crawl the content
         result = crawler_service.fetch_privacy_policy({
             'url': url,
-            'wait_time': data.get('wait_time', 5)  # 可选参数
+            'wait_time': data.get('wait_time', 5)  
         })
         
-        # 检查爬取结果
+        # check the crawl result
         if 'error' in result:
             return jsonify({
                 'success': False,
                 'error': result['error']
             }), 500
         
-        # 获取Markdown格式的内容
+        # get the markdown content
         content = result.get('markdown', '')
         
-        # 保存到文件
+        # save to the file
         with open(file_path, 'w', encoding='utf-8') as f:
             f.write(content)
         
-        # 返回爬取结果
+        # return the crawl result
         return jsonify({
             'success': True,
             'url': url,
