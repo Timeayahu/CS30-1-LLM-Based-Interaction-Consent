@@ -1,0 +1,583 @@
+Data category for the last 15 companies:
+
+16.
+Personal details
+Payment details
+Netflix account/profile information
+Usage information
+Advertising information
+Device and network information
+Communications
+
+17.
+ID, password, name, date of birth, gender, and mobile phone number, e-mail address, encrypted connecting information (CI), duplication information (DI), and domestic and foreign resident information, legal guardian's information
+the group ID, password, group name, e-mail address, and mobile phone number, the name of the group's representative
+ID, name, date of birth, and mobile phone number, password
+Name，profile picture，mobile phone number，list of friends，Email address  
+nickname, profile picture, masked ID, collected items of personal information, purposes of collecting and using personal information, retention period of personal information
+IP address, cookies, service usage records, device information, location information, images, voice data  
+information entered by users, unique device information, converted device information, location information  
+ personal information entered during service use, personal information collected through websites, email, fax, phone, offline events, seminars, personal information from partnered companies or organizations, device information  
+ 
+ 18.
+User-provided Information
+Automatically Collected Information
+Twitch Live (in-person) Events
+Information from Other Sources
+
+19.
+Data You Provide To Us
+  - Registration
+  - Profile
+  - Posting and Uploading
+Content From Others
+  - Content and News
+  - Contact and Calendar Information
+  - Partners
+  - Related Companies and Other Services
+Service Use
+Cookies and Similar Technologies
+Your Device and Location
+Communications
+Workplace and School Provided Information
+Sites and Services of Others
+Other
+
+20.
+When you give it to us or give us permission to obtain it
+  - Account Information
+  - Content
+  - Precise location information
+  - Your communications with us
+  - Your contacts
+We also get technical information when you use Pinterest
+  - Device information
+  - Log data
+  - Information from cookies and similar technologies
+  - Usage data and inferences
+  - Location Information
+  - User Choices
+Our partners and advertisers share information with us
+  - Third party platforms
+  - Technical service partners
+  - Advertisers or other partners
+  
+  21.
+  Users’ personal data
+  - data that are provided by the Users and are minimally necessary for registering on the Site
+  - data that are provided by the Users using the edit section for their Site pages
+  - data that are provided by the Users additionally at the Site Administration’s request
+  - In order to fulfil the agreement with the User to provide individual services by the Website   Administration
+  - For the purposes of using the VK payout service features
+Other User information processed by the Site Administration The Site Administration
+  - additional data received while accessing the Site
+  - information that is automatically received at the time of access to the Site with the use of cookies
+  - information that is created by the users on the Site outside the page edit section
+  - information that is received as the result of the User’s actions on the Site
+  - real-time face tracking in space and detecting points on the face in order to apply a virtual mask
+  
+  22.
+  Information that you provide
+  - Account and profile
+  - Purchases
+  - Customer support activity
+  - Information when you contact us
+  - Chats with merchandise partners
+  - User-generated content
+  - Promotion and event participation
+  - Other data
+Information from third-party sources
+  - Data providers
+  - Marketing and advertising partners
+  - Public authorities in Australia, public sources, and rights holders
+  - Our payment processors
+  - Merchandise partners and their business partners
+  - Other third-party services
+       - Social media service providers
+       - Logistics service providers
+       - Third-party mapping platforms
+Information collected automatically
+  - Device data
+  - Service usage information
+  - General location data
+Cookies and similar technologies
+Declining to provide information
+
+23.
+Information you provide to us
+  - contact information
+  - account information
+  - business information
+  - transaction information
+  - payment information
+  - contents stored in your devices
+  - information about the existing and prospective Users
+Information that we collect automatically
+  - device information
+  - online activity information
+  - location information
+  - communication information
+  - marketing and advertising information
+  - user-generated content
+  - other information
+Information that we receive from third parties
+  - social media account information
+  - communication information
+  - third parties that are engaged by us to provide verification services
+  - information about your interactions
+  - reviewing or rating products and/or services on Alibaba.com
+  
+  24.
+  Information you provide to us
+  - Account information
+  - Content you create
+  - Payment information
+  - Information from actions you take
+  - Information from optional features
+  - Other information you provide directly to us
+Information we collect automatically
+  - Information about your device
+  - Information about your use of the apps or websites
+  - Other information that we collect automatically
+Information we receive from other sources
+
+25.
+(a) Information you provide us directly
+(b) Information we receive from third-party applications
+(c) Information we receive from other third parties
+(d) Information we collect from you automatically
+(e) Cookies information and information taken from similar technologies
+(f) Log file information
+(g) Clear gifs/web beacons information
+(h) Device identifiers
+(i) Location data
+(j) Content within your account
+
+26.
+From You
+  - Account Data
+  - User Content and Files
+  - Demographic information
+  - Feedback Data
+  - Payment Information
+  - Profile Information
+  - Sales and Marketing Data
+  - Support Data
+Automatically
+  - Buttons, Tools, and Content from Other Companies
+  - Essential Cookies and Similar Tracking Technologies
+  - Non-essential Cookies
+  - Email Marketing Interactions
+  - Geolocation Information
+  - Service Usage Information
+  - Website Usage Data
+From Third Parties
+  - Information from Other Users of the Services
+  - Publicly Available Sources
+  - Services you linked to your GitHub account
+  - Vendors, Partners, and Affiliates
+  
+  27.
+  Collected when you sign up for the Spotify Service or when you update your account
+  -  User Data 
+  -  Street Address Data 
+ Collected through your use of the Spotify Service 
+  -  Usage Data 
+Additional data you may choose to give us
+  -  Payment and Purchase Data 
+  -  Survey and Research Data
+Third party sources that we receive your data from 
+  -  Authentication partners
+  -  Third party applications, services and devices you connect to your Spotify account
+  -  Technical service partners 
+  -  Payment partners and Merchants 
+  -  Advertising and marketing partners 
+  -  Acquired companies 
+  
+  28.
+  Setting up a Roblox account
+  - Three key rules for signing up
+  - Why we ask you for an email address
+  - Sharing your phone number
+Purchases on Roblox
+Posting content
+Asking questions or getting technical support
+Using Roblox features
+  - Third-party features such as social media add-ons (users 13 and older)
+  - Voice-based services (users 13 and older)
+  - Location-based Services (users 13 and older)
+  - Joining on a VR platform
+  - Camera-enabled features and uploads (users 13 and older)
+  - Contact Importer (users 13 and older)
+  - Creator Events (users 13 and older)
+  - Interacting with our experiences
+  - Subscribing to other features (users 13 and older)
+Competitions, promotions and research
+  - Taking part in competitions or promotions
+  - Taking part in research
+Advertising
+If you’re a developer or creator
+Other purposes for collecting your information
+Cookies and similar technologies
+  - Information collected through cookies
+  - How we use cookies
+  - Third-party advertising companies
+  - Your cookie choices
+  - To stop companies from tracking you on their websites
+On our corporate websites or in job applications
+
+29.
+Information You Give Us
+Automatic Information
+Information from Other Sources
+
+30.
+Account and Profile Data
+Your Content
+Communication Records
+Third Party Application Login
+Cookies and Similar Technologies
+Billing and Payment Data
+Platform Engagement Data
+Data From Advertisers
+
+
+Third Party:
+
+1.
+When google share your information 
+  - With your consent
+  - With domain administrators
+  - For external processing
+  - For legal reasons
+
+2.
+Who we share information with
+ - Partners
+ - Vendors
+ - Service providers
+ - Third parties
+ - Other third parties
+ 
+3.
+When May We Share Your Information?
+ - With Your Permission
+ - For Legal Reasons
+ - If the Organization is Transferred (Really Unlikely!)
+ - To Protect You, Ourselves & Others
+ - To Our Service Providers
+ - To Understand & Experiment
+ - Because You Made It Public
+ 
+4.
+Reasons we share personal data
+ - to complete any transaction or provide any product you have requested or authorized
+ - digital advertising purposes
+ - Microsoft-controlled affiliates and subsidiaries
+ - vendors or agents working on our behalf for the purposes described in this statement
+ - Comply with applicable law or respond to valid legal process
+ - Protect the safety of our customers, organizations, and the public
+ - Operate and maintain the security of our products
+ - Protect the rights or property of Microsoft
+ 
+5.
+How We Share Information
+ - With your consent
+ - With linked services
+ - With our service providers
+ - To comply with the law
+ - In an emergency
+ - To enforce our rights and promote safety and security
+ - With our affiliates
+ - Aggregated or de-identified information
+ 
+6.
+We may disclose your Personal Data in the following circumstances:
+ - Vendors and Service Providers
+ - Business Transfers
+ - Government Authorities or Other Third Parties
+ - Affiliates
+ - Business Account Administrators
+ - Other Users and Third Parties You Interact or Share Information With
+ 
+7.
+There are five general ways we share your information:
+- When you post and share.
+    - With the general public
+    - With other X users
+    - With partners
+- With third parties & third-party integrations
+    - With service providers
+    - With advertisers
+    - Third-party content & integrations
+    - Third-party collaborators
+    - Through our APIs
+- When required by law, to prevent harm, or in the public interest
+- With our Affiliates
+- As a result of a change in ownership
+
+8.
+You share your information as you use and communicate through our Services, and we share your information to help us operate, provide, improve, understand, customize, support, and market our Services.
+
+ - Send Your Information To Those With Whom You Choose To Communicate
+ - Information Associated With Your Account
+ - Your Contacts And Others
+ - Businesses On WhatsApp
+ - Third-Party Service Providers
+ - Third-Party Services
+ 
+9.
+## Very complex
+Who else has access to your Personal information and who is it shared with:
+- Within the Yandex group
+- Outside the Yandex Group
+   - Partners
+   - Advertisers or other Partners / third parties who process Personal information
+   - Entities providing information for discovering security risks
+   - Entities processing of the payment for goods and services by you
+   -  A third party that either takes over our responsibilities or gains control of our services by      buying the company or its assets.
+   - A government or legal authority (national or international) that asks for your data when required by law.
+   - A third party when you give consent or when sharing your data is needed to provide a service or fulfill a contract with you
+   - A third party if it's necessary to legally protect Yandex or others—such as when you break Yandex’s rules or are likely to
+   
+10.
+- We don’t save or share your search or browsing history when you search on DuckDuckGo or use our apps and extensions.
+- In order for our product to function, we share anonymous browser and device information with our hosting and content providers for security and display purpose
+- we design anonymous experiments to test different designs. We also observe what people are saying about our product across social channels and may search for, review, and share this publicly available information internally for consideration.
+
+11.
+We share customers' personal information only as described below and with subsidiaries Amazon.com, Inc. controls:
+ - Transactions involving Third Parties
+ - Third-Party Service Providers
+ - Business Transfers
+ - Protection of Amazon and Others
+
+12.
+one of the following circumstances applies:
+- With Your Consent
+- Within Yahoo
+- With Partners
+   - Trusted Partners
+   - Advertising, Analytics and Business Partners (Limited to Non-Personally Identifiable Information)
+   - third-party apps, websites or other products integrated with our Services
+   - other companies that show advertisements on our webpages or apps to collect information from your browsers or devices. 
+- For Legal and Other Purposes
+- New Ownership
+
+13.
+we may provide Personal Data to third parties
+ - Public disclosure by users themselves
+ - Subcontracting
+ - Sharing of Personal Data among group companies
+ - Succession of business
+ - Provision, etc. of Our Services
+ - Compliance and cooperation with public agencies
+
+14.
+We share your information with the following parties:
+
+Business Partners
+Service Providers
+  - Payment processors and transaction fulfillment providers
+  - Analytics providers
+Advertisers, Advertising Networks and Measurement Partners
+Independent Researchers
+Our Corporate Group
+For Legal Reasons
+Public Profiles
+Sale, Merger or Other Business Transactions
+Merchants, Payment and Transaction Fulfillment Providers, and Other Service Providers
+
+15.
+We may also share any information collected from the Services including aggregated or statistical data that we may generate from such information in the following ways:
+
+Service Providers
+Companies Offering Promotions, Products, or Services
+Other Websites, Other Services, Plug-Ins, and Links
+Advertising Vendors
+Bundling Companions
+Purchase or Sale of Businesses
+Aggregated Information
+Personal Weather Station and Air Quality Data
+
+16.
+We may disclose your personal information to the following parties: 
+
+The Netflix family of companies
+Service Providers
+Partners
+Netflix marketing providers
+Advertising Companies
+Promotional collaborations
+Corporate transactions
+Safety, security and fraud prevention
+Compliance with law and enforcing the Netflix Terms of Use
+
+17.
+personal information is provided in limited circumstances 
+ - if a user personally agrees to provide his/her personal information in order to use the service of an outside partner
+ - if NAVER becomes obliged to submit personal information under the relevant laws and regulations
+ - if an urgent risk to life or safety of users is identified. 
+ 
+18.
+Twitch shares personal data only as described below and with our parent company, Amazon.com, Inc., and the subsidiaries that Amazon.com, Inc. controls:
+ - We disclose such information to service providers working on our behalf
+ - Twitch may share personal information with, and receive personal information from, our affiliates
+ - Twitch may disclose user information if we believe in good faith that such disclosure is necessary to comply with U.S. state and federal laws or other applicable laws around the world
+ - Twitch may share your info to prevent harm, respond to legal claims, or protect itself and others.
+ 
+19.
+How We Share Information
+ - Our Services
+ - Communication Archival
+ - Others’ Services
+ - Related Services
+ - Service Providers
+ - Legal Disclosures
+ - Change in Control or Sale
+
+20.
+We also share the categories of information described above:
+ - With other services, at your direction
+ -  for advertising and related purposes
+ - With vendors that we employ to process information on our behalf based on our instructions and for the purposes described in this Privacy Policy
+ - With law enforcement agencies, government agencies, researchers, or other parties in compliance with laws, rules, or regulations
+ - With our corporate family of companies, including wholly-owned subsidiaries and affiliates. 
+ 
+21.
+the Site Administration does not collect, store, or share with third parties any information about face data, and only accesses the image from the User’s device camera using these technologies in order to provide the functionality of the Site’s mobile client
+
+22.
+We may share your personal information with the following parties for the purpose of providing you with better services, providing you with personalized advertising and marketing communications, protecting your rights, and/or complying with legal requirements:
+
+ - Affiliates
+ - Service providers
+ - Payment processors
+ - Advertising and analytics partners
+ - Third parties designated by you
+ - Business and marketing partners
+ - Professional advisors, authorities, and regulators
+ - Business transferees
+ - Merchandise Partners/Other Users
+ 
+23.
+We may disclose (or provide access to) personal information to the following categories of recipients:
+- Other Platform Users
+- Our group companies and affiliates
+- Third party business partners and service providers
+   - our business partners 
+   - marketing and advertising platforms
+   - due diligence and verification service providers
+   - payment service providers
+   - credit risk assessment providers
+   - logistics partners 
+   - custom agents
+   - cloud computing service providers
+   - instant messaging service providers
+   - software development kit (“SDK”) service providers
+   - customer service providers 
+   - risk control service providers
+   - third party rating / reviewing service providers
+- External professional advisers, law enforcement agencies, insurers, government and regulators and other organizations
+- Actual or potential business acquirers (and its agents and advisers) 
+
+24.
+How we disclose your information:
+ - When you tell us to
+ - With our vendors
+ - To comply with the law
+ - In an emergency
+ - To enforce our policies and rights
+ - With our related companies
+ - Sale, Acquisition, or Transfer of Assets
+ - Aggregated or de-identified information
+ 
+25.
+Sharing your information:
+- How we share your information. Some of the third parties with whom Canva may share your personal information are service providers who assist Canva with functions such as:
+   - Billing;
+   - Customer support and customer management;
+   - Email services;
+   - Hosting and storage;
+   - Data analytics and predictive analytics;
+   - Data labelling and machine learning;
+   - Security;
+   - Advertising and marketing services;
+   - Domain name registration;
+   - Delivery of physical products; and
+   - Other service providers
+- How you can share your User Content 
+   - Public Posts
+   - Teams
+   - Design Collaboration
+- Sharing in connection with a merger, acquisition or reorganization
+- Your employer or other organization associated with your email address
+- Sharing with other third parties
+- Sharing aggregate data
+- Sharing with authorities
+
+26.
+We may share Personal Data with the following recipients:
+ - Abuse and Fraud Prevention Entities
+ - Affiliates
+ - GitHub Organization Accounts
+ - Competent Authorities
+ - Corporate Transaction Entities
+ - Partners and Resellers
+ - Subprocessors and Service Providers
+ - Visual Studio Code (GitHub Codespaces)
+ - Other Third-party Applications
+ - Other Users and the Public
+ 
+27.
+This section sets out who receives personal data which is collected or generated through your use of the Spotify Service
+- Publicly available information
+- Personal data you may choose to disclose
+   - Third party applications, services and devices you connect to your Spotify account 
+   - Support community
+   - Other Spotify users 
+   - Artists and record labels
+- Information we may disclose
+   -  Service providers 
+   -  Payment partners 
+   -  Advertising partners 
+   -  Marketing Partners 
+   -  Ticketing and event partners 
+   -  Podcast Hosting Platforms 
+   -  Academic researchers 
+   -  Other Spotify group companies, including companies that Spotify acquires 
+   -  Law enforcement and other authorities, or other parties to litigation 
+   -  Purchasers of our business 
+   
+ 28.
+ When we share your information:
+- We may share Personal Information where necessary
+   - When other companies need Personal Information to provide a service on our behalf
+   - When creators need Personal Information to improve your experience
+   - For legal reasons or to help prevent a crime
+   - To help ensure safety and security
+   - If we need to protect ourselves against legal responsibility
+   - If there is a transfer of rights in our business e.g., if we sell our business
+- We may disclose Personal Information to third parties
+   - For Advertising Purposes
+   - Roblox Commerce
+- We may share information that does not identify you
+- We’re not responsible if you share your own Personal Information
+
+29.
+We share user information with our parent corporation (Amazon.com, Inc.), the subsidiaries it controls that follow practices at least as protective as those described in this Privacy Notice, and as described below:
+ - Transactions involving Third Parties
+ - Third-Party Service Providers
+ - Business Transfers
+ - Protection of IMDb and Others
+ 
+30.
+We share your information as outlined below, and where users have asked us to do so or otherwise consented:
+ - Service Providers
+ - Quora Affiliates
+ - Business Transfers
+ - Protection of Rights and When Legally Required
+ - Your Content and Public Information
+ - Platform Engagement Information
+ - Research
+ - Do-Not-Track Signals

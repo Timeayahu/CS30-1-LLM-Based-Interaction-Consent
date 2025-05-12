@@ -19,7 +19,6 @@ class User(BaseModel):
     username: str
     password: str
 
-# 注册接口
 @app.post("/api/signup")
 async def signup(user: User):
     existing_user = await users_collection.find_one({"username": user.username})
@@ -32,8 +31,6 @@ async def signup(user: User):
         "password": hashed_pw
     })
     return {"message": "User registered successfully"}
-
-# 登录接口
 @app.post("/api/login")
 async def login(user: User):
     found_user = await users_collection.find_one({"username": user.username})

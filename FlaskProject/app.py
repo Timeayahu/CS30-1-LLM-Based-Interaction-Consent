@@ -6,6 +6,10 @@ from routes.scheduling_routes import scheduling_bp
 from routes.chat_routes import chat_bp
 
 
+from routes.chat_routes import chat_bp
+from routes.scheduling_local_routes import scheduling_local_bp
+
+
 def create_app():
     app = Flask(__name__)
     CORS(app)  
@@ -14,7 +18,9 @@ def create_app():
     #app.register_blueprint(privacy_bp)
     app.register_blueprint(crawler_bp)
     app.register_blueprint(scheduling_bp)
+
     app.register_blueprint(chat_bp)  # 注册聊天路由
+    app.register_blueprint(scheduling_local_bp)
     
     @app.route('/')
     def index():

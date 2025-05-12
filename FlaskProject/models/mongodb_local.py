@@ -20,6 +20,7 @@ client = pymongo.MongoClient(
 
 db = client[database_name]
 privacy_data = db['privacy_data']
+chat_sessions = db['chat_sessions']
 
 # check the connection status
 try:
@@ -117,7 +118,7 @@ def update_last_checked_time(policy_id):
             except:
                 pass
                 
-        # Update the last_checked field
+        # Update last_checked 
         result = privacy_data.update_one(
             {"_id": object_id},
             {"$set": {
@@ -199,5 +200,91 @@ def save_summary(policy_id, summary_content):
     except Exception as e:
         print(f"Save summary failed: {e}")
         return None
+
+# 创建TTL索引，会话不活跃24小时后自动删除
+chat_sessions.create_index("last_active", expireAfterSeconds=86400)
+
+def generate_session_id():
+    return str(uuid.uuid4())
+
+def create_session(policy_id=None, user_id=None):
+    session_id = generate_session_id()
+    session_data = {
+        "_id": session_id,  # 直接用生成的UUID作为_id
+        "user_id": user_id,
+        "policy_id": policy_id,
+        "created_at": datetime.datetime.now(),
+        "last_active": datetime.datetime.now(),
+        "initialized": False,  # 标记是否已初始化系统消息
+        "messages": []
+    }
+    chat_sessions.insert_one(session_data)
+    return session_id
+
+def add_message_to_session(session_id, role, content):
+    message = {
+        "role": role,
+        "content": content,
+        "timestamp": datetime.datetime.now()
+    }
+    result = chat_sessions.update_one(
+        {"_id": session_id},
+        {
+            "$push": {"messages": {"$each": [message], "$slice": -50}},  # 只保留最新的50条消息
+            "$set": {"last_active": datetime.datetime.now()}
+        }
+    )
+    return result.modified_count > 0
+
+def mark_session_initialized(session_id, system_content):
+    """标记会话已初始化系统消息"""
+    message = {
+        "role": "system",
+        "content": system_content,
+        "timestamp": datetime.datetime.now()
+    }
+    result = chat_sessions.update_one(
+        {"_id": session_id, "initialized": False},  # 确保只初始化一次
+        {
+            "$set": {"initialized": True},
+            "$push": {"messages": message}
+        }
+    )
+    return result.modified_count > 0
+
+def get_session(session_id):
+    """获取完整会话"""
+    session = chat_sessions.find_one({"_id": session_id})
+    if session:
+        # 处理所有日期时间字段
+        if "created_at" in session:
+            session["created_at"] = session["created_at"].isoformat()
+        if "last_active" in session:
+            session["last_active"] = session["last_active"].isoformat()
+        
+        # 处理消息中的时间戳
+        for msg in session.get("messages", []):
+            if "timestamp" in msg:
+                msg["timestamp"] = msg["timestamp"].isoformat()
+    return session
+
+def get_session_messages(session_id):
+    """获取会话消息"""
+    session = chat_sessions.find_one({"_id": session_id})
+    if session:
+        messages = session.get("messages", [])
+        # 将datetime对象转换为ISO格式字符串
+        for msg in messages:
+            if "timestamp" in msg and isinstance(msg["timestamp"], datetime.datetime):
+                msg["timestamp"] = msg["timestamp"].isoformat()
+        return messages
+    return None
+
+def close_session(session_id):
+    """关闭会话（可选）"""
+    return chat_sessions.update_one(
+        {"_id": session_id},
+        {"$set": {"closed": True}}
+    ).modified_count > 0
 
 
