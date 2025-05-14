@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  test_runner:
+    build: .
+    container_name: privacy-policy-test-runner
+    depends_on:
+      - mongodb
+    environment:
+      - MONGODB_HOST=mongodb
+      - MONGODB_DB=CS30
+    command: ["python", "-m", "unittest", "discover", "-s", "test"]
+    volumes:
+      - .:/app
+    working_dir: /app
+
+  mongodb:
+    image: mongo:latest
+    container_name: privacy-policy-mongodb-test
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongodb_test_data:/data/db
+    restart: unless-stopped
+
+volumes:
+  mongodb_test_data:

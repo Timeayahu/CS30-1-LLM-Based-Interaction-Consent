@@ -54,6 +54,8 @@
    也可以用app.py直接启动，方便开发过程中的测试。在最后push前记得用compose down和build两条命令构建好容器方便后续使用。
 
 
+### Run test (docker-compose.test.yml)
+   Open the terminal, run `docker-compose -f docker-compose.test.yml up --build --abort-on-container-exit`, then start the test process.
 
 
 
