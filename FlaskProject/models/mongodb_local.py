@@ -280,6 +280,27 @@ def get_session_messages(session_id):
         return messages
     return None
 
+def update_system_message(session_id, new_system_content):
+    """更新会话中的系统消息内容"""
+    try:
+        result = chat_sessions.update_one(
+            {
+                "_id": session_id,
+                "messages.role": "system"  # 定位到系统消息
+            },
+            {
+                "$set": {
+                    "messages.$.content": new_system_content,
+                    "messages.$.timestamp": datetime.datetime.now(),
+                    "last_active": datetime.datetime.now()
+                }
+            }
+        )
+        return result.modified_count > 0
+    except Exception as e:
+        print(f"Update system message failed: {e}")
+        return False
+
 def close_session(session_id):
     """关闭会话（可选）"""
     return chat_sessions.update_one(
