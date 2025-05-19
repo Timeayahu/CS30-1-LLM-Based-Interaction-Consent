@@ -221,12 +221,22 @@ class ChatService:
 
         # 回答指南
         parts.extend([
-        "Answering procedure:",
-            "1. Search Bubble Context and Global Summary for the answer.",
-            "2. Compose a clear, user-friendly reply (short paragraphs).",
-            "3. THEN search the Original Policy with key terms from your reply; "
-            "   quote up to 3 consecutive sentences under === Source excerpt ===.",
-            "4. If no excerpt is found, state so as specified.",
+            "Answering procedure:",
+            "When answering a user question:",
+            "1. Search Bubble Context & Global Summary first.",
+            "2. If the answer is NOT found, search the Original Policy.",
+            "3. If still not found, request an Internet search.",
+            "4. If none contains the answer, apologise as specified.",
+            "",
+            "ONLY IF the user's question explicitly asks for the original wording "
+            "or contains any of these trigger words (case-insensitive): "
+            "\"original policy\", \"original text\", \"exact wording\", \"direct quote\", "
+            "\"source excerpt\", \"policy excerpt\", \"quote the policy\", "
+            "\"where in the policy\", \"which clause\", \"show me the clause\", "
+            "\"原文\", \"原句\", \"原始文本\", \"政策原文\", \"出处\", \"具体怎么写\" "
+            "— then locate the most relevant passage in the Original Policy and "
+            "quote up to 3 consecutive sentences under the heading === Source excerpt ===.",
+            "If the user does NOT ask for the original wording, DO NOT include any excerpt.",
             "",
             "---- RESPONSE STYLE GUIDELINES ----",
             "• Answer with short, plain-language paragraphs.",
