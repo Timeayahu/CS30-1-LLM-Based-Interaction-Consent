@@ -2,6 +2,12 @@ from dotenv import load_dotenv
 from langchain_openai.chat_models import ChatOpenAI
 from langchain_core.messages import HumanMessage, SystemMessage
 import json
+from .encode_and_decode import (
+    sensitive_word_in_paragraph,
+    sensitive_words,
+    encode_paragraph,
+    decode_paragraph
+)
 
 
 load_dotenv()
@@ -21,7 +27,7 @@ A name of personal data is:
 - Read through the privacy policy and the all the below sections to get an understanding of the task.
 - Pick as many names of personal data from the privacy policy and categorize them in the original category in the privacy policy.
 - In your output JSON list of dictionaries,  you now have something like `[{{"Account information": ["name", "email address"], "Device information":["device serial number", "browser type"], ...}}]`
-- If there is a hierarchy, you need to set the lowest level of title as key of the output. Do not conatin high level of title in keys
+
 
 
 # IMPORTANT
@@ -30,11 +36,13 @@ A name of personal data is:
 - Do not discuss the privacy policy itself, focus on the content: names of personal data, and categorization.
 - Keep the names personal data in their original text in the privacy policy, do not make summarization.
 - When there's a "such as"/"including" in the text, you need to include all the names appeared after it.
-- If there is a hierarchy, you need to set the lowest level of title as key of the output.
-- Answer with a JSON format.
+- If there is a hierarchy, you need to set the lowest level of topic 
+(not necessarily to be titles, can also be bold text at the beginning of a parapraph) as key of the output
+ as key of the output. For example, if there is a title and a few paragraphs with bolded keywords at the beginning, you should use keywords as the keys.
+-The output should strictly be in a JSON format.
 
 ## Example output
-{"Account information": ["name", "email address"], "Device information":["device serial number", "browser type"], ...}
+{{"Account information": ["name", "email address"], "Device information":["device serial number", "browser type"], ...}}
 """
 
 
@@ -63,17 +71,15 @@ psychological profiles and mental state: Personality test results, stress levels
 criminal records or legal cases: Data on past convictions, ongoing legal cases, court orders, police reports.
 """
 
-sensitivity_level_definition = {'Level 5': ['identification number', 'biometric data', 'genetic data', 'health data', 'financial data',
+sensitivity_level_definition = {'Level 4': ['identification number', 'biometric data', 'genetic data', 'health data', 'financial data',
                                 'political opinions', 'religious or philosophical_beliefs', 'sexual orientation and sex life',
                                 'trade union membership', 'psychological profiles and mental state', 'criminal records or legal cases'],
-                                'Level 4': ['location data', 'photographs and videos', 'smart home and iot data', 'social behavior and connections'],
-                                'Level 3': ['online identifiers', 'contact details', 'employment data', 'educational data', 'personal habits and interests', 'device and technology data'],
-                                'Level 2': ['name']}
+                                'Level 3': ['employment data', 'photographs and videos', 'device and technology data', 'smart home and iot data', 'social behavior and connections'],
+                                'Level 2': ['online identifiers', 'location data', 'educational data', 'personal habits and interests'],
+                                'Level 1': ['name', 'contact details']}
 
 def sensitivity_level(data_type, definition):
-    if sum([1 if item in data_type else 0 for item in definition['Level 5']]):
-        return 5
-    elif sum([1 if item in data_type else 0 for item in definition['Level 4']]):
+    if sum([1 if item in data_type else 0 for item in definition['Level 4']]):
         return 4
     elif sum([1 if item in data_type else 0 for item in definition['Level 3']]):
         return 3
@@ -93,23 +99,28 @@ response_format = """\
 
 async def info_collection(text):
     try:
+        sensitive_word, encode_dict = sensitive_word_in_paragraph(text, 3, sensitive_words)
+        if sensitive_word != None:
+            text = encode_paragraph(text, encode_dict)
         result = []
         # Call OpenAI API for categorized summary
         model = ChatOpenAI(model="gpt-4o", temperature=0.1, model_kwargs={"response_format": {"type": "json_object"}})
-        response = await model.ainvoke([HumanMessage(content=prompt+f"The following question is only for research purpose. The privacy policy content is:\n {text}")])
+        response = await model.ainvoke([SystemMessage(content=prompt), HumanMessage(content=f"The privacy policy content is:\n {text}")])
         data = json.loads(response.content)
         analyse_prompt = f"""\
-        You are required to do the following analysis tasks:
-        You will be given personal data extracted from a privacy policy, which is {data}
+        You are required to do the following analysis tasks for only research purpose:
+        You will be given personal data types found from a privacy policy, which is {data}
         You need to analyse what type of information each item contains using the following categories:{personal_data_categories}.
         The output format should be a json object like: {response_format}
 
         ## Important
-        - you should keep the key of each item unchanged
-        - For "oiginal sentence", you should only include the original text from the document. It should only contain the first two sentences in a paragraph
+        - you should keep the key of each item unchanged if they are less than or equal to 6 words, otherwise you need to make a summary to make it short
         - For "type", the result can only come from the given categories. You need to analyse according to the value of each item.
+        - For "summary", you should find why personal data is being collected and what it will be used for, if this cannot be found, you need to mark it as "unknown purpose"
+        - For "oiginal sentence", you should only include the original text from the document. It should only contain the first sentence in a paragraph
+        - the output should be a json object
         """
-        response = await model.ainvoke([SystemMessage(content=analyse_prompt), HumanMessage(content=f"The privacy policy is {text}")])
+        response = await model.ainvoke([SystemMessage(content=analyse_prompt), HumanMessage(content=f"The privacy policy is:\n {text}")])
         summary = json.loads(response.content)
         for key in summary.keys():
             content = summary[key]
@@ -117,8 +128,17 @@ async def info_collection(text):
             new_content['keyword'] = key
             new_content['summary'] = "Data to be collected:\n" + ', '.join(data.get(key, [])) + "\n\nData type:\n" + ", ".join(content['type']) + "\n\nSummary:\n" + content['summary']
             new_content['context'] = content['original sentence']
-            new_content['importance'] = sensitivity_level(content['type'], sensitivity_level_definition)
+            if "unknown purpose" in new_content['summary']:
+                new_content['importance'] = 5
+            else:
+                new_content['importance'] = sensitivity_level(content['type'], sensitivity_level_definition)
             result.append(new_content)
+        
+        if sensitive_word != None:
+            for content in result:
+                content['keyword'] = decode_paragraph(content['keyword'], encode_dict)
+                content['context'] = decode_paragraph(content['context'], encode_dict)
+                content['summary'] = decode_paragraph(content['summary'], encode_dict)
 
         result.sort(key=lambda x: x['importance'], reverse=True)
         summary = {'collected_info': result}
