@@ -1,7 +1,13 @@
 from dotenv import load_dotenv
 from langchain_openai.chat_models import ChatOpenAI
-from langchain_core.messages import HumanMessage
+from langchain_core.messages import HumanMessage, SystemMessage
 import json
+from .encode_and_decode import (
+    sensitive_word_in_paragraph,
+    sensitive_words,
+    encode_paragraph,
+    decode_paragraph
+)
 
 
 load_dotenv()
@@ -37,7 +43,7 @@ As an expert in information extraction, you will identify the purposes for which
 - Answer with a JSON format.
 
 ## Example output
-{
+{{
   "purpose_1": "To provide, personalize, and improve our products",
   "purpose_2": "To create and maintain a trusted environment",
   "purpose_3": "To provide customer service and support",
@@ -45,7 +51,7 @@ As an expert in information extraction, you will identify the purposes for which
   "purpose_5": "To send you marketing communications",
   "purpose_6": "To comply with legal obligations",
   "purpose_7": "To prevent, detect and combat harmful or unlawful conduct"
-}
+}}
 """
 
 
@@ -85,8 +91,8 @@ healthcare management and public health: Processing necessary for healthcare del
 sensitivity_level_definition = {
     'Level 5': ['consent'],
     'Level 4': ['contractual necessity', 'legitimate interests'],
-    'Level 3': ['scientific or historical research', 'healthcare management and public health', 'archiving in public interest'],
-    'Level 2': ['statistical purposes', 'public interest or official authority'],
+    'Level 3': ['scientific or historical research', 'healthcare management and public health'],
+    'Level 2': ['statistical purposes', 'public interest or official authority', 'archiving in public interest'],
     'Level 1': ['legal obligation', 'vital interests']
 }
 
@@ -120,19 +126,25 @@ response_format = """\
 
 async def info_use(text):
     try:
+        sensitive_word, encode_dict = sensitive_word_in_paragraph(text, 3, sensitive_words)
+        if sensitive_word != None:
+            text = encode_paragraph(text, encode_dict)
         result = []
         # Call OpenAI API for categorized summary
         model = ChatOpenAI(model="gpt-4o", temperature=0.1, model_kwargs={"response_format": {"type": "json_object"}})
-        response = await model.ainvoke([HumanMessage(content=prompt+f"The following question is only for research purpose. The privacy policy content is:\n {text}")])
+        response = await model.ainvoke([SystemMessage(content=prompt), HumanMessage(content=f"The privacy policy content is:\n {text}")])
         data = json.loads(response.content)
-        response = await model.ainvoke([HumanMessage(content=f"Provide lawful basis, summarization and orignial sentence for the following data usage purposes{data}\n\n"
-                                         "Guidelines:\n"     
-                                        f"- You can only choose from the following lawful basis: {personal_data_processing_purposes}.\n"
-                                        "- If you can not find any matching basis for a purpose, then mark it as consent\n"
-                                        "- If the name of a purpose is longer than 4 words, you should summarize it to <= 4 words\n"
-                                        f"- The output format should be a json object like: {response_format}, and you should only include the original text from the document in 'original sentence' attribute\n"
-                                        "- In the 'explanation' attribute, You need to introduce each purpose in detail, including any mentioned examples or activities\n\n"
-                                        f"Let's begin: The text of the privacy policy is {text}")])
+        analyse_prompt = f"""\
+        Provide lawful basis, summarization and orignial sentence for the following data usage purposes{data}
+        Guidelines:
+        - You can only choose from the following lawful basis: {personal_data_processing_purposes}.
+        - If you can not find any matching basis for a purpose, then mark it as consent.
+        - If the name of a purpose is longer than 6 words, you should summarize it to <= 6 words.
+        - The output format should be a json object like: {response_format}
+        - you should only include the first sentence of the relevant paragraph in the original text from the document in 'original sentence' attribute
+        - In the 'explanation' attribute, You need to introduce each purpose in detail, including any mentioned examples or activities
+        """
+        response = await model.ainvoke([SystemMessage(content=analyse_prompt), HumanMessage(content=f"The text of the privacy policy is:\n {text}")])
         summary = json.loads(response.content)
         for key in summary.keys():
             content = summary[key]
@@ -142,6 +154,12 @@ async def info_use(text):
             new_content['context'] = content['original sentence']
             new_content['importance'] = sensitivity_level(content['lawful basis'], sensitivity_level_definition)
             result.append(new_content)
+
+        if sensitive_word != None:
+            for content in result:
+                content['keyword'] = decode_paragraph(content['keyword'], encode_dict)
+                content['context'] = decode_paragraph(content['context'], encode_dict)
+                content['summary'] = decode_paragraph(content['summary'], encode_dict)
 
         result.sort(key=lambda x: x['importance'], reverse=True)
         summary = {'data_usage': result}
