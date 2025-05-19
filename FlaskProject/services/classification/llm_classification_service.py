@@ -3,6 +3,12 @@ import os
 import json
 from dotenv import load_dotenv
 from utils import text_processor
+from services.section_analysis.encode_and_decode import (
+    sensitive_word_in_paragraph,
+    sensitive_words,
+    encode_paragraph,
+    decode_paragraph
+)
 
 text_processor = text_processor.TextProcessor()
 os.environ["OPENAI_API_KEY"] = "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"
@@ -16,6 +22,9 @@ class ClassificationService:
     def classification_privacy_policy(self, privacy_dict):
         results = {}
         content = privacy_dict['content']
+        sensitive_word, encode_dict = sensitive_word_in_paragraph(content, 5, sensitive_words)
+        if sensitive_word != None:
+            content = encode_paragraph(content, encode_dict)
         company_name = privacy_dict['company_name']
         input_format = privacy_dict['format']
         prompt = f"""
@@ -64,7 +73,7 @@ class ClassificationService:
             - If a section belongs to multiple categories, list all applicable categories.
             - For each item, provide:
               keyword: the subcategory name (e.g., “Information Type” or “Retention Period”)
-              context: a direct quote (1~2 sentences) from the original provacy policy. DO NOT paraphrase
+              context: the first sentence of a relevant paragraph in the original provacy policy. DO NOT paraphrase
               summary: a detailed summary of the practice described
             - No duplicate keyword in any category.
             - **Ensure that all 12 categories are included in the output, even if some categories do not have relevant content.**
@@ -99,6 +108,12 @@ class ClassificationService:
             if result_json[key] == []:
                 result_json[key] = [{"keyword": "Not found", "summary": "This content is not mentioned in the privacy policy",
                                      "context": "Not mentioned"}]
+                
+        if sensitive_word != None:
+            for key in result_json.keys():
+                for content in result_json[key]:
+                    content['context'] = decode_paragraph(content['context'], encode_dict)
+                    content['summary'] = decode_paragraph(content['summary'], encode_dict)
         results['result'] = result_json
 
         return results
