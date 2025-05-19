@@ -11,8 +11,6 @@ from services.section_analysis.encode_and_decode import (
 )
 
 text_processor = text_processor.TextProcessor()
-os.environ["OPENAI_API_KEY"] = "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"
-
 
 class ClassificationService:
     def __init__(self):
