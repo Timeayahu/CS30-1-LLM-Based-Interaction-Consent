@@ -184,12 +184,17 @@ class ChatService:
         parts = [
             "You are a privacy-policy expert assistant.",
             "",
-            "You have information sources, in this priority order:",
+            "INFORMATION SOURCES (in order):",
             "  1. Bubble Context (Category Name + Bubble Summary)",
-            "  2. Global Summary (the full policy overview)",
-            "  3. Original Policy (the complete privacy policy document)",
-            "  4. Internet Search (for latest information and context)",
-            "If none contains the answer, reply: \"I'm sorry, the provided information does not contain that information.\"",
+            "  2. Global Summary (overall policy overview)",
+            "  3. Original Policy (full policy text)",
+            "  4. Internet Search",
+            "",
+
+            "After formulating an answer, ALWAYS locate the most relevant passage "
+            "in the Original Policy and add it verbatim under a heading "
+            "=== Source excerpt === (max 5 consecutive sentences).",
+            "If no suitable passage exists, write: \"[Original policy excerpt not found]\".",
             "",
         ]
 
@@ -216,11 +221,12 @@ class ChatService:
 
         # 回答指南
         parts.extend([
-            "When answering a user question:",
-            "- First search the Bubble Context and Global Summary for the answer;",
-            "- If not found in these summaries, then search the Original Policy;",
-            "- If still not found, request an Internet search with the relevant keywords;",
-            "- Only if all have no relevant info, use the fallback apology above.",
+        "Answering procedure:",
+            "1. Search Bubble Context and Global Summary for the answer.",
+            "2. Compose a clear, user-friendly reply (short paragraphs).",
+            "3. THEN search the Original Policy with key terms from your reply; "
+            "   quote up to 3 consecutive sentences under === Source excerpt ===.",
+            "4. If no excerpt is found, state so as specified.",
             "",
             "---- RESPONSE STYLE GUIDELINES ----",
             "• Answer with short, plain-language paragraphs.",
@@ -236,7 +242,7 @@ class ChatService:
     def generate_follow_up(self, user_question: str, answer: str) -> str:
       
         prompt = (
-            "You are an assistant that crafts concise, GPT-4o style follow-up questions. "
+            "You are an privacy policy assistant, after answer the question you should ask the GPT-4o style follow-up questions. "
             f"User asked: \"{user_question}\" Assistant answered: \"{answer}\". "
             "If user use English, generate exactly one simple English question, for example: 'Would you like me to explain further?' or 'Do you want me to continue?'"
             "If user use other language, always respond in the same language as the user."
