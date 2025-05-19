@@ -2,17 +2,11 @@ import os
 from langchain_openai.chat_models import ChatOpenAI
 from langchain_core.messages import HumanMessage
 from langchain_text_splitters import HTMLHeaderTextSplitter
-from langchain_text_splitters import MarkdownHeaderTextSplitter
 from collections import Counter
 from .webpage_split_markdown import split_by_markdown
+from .markdown_split import extract_sections
 import html2text
 import json
-
-
-os.environ["LANGSMITH_TRACING"] = "true"
-os.environ["LANGSMITH_API_KEY"] = "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"
-os.environ["OPENAI_API_KEY"] = "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"
-os.environ["SERPAPI_API_KEY"] = "70a08d7f2b16602366468c3df268fc9f7f16f52c4020d138931f0c387363799e"
 
 
 response_format = """\
@@ -20,7 +14,6 @@ response_format = """\
  'Use': 'How we will use your data',
  'Share': 'Who will share your data'}
 """
-
 
 
 def search_by_headers(text, n):
@@ -32,6 +25,8 @@ def search_by_headers(text, n):
 
 
 def extract_section(html_text):
+    readable_text = html2text.html2text(html_text)
+
     h1_sections = search_by_headers(html_text, 1)
     h2_sections = search_by_headers(html_text, 2)
     h3_sections = search_by_headers(html_text, 3)
@@ -39,6 +34,9 @@ def extract_section(html_text):
     header_names_h1 = [doc.metadata.get("Header 1") for doc in h1_sections]
     header_names_h2 = [doc.metadata.get("Header 2") for doc in h2_sections]
     header_names_h3 = [doc.metadata.get("Header 3") for doc in h3_sections]
+
+    if len(header_names_h1) <= 2 and len(header_names_h2) <= 2 and len(header_names_h3) <= 2:
+        return extract_sections(readable_text)
 
     n_completions = 1  # Number of responses to generate
     responses = []
@@ -66,11 +64,12 @@ def extract_section(html_text):
         target_header_names = header_names_h3
         header_type = 3
 
-    readable_text = html2text.html2text(html_text)
+   
 
     if len(target_header_names) <= 2:
-        return {'Collect': readable_text, 'Use': readable_text, 'Share': readable_text}
+        return extract_sections(readable_text)
 
+    print(target_header_names)
 
     model = ChatOpenAI(model="gpt-4o", temperature=0.1, model_kwargs={"response_format": {"type": "json_object"}})
     response = model.invoke([HumanMessage(content=f"Which title is most probably about the section of 'Information to be collected'?\n"
@@ -79,17 +78,11 @@ def extract_section(html_text):
                                           f"Your response should be in json format like{response_format}. The keys have to be 'Collect', 'Use', 'Share'"
                                           f"All the answers must appear from the given list. Let's begin: {str(target_header_names)}")])
 
-    # model = init_chat_model(model="gpt-4o", temperature=0.1)
-    # response = model.invoke(
-    #     [HumanMessage(content=f"Which title is most probably about the section of 'Information to be collected'?\n"
-    #                               f"Which title is most probably about the section of 'How information will be used'?\n"
-    #                               f"Which title is most probably about the section of 'Who will share your data'?\n"
-    #                               f"Your response should be in json format like{response_format}. All the answers must appear from the given list. Let's begin: {str(target_header_names)}")],
-    #     response_format={"type": "json_object"}
-    # )
-
-    
     target_header = json.loads(response.content)
+    print(target_header)
     content = split_by_markdown(readable_text, header_type, target_header)
+
+    if content['Collect'] == None or content['Use'] == None or content['Share'] == None:
+        content = extract_sections(readable_text, headers=target_header)
 
     return content
