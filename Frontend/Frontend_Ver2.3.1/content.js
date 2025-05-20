@@ -1072,7 +1072,7 @@ function updatePopup(popup, isLoading, text, isError) {
   Object.assign(title.style, {
     marginTop: '0',
     marginBottom: '0',
-    fontSize: '1.5rem',
+    fontSize: '24px', // Fixed font size in pixels, and increased for better visibility
     background: 'linear-gradient(to right, #1565c0, #1976d2, #2196f3)',
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
@@ -1280,7 +1280,7 @@ function updatePopup(popup, isLoading, text, isError) {
     const contentDiv = document.createElement('div');
     contentDiv.innerText = text;
     Object.assign(contentDiv.style, {
-      fontSize: '1rem',
+      fontSize: '15px', // Fixed font size in pixels
       lineHeight: '1.6',
       marginBottom: '16px',
       whiteSpace: 'pre-wrap',
@@ -1316,7 +1316,7 @@ function updatePopup(popup, isLoading, text, isError) {
       Object.assign(legendTitle.style, {
         marginTop: '0',
         marginBottom: '15px',
-        fontSize: '1.1rem',
+        fontSize: '20px', // Fixed font size in pixels, and increased for better visibility
         fontWeight: '600',
         position: 'relative',
         paddingBottom: '8px',
@@ -1345,7 +1345,7 @@ function updatePopup(popup, isLoading, text, isError) {
       const instructionText = document.createElement('div');
       instructionText.innerText = "Hint: You can click on any color or number to filter bubbles by importance level!";
       Object.assign(instructionText.style, {
-        fontSize: '0.85rem',
+        fontSize: '13px', // Fixed font size in pixels
         color: '#555',
         marginBottom: '15px',
         lineHeight: '1.4',
@@ -1397,7 +1397,7 @@ function updatePopup(popup, isLoading, text, isError) {
       const filterStatusText = document.createElement('div');
       filterStatusText.innerText = 'No filter';
       Object.assign(filterStatusText.style, {
-        fontSize: '0.9rem',
+        fontSize: '14px', // Fixed font size in pixels
         fontWeight: '500'
       });
       
@@ -1408,7 +1408,7 @@ function updatePopup(popup, isLoading, text, isError) {
         background: 'rgba(25, 118, 210, 0.1)',
         padding: '4px 8px',
         borderRadius: '4px',
-        fontSize: '0.8rem',
+        fontSize: '12px', // Fixed font size in pixels
         cursor: 'pointer',
         transition: 'background 0.2s'
       });
@@ -1855,7 +1855,7 @@ function updatePopup(popup, isLoading, text, isError) {
         numberLabel.innerText = item.level;
         Object.assign(numberLabel.style, {
           fontWeight: '600',
-          fontSize: '0.9rem',
+          fontSize: '14px', // Fixed font size in pixels
           color: item.color,
           textAlign: 'center',
           width: '20px',
@@ -1995,7 +1995,7 @@ function updatePopup(popup, isLoading, text, isError) {
       leftLabel.innerText = "Most Important";
       Object.assign(leftLabel.style, {
         fontWeight: '500',
-        fontSize: '0.85rem',
+        fontSize: '13px', // Fixed font size in pixels
         color: '#b71c1c'
       });
       
@@ -2004,7 +2004,7 @@ function updatePopup(popup, isLoading, text, isError) {
       rightLabel.innerText = "Least Important";
       Object.assign(rightLabel.style, {
         fontWeight: '500',
-        fontSize: '0.85rem',
+        fontSize: '13px', // Fixed font size in pixels
         color: '#388e3c'
       });
       
@@ -2056,7 +2056,7 @@ function updatePopup(popup, isLoading, text, isError) {
           marginTop: '0',
           marginBottom: '15px',
           color: '#1976d2',
-          fontSize: '1.1rem',
+          fontSize: '20px', // Fixed font size in pixels, and increased for better visibility
           fontWeight: '600',
           position: 'relative',
           paddingBottom: '8px',
@@ -2149,7 +2149,7 @@ function updatePopup(popup, isLoading, text, isError) {
               padding: '10px 18px',
               borderRadius: '25px',
               cursor: 'pointer',
-              fontSize: '0.95rem',
+              fontSize: '14px', // Fixed font size in pixels
               fontWeight: '600',
               boxShadow: bubbleShadow,
               transition: 'transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s, background 0.3s, opacity 0.3s',
@@ -2635,7 +2635,7 @@ function updatePopup(popup, isLoading, text, isError) {
                   Object.assign(summaryTitle.style, {
                     margin: '0 0 12px 0',
                     color: borderColor,
-                    fontSize: '1.1rem',
+                    fontSize: '16px', // Fixed font size in pixels
                     fontWeight: '600',
                     opacity: '0',
                     transform: 'translateY(10px)',
@@ -2665,7 +2665,7 @@ function updatePopup(popup, isLoading, text, isError) {
                   const summaryText = document.createElement('div');
                   summaryText.innerText = item.summary;
                   Object.assign(summaryText.style, {
-                    fontSize: '0.95rem',
+                    fontSize: '14px', // Fixed font size in pixels
                     lineHeight: '1.6',
                     marginBottom: '15px',
                     wordBreak: 'break-word',
@@ -2687,7 +2687,7 @@ function updatePopup(popup, isLoading, text, isError) {
                   Object.assign(contextLink.style, {
                     color: borderColor,
                     textDecoration: 'none',
-                    fontSize: '0.9rem',
+                    fontSize: '14px', // Fixed font size in pixels
                     display: 'inline-block',
                     padding: '6px 12px',  
                     margin: '0 0 10px 0',
@@ -2750,7 +2750,7 @@ function updatePopup(popup, isLoading, text, isError) {
                   Object.assign(detailExplanationBtn.style, {
                     color: borderColor,
                     textDecoration: 'none',
-                    fontSize: '0.9rem',
+                    fontSize: '14px', // Fixed font size in pixels
                     display: 'inline-block',
                     padding: '6px 12px',  
                     margin: '0 0 10px 0',
@@ -2915,7 +2915,7 @@ function updatePopup(popup, isLoading, text, isError) {
               marginRight: '10px',
               transition: 'transform 0.3s ease',
               display: 'inline-block',
-              fontSize: '0.8rem',
+              fontSize: '12px', // Fixed font size in pixels
               color: '#1976d2'
             });
 
@@ -2926,7 +2926,7 @@ function updatePopup(popup, isLoading, text, isError) {
               fontWeight: '600',
               color: '#1976d2',
               flex: '1',
-              fontSize: '1rem'
+              fontSize: '15px' // Fixed font size in pixels
             });
 
             headerContainer.appendChild(arrow);
@@ -2948,7 +2948,7 @@ function updatePopup(popup, isLoading, text, isError) {
             const summary = document.createElement('div');
             summary.innerText = item.summary;
             Object.assign(summary.style, {
-              fontSize: '0.9rem',
+              fontSize: '14px', // Fixed font size in pixels
               marginBottom: '8px',
               lineHeight: '1.5',
               wordBreak: 'break-word',
@@ -2962,7 +2962,7 @@ function updatePopup(popup, isLoading, text, isError) {
             Object.assign(contextLink.style, {
               color: '#1976d2',
               textDecoration: 'none',
-              fontSize: '0.9rem',
+              fontSize: '14px', // Fixed font size in pixels
               display: 'inline-block',
               marginBottom: '10px',
               padding: '6px 12px', 
@@ -3019,7 +3019,7 @@ function updatePopup(popup, isLoading, text, isError) {
             Object.assign(detailExplanationBtn.style, {
               color: '#1976d2',
               textDecoration: 'none',
-              fontSize: '0.9rem',
+              fontSize: '14px', // Fixed font size in pixels
               display: 'inline-block',
               marginBottom: '10px',
               marginLeft: '10px',

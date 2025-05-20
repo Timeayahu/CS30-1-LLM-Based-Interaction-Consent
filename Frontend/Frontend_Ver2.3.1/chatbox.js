@@ -110,7 +110,7 @@ function createChatWindow(buttonRect) {
   Object.assign(chatTitle.style, {
     marginTop: '0',
     marginBottom: '0.8em',
-    fontSize: '1.5rem',
+    fontSize: '22px', // Fixed font size in pixels, and increased for better visibility
     background: 'linear-gradient(to right, #1565c0, #1976d2, #2196f3)',
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
@@ -187,9 +187,10 @@ function createChatWindow(buttonRect) {
     scrollbarColor: 'rgba(25, 118, 210, 0.3) transparent'
   });
   
-  // Add Webkit browser scrollbar styles
-  const scrollbarStyle = document.createElement('style');
-  scrollbarStyle.textContent = `
+  // Add chat styles including scrollbar and message formatting
+  const chatStyles = document.createElement('style');
+  chatStyles.textContent = `
+    /* Scrollbar styles */
     .chat-messages::-webkit-scrollbar {
       width: 8px;
     }
@@ -216,8 +217,38 @@ function createChatWindow(buttonRect) {
     .chat-messages:not(:hover) {
       scrollbar-color: transparent transparent;
     }
+    
+    /* Message formatting styles */
+    .chat-message {
+      max-width: 80%;
+      white-space: pre-line;
+      line-height: 1.5;
+      word-break: break-word;
+    }
+    
+    .chat-message p {
+      margin: 0 0 8px 0;
+    }
+    
+    .chat-message:last-child p:last-child {
+      margin-bottom: 0;
+    }
+    
+    .chat-message ul, .chat-message ol {
+      margin-top: 4px;
+      margin-bottom: 8px;
+      padding-left: 20px;
+    }
+    
+    .chat-message code {
+      background-color: rgba(0, 0, 0, 0.05);
+      padding: 2px 4px;
+      border-radius: 3px;
+      font-family: monospace;
+      font-size: 0.9em;
+    }
   `;
-  document.head.appendChild(scrollbarStyle);
+  document.head.appendChild(chatStyles);
   
   // Create input area
   const chatInputArea = document.createElement('div');
@@ -485,7 +516,8 @@ function addChatMessage(text, sender) {
     // Initial animation state
     opacity: '0',
     transform: sender === 'user' ? 'translateX(20px) scale(0.8)' : 'translateX(-20px) scale(0.8)',
-    transition: 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)'
+    transition: 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
+    whiteSpace: 'pre-line' // Add pre-line to preserve line breaks
   });
   
   // Add typing animation if it's the assistant's "Thinking..." message
@@ -532,7 +564,9 @@ function addChatMessage(text, sender) {
     typingContainer.appendChild(dotsContainer);
     messageDiv.appendChild(typingContainer);
   } else {
-    messageDiv.innerText = text;
+    // Preserve line breaks in the text by using textContent instead of innerText
+    // and setting white-space: pre-line in the styles
+    messageDiv.textContent = text;
   }
   
   chatPopup.messages.appendChild(messageDiv);
@@ -674,6 +708,9 @@ function sendChatMessage() {
                       responseText = responseItem;
                     }
                     
+                    // Normalize line breaks to ensure consistent formatting
+                    responseText = normalizeLineBreaks(responseText);
+                    
                     // Add each response as a separate message
                     const assistantMessage = addChatMessage(responseText, 'assistant');
                     
@@ -705,6 +742,9 @@ function sendChatMessage() {
                 } else {
                   responseText = data.response;
                 }
+                
+                // Normalize line breaks to ensure consistent formatting
+                responseText = normalizeLineBreaks(responseText);
                 
                 // Add assistant reply with improved animation
                 const assistantMessage = addChatMessage(responseText, 'assistant');
@@ -899,6 +939,9 @@ function openChatWindowWithAutoQuery(buttonRect, bubbleData, buttonElement) {
                           responseText = responseItem;
                         }
                         
+                        // Normalize line breaks to ensure consistent formatting
+                        responseText = normalizeLineBreaks(responseText);
+                        
                         // Add each response as a separate message
                         const assistantMessage = addChatMessage(responseText, 'assistant');
                         
@@ -930,6 +973,9 @@ function openChatWindowWithAutoQuery(buttonRect, bubbleData, buttonElement) {
                     } else {
                       responseText = data.response;
                     }
+                    
+                    // Normalize line breaks to ensure consistent formatting
+                    responseText = normalizeLineBreaks(responseText);
                     
                     // Add assistant reply with improved animation
                     const assistantMessage = addChatMessage(responseText, 'assistant');
@@ -1046,35 +1092,128 @@ window.addEventListener('resize', () => {
 function highlightImportantContent(messageElement) {
   if (!messageElement) return;
   
-  // Add visual cues for important sentences
-  const text = messageElement.innerText;
-  const sentences = text.split(/(?<=[.!?])\s+/);
+  // Get the original text with preserved line breaks
+  const originalText = messageElement.textContent;
   
-  if (sentences.length > 1) {
-    // Clear current text
-    messageElement.innerText = '';
-    
-    // Create styled sentences
-    sentences.forEach((sentence, index) => {
-      const sentenceSpan = document.createElement('span');
-      sentenceSpan.innerText = sentence + (index < sentences.length - 1 ? ' ' : '');
-      
-      // Determine if sentence is important based on keywords
-      const isImportant = /important|critical|must|always|never|careful|warning|caution|attention/i.test(sentence);
-      
-      if (isImportant) {
-        Object.assign(sentenceSpan.style, {
-          fontWeight: '500',
-          background: 'rgba(25, 118, 210, 0.07)',
-          padding: '2px 4px',
-          borderRadius: '4px',
-          margin: '0 -2px'
+  // Check if the message contains code blocks or structured content
+  if (/```|\n\s{2,}|\n\t+|Source excerpt:/i.test(originalText)) {
+    // For code blocks or special content, don't apply sentence highlighting
+    // to avoid breaking the formatting
+    return;
+  }
+  
+  // Split text by lines first to preserve line breaks
+  const lines = originalText.split(/\n/);
+  
+  // Clear current text
+  messageElement.textContent = '';
+  
+  // Process each line separately to preserve line breaks
+  lines.forEach((line, lineIndex) => {
+    // Only process non-empty lines
+    if (line.trim()) {
+      // Skip highlighting for lines that look like code or structured data
+      if (/^\s{2,}|^\t+|\s{2,}\S+\s{2,}|\|\s+\|/.test(line)) {
+        // Add the line as-is without highlighting
+        const plainSpan = document.createElement('span');
+        plainSpan.textContent = line;
+        messageElement.appendChild(plainSpan);
+      } else {
+        // Split line into sentences
+        const sentences = line.split(/(?<=[.!?])\s+/);
+        
+        // Process each sentence in the line
+        sentences.forEach((sentence, sentenceIndex) => {
+          const sentenceSpan = document.createElement('span');
+          
+          // Add space after sentence if not last sentence in line
+          const needsSpace = sentenceIndex < sentences.length - 1;
+          sentenceSpan.textContent = sentence + (needsSpace ? ' ' : '');
+          
+          // Determine if sentence is important based on keywords
+          const isImportant = /important|critical|must|always|never|careful|warning|caution|attention/i.test(sentence);
+          
+          if (isImportant) {
+            Object.assign(sentenceSpan.style, {
+              fontWeight: '500',
+              background: 'rgba(25, 118, 210, 0.07)',
+              padding: '2px 4px',
+              borderRadius: '4px',
+              margin: '0 -2px'
+            });
+          }
+          
+          messageElement.appendChild(sentenceSpan);
         });
       }
-      
-      messageElement.appendChild(sentenceSpan);
-    });
+    }
+    
+    // Add line break if not the last line
+    if (lineIndex < lines.length - 1) {
+      messageElement.appendChild(document.createElement('br'));
+    }
+  });
+}
+
+/**
+ * Normalize line breaks in text to ensure consistent formatting
+ * @param {string} text - The text to normalize
+ * @return {string} - Normalized text with consistent line breaks
+ */
+function normalizeLineBreaks(text) {
+  if (!text) return '';
+  
+  // First replace all variants of line breaks with standard \n
+  let normalized = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+  
+  // Detect if text contains code blocks (starting with spaces/tabs or containing programming tokens)
+  const hasCodeBlock = /\n(\s{2,}|\t+)[a-zA-Z0-9_.]+|[\{\}\[\]<>;=]/m.test(normalized);
+  if (hasCodeBlock) {
+    // For texts with code blocks, be more conservative with formatting
+    // Just ensure there's proper paragraph separation
+    normalized = normalized.replace(/\n{3,}/g, '\n\n');
+    return normalized;
   }
+  
+  // Common patterns that should start on a new line
+  const patterns = [
+    'Source excerpt:',
+    'Example:',
+    'Note:',
+    'Warning:',
+    'Important:',
+    'References:',
+    'Disclaimer:',
+    'Summary:',
+    'Conclusion:',
+    'In conclusion,',
+    'For example:',
+    'Additionally:',
+    'Furthermore:',
+    'In summary:',
+    'Context:',
+    'Original text:'
+  ];
+  
+  // Create a regex pattern from the patterns array
+  const patternRegex = patterns.map(p => p.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|');
+  
+  // Ensure patterns start on a new line if preceded by punctuation + space
+  normalized = normalized.replace(new RegExp(`([.:!?])\\s+(${patternRegex})`, 'g'), '$1\n\n$2');
+  
+  // Ensure patterns start on a new line even if they appear at the beginning of a normal paragraph
+  normalized = normalized.replace(new RegExp(`(^|\\n)([^\\n]+?)\\s+(${patternRegex})`, 'g'), '$1$2\n\n$3');
+  
+  // Ensure proper spacing after these patterns
+  normalized = normalized.replace(new RegExp(`(${patternRegex})(\\s*)(\\S)`, 'g'), '$1$2\n$3');
+  
+  // Handle list items - make sure there's a line break before each list item
+  normalized = normalized.replace(/(\n|^)([^\n]*?\n)(\d+\.\s+|\*\s+|\-\s+)/g, '$1$2\n$3');
+  
+  // Ensure there's only one blank line between paragraphs
+  normalized = normalized.replace(/\n{3,}/g, '\n\n');
+  
+  return normalized;
 }
 
 // Export interface

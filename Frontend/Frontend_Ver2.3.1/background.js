@@ -34,12 +34,12 @@ function setupServiceWorkerMonitoring() {
     serviceWorkerHeartbeats: [] 
   });
   
-  // Schedule regular heartbeat checks
-  setInterval(recordHeartbeat, 30000);
-  setInterval(checkServiceWorkerHealth, 60000);
-  setInterval(verifyServiceWorkerActivity, 5 * 60000);
+  // Increased frequency of heartbeat and health checks
+  setInterval(recordHeartbeat, 15000);      // Changed to 15 seconds
+  setInterval(checkServiceWorkerHealth, 30000);  // Changed to 30 seconds
+  setInterval(verifyServiceWorkerActivity, 2 * 60000);  // Changed to 2 minutes
   
-  console.log("Service worker monitoring initialized");
+  console.log("Service worker monitoring system initialized");
 }
 
 // Record heartbeat to track service worker activity
@@ -48,8 +48,8 @@ function recordHeartbeat() {
     const heartbeats = data.serviceWorkerHeartbeats || [];
     const now = Date.now();
     
-    // Keep only the last 30 heartbeats (15 minutes of history with 30s intervals)
-    while (heartbeats.length > 30) {
+    // Keep the last 60 heartbeats (15 seconds each, 15 minutes of history)
+    while (heartbeats.length > 60) {
       heartbeats.shift();
     }
     
@@ -99,17 +99,33 @@ function verifyServiceWorkerActivity() {
     
     console.log(`Service worker last active ${inactiveTime/1000} seconds ago`);
     
-    // If service worker hasn't been active for more than 10 minutes and 
-    // the extension has been running for at least 15 minutes
-    if (inactiveTime > 10 * 60 * 1000 && (now - startupTime) > 15 * 60 * 1000) {
+    // If service worker has been inactive for more than 5 minutes (more sensitive than previous 10 minutes)
+    // and the extension has been running for at least 10 minutes (shorter than previous 15 minutes)
+    if (inactiveTime > 5 * 60 * 1000 && (now - startupTime) > 10 * 60 * 1000) {
       console.warn("Service worker may be inactive, attempting recovery");
       attemptServiceWorkerRecovery();
     }
+    
+    // Proactively record heartbeat to ensure service worker stays active during verification
+    recordHeartbeat();
   });
 }
 
 // Try to recover service worker if it becomes inactive
 function attemptServiceWorkerRecovery() {
+  console.log("Attempting to recover service worker...");
+  
+  // Force meaningful operations to keep service worker active
+  chrome.runtime.getPlatformInfo(function(info) {
+    console.log("Forced operation: getting platform info " + info.os);
+  });
+  
+  // Update storage to trigger activity
+  chrome.storage.local.set({ 
+    serviceWorkerRecoveryAttempt: Date.now(),
+    serviceWorkerForceRefresh: true
+  });
+  
   // Send a wake-up ping to ensure service worker is active
   chrome.runtime.sendMessage({ action: "serviceWorkerWakeUp" }, function(response) {
     if (response) {
@@ -120,17 +136,34 @@ function attemptServiceWorkerRecovery() {
       
       // Force storage update to trigger activity
       chrome.storage.local.set({ 
-        serviceWorkerRecoveryAttempt: Date.now()
+        serviceWorkerRecoveryAttempt: Date.now(),
+        serviceWorkerFatalRecovery: true
       }, function() {
         // Check if this operation succeeded
         chrome.storage.local.get(['serviceWorkerRecoveryAttempt'], function(data) {
           if (data.serviceWorkerRecoveryAttempt) {
             console.log("Storage write successful, service worker may be recovering");
+            // Force a heartbeat
+            recordHeartbeat();
           } else {
             console.error("Storage write failed, service worker may need manual restart");
-            // At this point, the extension may need to be manually restarted
+            // Notify user of service worker failure
+            notifyServiceWorkerFailure();
           }
         });
+      });
+    }
+  });
+}
+
+// Notify user when service worker completely fails
+function notifyServiceWorkerFailure() {
+  // Show notification to user about extension issues
+  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+    if (tabs.length > 0) {
+      chrome.tabs.sendMessage(tabs[0].id, {
+        action: "showSummary",
+        error: "Extension service is having issues. Please try closing and reopening the extension."
       });
     }
   });
@@ -274,12 +307,16 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
             const apiUrl = `${API_CONFIG.BASE_URL}/api/scheduling`;
             console.log("Making API request to:", apiUrl);
             
+            // Set up API request heartbeat to keep service worker active during long requests
+            const apiRequestHeartbeat = setInterval(recordHeartbeat, 5000);
+            
             // Check if the request has been cancelled
             return new Promise((resolve, reject) => {
               chrome.storage.local.get(['currentSummaryRequest'], (data) => {
                 // If request status is marked as cancelled, abort the request
                 if (data.currentSummaryRequest && data.currentSummaryRequest.isCancelled) {
                   console.log("Request was cancelled by user, aborting API call");
+                  clearInterval(apiRequestHeartbeat); // Clear API request heartbeat
                   reject(new Error("Request cancelled by user"));
                   return;
                 }
@@ -293,11 +330,16 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
                   body: JSON.stringify({ text: pageText, url: url })
                 }).then(response => {
                   if (!response.ok) {
+                    clearInterval(apiRequestHeartbeat); // Clear API request heartbeat
                     throw new Error(`API response error: ${response.status}`);
                   }
                   console.log("Received successful API response");
+                  clearInterval(apiRequestHeartbeat); // Clear API request heartbeat
                   return response.json();
-                }).then(resolve).catch(reject);
+                }).then(resolve).catch(err => {
+                  clearInterval(apiRequestHeartbeat); // Ensure API request heartbeat is cleared in all cases
+                  reject(err);
+                });
               });
             });
           })

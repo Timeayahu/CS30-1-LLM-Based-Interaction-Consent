@@ -114,7 +114,7 @@ function createLoginPage() {
   Object.assign(title.style, {
     marginTop: '0',
     marginBottom: '0',
-    fontSize: '1.6rem',
+    fontSize: '24px', // Fixed font size in pixels, and increased for better visibility
     background: 'linear-gradient(to right, #1565c0, #1976d2, #2196f3)',
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
@@ -1129,7 +1129,7 @@ function createProfilePage(summaryRect) {
   Object.assign(profileTitle.style, {
     marginTop: '0',
     marginBottom: '0.8em',
-    fontSize: '1.5rem',
+    fontSize: '22px', // Fixed font size in pixels, and increased for better visibility
     background: 'linear-gradient(to right, #1565c0, #1976d2, #2196f3)',
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
