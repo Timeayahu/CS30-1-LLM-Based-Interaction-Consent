@@ -1,7 +1,7 @@
 // background.js
 
 const API_CONFIG = {
-  BASE_URL: 'https://54.221.37.249:5000'
+  BASE_URL: 'https://usyd-cs30-1-llm-based-consent-reader.com'
 };
 
 // Initialize the extension state
