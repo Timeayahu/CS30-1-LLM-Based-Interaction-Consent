@@ -557,7 +557,7 @@ function addChatMessage(text, sender) {
   
   if (targetScrollTop > currentScrollTop) {
     const startTime = Date.now();
-    const duration = 300; // ms
+    const duration = 300;
     
     const scrollAnimation = () => {
       const elapsed = Date.now() - startTime;
@@ -616,9 +616,13 @@ function sendChatMessage() {
   setTimeout(() => {
     const loadingMsg = addChatMessage('Thinking...', 'assistant');
     
-    // Get policy ID to be dialoged
-    chrome.storage.local.get(['currentPolicyId'], (result) => {
-      const policyId = result.currentPolicyId || '';
+    // Get the URL of the current page
+    const currentUrl = window.location.href;
+    const urlPolicyKey = `policyId_${currentUrl}`;
+    
+    // Get the policyId of the current page first, then fall back to the global currentPolicyId
+    chrome.storage.local.get([urlPolicyKey, 'currentPolicyId'], (result) => {
+      const policyId = result[urlPolicyKey] || result.currentPolicyId || '';
       
       // Prepare request data, add session ID if available
       const requestData = {
@@ -826,11 +830,25 @@ function openChatWindowWithAutoQuery(buttonRect, bubbleData, buttonElement) {
       setTimeout(() => {
         const loadingMsg = addChatMessage('Thinking...', 'assistant');
         
-        // Get current privacy policy ID
-        chrome.storage.local.get(['currentPolicyId'], (result) => {
-          const policyId = result.currentPolicyId || '';
+        let policyId;
+        
+        if (bubbleData && bubbleData.policy_id) {
+          policyId = bubbleData.policy_id;
+          processWithPolicyId(policyId);
+        } else {
+          // Get the policyId of the current page URL
+          const currentUrl = window.location.href;
+          const urlPolicyKey = `policyId_${currentUrl}`;
           
-          // Prepare request data, add session ID if available
+          chrome.storage.local.get([urlPolicyKey, 'currentPolicyId'], (result) => {
+            policyId = result[urlPolicyKey] || result.currentPolicyId || '';
+            processWithPolicyId(policyId);
+          });
+        }
+        
+        // Process request with determined policyId
+        function processWithPolicyId(policyId) {
+          // Prepare request data
           const requestData = {
             policy_id: policyId,
             category_name: bubbleData.category || '',
@@ -995,7 +1013,7 @@ function openChatWindowWithAutoQuery(buttonRect, bubbleData, buttonElement) {
               }, 300);
             }
           });
-        });
+        }
       }, 200);
     }, animDelay);
   }

@@ -2633,91 +2633,91 @@ function updatePopup(popup, isLoading, text, isError) {
                     // 4. Set transition effect for smooth height changes
                     categoryDiv.style.transition = 'height 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
                     
-                      // Combine original height and detection mechanism to ensure container doesn't grow too tall
-  if (originalHeight && originalHeight > 0) {
-    // Set to original height first
-    if (expandedSummary.classList.contains('collapsing')) {
-      setTimeout(() => {
-        categoryDiv.style.height = `${originalHeight}px`;
-        // Force layout recalculation
-        void categoryDiv.offsetHeight;
-        
-        // After setting original height, trigger an additional check to prevent accumulative growth
-        setTimeout(() => {
-          // Detect all visible bubbles
-          const visibleBubbles = Array.from(bubbleContainer.querySelectorAll('div[style*="border-radius: 25px"]'))
-            .filter(b => {
-              return b !== expandedSummary && 
-                    window.getComputedStyle(b).display !== 'none' && 
-                    parseFloat(window.getComputedStyle(b).opacity) > 0;
-            });
-          
-          if (visibleBubbles.length > 0) {
-            // Calculate actual height needed for all bubbles plus title
-            const categoryRect = categoryDiv.getBoundingClientRect();
-            const titleHeight = categoryDiv.querySelector('h3')?.offsetHeight || 30;
-            const paddingTop = 18;
-            const paddingBottom = 18;
-            
-            let maxBubbleBottom = 0;
-            visibleBubbles.forEach(b => {
-              const bubbleRect = b.getBoundingClientRect();
-              const bubbleBottom = bubbleRect.bottom - categoryRect.top + 20;
-              maxBubbleBottom = Math.max(maxBubbleBottom, bubbleBottom);
-            });
-            
-            // Calculate actual required height
-            const neededHeight = Math.max(
-              titleHeight + paddingTop + paddingBottom,
-              maxBubbleBottom
-            );
-            
-            // Choose smaller height to prevent accumulative growth
-            const adjustedHeight = Math.min(neededHeight, originalHeight);
-            
-            // If adjusted height differs from original height by over 20%, use adjusted height
-            if (Math.abs(adjustedHeight - originalHeight) > originalHeight * 0.2) {
-              categoryDiv.style.height = `${adjustedHeight}px`;
-            }
-          }
-        }, 300);
-      }, 100);
-    } else {
-      categoryDiv.style.height = `${originalHeight}px`;
-    }
-  } else if (originalHeightBeforeExpand && originalHeightBeforeExpand > 0) {
-    // Use height from before expansion
-    categoryDiv.style.height = `${originalHeightBeforeExpand}px`;
-  } else {
-    // Only use detection mechanism when original height isn't available
-    
-    // Detect all visible bubbles
-    const visibleBubbles = Array.from(bubbleContainer.querySelectorAll('div[style*="border-radius: 25px"]'))
-      .filter(b => {
-        return b !== expandedSummary && 
-               window.getComputedStyle(b).display !== 'none' && 
-               parseFloat(window.getComputedStyle(b).opacity) > 0;
-      });
-    
-    if (visibleBubbles.length > 0) {
-      const categoryRect = categoryDiv.getBoundingClientRect();
-      let maxBottom = 0;
-      
-      visibleBubbles.forEach(bubble => {
-        const rect = bubble.getBoundingClientRect();
-        const bubbleBottom = rect.bottom - categoryRect.top;
-        maxBottom = Math.max(maxBottom, bubbleBottom);
-      });
-      
-      const extraBottomMargin = 20;
-      const reasonableHeight = maxBottom + extraBottomMargin;
-      
-      categoryDiv.style.height = `${Math.max(reasonableHeight, 120)}px`;
-    } else {
-      categoryDiv.style.height = 'auto';
-      categoryDiv.style.minHeight = '120px';
-    }
-  }
+                    // 5. Combine original height and detection mechanism to ensure container doesn't grow too tall
+                    if (originalHeight && originalHeight > 0) {
+                      // Set to original height first
+                      if (expandedSummary.classList.contains('collapsing')) {
+                        setTimeout(() => {
+                          categoryDiv.style.height = `${originalHeight}px`;
+                          // Force layout recalculation
+                          void categoryDiv.offsetHeight;
+                          
+                          // After setting original height, trigger an additional check to prevent accumulative growth
+                          setTimeout(() => {
+                            // Detect all visible bubbles
+                            const visibleBubbles = Array.from(bubbleContainer.querySelectorAll('div[style*="border-radius: 25px"]'))
+                              .filter(b => {
+                                return b !== expandedSummary && 
+                                      window.getComputedStyle(b).display !== 'none' && 
+                                      parseFloat(window.getComputedStyle(b).opacity) > 0;
+                              });
+                            
+                            if (visibleBubbles.length > 0) {
+                              // Calculate actual height needed for all bubbles plus title
+                              const categoryRect = categoryDiv.getBoundingClientRect();
+                              const titleHeight = categoryDiv.querySelector('h3')?.offsetHeight || 30;
+                              const paddingTop = 18;
+                              const paddingBottom = 18;
+                              
+                              let maxBubbleBottom = 0;
+                              visibleBubbles.forEach(b => {
+                                const bubbleRect = b.getBoundingClientRect();
+                                const bubbleBottom = bubbleRect.bottom - categoryRect.top + 20;
+                                maxBubbleBottom = Math.max(maxBubbleBottom, bubbleBottom);
+                              });
+                              
+                              // Calculate actual required height
+                              const neededHeight = Math.max(
+                                titleHeight + paddingTop + paddingBottom,
+                                maxBubbleBottom
+                              );
+                              
+                              // Choose smaller height to prevent accumulative growth
+                              const adjustedHeight = Math.min(neededHeight, originalHeight);
+                              
+                              // If adjusted height differs from original height by over 20%, use adjusted height
+                              if (Math.abs(adjustedHeight - originalHeight) > originalHeight * 0.2) {
+                                categoryDiv.style.height = `${adjustedHeight}px`;
+                              }
+                            }
+                          }, 300);
+                        }, 100);
+                      } else {
+                        categoryDiv.style.height = `${originalHeight}px`;
+                      }
+                    } else if (originalHeightBeforeExpand && originalHeightBeforeExpand > 0) {
+                      // Use height from before expansion
+                      categoryDiv.style.height = `${originalHeightBeforeExpand}px`;
+                    } else {
+                      // Only use detection mechanism when original height isn't available
+                      
+                      // Detect all visible bubbles
+                      const visibleBubbles = Array.from(bubbleContainer.querySelectorAll('div[style*="border-radius: 25px"]'))
+                        .filter(b => {
+                          return b !== expandedSummary && 
+                                 window.getComputedStyle(b).display !== 'none' && 
+                                 parseFloat(window.getComputedStyle(b).opacity) > 0;
+                        });
+                      
+                      if (visibleBubbles.length > 0) {
+                        const categoryRect = categoryDiv.getBoundingClientRect();
+                        let maxBottom = 0;
+                        
+                        visibleBubbles.forEach(bubble => {
+                          const rect = bubble.getBoundingClientRect();
+                          const bubbleBottom = rect.bottom - categoryRect.top;
+                          maxBottom = Math.max(maxBottom, bubbleBottom);
+                        });
+                        
+                        const extraBottomMargin = 20;
+                        const reasonableHeight = maxBottom + extraBottomMargin;
+                        
+                        categoryDiv.style.height = `${Math.max(reasonableHeight, 120)}px`;
+                      } else {
+                        categoryDiv.style.height = 'auto';
+                        categoryDiv.style.minHeight = '120px';
+                      }
+                    }
                     
                     // Restore original minimum height
                     categoryDiv.style.minHeight = originalMinHeight || 'auto';
@@ -2913,7 +2913,7 @@ function updatePopup(popup, isLoading, text, isError) {
                   Object.assign(contextLink.style, {
                     color: borderColor,
                     textDecoration: 'none',
-                    fontSize: '14px', // Fixed font size in pixels
+                    fontSize: '14px',
                     display: 'inline-block',
                     padding: '6px 12px',  
                     margin: '0 0 10px 0',
@@ -3009,15 +3009,29 @@ function updatePopup(popup, isLoading, text, isError) {
                     // Record button position for animation
                     const buttonRect = detailExplanationBtn.getBoundingClientRect();
                     
-                    // Prepare bubble data for chat window
-                    const bubbleData = {
-                      keyword: item.keyword,
-                      summary: item.summary,
-                      category: category.title
-                    };
+                    // Get the policyId of the current page URL
+                    const currentUrl = window.location.href;
+                    const urlPolicyKey = `policyId_${currentUrl}`;
                     
-                    // Call chat window with auto query
-                    window.privacyChatbox.openChatWindowWithAutoQuery(buttonRect, bubbleData, detailExplanationBtn);
+                    chrome.storage.local.get([urlPolicyKey], (result) => {
+                      const pagePolicyId = result[urlPolicyKey];
+                      
+                      // Ensure the policyId of the current page is the latest
+                      if (pagePolicyId) {
+                        chrome.storage.local.set({ currentPolicyId: pagePolicyId });
+                      }
+                      
+                      // Prepare bubble data for chat window
+                      const bubbleData = {
+                        keyword: item.keyword,
+                        summary: item.summary,
+                        category: category.title,
+                        policy_id: pagePolicyId
+                      };
+                      
+                      // Call chat window with auto query
+                      window.privacyChatbox.openChatWindowWithAutoQuery(buttonRect, bubbleData, detailExplanationBtn);
+                    });
                   });
 
                   // Handle click to view original text
@@ -3141,7 +3155,7 @@ function updatePopup(popup, isLoading, text, isError) {
               marginRight: '10px',
               transition: 'transform 0.3s ease',
               display: 'inline-block',
-              fontSize: '12px', // Fixed font size in pixels
+              fontSize: '12px',
               color: '#1976d2'
             });
 
@@ -3152,7 +3166,7 @@ function updatePopup(popup, isLoading, text, isError) {
               fontWeight: '600',
               color: '#1976d2',
               flex: '1',
-              fontSize: '15px' // Fixed font size in pixels
+              fontSize: '15px'
             });
 
             headerContainer.appendChild(arrow);
@@ -3174,7 +3188,7 @@ function updatePopup(popup, isLoading, text, isError) {
             const summary = document.createElement('div');
             summary.innerText = item.summary;
             Object.assign(summary.style, {
-              fontSize: '14px', // Fixed font size in pixels
+              fontSize: '14px',
               marginBottom: '8px',
               lineHeight: '1.5',
               wordBreak: 'break-word',
@@ -3188,7 +3202,7 @@ function updatePopup(popup, isLoading, text, isError) {
             Object.assign(contextLink.style, {
               color: '#1976d2',
               textDecoration: 'none',
-              fontSize: '14px', // Fixed font size in pixels
+              fontSize: '14px',
               display: 'inline-block',
               marginBottom: '10px',
               padding: '6px 12px', 
@@ -3245,7 +3259,7 @@ function updatePopup(popup, isLoading, text, isError) {
             Object.assign(detailExplanationBtn.style, {
               color: '#1976d2',
               textDecoration: 'none',
-              fontSize: '14px', // Fixed font size in pixels
+              fontSize: '14px',
               display: 'inline-block',
               marginBottom: '10px',
               marginLeft: '10px',
@@ -3276,15 +3290,29 @@ function updatePopup(popup, isLoading, text, isError) {
               // Record button position for animation
               const buttonRect = detailExplanationBtn.getBoundingClientRect();
               
-              // Prepare bubble data for chat window
-              const bubbleData = {
-                keyword: item.keyword,
-                summary: item.summary,
-                category: category.title
-              };
+              // Get the policyId of the current page
+              const currentUrl = window.location.href;
+              const urlPolicyKey = `policyId_${currentUrl}`;
               
-              // Call chat window with auto query
-              window.privacyChatbox.openChatWindowWithAutoQuery(buttonRect, bubbleData, detailExplanationBtn);
+              chrome.storage.local.get([urlPolicyKey], (result) => {
+                const pagePolicyId = result[urlPolicyKey];
+                
+                // Ensure the policyId of the current page is the latest
+                if (pagePolicyId) {
+                  chrome.storage.local.set({ currentPolicyId: pagePolicyId });
+                }
+                
+                // Prepare bubble data for chat window
+                const bubbleData = {
+                  keyword: item.keyword,
+                  summary: item.summary,
+                  category: category.title,
+                  policy_id: pagePolicyId
+                };
+                
+                // Call chat window with auto query
+                window.privacyChatbox.openChatWindowWithAutoQuery(buttonRect, bubbleData, detailExplanationBtn);
+              });
             });
 
             // Handle click to view original text
@@ -3601,7 +3629,7 @@ cleanupFloatingIcon();
 
 // Chrome extension message listener
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  if (message.action === "showSummary") {
+      if (message.action === "showSummary") {
     // When summary is displayed, save current policy ID for chat functionality
     if (message.summary && !message.isLoading && !message.error) {
       try {
@@ -3610,7 +3638,14 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
           : message.summary;
         
         if (summary && message.policy_id) {
-          chrome.storage.local.set({ currentPolicyId: message.policy_id });
+          // Store with URL prefix to make it unique for current page
+          const currentUrl = window.location.href;
+          const urlPolicyKey = `policyId_${currentUrl}`;
+          // Save global currentPolicyId for compatibility
+          chrome.storage.local.set({ 
+            currentPolicyId: message.policy_id,
+            [urlPolicyKey]: message.policy_id
+          });
         }
       } catch (e) {
         console.error("Failed to parse summary:", e);
