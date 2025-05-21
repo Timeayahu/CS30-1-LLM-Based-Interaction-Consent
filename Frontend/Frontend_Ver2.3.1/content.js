@@ -443,6 +443,23 @@ function handleLinkHover(e) {
 function isPossiblePrivacyPolicyLink(link) {
   if (!link || !link.href) return false;
   
+  // Quick exclusion for obvious Terms of Service links
+  const termsPattern = /terms|conditions|nutzungsbedingungen|利用規約|사용약관|使用条款/i;
+  if (link.textContent && 
+      termsPattern.test(link.textContent.trim()) && 
+      !/privacy|隐私|プライバシー|개인정보|datenschutz|privacidad/i.test(link.textContent.trim())) {
+    
+    // Exception for JB HiFi special handling
+    if (link.href && (
+        link.href.includes('support.jbhifi.com.au') || 
+        (link.href.includes('jbhifi.com') && link.href.includes('privacy'))
+    )) {
+      // Do not exclude potential JB HiFi privacy policy links
+    } else {
+      return false;
+    }
+  }
+  
   // Use cached result if available
   if (linkDetectionCache.has(link.href)) {
     return linkDetectionCache.get(link.href);
@@ -465,7 +482,7 @@ function isPossiblePrivacyPolicyLink(link) {
 
 // Actual link detection logic
 function checkLinkForPrivacyPolicy(link) {
-  // REDESIGNED DETECTION LOGIC - More strict matching for privacy policy links
+  // REDESIGNED DETECTION LOGIC - Strict matching for privacy policy links only
   
   // Core privacy keywords - Direct and specific matches only
   const corePrivacyKeywords = /privacy(\s|-|_)policy|隐私(\s|-|_)政策|プライバシー(\s|-|_)ポリシー|개인정보(\s|-|_)처리방침|datenschutzerklärung|política(\s|-|_)de(\s|-|_)privacidad/i;
@@ -473,8 +490,8 @@ function checkLinkForPrivacyPolicy(link) {
   // Secondary privacy keywords - Less precise but still directly related
   const secondaryPrivacyKeywords = /privacy|隐私|プライバシー|개인정보|datenschutz|privacidad/i;
   
-  // Terms/policy keywords that require additional context validation
-  const termsKeywords = /terms|policy|政策|条款|利用規約|이용약관/i;
+  // Terms of Service exclusion pattern - used to exclude terms links even if they contain 'policy'
+  const termsExclusionPattern = /terms(\s|-|_)of(\s|-|_)service|terms(\s|-|_)and(\s|-|_)conditions|terms(\s|-|_)of(\s|-|_)use|使用条款|利用規約|이용약관|nutzungsbedingungen|términos(\s|-|_)de(\s|-|_)servicio/i;
   
   // Common privacy policy link text patterns - used for text-only checks
   const commonPrivacyLinkTexts = [
@@ -485,6 +502,15 @@ function checkLinkForPrivacyPolicy(link) {
     /datenschutzerklärung/i,
     /política(\s|-|_)de(\s|-|_)privacidad/i
   ];
+  
+  // Exclude Terms of Service links
+  if (link.href && termsExclusionPattern.test(link.href)) {
+    return false;
+  }
+  
+  if (link.textContent && termsExclusionPattern.test(link.textContent.trim())) {
+    return false;
+  }
   
   // Quick check stages - first perform fastest checks
   
@@ -506,6 +532,8 @@ function checkLinkForPrivacyPolicy(link) {
   // 4. Check specific company privacy policy URL patterns (direct matches)
   const knownPatterns = [
     /microsoft\.com.*privacy/i,
+    /go\.microsoft\.com\/fwlink\/\?LinkId=521839/i,  // Microsoft specific redirection link for privacy policy
+    /go\.microsoft\.com\/fwlink.*privacy/i,          // Generic Microsoft fwlink URLs containing privacy
     /google\.com.*privacy/i,
     /apple\.com.*privacy/i,
     /facebook\.com.*privacy/i,
@@ -523,7 +551,10 @@ function checkLinkForPrivacyPolicy(link) {
     /\/privacy-policy/i,
     /\/privacy\/policy/i,
     /\/privacypolicy/i,
-    /\/privacy_policy/i
+    /\/privacy_policy/i,
+    /jbhifi\.com.*privacy/i,
+    /support\.jbhifi\.com\.au\/hc\/.*\/articles\/.*Privacy-policy/i,
+    /support\.jbhifi\.com\.au\/hc\/.*\/articles\/360052938974/i
   ];
   
   for (const pattern of knownPatterns) {
@@ -534,9 +565,7 @@ function checkLinkForPrivacyPolicy(link) {
   
   // Special case handlers for major Chinese platforms
   const chinesePatterns = [
-    /alibaba\.com.*rule/i,
-    /rulechannel\.alibaba\.com/i,
-    /taobao\.com.*rule/i,
+    /alibaba\.com.*privacy/i,
     /baidu\.com.*privacy/i,
     /tencent\.com.*privacy/i,
     /qq\.com.*privacy/i,
@@ -585,33 +614,43 @@ function checkLinkForPrivacyPolicy(link) {
         link.textContent.trim().length < 30 &&
         secondaryPrivacyKeywords.test(link.textContent.trim())) {
       
-      const siblings = getSiblingLinkTexts(link, 3);
-      const hasSiblingTerms = siblings.some(text => 
-        /terms|conditions|legal|copyright|contact|cookies|隐私|条款|版权|联系/i.test(text)
-      );
-      
-      if (hasSiblingTerms) {
+      // Explicit check if link text contains "privacy" but not "terms"
+      if (/\bprivacy\b/i.test(link.textContent.trim()) && 
+          !/\bterms\b|\bconditions\b/i.test(link.textContent.trim())) {
         return true;
       }
-    }
-  }
-  
-  // Lower confidence checks - only for terms/policy keywords in specific contexts
-  if (termsKeywords.test(link.href) || 
-      (link.textContent && termsKeywords.test(link.textContent.trim()))) {
-    
-    // Only consider terms/policy keywords in footer areas
-    if (isLinkInFooter(link)) {
-      const siblings = getSiblingLinkTexts(link, 5);
       
-      // Only trigger if there are clear privacy-related siblings
+      const siblings = getSiblingLinkTexts(link, 3);
+      // Strict check: ensure presence of privacy-related sibling nodes without using terms siblings
       const hasPrivacySiblings = siblings.some(text => 
-        secondaryPrivacyKeywords.test(text)
+        /privacy(\s|-|_)policy|隐私政策/i.test(text)
       );
       
       if (hasPrivacySiblings) {
         return true;
       }
+    }
+  }
+  
+      // Completely removed terms-related detection logic, no longer considering terms links
+  
+  // Special case for Microsoft fwlink URLs
+  if (/go\.microsoft\.com\/fwlink/i.test(link.href)) {
+    // Handle specific known Microsoft privacy policy redirect
+    if (/LinkId=521839/i.test(link.href)) {
+      return true;
+    }
+    
+    // Check if the link text suggests privacy
+    if (link.textContent && secondaryPrivacyKeywords.test(link.textContent.trim())) {
+      return true;
+    }
+    
+    // If it has "privacy" in the URL or parent element text, consider it a match
+    if (/privacy/i.test(link.href) || 
+        (link.parentElement && link.parentElement.textContent && 
+         /privacy/i.test(link.parentElement.textContent))) {
+      return true;
     }
   }
   
@@ -623,6 +662,19 @@ function checkLinkForPrivacyPolicy(link) {
     }
   } catch (e) {
     // Decoding failed, ignore
+  }
+  
+  // Special site handling - JB HiFi
+  if ((link.href.includes('jbhifi.com') || link.href.includes('support.jbhifi.com.au')) && 
+      (link.href.includes('Privacy-policy') || 
+       link.href.includes('360052938974') ||
+       (link.textContent && link.textContent.toLowerCase().includes('privacy')))) {
+    return true;
+  }
+  
+  // Special check for JB HiFi specific URL format
+  if (link.href.includes('support.jbhifi.com.au/hc/en-au/articles/360052938974')) {
+    return true;
   }
   
   return false;
@@ -639,10 +691,15 @@ function getSiblingLinkTexts(link, count) {
   // Get all sibling links
   const siblings = parent.querySelectorAll('a');
   
+  // Exclude terms-related link text, focus only on privacy-related text
   for (const sibling of siblings) {
     if (sibling !== link && sibling.textContent) {
-      result.push(sibling.textContent.trim());
-      if (result.length >= count) break;
+      const siblingText = sibling.textContent.trim();
+      // Filter out terms/conditions/service-related link text
+      if (!/\bterms\b|\bconditions\b|\bservice\b|\bagreement\b/i.test(siblingText)) {
+        result.push(siblingText);
+        if (result.length >= count) break;
+      }
     }
   }
   
@@ -654,8 +711,12 @@ function getSiblingLinkTexts(link, count) {
         const links = parentSibling.querySelectorAll('a');
         for (const siblingLink of links) {
           if (siblingLink.textContent) {
-            result.push(siblingLink.textContent.trim());
-            if (result.length >= count) break;
+                         const siblingText = siblingLink.textContent.trim();
+            // Filter out terms/conditions/service-related link text
+            if (!/\bterms\b|\bconditions\b|\bservice\b|\bagreement\b/i.test(siblingText)) {
+              result.push(siblingText);
+              if (result.length >= count) break;
+            }
           }
         }
       }
@@ -748,6 +809,14 @@ function handleLinkLeave(e) {
                       currentX <= iconRect.right && 
                       currentY >= iconRect.top && 
                       currentY <= iconRect.bottom;
+      
+      // Check if summary popup is currently displayed
+      const isSummaryShowing = document.getElementById('summary-popup') !== null;
+      
+      // Reset icon lock status if the summary is closed
+      if (!isSummaryShowing) {
+        isIconLocked = isOverIcon; // Only lock when mouse is actually hovering over the icon
+      }
       
       // Don't hide if mouse is over icon or icon is locked
       if (isOverIcon || isIconLocked) {
@@ -1308,7 +1377,7 @@ function updatePopup(popup, isLoading, text, isError) {
         border: '1px solid rgba(25, 118, 210, 0.08)',
         transition: 'all 0.3s ease',
         fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
-        fontSize: '0.9rem'
+        fontSize: '14px'
       });
       
       const legendTitle = document.createElement('div');
@@ -1316,7 +1385,7 @@ function updatePopup(popup, isLoading, text, isError) {
       Object.assign(legendTitle.style, {
         marginTop: '0',
         marginBottom: '15px',
-        fontSize: '20px', // Fixed font size in pixels, and increased for better visibility
+        fontSize: '18px', // Reduced font size from 20px to 18px
         fontWeight: '600',
         position: 'relative',
         paddingBottom: '8px',
@@ -2056,7 +2125,7 @@ function updatePopup(popup, isLoading, text, isError) {
           marginTop: '0',
           marginBottom: '15px',
           color: '#1976d2',
-          fontSize: '20px', // Fixed font size in pixels, and increased for better visibility
+          fontSize: '18px', // Reduced font size from 20px to 18px
           fontWeight: '600',
           position: 'relative',
           paddingBottom: '8px',
@@ -2289,6 +2358,10 @@ function updatePopup(popup, isLoading, text, isError) {
                 const relativeLeft = bubbleRect.left - categoryRect.left;
                 const relativeTop = bubbleRect.top - categoryRect.top;
                 
+                // Get container dimensions for boundary checking
+                const containerWidth = categoryDiv.clientWidth;
+                const containerHeight = categoryDiv.clientHeight;
+                
                 // Create expanded summary box
                 const expandedSummary = document.createElement('div');
                 expandedSummary.className = 'expanded-summary';
@@ -2302,7 +2375,7 @@ function updatePopup(popup, isLoading, text, isError) {
                   color: '#333',
                   borderRadius: '12px',
                   padding: '20px',
-                  fontSize: '0.95rem',
+                  fontSize: '15px',
                   fontWeight: 'bold',
                   boxShadow: '0 10px 30px rgba(25, 118, 210, 0.15)',
                   zIndex: 10,
@@ -2367,26 +2440,50 @@ function updatePopup(popup, isLoading, text, isError) {
                 
                 // Set expansion animation
                 setTimeout(() => {
-                  // Calculate expanded position to ensure it doesn't exceed container boundaries
-                  let finalLeft = relativeLeft;
+                  // Define safety margins
+                  const horizontalMargin = 15;
+                  const verticalMargin = 15;
                   
-                  // If bubble is not at leftmost position, adjust position to avoid right boundary overflow
-                  if (relativeLeft + expandedWidth > categoryDiv.clientWidth - 15) {
-                    // Move expanded box left to align its right edge with container right edge (15px margin)
-                    finalLeft = categoryDiv.clientWidth - expandedWidth - 15;
+                  // Calculate maximum allowed dimensions
+                  const maxWidth = containerWidth - (2 * horizontalMargin);
+                  const maxHeight = 500; // Maximum height for summary box
+                  
+                  // Calculate safe dimensions
+                  const safeWidth = Math.min(expandedWidth, maxWidth);
+                  const safeHeight = Math.min(dynamicHeight, maxHeight);
+                  
+                  // Calculate optimal position to keep within container boundaries
+                  // Start with original position
+                  let finalLeft = relativeLeft;
+                  let finalTop = relativeTop;
+                  
+                  // Adjust horizontal position if it would overflow container
+                  if (finalLeft + safeWidth > containerWidth - horizontalMargin) {
+                    // Align right edge with container boundary
+                    finalLeft = containerWidth - safeWidth - horizontalMargin;
                   }
                   
-                  // Add safety check to ensure no negative position
-                  finalLeft = Math.max(finalLeft, 10);
+                  // Ensure left position is not negative
+                  finalLeft = Math.max(finalLeft, horizontalMargin);
                   
-                  // Additional check to ensure summary box doesn't exceed right boundary
-                  const safeWidth = Math.min(expandedWidth, categoryDiv.clientWidth - 30);
+                  // Adjust vertical position if needed
+                  // If the expanded height would go beyond container bottom
+                  if (finalTop + safeHeight > containerHeight - verticalMargin) {
+                    // Try to position above the bubble if there's space
+                    if (finalTop > safeHeight + verticalMargin) {
+                      // Position above the bubble
+                      finalTop = finalTop - safeHeight + bubbleRect.height;
+                    } else {
+                      // Not enough space above, keep at current position but adjust container height later
+                    }
+                  }
                   
                   expandedSummary.style.zIndex = '20';
                   
                   expandedSummary.style.width = `${safeWidth}px`;
-                  expandedSummary.style.height = `${dynamicHeight}px`;
+                  expandedSummary.style.height = `${safeHeight}px`;
                   expandedSummary.style.left = `${finalLeft}px`;
+                  expandedSummary.style.top = `${finalTop}px`;
                   expandedSummary.style.borderRadius = '12px';
                   expandedSummary.style.padding = '20px';
                   expandedSummary.style.alignItems = 'flex-start';
@@ -2416,30 +2513,43 @@ function updatePopup(popup, isLoading, text, isError) {
                   expandedSummary.style.boxShadow = `0 10px 30px rgba(0, 0, 0, 0.2)`;
                   
                   // Calculate bottom position of expanded summary box (relative to category container)
-                  const summaryBottom = relativeTop + dynamicHeight + 20;
+                  const summaryBottom = finalTop + safeHeight + 20;
                   
                   // Check if it will exceed category container bottom
-                  if (summaryBottom > categoryDiv.clientHeight) {
-                    // Calculate additional height needed
-                    const extraHeight = summaryBottom - categoryDiv.clientHeight + 20;
+                  if (summaryBottom > containerHeight) {
+                    // Calculate additional height needed with a bit of extra padding
+                    const extraHeight = summaryBottom - containerHeight + 30;
                     const currentHeight = categoryDiv.getBoundingClientRect().height;
                     
+                    // Improved container expansion function
                     const applyContainerExpansion = () => {
+                      // Make container expandable
                       categoryDiv.style.overflow = 'visible';
                       categoryDiv.style.transition = 'none';
                       
+                      // Save current dimensions
                       categoryDiv.style.height = `${currentHeight}px`;
                       categoryDiv.style.minHeight = `${currentHeight}px`;
                       
+                      // Force reflow
                       void categoryDiv.offsetHeight;
                       
+                      // Schedule animation in next frame for smoother transition
                       requestAnimationFrame(() => {
+                        // Set transition for smooth expansion
                         categoryDiv.style.transition = 'height 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
                         
+                        // Force reflow again to ensure transition applies
                         void categoryDiv.offsetHeight;
                         
-                        categoryDiv.style.height = `${currentHeight + extraHeight}px`;
+                        // Set new height
+                        const newHeight = currentHeight + extraHeight;
+                        categoryDiv.style.height = `${newHeight}px`;
                         
+                        // Log resize for debugging
+                        console.log(`Expanding container from ${currentHeight}px to ${newHeight}px to fit summary`);
+                        
+                        // Reset transition after animation completes
                         setTimeout(() => {
                           categoryDiv.style.transition = '';
                         }, 650);
@@ -2511,41 +2621,94 @@ function updatePopup(popup, isLoading, text, isError) {
                     bubble.style.opacity = '1';
                     bubble.style.transition = 'opacity 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s, background 0.3s';
                     
-                    // 4. Set transition effect
+                    // 4. Set transition effect for smooth height changes
                     categoryDiv.style.transition = 'height 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
                     
-                    if (originalHeight && originalHeight > 0) {
-                      const allBubbles = bubbleContainer.querySelectorAll('.bubble');
-                      let maxBubbleBottom = 0;
-                      
-                      allBubbles.forEach(b => {
-                        if (window.getComputedStyle(b).display !== 'none') {
-                          const bubbleRect = b.getBoundingClientRect();
-                          const bubbleBottom = bubbleRect.top - categoryRect.top + bubbleRect.height + 20;
-                          maxBubbleBottom = Math.max(maxBubbleBottom, bubbleBottom);
-                        }
-                      });
-                      
-                      // Ensure the height is enough to contain all visible bubbles, and add extra safety margin
-                      const minRequiredHeight = maxBubbleBottom > 0 ? maxBubbleBottom + 30 : originalHeight;
-                      
-                      // Solve the problem of continuous clicking: detect if it is already in the closing process, delay setting the height
-                      if (expandedSummary.classList.contains('collapsing')) {
-                        setTimeout(() => {
-                          categoryDiv.style.height = `${Math.max(originalHeight, minRequiredHeight)}px`;
-                          // Force recalculate layout again to ensure the height is correctly applied
-                          void categoryDiv.offsetHeight;
-                        }, 100);
-                      } else {
-                        categoryDiv.style.height = `${Math.max(originalHeight, minRequiredHeight)}px`;
-                      }
-                    } else if (originalHeightBeforeExpand && originalHeightBeforeExpand > 0) {
-                      // Ensure enough height
-                      categoryDiv.style.height = `${originalHeightBeforeExpand}px`;
-                    } else {
-                      // If there is no valid original height, use the natural height of the content
-                      categoryDiv.style.height = 'auto';
-                    }
+                      // Combine original height and detection mechanism to ensure container doesn't grow too tall
+  if (originalHeight && originalHeight > 0) {
+    // Set to original height first
+    if (expandedSummary.classList.contains('collapsing')) {
+      setTimeout(() => {
+        categoryDiv.style.height = `${originalHeight}px`;
+        // Force layout recalculation
+        void categoryDiv.offsetHeight;
+        
+        // After setting original height, trigger an additional check to prevent accumulative growth
+        setTimeout(() => {
+          // Detect all visible bubbles
+          const visibleBubbles = Array.from(bubbleContainer.querySelectorAll('div[style*="border-radius: 25px"]'))
+            .filter(b => {
+              return b !== expandedSummary && 
+                    window.getComputedStyle(b).display !== 'none' && 
+                    parseFloat(window.getComputedStyle(b).opacity) > 0;
+            });
+          
+          if (visibleBubbles.length > 0) {
+            // Calculate actual height needed for all bubbles plus title
+            const categoryRect = categoryDiv.getBoundingClientRect();
+            const titleHeight = categoryDiv.querySelector('h3')?.offsetHeight || 30;
+            const paddingTop = 18;
+            const paddingBottom = 18;
+            
+            let maxBubbleBottom = 0;
+            visibleBubbles.forEach(b => {
+              const bubbleRect = b.getBoundingClientRect();
+              const bubbleBottom = bubbleRect.bottom - categoryRect.top + 20;
+              maxBubbleBottom = Math.max(maxBubbleBottom, bubbleBottom);
+            });
+            
+            // Calculate actual required height
+            const neededHeight = Math.max(
+              titleHeight + paddingTop + paddingBottom,
+              maxBubbleBottom
+            );
+            
+            // Choose smaller height to prevent accumulative growth
+            const adjustedHeight = Math.min(neededHeight, originalHeight);
+            
+            // If adjusted height differs from original height by over 20%, use adjusted height
+            if (Math.abs(adjustedHeight - originalHeight) > originalHeight * 0.2) {
+              categoryDiv.style.height = `${adjustedHeight}px`;
+            }
+          }
+        }, 300);
+      }, 100);
+    } else {
+      categoryDiv.style.height = `${originalHeight}px`;
+    }
+  } else if (originalHeightBeforeExpand && originalHeightBeforeExpand > 0) {
+    // Use height from before expansion
+    categoryDiv.style.height = `${originalHeightBeforeExpand}px`;
+  } else {
+    // Only use detection mechanism when original height isn't available
+    
+    // Detect all visible bubbles
+    const visibleBubbles = Array.from(bubbleContainer.querySelectorAll('div[style*="border-radius: 25px"]'))
+      .filter(b => {
+        return b !== expandedSummary && 
+               window.getComputedStyle(b).display !== 'none' && 
+               parseFloat(window.getComputedStyle(b).opacity) > 0;
+      });
+    
+    if (visibleBubbles.length > 0) {
+      const categoryRect = categoryDiv.getBoundingClientRect();
+      let maxBottom = 0;
+      
+      visibleBubbles.forEach(bubble => {
+        const rect = bubble.getBoundingClientRect();
+        const bubbleBottom = rect.bottom - categoryRect.top;
+        maxBottom = Math.max(maxBottom, bubbleBottom);
+      });
+      
+      const extraBottomMargin = 20;
+      const reasonableHeight = maxBottom + extraBottomMargin;
+      
+      categoryDiv.style.height = `${Math.max(reasonableHeight, 120)}px`;
+    } else {
+      categoryDiv.style.height = 'auto';
+      categoryDiv.style.minHeight = '120px';
+    }
+  }
                     
                     // Restore original minimum height
                     categoryDiv.style.minHeight = originalMinHeight || 'auto';
@@ -2553,54 +2716,109 @@ function updatePopup(popup, isLoading, text, isError) {
                     // 6. Clean up all styles after transition and remove expanded summary box
                     setTimeout(() => {
                       try {
-                        // Get all visible bubbles with a more reliable method
-                        let allBubbles = Array.from(bubbleContainer.querySelectorAll('div[style*="border-radius: 25px"]'));
-                        
-                        // If no elements are found, try using other selectors
-                        if (allBubbles.length === 0) {
-                          allBubbles = Array.from(bubbleContainer.querySelectorAll('div')).filter(el => {
-                            const style = window.getComputedStyle(el);
-                            return style.borderRadius.includes('px') && parseFloat(style.borderRadius) > 10;
-                          });
+                                                // Height restoration - using two-step validation strategy to prevent cumulative growth
+                          if (originalHeight && originalHeight > 0) {
+                            // Step 1: Get all currently visible bubbles
+                            let allBubbles = Array.from(bubbleContainer.querySelectorAll('div[style*="border-radius: 25px"]'))
+                              .filter(b => {
+                                return b !== expandedSummary && 
+                                       window.getComputedStyle(b).display !== 'none' && 
+                                       parseFloat(window.getComputedStyle(b).opacity) > 0;
+                              });
+                            
+                            if (allBubbles.length === 0) {
+                              allBubbles = Array.from(bubbleContainer.querySelectorAll('div')).filter(el => {
+                                const style = window.getComputedStyle(el);
+                                return el !== expandedSummary && 
+                                       style.borderRadius && 
+                                       parseFloat(style.borderRadius) > 10 && 
+                                       style.display !== 'none' && 
+                                       parseFloat(style.opacity) > 0;
+                              });
+                            }
+                            
+                            // Step 2: Calculate actual required height
+                            if (allBubbles.length > 0) {
+                              const categoryRect = categoryDiv.getBoundingClientRect();
+                              let maxBottom = 0;
+                              
+                              allBubbles.forEach(bubble => {
+                                const rect = bubble.getBoundingClientRect();
+                                const bubbleBottom = rect.bottom - categoryRect.top;
+                                maxBottom = Math.max(maxBottom, bubbleBottom);
+                              });
+                              
+                              const titleHeight = categoryDiv.querySelector('h3')?.offsetHeight || 30;
+                              const paddingTop = 18;
+                              const paddingBottom = 18;
+                              const extraBottomMargin = 20;
+                              
+                              // Calculate minimum required height
+                              const reasonableHeight = Math.max(
+                                maxBottom + extraBottomMargin, 
+                                titleHeight + paddingTop + paddingBottom + 20
+                              );
+                              
+                              // Determine final height - prevent growth beyond original height
+                              const finalHeight = Math.min(
+                                reasonableHeight,
+                                Math.max(originalHeight, 120) // Keep minimum height of 120px
+                              );
+                              
+                              categoryDiv.style.height = `${finalHeight}px`;
+                            } else {
+                              // When no bubbles, use original height with safety limit
+                              categoryDiv.style.height = `${Math.min(originalHeight, 180)}px`;
+                            }
+                          } else if (originalHeightBeforeExpand && originalHeightBeforeExpand > 0) {
+                            // Use pre-expansion height with maximum limit
+                            const safeHeight = Math.min(originalHeightBeforeExpand, 200);
+                            categoryDiv.style.height = `${safeHeight}px`;
+                          } else {
+                            // Fallback to detection mechanism
+                            let allBubbles = Array.from(bubbleContainer.querySelectorAll('div[style*="border-radius: 25px"]'))
+                              .filter(b => b !== expandedSummary);
+                            
+                            if (allBubbles.length === 0) {
+                              allBubbles = Array.from(bubbleContainer.querySelectorAll('div')).filter(el => {
+                                const style = window.getComputedStyle(el);
+                                return el !== expandedSummary && 
+                                       style.borderRadius && 
+                                       parseFloat(style.borderRadius) > 10;
+                              });
+                            }
+                            
+                            const visibleBubbles = allBubbles.filter(b => {
+                              const style = window.getComputedStyle(b);
+                              return style.display !== 'none' && 
+                                     parseFloat(style.opacity) > 0;
+                            });
+                                         
+                            if (visibleBubbles.length > 0) {
+                              let maxBottom = 0;
+                              const categoryRect = categoryDiv.getBoundingClientRect();
+                              
+                              visibleBubbles.forEach(bubble => {
+                                const rect = bubble.getBoundingClientRect();
+                                const bubbleBottom = rect.bottom - categoryRect.top;
+                                maxBottom = Math.max(maxBottom, bubbleBottom);
+                              });
+                              
+                              const extraBottomMargin = 20;
+                              const reasonableHeight = Math.min(maxBottom + extraBottomMargin, 200); // Set safety limit
+                              
+                              categoryDiv.style.height = `${Math.max(reasonableHeight, 120)}px`;
+                            } else {
+                              // Default safe height when no bubbles found
+                              categoryDiv.style.height = '120px';
+                              categoryDiv.style.minHeight = '120px';
+                            }
+                          }
+                        } catch (err) {
+                          // Use safe values when error occurs
+                          categoryDiv.style.height = '120px';
+                          categoryDiv.style.minHeight = '120px';
                         }
-                        
-                        // Filter visible bubbles
-                        const visibleBubbles = allBubbles.filter(b => {
-                          const style = window.getComputedStyle(b);
-                          return style.display !== 'none' && 
-                                 parseFloat(style.opacity) > 0 && 
-                                 b !== expandedSummary;
-                        });
-                                     
-                        if (visibleBubbles.length > 0) {
-                          // Find the position of the lowest bubble
-                          let maxBottom = 0;
-                          const categoryRect = categoryDiv.getBoundingClientRect();
-                          
-                          visibleBubbles.forEach(bubble => {
-                            const rect = bubble.getBoundingClientRect();
-                            // Calculate bottom position relative to the container
-                            const bubbleBottom = rect.bottom - categoryRect.top;
-                            maxBottom = Math.max(maxBottom, bubbleBottom);
-                          });
-                          
-                          // Extra margin to ensure all bubbles are fully visible
-                          const extraBottomMargin = 20; // Set to a value similar to title and container margins
-                          const reasonableHeight = maxBottom + extraBottomMargin;
-                          
-                          // Set a reasonable height, ensuring a minimum value
-                          categoryDiv.style.height = `${Math.max(reasonableHeight, 120)}px`;
-                        } else {
-                          // If no visible bubbles, restore original height or set minimum height
-                          categoryDiv.style.height = originalHeight ? `${originalHeight}px` : 'auto';
-                          categoryDiv.style.minHeight = originalMinHeight || 'auto';
-                        }
-                      } catch (err) {
-                        console.log('Error calculating container height:', err);
-                        // Fall back to safe default values
-                        categoryDiv.style.height = 'auto';
-                        categoryDiv.style.minHeight = '120px';
-                      }
                       
                       categoryDiv.style.transition = '';
                       categoryDiv.style.overflow = '';
@@ -3184,6 +3402,19 @@ function updatePopup(popup, isLoading, text, isError) {
       window.privacyAuth.closeProfilePopup();
     }
     
+    // Reset floating icon state
+    if (floatingIcon) {
+      isIconLocked = false;
+      if (hideIconTimer) {
+        clearTimeout(hideIconTimer);
+        hideIconTimer = null;
+      }
+      floatingIcon.style.opacity = '0';
+      floatingIcon.style.pointerEvents = 'none';
+      floatingIcon.style.transform = 'scale(0.8)';
+      lastIconPosition = null;
+    }
+    
     // Add closing class, trigger CSS animation
     container.classList.add('closing');
     overlay.classList.add('closing');
@@ -3246,6 +3477,27 @@ document.addEventListener('mousemove', (event) => {
   currentMouseY = event.clientY;
   lastMouseMoveTime = now;
   
+  // Check if summary popup exists
+  const isSummaryShowing = document.getElementById('summary-popup') !== null;
+  
+  // Ensure icon state is correct if summary is closed
+  if (!isSummaryShowing && isIconLocked) {
+    // Verify if mouse is actually over the icon
+    if (floatingIcon) {
+      const iconRect = floatingIcon.getBoundingClientRect();
+      const isReallyOverIcon = 
+        currentMouseX >= iconRect.left && 
+        currentMouseX <= iconRect.right && 
+        currentMouseY >= iconRect.top && 
+        currentMouseY <= iconRect.bottom;
+      
+      // Unlock if mouse is not over the icon
+      if (!isReallyOverIcon) {
+        isIconLocked = false;
+      }
+    }
+  }
+  
   // If the icon exists, is visible, and not locked, check for links under mouse
   if (floatingIcon && 
       window.getComputedStyle(floatingIcon).opacity === '1' && 
@@ -3285,8 +3537,14 @@ document.addEventListener('mousemove', (event) => {
           // If moved from link to non-link area
           lastTrackedLink = null;
           
-          // Don't immediately hide, let handleLinkLeave manage this
-          // to avoid flickering during rapid mouse movements
+          // Start hiding icon when mouse leaves link and is not over icon
+          if (!isOverIcon && !hideIconTimer) {
+            hideIconTimer = setTimeout(() => {
+              floatingIcon.style.opacity = '0';
+              floatingIcon.style.pointerEvents = 'none';
+              floatingIcon.style.transform = 'scale(0.8)';
+            }, 150);
+          }
         }
       }
     }
