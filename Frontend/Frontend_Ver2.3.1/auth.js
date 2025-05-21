@@ -1,12 +1,12 @@
-// Login and Registration Functions (auth.js)
+// auth.js: Login and Registration Functions
 const API_CONFIG = {
   BASE_URL: 'https://usyd-cs30-1-llm-based-consent-reader.com'
 };
-// Global variables
+
 let authPopup = null;
 let profilePopup = null;
 let isLoggedIn = false;
-let currentAuthMode = 'login'; // 'login' or 'register'
+let currentAuthMode = 'login';
 let userInfo = null;
 let errorBlinkInterval = null;
 
@@ -114,7 +114,7 @@ function createLoginPage() {
   Object.assign(title.style, {
     marginTop: '0',
     marginBottom: '0',
-    fontSize: '24px', // Fixed font size in pixels, and increased for better visibility
+    fontSize: '24px',
     background: 'linear-gradient(to right, #1565c0, #1976d2, #2196f3)',
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
@@ -579,7 +579,7 @@ function createLoginPage() {
     }
   });
   
-  // Modified secondary button click event - update UI instead of recreating
+  // Modified secondary button click event
   secondaryButton.addEventListener('click', () => {
     // Switch mode
     currentAuthMode = currentAuthMode === 'login' ? 'register' : 'login';
@@ -717,7 +717,7 @@ function createLoginPage() {
   return authPopup;
 }
 
-// Close login page with improved cleanup and animations
+// Close login page with cleanup and animations
 function closeAuthPopup() {
   if (authPopup) {
     // Start fade-out animation
@@ -758,7 +758,6 @@ function closeAuthPopup() {
       } catch (e) {
         console.error('Error during auth popup cleanup:', e);
       } finally {
-        // Always reset the authPopup variable
         authPopup = null;
       }
     }, 500);
@@ -856,7 +855,6 @@ async function handleLogin(username, password, errorContainer) {
         });
       }, 1000);
     } else {
-      // Login failed
       showError(errorContainer, data.detail || 'Username or password incorrect');
     }
   } catch (error) {
@@ -904,7 +902,6 @@ async function handleRegister(username, password, errorContainer) {
     try {
       data = await response.json();
     } catch (e) {
-      // If response is not valid JSON
       data = { message: 'Invalid server response' };
     }
     
@@ -957,7 +954,6 @@ async function handleRegister(username, password, errorContainer) {
           // Ensure username and password input containers are always visible
           const formContainers = authPopup.container.querySelectorAll('div[style*="display: flex"][style*="flex-direction: column"]');
           if (formContainers.length >= 2) {
-            // First and second containers are username and password input containers
             formContainers[0].style.display = 'flex'; // Username container
             formContainers[1].style.display = 'flex'; // Password container
           }
@@ -1013,7 +1009,6 @@ async function handleRegister(username, password, errorContainer) {
         }
       }, 1000);
     } else {
-      // Registration failed
       showError(errorContainer, data.detail || 'Registration failed');
     }
   } catch (error) {
@@ -1129,7 +1124,7 @@ function createProfilePage(summaryRect) {
   Object.assign(profileTitle.style, {
     marginTop: '0',
     marginBottom: '0.8em',
-    fontSize: '22px', // Fixed font size in pixels, and increased for better visibility
+    fontSize: '22px',
     background: 'linear-gradient(to right, #1565c0, #1976d2, #2196f3)',
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
@@ -1203,7 +1198,6 @@ function createProfilePage(summaryRect) {
     flexDirection: 'column',
     gap: '15px',
     overflow: 'auto',
-    // Custom scrollbar styling - match with summary page and chat page
     scrollbarWidth: 'thin',
     scrollbarColor: 'rgba(25, 118, 210, 0.3) transparent'
   });
@@ -1671,10 +1665,9 @@ function handleLogout() {
         }, 400);
       }, 1500);
       
-      return; // Return, avoid executing below code
+      return;
     } catch (e) {
       console.error('Error showing logout message:', e);
-      // Continue executing below code
     }
   }
   

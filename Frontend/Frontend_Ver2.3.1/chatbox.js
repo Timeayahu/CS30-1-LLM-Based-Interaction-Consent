@@ -1,6 +1,5 @@
-// Chatbox functionality for Privacy Policy Summarizer
+// chatbox.js: Chatbox functionality for Privacy Policy Summarizer
 
-// Global variables
 let chatPopup = null;
 let isProcessingDetailExplanation = false;
 let currentSessionId = null;
@@ -15,7 +14,6 @@ const CHAT_WIDTH = 420;
 function createChatWindow(buttonRect) {
   // Check if chat window already exists
   if (chatPopup && chatPopup.container && document.body.contains(chatPopup.container)) {
-    // If exists, show and return
     chatPopup.container.style.opacity = '1';
     chatPopup.container.style.transform = 'scale(1)';
     const summaryPopup = document.getElementById('summary-popup');
@@ -26,7 +24,6 @@ function createChatWindow(buttonRect) {
     return chatPopup;
   }
   
-  // Reset session ID when creating a new chat window
   currentSessionId = null;
   
   // Get summary popup position
@@ -44,12 +41,10 @@ function createChatWindow(buttonRect) {
   let initialTransformOrigin;
   
   if (buttonRect) {
-    // If we have a button rectangle (Detail Explanation button), start from that position
     originX = buttonRect.left;
     originY = buttonRect.top;
     initialTransformOrigin = 'top left';
   } else {
-    // If no specific button, start from the top right corner of the summary (chat button position)
     const chatButton = summaryPopup.querySelector('.privacy-chat-button');
     if (chatButton) {
       const chatButtonRect = chatButton.getBoundingClientRect();
@@ -57,14 +52,13 @@ function createChatWindow(buttonRect) {
       originY = chatButtonRect.top;
       initialTransformOrigin = 'top right';
     } else {
-      // Fallback to top right corner of summary
       originX = summaryRect.right - 15 - 36;
       originY = summaryRect.top + 15;
       initialTransformOrigin = 'top right';
     }
   }
   
-  // Calculate initial height - using a reasonable starting height
+  // Calculate initial height
   const initialHeight = Math.min(summaryRect.height * 0.92, 450);
   
   const initialStyles = {
@@ -104,13 +98,13 @@ function createChatWindow(buttonRect) {
     color: '#333'
   });
   
-  // Title - using same style as summary page
+  // Title
   const chatTitle = document.createElement('h2');
   chatTitle.innerText = 'AI Chatbox';
   Object.assign(chatTitle.style, {
     marginTop: '0',
     marginBottom: '0.8em',
-    fontSize: '22px', // Fixed font size in pixels, and increased for better visibility
+    fontSize: '22px',
     background: 'linear-gradient(to right, #1565c0, #1976d2, #2196f3)',
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
@@ -122,7 +116,7 @@ function createChatWindow(buttonRect) {
     fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
   });
   
-  // Add title underline - same as summary page
+  // Add title underline
   const titleUnderline = document.createElement('div');
   Object.assign(titleUnderline.style, {
     position: 'absolute',
@@ -182,7 +176,6 @@ function createChatWindow(buttonRect) {
     display: 'flex',
     flexDirection: 'column',
     gap: '10px',
-    // Custom scrollbar style - same as summary box
     scrollbarWidth: 'thin',
     scrollbarColor: 'rgba(25, 118, 210, 0.3) transparent'
   });
@@ -281,14 +274,11 @@ function createChatWindow(buttonRect) {
   
   // Function to auto-adjust height
   function adjustHeight() {
-    // Reset height for recalculation
     chatInput.style.height = 'auto';
     
-    // Set height to fit content
     const newHeight = Math.min(chatInput.scrollHeight, 150);
     chatInput.style.height = `${newHeight}px`;
     
-    // Adjust send button position
     sendButton.style.alignSelf = newHeight <= 40 ? 'center' : 'flex-end';
   }
   
@@ -372,13 +362,10 @@ function createChatWindow(buttonRect) {
   
   // Animation to show chat window
   setTimeout(() => {
-    // Store the animation start time for smoother transitions
     chatPopup.animationStartTime = Date.now();
     
-    // Calculate a suitable final position to place the chat window on the right side of the summary
     const finalTop = Math.max(summaryRect.top, 20);
     
-    // Set final position and size
     Object.assign(chatContainer.style, {
       opacity: '1',
       top: `${finalTop}px`,
@@ -388,7 +375,6 @@ function createChatWindow(buttonRect) {
     });
   }, 50);
   
-  // Add window size change listener to ensure chat window syncs with summary window
   window.addEventListener('resize', syncChatPosition);
   
   return chatPopup;
@@ -414,7 +400,6 @@ function openChatWindow(buttonRect) {
     return;
   }
   
-  // Create new chat window
   createChatWindow(buttonRect);
 }
 
@@ -481,8 +466,6 @@ function syncChatPosition() {
   // Update chat button position (if page was scrolled)
   const chatButton = summaryPopup.querySelector('.privacy-chat-button');
   if (chatButton && chatButton.parentNode) {
-    // Button position doesn't need syncing as it's absolutely positioned at the top-right of the summary box
-    // This ensures the button always stays at the top-right corner of the summary window
   }
 }
 
@@ -513,11 +496,10 @@ function addChatMessage(text, sender) {
       : (sender === 'assistant' ? '#f0f0f0' : 'rgba(255, 152, 0, 0.08)'),
     color: sender === 'user' ? 'white' : '#333',
     boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
-    // Initial animation state
     opacity: '0',
     transform: sender === 'user' ? 'translateX(20px) scale(0.8)' : 'translateX(-20px) scale(0.8)',
     transition: 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
-    whiteSpace: 'pre-line' // Add pre-line to preserve line breaks
+    whiteSpace: 'pre-line'
   });
   
   // Add typing animation if it's the assistant's "Thinking..." message
@@ -564,8 +546,6 @@ function addChatMessage(text, sender) {
     typingContainer.appendChild(dotsContainer);
     messageDiv.appendChild(typingContainer);
   } else {
-    // Preserve line breaks in the text by using textContent instead of innerText
-    // and setting white-space: pre-line in the styles
     messageDiv.textContent = text;
   }
   
@@ -576,7 +556,6 @@ function addChatMessage(text, sender) {
   const targetScrollTop = chatPopup.messages.scrollHeight - chatPopup.messages.clientHeight;
   
   if (targetScrollTop > currentScrollTop) {
-    // Smooth scroll animation
     const startTime = Date.now();
     const duration = 300; // ms
     
@@ -584,7 +563,6 @@ function addChatMessage(text, sender) {
       const elapsed = Date.now() - startTime;
       const progress = Math.min(elapsed / duration, 1);
       
-      // Easing function for smooth scrolling
       const easeOutCubic = progress => 1 - Math.pow(1 - progress, 3);
       const easedProgress = easeOutCubic(progress);
       
@@ -599,12 +577,10 @@ function addChatMessage(text, sender) {
     requestAnimationFrame(scrollAnimation);
   }
   
-  // Trigger animation effect with improved timing
   setTimeout(() => {
     messageDiv.style.opacity = '1';
     messageDiv.style.transform = 'translateX(0) scale(1)';
     
-    // Adjust chat window size after message animation completes
     setTimeout(() => {
       adjustChatWindowHeight();
     }, 100);
@@ -655,7 +631,7 @@ function sendChatMessage() {
         requestData.session_id = currentSessionId;
       }
       
-      // Send message to backend
+      // Send message to backend api/general-chat
       fetch(`${API_CONFIG.BASE_URL}/api/general-chat`, {
         method: 'POST',
         headers: {
@@ -716,12 +692,11 @@ function sendChatMessage() {
                     
                     // Apply highlighting to each message
                     if (assistantMessage) {
-                      // Delay highlighting to ensure smooth animation
                       setTimeout(() => {
                         highlightImportantContent(assistantMessage);
                       }, 500);
                     }
-                  }, index * 500); // 500ms delay between messages
+                  }, index * 500);
                 });
               } else {
                 // Original single response handling
@@ -758,14 +733,12 @@ function sendChatMessage() {
                 }
               }
             } else {
-              // Handle error
               addChatMessage('Sorry, I couldn\'t get a response. ' + (data.error || ''), 'assistant');
             }
           }, 300);
         }
       })
       .catch(error => {
-        // Remove loading message (with animation)
         if (loadingMsg && loadingMsg.parentNode) {
           loadingMsg.style.opacity = '0';
           loadingMsg.style.transform = 'translateX(-20px) scale(0.8)';
@@ -775,7 +748,6 @@ function sendChatMessage() {
               loadingMsg.parentNode.removeChild(loadingMsg);
             }
             
-            // Show error message
             addChatMessage(`Error: ${error.message}`, 'assistant');
           }, 300);
         }
@@ -871,7 +843,7 @@ function openChatWindowWithAutoQuery(buttonRect, bubbleData, buttonElement) {
             requestData.session_id = currentSessionId;
           }
           
-          // Send request to /api/chat instead of /api/general-chat
+          // Send request to /api/chat
           fetch(`${API_CONFIG.BASE_URL}/api/chat`, {
             method: 'POST',
             headers: {
@@ -947,12 +919,11 @@ function openChatWindowWithAutoQuery(buttonRect, bubbleData, buttonElement) {
                         
                         // Apply highlighting to each message
                         if (assistantMessage) {
-                          // Delay highlighting to ensure smooth animation
                           setTimeout(() => {
                             highlightImportantContent(assistantMessage);
                           }, 500);
                         }
-                      }, index * 500); // 500ms delay between messages
+                      }, index * 500);
                     });
                   } else {
                     // Original single response handling
@@ -982,14 +953,12 @@ function openChatWindowWithAutoQuery(buttonRect, bubbleData, buttonElement) {
                     
                     // Highlight important parts in the response
                     if (assistantMessage) {
-                      // Delay highlighting to ensure smooth animation
                       setTimeout(() => {
                         highlightImportantContent(assistantMessage);
                       }, 500);
                     }
                   }
                 } else {
-                  // Handle error
                   addChatMessage('Sorry, I couldn\'t get a response. ' + (data.error || ''), 'assistant');
                 }
               }, 300);
@@ -1044,8 +1013,8 @@ function adjustChatWindowHeight() {
   const maxHeightPx = Math.floor(viewportHeight * 0.75); // 75vh
   
   // Get heights of header and input areas
-  const headerHeight = chatPopup.container.querySelector('div').offsetHeight; // First div is header
-  const inputAreaHeight = chatPopup.container.lastElementChild.offsetHeight; // Last element is input area
+  const headerHeight = chatPopup.container.querySelector('div').offsetHeight;
+  const inputAreaHeight = chatPopup.container.lastElementChild.offsetHeight;
   
   // Calculate ideal height for message area
   const messagesContentHeight = chatPopup.messages.scrollHeight;
@@ -1097,8 +1066,6 @@ function highlightImportantContent(messageElement) {
   
   // Check if the message contains code blocks or structured content
   if (/```|\n\s{2,}|\n\t+|Source excerpt:/i.test(originalText)) {
-    // For code blocks or special content, don't apply sentence highlighting
-    // to avoid breaking the formatting
     return;
   }
   
@@ -1148,7 +1115,6 @@ function highlightImportantContent(messageElement) {
       }
     }
     
-    // Add line break if not the last line
     if (lineIndex < lines.length - 1) {
       messageElement.appendChild(document.createElement('br'));
     }

@@ -8,7 +8,7 @@ const API_CONFIG = {
 chrome.runtime.onInstalled.addListener((details) => {
   chrome.storage.local.set({ 
     isEnabled: true,
-    serviceWorkerLastActive: Date.now() // Track when service worker was last active
+    serviceWorkerLastActive: Date.now()
   });
   updateIcon(true);
   console.log("Extension installed and initialized");
@@ -35,9 +35,9 @@ function setupServiceWorkerMonitoring() {
   });
   
   // Increased frequency of heartbeat and health checks
-  setInterval(recordHeartbeat, 15000);      // Changed to 15 seconds
-  setInterval(checkServiceWorkerHealth, 30000);  // Changed to 30 seconds
-  setInterval(verifyServiceWorkerActivity, 2 * 60000);  // Changed to 2 minutes
+  setInterval(recordHeartbeat, 15000);
+  setInterval(checkServiceWorkerHealth, 30000);
+  setInterval(verifyServiceWorkerActivity, 2 * 60000);
   
   console.log("Service worker monitoring system initialized");
 }
@@ -73,7 +73,6 @@ function checkServiceWorkerHealth() {
   
   // Attempt to keep service worker alive with a meaningful operation
   chrome.runtime.getPlatformInfo(function(info) {
-    // Just a simple operation to ensure service worker is responsive
     console.log("Service worker active, platform: " + info.os);
   });
   
@@ -83,7 +82,6 @@ function checkServiceWorkerHealth() {
       console.log("Storage access successful, extension state: " + (data.isEnabled ? "enabled" : "disabled"));
     } else {
       console.warn("Storage access issue - extension state missing");
-      // Try to reset the state
       chrome.storage.local.set({ isEnabled: true });
     }
   });
@@ -130,7 +128,7 @@ function attemptServiceWorkerRecovery() {
   chrome.runtime.sendMessage({ action: "serviceWorkerWakeUp" }, function(response) {
     if (response) {
       console.log("Service worker responded to wake-up ping");
-      recordHeartbeat(); // Record successful ping
+      recordHeartbeat();
     } else {
       console.error("Service worker recovery failed, attempting last resort measures");
       
@@ -389,14 +387,14 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
                   body: JSON.stringify({ text: pageText, url: url })
                 }).then(response => {
                   if (!response.ok) {
-                    clearInterval(apiRequestHeartbeat); // Clear API request heartbeat
+                    clearInterval(apiRequestHeartbeat);
                     throw new Error(`API response error: ${response.status}`);
                   }
                   console.log("Received successful API response");
-                  clearInterval(apiRequestHeartbeat); // Clear API request heartbeat
+                  clearInterval(apiRequestHeartbeat);
                   return response.json();
                 }).then(resolve).catch(err => {
-                  clearInterval(apiRequestHeartbeat); // Ensure API request heartbeat is cleared in all cases
+                  clearInterval(apiRequestHeartbeat);
                   reject(err);
                 });
               });
@@ -923,11 +921,6 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
                     // Highlight the specific matching segment
                     found = highlightNode(currentNode, index, segment.length);
                     
-                    // setTimeout(() => {
-                    //   containerElement.style.backgroundColor = originalBackground;
-                    //   containerElement.style.transition = originalTransition;
-                    // }, 2000);
-                    
                     return true;
                   }
                 }
@@ -976,7 +969,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
                 const chunks = chunkString(searchText, 10);
                 for (const chunk of chunks) {
                   if (normalizedText.includes(chunk.toLowerCase())) {
-                    score += chunk.length * 2; // Phrase matches get higher scores
+                    score += chunk.length * 2;
                   }
                 }
               }
@@ -1049,11 +1042,6 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
               if (matchNode && matchIndex >= 0) {
                 wordHighlighted = highlightNode(matchNode, matchIndex, bestWordMatch.length);
               }
-              
-              // setTimeout(() => {
-              //   bestMatch.element.style.boxShadow = originalStyle.boxShadow;
-              //   bestMatch.element.style.backgroundColor = 'rgba(255, 213, 79, 0.1)';
-              // }, 2000);
               
               // Add return button even if no specific word is highlighted
               addReturnButton();
@@ -1299,13 +1287,13 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
                   const length = node.textContent.length;
                   
                   if (currentIndex <= targetIndex && targetIndex < currentIndex + length) {
-                    return node; // Found the node containing the target index
+                    return node;
                   }
                   
                   currentIndex += length;
                 }
                 
-                return null; // Not found
+                return null;
               }
               
               // Helper function to get offset from parent to specific text node
@@ -1337,7 +1325,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
                   // Set permanent highlight instead of temporary
                   keywordHighlight.style.backgroundColor = isDarkBackground ? 
                     'rgba(255, 255, 0, 0.9)' : 
-                    'rgba(255, 152, 0, 0.9)'; // 更深的橙色
+                    'rgba(255, 152, 0, 0.9)';
                     
                   keywordHighlight.style.boxShadow = '0 0 0 1px rgba(0,0,0,0.2), 0 0 8px rgba(255, 152, 0, 0.5)';
                 }
@@ -1345,7 +1333,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
                 if (sentenceHighlight) {
                   sentenceHighlight.style.backgroundColor = isDarkBackground ? 
                     'rgba(255, 255, 150, 0.5)' : 
-                    'rgba(255, 236, 179, 0.7)'; // 增加不透明度
+                    'rgba(255, 236, 179, 0.7)';
                 }
                 
                 // Enhanced scrolling to the highlighted text with multiple attempts
@@ -1412,7 +1400,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
               const currentScrollY = window.pageYOffset || document.documentElement.scrollTop;
               
               // Check if there might be a fixed header
-              const potentialHeaderHeight = 80; // Reasonable estimate for most sites
+              const potentialHeaderHeight = 80;
               
               // Calculate position to place element slightly below potential header
               // and not exactly at screen center for better readability
@@ -1572,7 +1560,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
                 fontWeight: 'bold',
                 opacity: '0.9',
                 transition: 'all 0.2s ease',
-                transform: 'scale(0.9)' // Start slightly smaller for animation
+                transform: 'scale(0.9)'
               });
               
               // Add fade-in animation
@@ -2540,7 +2528,7 @@ function tryKeywordBubbleMatch(searchText) {
         element: paragraph,
         text: text,
         matchedKeywords: matchedKeywords,
-        score: matchedKeywords.length / keywords.length  // Score as percentage of matching keywords
+        score: matchedKeywords.length / keywords.length
       });
     }
   }

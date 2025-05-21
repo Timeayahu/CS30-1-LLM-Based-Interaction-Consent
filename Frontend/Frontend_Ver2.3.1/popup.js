@@ -1,3 +1,5 @@
+// popup.js
+
 document.addEventListener('DOMContentLoaded', function() {
   // Get toggle button
   const toggleSwitch = document.getElementById('toggle-switch');

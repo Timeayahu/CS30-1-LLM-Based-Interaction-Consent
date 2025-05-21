@@ -163,9 +163,9 @@ function createFloatingIcon() {
     transform: 'scale(0.8)',
     transition: 'opacity 0.2s ease-in-out, transform 0.2s ease-in-out, background 0.2s ease-in-out',
     pointerEvents: 'none',
-    willChange: 'transform, opacity', // Optimize for animation performance
+    willChange: 'transform, opacity',
     textAlign: 'center',
-    lineHeight: '32px' // Ensures emoji is vertically centered
+    lineHeight: '32px'
   });
   
   // Use a span for icon content to prevent positioning issues
@@ -211,7 +211,7 @@ function createFloatingIcon() {
     border: '1px solid rgba(25, 118, 210, 0.1)',
     fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
     fontWeight: '500',
-    willChange: 'opacity' // Optimize for animation
+    willChange: 'opacity'
   });
   tooltip.textContent = 'Use LLM to summarize the privacy policy';
   
@@ -328,7 +328,7 @@ function handleLinkHover(e) {
       // Make sure transform is properly reset when created
       setTimeout(() => {
         floatingIcon.style.transform = 'scale(0.8)';
-        void floatingIcon.offsetWidth; // Force reflow
+        void floatingIcon.offsetWidth;
       }, 0);
       
       // Add click handler, integrate with login functionality
@@ -407,7 +407,7 @@ function handleLinkHover(e) {
               hideIconTimer = setTimeout(() => {
                 floatingIcon.style.opacity = '0';
                 floatingIcon.style.pointerEvents = 'none';
-                floatingIcon.style.transform = 'scale(0.8)'; // Return to initial scale
+                floatingIcon.style.transform = 'scale(0.8)';
               }, 150);
             }
           }
@@ -419,7 +419,7 @@ function handleLinkHover(e) {
       floatingIcon.style.display = '';
       floatingIcon.style.transform = 'scale(0.8)';
       floatingIcon.style.background = 'linear-gradient(135deg, #1976d2, #2196f3)';
-      void floatingIcon.offsetWidth; // Force reflow
+      void floatingIcon.offsetWidth;
     }
     
     currentHoveredLink = link.href;
@@ -429,7 +429,7 @@ function handleLinkHover(e) {
     requestAnimationFrame(() => {
       floatingIcon.style.opacity = '1';
       floatingIcon.style.pointerEvents = 'auto';
-      floatingIcon.style.transform = 'scale(1)';  // Ensure proper scale when visible
+      floatingIcon.style.transform = 'scale(1)';
     });
     
     if (hideIconTimer) {
@@ -532,8 +532,8 @@ function checkLinkForPrivacyPolicy(link) {
   // 4. Check specific company privacy policy URL patterns (direct matches)
   const knownPatterns = [
     /microsoft\.com.*privacy/i,
-    /go\.microsoft\.com\/fwlink\/\?LinkId=521839/i,  // Microsoft specific redirection link for privacy policy
-    /go\.microsoft\.com\/fwlink.*privacy/i,          // Generic Microsoft fwlink URLs containing privacy
+    /go\.microsoft\.com\/fwlink\/\?LinkId=521839/i,
+    /go\.microsoft\.com\/fwlink.*privacy/i,
     /google\.com.*privacy/i,
     /apple\.com.*privacy/i,
     /facebook\.com.*privacy/i,
@@ -815,7 +815,7 @@ function handleLinkLeave(e) {
       
       // Reset icon lock status if the summary is closed
       if (!isSummaryShowing) {
-        isIconLocked = isOverIcon; // Only lock when mouse is actually hovering over the icon
+        isIconLocked = isOverIcon;
       }
       
       // Don't hide if mouse is over icon or icon is locked
@@ -848,7 +848,7 @@ function handleLinkLeave(e) {
           positionUpdateTimer = null;
         }
       }
-    }, 100); // Reduced delay for faster response
+    }, 100);
   }
 }
 
@@ -928,7 +928,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       }
       
       // Reinitialize detection immediately
-      init(); // Call main init function to set up everything from scratch
+      init();
       
       // Additional check for currently hovered links
       setTimeout(() => {
@@ -1141,7 +1141,7 @@ function updatePopup(popup, isLoading, text, isError) {
   Object.assign(title.style, {
     marginTop: '0',
     marginBottom: '0',
-    fontSize: '24px', // Fixed font size in pixels, and increased for better visibility
+    fontSize: '24px',
     background: 'linear-gradient(to right, #1565c0, #1976d2, #2196f3)',
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
@@ -1349,7 +1349,7 @@ function updatePopup(popup, isLoading, text, isError) {
     const contentDiv = document.createElement('div');
     contentDiv.innerText = text;
     Object.assign(contentDiv.style, {
-      fontSize: '15px', // Fixed font size in pixels
+      fontSize: '15px',
       lineHeight: '1.6',
       marginBottom: '16px',
       whiteSpace: 'pre-wrap',
@@ -1385,7 +1385,7 @@ function updatePopup(popup, isLoading, text, isError) {
       Object.assign(legendTitle.style, {
         marginTop: '0',
         marginBottom: '15px',
-        fontSize: '18px', // Reduced font size from 20px to 18px
+        fontSize: '18px',
         fontWeight: '600',
         position: 'relative',
         paddingBottom: '8px',
@@ -1414,7 +1414,7 @@ function updatePopup(popup, isLoading, text, isError) {
       const instructionText = document.createElement('div');
       instructionText.innerText = "Hint: You can click on any color or number to filter bubbles by importance level!";
       Object.assign(instructionText.style, {
-        fontSize: '13px', // Fixed font size in pixels
+        fontSize: '13px',
         color: '#555',
         marginBottom: '15px',
         lineHeight: '1.4',
@@ -1437,8 +1437,8 @@ function updatePopup(popup, isLoading, text, isError) {
       // Define importance colors
       const importanceColors = [
         { level: 5, color: '#b71c1c', gradient: 'linear-gradient(135deg, #b71c1c, #d32f2f)' },  // Very Important - Red
-        { level: 4, color: '#f57c00', gradient: 'linear-gradient(135deg, #f57c00, #fb8c00)' },  // Important - Light Orange (was #e64a19)
-        { level: 3, color: '#ffc107', gradient: 'linear-gradient(135deg, #ffc107, #ffeb3b)' },  // Medium - Lighter Yellow (was #ffa000)
+        { level: 4, color: '#f57c00', gradient: 'linear-gradient(135deg, #f57c00, #fb8c00)' },  // Important - Orange
+        { level: 3, color: '#ffc107', gradient: 'linear-gradient(135deg, #ffc107, #ffeb3b)' },  // Medium - Yellow
         { level: 2, color: '#7cb342', gradient: 'linear-gradient(135deg, #7cb342, #8bc34a)' },  // Low - Light Green
         { level: 1, color: '#388e3c', gradient: 'linear-gradient(135deg, #388e3c, #4caf50)' }   // Very Low - Green
       ];
@@ -1466,7 +1466,7 @@ function updatePopup(popup, isLoading, text, isError) {
       const filterStatusText = document.createElement('div');
       filterStatusText.innerText = 'No filter';
       Object.assign(filterStatusText.style, {
-        fontSize: '14px', // Fixed font size in pixels
+        fontSize: '14px',
         fontWeight: '500'
       });
       
@@ -1477,7 +1477,7 @@ function updatePopup(popup, isLoading, text, isError) {
         background: 'rgba(25, 118, 210, 0.1)',
         padding: '4px 8px',
         borderRadius: '4px',
-        fontSize: '12px', // Fixed font size in pixels
+        fontSize: '12px',
         cursor: 'pointer',
         transition: 'background 0.2s'
       });
@@ -2125,7 +2125,7 @@ function updatePopup(popup, isLoading, text, isError) {
           marginTop: '0',
           marginBottom: '15px',
           color: '#1976d2',
-          fontSize: '18px', // Reduced font size from 20px to 18px
+          fontSize: '18px',
           fontWeight: '600',
           position: 'relative',
           paddingBottom: '8px',
@@ -2178,11 +2178,11 @@ function updatePopup(popup, isLoading, text, isError) {
                   bubbleColor = 'linear-gradient(135deg, #b71c1c, #d32f2f)';
                   bubbleShadow = '0 3px 8px rgba(183, 28, 28, 0.4)';
                   break;
-                case 4: // Important - Light Orange
+                case 4: // Important - Orange
                   bubbleColor = 'linear-gradient(135deg, #f57c00, #fb8c00)';
                   bubbleShadow = '0 3px 8px rgba(245, 124, 0, 0.3)';
                   break;
-                case 3: // Medium - Lighter Yellow
+                case 3: // Medium - Yellow
                   bubbleColor = 'linear-gradient(135deg, #ffc107, #ffeb3b)';
                   bubbleShadow = '0 3px 8px rgba(255, 235, 59, 0.3)';
                   break;
@@ -2209,16 +2209,16 @@ function updatePopup(popup, isLoading, text, isError) {
             // Determine text color based on bubble color for better contrast
             let textColor = '#fff'; // Default white text for most bubbles
             if (item.importance === 3) { // Only for yellow bubbles
-              textColor = '#212121'; // Dark gray text for better visibility on yellow
+              textColor = '#212121';
             }
             
             Object.assign(bubble.style, {
               background: bubbleColor,
-              color: textColor, // Set dynamic text color
+              color: textColor,
               padding: '10px 18px',
               borderRadius: '25px',
               cursor: 'pointer',
-              fontSize: '14px', // Fixed font size in pixels
+              fontSize: '14px',
               fontWeight: '600',
               boxShadow: bubbleShadow,
               transition: 'transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s, background 0.3s, opacity 0.3s',
@@ -2270,11 +2270,11 @@ function updatePopup(popup, isLoading, text, isError) {
                     this.style.boxShadow = '0 5px 12px rgba(183, 28, 28, 0.5)';
                     this.style.background = 'linear-gradient(135deg, #96140e, #b71c1c)';
                     break;
-                  case 4: // Important - Light Orange
+                  case 4: // Important - Orange
                     this.style.boxShadow = '0 5px 12px rgba(245, 124, 0, 0.4)';
                     this.style.background = 'linear-gradient(135deg, #ef6c00, #f57c00)';
                     break;
-                  case 3: // Medium - Lighter Yellow
+                  case 3: // Medium - Yellow
                     this.style.boxShadow = '0 5px 12px rgba(255, 235, 59, 0.4)';
                     this.style.background = 'linear-gradient(135deg, #ffd54f, #ffc107)';
                     break;
@@ -2601,14 +2601,23 @@ function updatePopup(popup, isLoading, text, isError) {
                     // Set animation lock
                     isSummaryAnimating = true;
                     
+                    // Store the bubble's original position, which we'll return to
+                    const bubblePosition = {
+                      left: relativeLeft,
+                      top: relativeTop,
+                      width: bubbleRect.width,
+                      height: bubbleRect.height
+                    };
+                    
                     // 1. First ensure content is visible
                     categoryDiv.style.overflow = 'visible';
                     
                     // 2. Set bubble collapsing animation
                     expandedSummary.classList.add('collapsing');
-                    expandedSummary.style.width = `${bubbleRect.width}px`;
-                    expandedSummary.style.height = `${bubbleRect.height}px`;
-                    expandedSummary.style.left = `${relativeLeft}px`;
+                    expandedSummary.style.width = `${bubblePosition.width}px`;
+                    expandedSummary.style.height = `${bubblePosition.height}px`;
+                    expandedSummary.style.left = `${bubblePosition.left}px`;
+                    expandedSummary.style.top = `${bubblePosition.top}px`;
                     expandedSummary.style.borderRadius = '25px';
                     expandedSummary.style.padding = '10px 18px';
                     expandedSummary.style.alignItems = 'center';
@@ -2716,7 +2725,6 @@ function updatePopup(popup, isLoading, text, isError) {
                     // 6. Clean up all styles after transition and remove expanded summary box
                     setTimeout(() => {
                       try {
-                                                // Height restoration - using two-step validation strategy to prevent cumulative growth
                           if (originalHeight && originalHeight > 0) {
                             // Step 1: Get all currently visible bubbles
                             let allBubbles = Array.from(bubbleContainer.querySelectorAll('div[style*="border-radius: 25px"]'))
@@ -3027,7 +3035,7 @@ function updatePopup(popup, isLoading, text, isError) {
                           text: searchText,
                           sourceUrl: originalUrl,
                           summaryData: text,
-                          sourceTabId: sourceTabId  // Store the source tab ID
+                          sourceTabId: sourceTabId
                         }
                       }, () => {
                         // Open original privacy policy URL in a new tab
@@ -3520,8 +3528,7 @@ document.addEventListener('mousemove', (event) => {
         hideIconTimer = null;
       }
     } else {
-      // Check for links under the mouse - optimize by limiting checks
-      // Only check max every 32ms (about 30fps) when icon is visible but not locked
+      // Check for links under the mouse
       if (now - lastMouseMoveTime > 32 || !lastTrackedLink) {
         const elementsUnderMouse = document.elementsFromPoint(currentMouseX, currentMouseY);
         const hoveredPrivacyLink = elementsUnderMouse.find(el => 
