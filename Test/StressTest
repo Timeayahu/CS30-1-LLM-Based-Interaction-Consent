@@ -1,0 +1,82 @@
+import http from 'k6/http';
+import { check, sleep } from 'k6';
+
+export let options = {
+    vus: 200,         // Number of concurrent users
+    duration: '1m',  // Stress test duration
+};
+
+const BASE_URL = 'https://usyd-cs30-1-llm-based-consent-reader.com'; 
+
+const realWebPages = [
+    'https://policies.google.com/privacy?hl=en-US',
+    'https://www.apple.com/legal/privacy/en-ww/',
+    'https://www.microsoft.com/en-us/privacy/privacystatement',
+    'https://www.amazon.com/gp/help/customer/display.html?nodeId=GX7NJQ4ZB8MHFRNJ',
+    'https://www.facebook.com/privacy/policy/',
+    'https://www.tesla.com/legal',
+    'https://www.ibm.com/us-en/privacy',
+    'https://www.tiktok.com/legal/page/row/privacy-policy/en',
+    'https://help.netflix.com/en/legal/privacy',
+    'https://www.salesforce.com/au/company/privacy/',
+    'https://www.samsung.com/au/info/privacy/',
+    'https://www.adobe.com/au/privacy/policy.html',
+    'https://x.com/en/privacy',
+    'https://www.linkedin.com/legal/privacy-policy',
+    'https://www.uber.com/global/en/privacy/overview/',
+    'https://www.zoom.com/en/trust/privacy/privacy-statement/',
+    'https://www.spotify.com/au/legal/privacy-policy/',
+    'https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement',
+    'https://slack.com/trust/privacy/privacy-policy',
+    'https://www.cloudflare.com/privacypolicy/'
+
+];
+
+export default function () {
+    const username = `user${Math.floor(Math.random() * 10000)}`;
+    const password = 'test1234';
+
+    const headers = { 'Content-Type': 'application/json' };
+
+    http.post(`${BASE_URL}/api/signup`, JSON.stringify({ username, password }), { headers });
+
+    const loginRes = http.post(`${BASE_URL}/api/login`, JSON.stringify({ username, password }), { headers });
+    check(loginRes, { 'login status is 200': (r) => r.status === 200 });
+
+    http.get(`${BASE_URL}/api/get_visibility?feature=extension`);
+
+    http.post(`${BASE_URL}/api/toggle_visibility`, JSON.stringify({
+        username,
+        feature: 'extension',
+        visible: true,
+    }), { headers });
+
+    const pageUrl = realWebPages[Math.floor(Math.random() * realWebPages.length)];
+    const pageText = ''; 
+
+    const summaryRes = http.post(`${BASE_URL}/api/scheduling`, JSON.stringify({
+        text: pageText,
+        url: pageUrl,
+    }), { headers });
+    check(summaryRes, { 'scheduling status is 200': (r) => r.status === 200 });
+
+    sleep(5);
+
+    http.post(`${BASE_URL}/api/cancel`, JSON.stringify({
+        tabId: 1,
+        timestamp: Date.now(),
+    }), { headers });
+
+    const sessionId = Math.floor(Math.random() * 1000);
+    http.post(`${BASE_URL}/api/sessions/${sessionId}/close`, null, { headers });
+
+    const requestData = {
+        message: '你好',
+        context: {},
+    };
+
+    http.post(`${BASE_URL}/api/chat`, JSON.stringify(requestData), { headers });
+    http.post(`${BASE_URL}/api/general-chat`, JSON.stringify(requestData), { headers });
+
+    sleep(1);
+}
