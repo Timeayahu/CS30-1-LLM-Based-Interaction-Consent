@@ -1635,8 +1635,6 @@ function updatePopup(popup, isLoading, text, isError) {
           filterStatusContainer.style.padding = '6px';
           filterStatusContainer.style.marginTop = '10px';
           filterStatusContainer.style.overflow = 'visible';
-          
-          // Use first filter level color for border - Changed to always use blue
           filterStatusContainer.style.borderLeft = `3px solid #1976d2`;
         }
       }
@@ -1670,7 +1668,7 @@ function updatePopup(popup, isLoading, text, isError) {
         });
       }
       
-      // Function to apply filter - 修改为支持多筛选
+      // Function to apply filter - support multiple selection
       function applyFilter(filters) {
         // Increment operation counter to track latest operation
         currentFilterOperation++;
@@ -2254,7 +2252,7 @@ function updatePopup(popup, isLoading, text, isError) {
           }
         });
         
-        // Click filter functionality - 修改为支持多选
+        // Click filter functionality - support multiple selection
         numberLabel.addEventListener('click', () => {
           // Reset all bubble animation states
           resetBubbleAnimations();
@@ -2273,14 +2271,14 @@ function updatePopup(popup, isLoading, text, isError) {
             }
           }
 
-          // 切换筛选状态（多选支持）
+          // Toggle filter state (multiple selection support)
           const levelIndex = currentFilters.indexOf(item.level);
           
           if (levelIndex > -1) {
-            // 如果当前等级已被选中，则移除它
+            // If current level is already selected, remove it
             currentFilters.splice(levelIndex, 1);
             
-            // 更新UI状态为未选中
+            // Update UI state to unselected
             numberLabel.style.transform = 'scale(1)';
             numberLabel.style.fontWeight = '600';
             numberLabel.style.boxShadow = `0 1px 3px rgba(0,0,0,0.1), 0 0 0 1px ${item.color}30`;
@@ -2288,7 +2286,7 @@ function updatePopup(popup, isLoading, text, isError) {
             numberLabel.style.opacity = '1';
             numberLabel.classList.remove('selected');
             
-            // 更新对应颜色块的状态
+            // Update corresponding color block state
             const correspondingSegment = Array.from(segmentedBar.children).find(
               seg => parseInt(seg.dataset.level) === item.level
             );
@@ -2300,10 +2298,10 @@ function updatePopup(popup, isLoading, text, isError) {
               correspondingSegment.classList.remove('selected');
             }
           } else {
-            // 如果当前等级未被选中，则添加它
+            // If current level is not selected, add it
             currentFilters.push(item.level);
             
-            // 更新UI状态为选中
+            // Update UI state to selected
             numberLabel.style.transform = 'scale(1.3)';
             numberLabel.style.fontWeight = '700';
             numberLabel.style.boxShadow = `0 3px 8px rgba(0,0,0,0.15), 0 0 0 2px ${item.color}70`;
@@ -2311,7 +2309,7 @@ function updatePopup(popup, isLoading, text, isError) {
             numberLabel.classList.add('selected');
             numberLabel.classList.add('number-label');
             
-            // 更新对应颜色块的状态
+            // Update corresponding color block state
             const correspondingSegment = Array.from(segmentedBar.children).find(
               seg => parseInt(seg.dataset.level) === item.level
             );
@@ -2325,18 +2323,18 @@ function updatePopup(popup, isLoading, text, isError) {
             }
           }
           
-          // 更新未选中项的外观
+          // Update appearance of unselected items
           const allNumbers = numbersContainer.querySelectorAll('div');
           allNumbers.forEach(number => {
             const numberLevel = parseInt(number.innerText);
             if (!currentFilters.includes(numberLevel) && !number.classList.contains('selected')) {
               if (currentFilters.length > 0) {
-                // 有筛选时，未选中项半透明
+                // When filtering, unselected items become semi-transparent
                 number.style.opacity = '0.4';
                 number.style.transform = 'scale(0.9)';
                 number.style.fontWeight = '400';
               } else {
-                // 无筛选时，所有项正常显示
+                // When no filter, all items display normally
                 number.style.opacity = '1';
                 number.style.transform = 'scale(1)';
                 number.style.fontWeight = '600';
@@ -2344,16 +2342,16 @@ function updatePopup(popup, isLoading, text, isError) {
             }
           });
           
-          // 更新未选中颜色块的外观
+          // Update appearance of unselected color blocks
           const allSegments = segmentedBar.querySelectorAll('div');
           allSegments.forEach(segment => {
             const segmentLevel = parseInt(segment.dataset.level);
             if (!currentFilters.includes(segmentLevel) && !segment.classList.contains('selected')) {
               if (currentFilters.length > 0) {
-                // 有筛选时，未选中项半透明
+                // When filtering, unselected items become semi-transparent
                 segment.style.opacity = '0.3';
               } else {
-                // 无筛选时，所有项正常显示
+                // When no filter, all items display normally
                 segment.style.opacity = '1';
               }
             }
@@ -3207,7 +3205,7 @@ function updatePopup(popup, isLoading, text, isError) {
                   const summaryText = document.createElement('div');
                   summaryText.innerText = item.summary;
                   Object.assign(summaryText.style, {
-                    fontSize: '14px', // Fixed font size in pixels
+                    fontSize: '14px',
                     lineHeight: '1.6',
                     marginBottom: '15px',
                     wordBreak: 'break-word',
@@ -3241,7 +3239,6 @@ function updatePopup(popup, isLoading, text, isError) {
                     transform: 'translateY(10px)',
                     transition: 'opacity 0.3s ease, transform 0.3s ease, background-color 0.2s',
                     transitionDelay: '0.25s',
-                    // Fix: Add consistent button sizing
                     height: '32px',
                     lineHeight: '20px',
                     boxSizing: 'border-box',
@@ -3270,7 +3267,6 @@ function updatePopup(popup, isLoading, text, isError) {
                     alignItems: 'center',
                     justifyContent: 'center',
                     gap: '5px',
-                    // Fix: Remove minHeight that was causing sizing issues
                     height: '100%',
                     lineHeight: '1',
                     margin: '0',
@@ -3303,7 +3299,7 @@ function updatePopup(popup, isLoading, text, isError) {
                   Object.assign(detailExplanationBtn.style, {
                     color: borderColor,
                     textDecoration: 'none',
-                    fontSize: '14px', // Fixed font size in pixels
+                    fontSize: '14px',
                     display: 'inline-block',
                     padding: '6px 12px',  
                     margin: '0 0 10px 0',
@@ -3316,7 +3312,6 @@ function updatePopup(popup, isLoading, text, isError) {
                     transform: 'translateY(10px)',
                     transition: 'opacity 0.3s ease, transform 0.3s ease, background-color 0.2s',
                     transitionDelay: '0.25s',
-                    // Fix: Add consistent button sizing to match contextLink
                     height: '32px',
                     lineHeight: '20px',
                     boxSizing: 'border-box',
@@ -3543,7 +3538,6 @@ function updatePopup(popup, isLoading, text, isError) {
               backgroundColor: 'rgba(25, 118, 210, 0.1)',
               borderRadius: '4px',
               transition: 'background-color 0.2s',
-              // Fix: Add consistent button sizing
               height: '32px',
               lineHeight: '20px',
               boxSizing: 'border-box',
@@ -3572,7 +3566,6 @@ function updatePopup(popup, isLoading, text, isError) {
               alignItems: 'center',
               justifyContent: 'center',
               gap: '5px',
-              // Fix: Remove minHeight that was causing sizing issues
               height: '100%',
               lineHeight: '1',
               margin: '0',
@@ -3615,7 +3608,6 @@ function updatePopup(popup, isLoading, text, isError) {
               border: '1px solid rgba(25, 118, 210, 0.3)',
               opacity: '0',
               transform: 'translateY(5px)',
-              // Fix: Add consistent button sizing to match contextLink
               height: '32px',
               lineHeight: '20px',
               boxSizing: 'border-box',
@@ -3857,7 +3849,7 @@ let lastElementUnderMouse = null;
 
 // Enhanced mouse tracking for better responsiveness - Updated for all element types
 let lastMouseMoveTime = 0;
-let lastTrackedElement = null;  // Changed from lastTrackedLink to lastTrackedElement
+let lastTrackedElement = null;
 
 document.addEventListener('mousemove', (event) => {
   const now = Date.now();
@@ -4135,7 +4127,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       });
     }
     
-    return true; // Keep message channel open for async response
+    return true;
   } else if (message.action === "checkCurrentPageForPrivacy") {
     // Handle request to check if current page is privacy-related
     console.log("Received request to check current page for privacy content");
@@ -4170,7 +4162,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       });
     }
     
-    return true; // Keep message channel open for async response
+    return true;
   }
 });
 

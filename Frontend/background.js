@@ -38,7 +38,7 @@ function createContextMenu() {
         id: "summarize-privacy-policy",
         title: "Use LLM to summarize privacy policy",
         contexts: ["link", "selection"],
-        documentUrlPatterns: ["*://*/*"] // Available on all websites
+        documentUrlPatterns: ["*://*/*"]
       });
       
       console.log("Context menu created successfully");

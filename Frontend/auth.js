@@ -1,4 +1,5 @@
 // auth.js: Login and Registration Functions
+
 const API_CONFIG = {
   BASE_URL: 'https://usyd-cs30-1-llm-based-consent-reader.com'
 };
