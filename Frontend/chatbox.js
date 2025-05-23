@@ -1053,7 +1053,7 @@ function adjustChatWindowHeight() {
   // Get current viewport height
   const viewportHeight = window.innerHeight;
   // Calculate maximum height (in pixels)
-  const maxHeightPx = Math.floor(viewportHeight * 0.75); // 75vh
+  const maxHeightPx = Math.floor(viewportHeight * 0.75);
   
   // Get heights of header and input areas
   const headerHeight = chatPopup.container.querySelector('div').offsetHeight;
