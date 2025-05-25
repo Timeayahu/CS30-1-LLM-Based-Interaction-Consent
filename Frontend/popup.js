@@ -7,6 +7,9 @@ document.addEventListener('DOMContentLoaded', function() {
   // Get tutorial button
   const tutorialBtn = document.getElementById('tutorial-btn');
   
+  // Get guided tour button
+  const guidedTourBtn = document.getElementById('guided-tour-btn');
+  
   // Initialize toggle state
   chrome.storage.local.get(['isEnabled'], function(result) {
     toggleSwitch.checked = result.isEnabled !== false; // Default to true
@@ -39,6 +42,20 @@ document.addEventListener('DOMContentLoaded', function() {
     // Open tutorial page
     chrome.tabs.create({
       url: chrome.runtime.getURL('tutorial.html')
+    });
+  });
+  
+  // Listen for guided tour button click
+  guidedTourBtn.addEventListener('click', function() {
+    // Send message to current tab to start guided tour
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+      if (tabs[0]) {
+        chrome.tabs.sendMessage(tabs[0].id, {
+          action: "startGuidedTour"
+        });
+        // Close popup after starting tour
+        window.close();
+      }
     });
   });
 }); 
