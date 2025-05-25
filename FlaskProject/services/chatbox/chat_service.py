@@ -31,17 +31,17 @@ class ChatService:
         self.logger = logging.getLogger(__name__)
         self.logger.setLevel(logging.DEBUG)
         
-        # Google搜索API配置
+        # Google search API configuration
         self.google_api_key = os.environ.get("GOOGLE_API_KEY")
         self.google_cse_id = os.environ.get("GOOGLE_CSE_ID")
         if not self.google_api_key or not self.google_cse_id:
-            self.logger.warning("Google搜索API未完全配置，联网搜索功能将不可用")
+            self.logger.warning("Google search API is not fully configured, the online search function will be unavailable")
             self.google_search_enabled = False
         else:
             self.google_search_enabled = True
     
     def google_search(self, query, num_results=3):
-        """执行Google搜索并返回结果"""
+        """execute Google search and return the results"""
         if not self.google_search_enabled:
             self.logger.warning("try to use Google search, but API is not configured")
             return "search function is not configured."
@@ -83,62 +83,62 @@ class ChatService:
                 if summary_data and 'summary_content' in summary_data:
                     summary_content = summary_data.get('summary_content', {})             
                     
-                    # 处理字符串类型的summary_content
+                    # handle string type summary_content
                     if isinstance(summary_content, str):
                         try:
                             # try to parse the string as a dictionary
                             summary_content = json.loads(summary_content)
                         except json.JSONDecodeError:
                             self.logger.warning(f"can not parse summary_content to JSON: {summary_content[:100]}...")
-                            # 如果无法解析为JSON，直接使用字符串内容
+                            # if cannot parse to JSON, use the string content directly
                             return summary_content
                     
-                    # 处理任意JSON格式
+                    # handle any JSON format
                     if isinstance(summary_content, dict):
                         formatted_summary = []
                         
-                        # 添加公司名称（如果有的话）
+                        # add company name
                         if "Company Name" in summary_content:
                             formatted_summary.append(f"Company: {summary_content['Company Name']}")
                         
-                        # 处理所有顶级键，无论它们的名称是什么
+                        # handle all top-level keys
                         for key, value in summary_content.items():
-                            # 跳过已处理的Company Name
+                            # skip the processed Company Name
                             if key == "Company Name":
                                 continue
                                 
-                            # 处理数组类型的值（如collected_info、data_usage、data_sharing等）
+                            # handle array type values
                             if isinstance(value, list):
                                 formatted_summary.append(f"\n{key.replace('_', ' ').title()}:")
                                 for item in value:
                                     if isinstance(item, dict):
-                                        # 清除标签，合并为自然语言
+                                        # clear the tags, merge into natural language
                                         sentence = []
                                         for k, v in item.items():
                                             if k.lower() in {"context", "importance"}:
                                                 continue
-                                            # 去除标签前缀
+                                            # remove the prefix of the tag
                                             clean_value = self.clean_value(str(v))
                                             sentence.append(clean_value)
                                         if sentence:
                                             formatted_summary.append(f"- {'; '.join(sentence)}")
-                            # 处理嵌套字典（如Privacy Policy）
+                            # handle nested dictionaries
                             elif isinstance(value, dict):
                                 formatted_summary.append(f"\n{key.replace('_', ' ').title()}:")
                                 for k, v in value.items():
                                     formatted_summary.append(f"- {self.clean_value(str(v))}")
-                            # 处理简单值
+                           
                             else:
                                 formatted_summary.append(f"\n{key}: {value}")
                         
-                        # 合并摘要内容
+                        # merge summary content
                         if formatted_summary:
                             global_summary = "\n".join(formatted_summary)
                         else:
                             global_summary = "Summary is available but contains no displayable content."
                     else:
                         self.logger.warning(f"Unexpected summary_content type: {type(summary_content)}")
-                        # 如果不是字典类型，直接返回原始内容的字符串表示
+                        
                         global_summary = str(summary_content)
             except Exception as e:
                 self.logger.error(f"get summary error: {str(e)}")
@@ -146,11 +146,11 @@ class ChatService:
         return global_summary
         
     def clean_value(self, value):
-        """去除标签前缀"""
+        """remove the prefix of the tag"""
         return re.sub(r'^\s*(Type|Details|Description|keyword|summary)\s*:\s*', '', value, flags=re.I)
         
     def get_policy_content(self, policy_id):
-        """获取政策原文内容"""
+        """get the original policy content"""
         if not policy_id:
             return None
         
@@ -160,24 +160,24 @@ class ChatService:
                 self.logger.warning(f"找不到ID为{policy_id}的政策")
                 return None
             
-            # 检查是否有原始内容
+            # check if there is original content
             markdown_content = policy_data.get("markdown_content")
             html_content = policy_data.get("content")
             
-            # 优先使用markdown格式（更易读）
+            # use markdown format
             if markdown_content:
                 return markdown_content
             elif html_content:
                 return html_content
             else:
-                self.logger.warning(f"政策{policy_id}没有内容")
+                self.logger.warning(f"policy {policy_id} has no content")
                 return None
         except Exception as e:
-            self.logger.error(f"获取政策内容错误: {str(e)}")
+            self.logger.error(f"get policy content error: {str(e)}")
             return None
 
     def get_system_content(self, policy_id, bubble_context=None):
-        """构建完整的system消息：包含指令、气泡上下文、全局摘要、原始政策和联网搜索"""
+        """build the complete system message: include instructions, bubble context, global summary, original policy and internet search"""
         global_summary = self.format_global_summary(policy_id)
         policy_original = self.get_policy_content(policy_id)
 
@@ -198,7 +198,7 @@ class ChatService:
             "",
         ]
 
-        # 插入气泡上下文
+        # insert bubble context
         if bubble_context:
             parts.extend([
                 "### Bubble Context:",
@@ -206,20 +206,20 @@ class ChatService:
                 ""
             ])
 
-        # 插入全局摘要
+        # insert global summary
         parts.extend([
             "### Global Summary:",
             global_summary,
             ""
         ])
 
-        # 插入原始政策
+        # insert original policy
         if policy_original:
             parts.append("### Original Policy:")
             parts.append(policy_original)
             parts.append("")
 
-        # 回答指南
+        # answering guidelines
         parts.extend([
             "Answering procedure:",
             "When answering a user question:",
@@ -274,7 +274,7 @@ class ChatService:
         
     def wrap_plain_text(self, text: str) -> dict:
         """
-        仅包装原生回答，不再生成默认 follow_up，由 _generate_follow_up 负责。
+        only wrap the original answer, do not generate default follow_up, let _generate_follow_up handle it.
         """
         return {
             "answer": text.strip(),
@@ -284,18 +284,18 @@ class ChatService:
         
     def process_chat(self, data):
         """
-        处理聊天请求并返回响应
+        process chat request and return response
         
-        参数:
-            data (dict): 包含聊天请求数据的字典
-                - policy_id: 政策ID
-                - category_name: 类别名称
-                - bubble_summary: 气泡摘要
-                - user_question: 用户问题
-                - session_id: 会话ID（可选）
+        parameters:
+            data (dict): dictionary containing chat request data
+                - policy_id: policy ID
+                - category_name: category name
+                - bubble_summary: bubble summary
+                - user_question: user question
+                - session_id: session ID (optional)
         
-        返回:
-            dict 或 tuple(dict, int): 包含AI响应和相关元数据的字典，失败时可能附带HTTP状态码
+        return:
+            dict or tuple(dict, int): dictionary containing AI response and related metadata, may附带HTTP状态码
         """
         try:
             # 1. parameter extraction and validation
@@ -321,20 +321,20 @@ class ChatService:
             if not policy_id and session.get("policy_id"):
                 policy_id = session["policy_id"]
                 
-            # 3. build user message content - 移除JSON格式要求
+            # 3. build user message content
             user_message_content = f"Question: {user_question}"
             
             # 4. initialize session (only on the first time)
             if not session.get("initialized", False):
-                # 准备气泡上下文
+                # prepare bubble context
                 bubble_context = None
                 if category_name or bubble_summary:
                     bubble_context = f"Category: {category_name}\nBubble Summary: {bubble_summary}"
                 
-                # 构建系统消息内容，包括全局摘要和气泡上下文
+                # build system message content, include global summary and bubble context
                 system_content = self.get_system_content(policy_id, bubble_context)
                 
-                # 初始化会话
+                # initialize session
                 success = mark_session_initialized(session_id, system_content)
                 if not success:
                     # only record warning, not block the process
@@ -344,15 +344,15 @@ class ChatService:
                     if not success:
                         self.logger.warning("Retry initialize still failed, continue to process the request without system message")
             else:
-                # 如果会话已初始化，但前端发送了新的bubble_summary或category_name，需要更新系统消息
+                # if session is initialized, but the frontend sends new bubble_summary or category_name, update the system message
                 if (category_name or bubble_summary) and session.get("messages"):
-                    # 检查会话中是否有系统消息
+                    # check if there is system message
                     system_messages = [msg for msg in session["messages"] if msg["role"] == "system"]
                     
                     if system_messages:
                         current_system_msg = system_messages[0]["content"]
                         
-                        # 检查当前系统消息中的Bubble Context信息
+                        # check the Bubble Context information in the current system message
                         current_category = ""
                         current_bubble_summary = ""
                         
@@ -364,15 +364,15 @@ class ChatService:
                                 elif line.startswith("Bubble Summary:"):
                                     current_bubble_summary = line.replace("Bubble Summary:", "").strip()
                         
-                        # 判断是否需要更新
+                        # check if update is needed
                         if current_category != category_name or current_bubble_summary != bubble_summary:
-                            # 准备新的气泡上下文
+                            # prepare new bubble context
                             new_bubble_context = f"Category: {category_name}\nBubble Summary: {bubble_summary}"
                             
-                            # 更新系统消息
+                            # update system message
                             new_system_content = self.get_system_content(policy_id, new_bubble_context)
                             
-                            # 更新会话中的系统消息
+                            # update system message
                             update_system_message(session_id, new_system_content)
                             self.logger.info(f"Updated session {session_id} with new bubble context")
             
@@ -384,7 +384,7 @@ class ChatService:
             if messages is None:
                 return {"success": False, "error": "get session messages failed"}, 500
             
-            # 7. call OpenAI API - 移除严格JSON格式约束
+            # 7. call OpenAI API
             response = self.client.chat.completions.create(
                 model=self.model,
                 messages=messages,
@@ -394,25 +394,25 @@ class ChatService:
             
             response_content = response.choices[0].message.content
             
-            # 8. 检查是否需要联网搜索
-            if "需要搜索" in response_content.lower() or "请搜索" in response_content.lower() or "internet search" in response_content.lower():
-                # 提取搜索关键词
-                search_terms = user_question  # 默认使用用户问题作为搜索词
+            # 8. check if internet search is needed
+            if "search" in response_content.lower() or "internet search" in response_content.lower():
+                # extract search keywords
+                search_terms = user_question  # use user question as default
                 
-                # 尝试从回复中提取更精确的搜索关键词
-                search_pattern = r"搜索[：:]\s*([^\n]+)|search[：:]\s*([^\n]+)"
+                # try to extract more precise search keywords from the response
+                search_pattern = r"search[：:]\s*([^\n]+)|search[：:]\s*([^\n]+)"
                 search_match = re.search(search_pattern, response_content, re.IGNORECASE)
                 if search_match:
                     search_terms = search_match.group(1) or search_match.group(2)
                 
-                # 执行搜索
+                # execute search
                 search_results = self.google_search(search_terms)
                 
-                # 添加搜索结果作为额外消息
-                search_message = f"搜索结果（关键词：{search_terms}）:\n\n{search_results}"
+                # add search results as extra message
+                search_message = f"Search results (keywords: {search_terms}):\n\n{search_results}"
                 add_message_to_session(session_id, "user", search_message)
                 
-                # 重新获取消息并生成最终回复
+                # get messages again and generate final response
                 messages = get_session_messages(session_id)
                 response = self.client.chat.completions.create(
                     model=self.model,
@@ -428,10 +428,10 @@ class ChatService:
              # 10. wrap answer text
             wrapped = self.wrap_plain_text(response_content)
 
-            # 11. 智能生成 follow_up
+            # 11. generate follow_up
             wrapped['follow_up'] = self.generate_follow_up(user_question, wrapped['answer'])
 
-            # 12. 返回结构化结果
+            # 12. return structured result
             result = {
                 "success": True,
                 "response": wrapped,
@@ -450,16 +450,16 @@ class ChatService:
             
     def process_general_chat(self, data):
         """
-        处理通用聊天请求并返回响应（无类别和气泡摘要）
+        process general chat request and return response (no category and bubble summary)
         
-        参数:
-            data (dict): 包含聊天请求数据的字典
-                - policy_id: 政策ID
-                - user_question: 用户问题
-                - session_id: 会话ID（可选）
+        parameters:
+            data (dict): dictionary containing chat request data
+                - policy_id: policy ID
+                - user_question: user question
+                - session_id: session ID (optional)
         
-        返回:
-            dict 或 tuple(dict, int): 包含AI响应和相关元数据的字典，失败时可能附带HTTP状态码
+        return:
+            dict or tuple(dict, int): dictionary containing AI response and related metadata
         """
         try:
             # 1. parameter extraction and validation
@@ -483,15 +483,15 @@ class ChatService:
             if not policy_id and session.get("policy_id"):
                 policy_id = session["policy_id"]
                 
-            # 3. build user message content - 移除JSON格式要求
+            # 3. build user message content 
             user_message_content = f"Question: {user_question}"
             
             # 4. initialize session (only on the first time)
             if not session.get("initialized", False):
-                # 构建系统消息内容，只包含全局摘要（无气泡上下文）
+          
                 system_content = self.get_system_content(policy_id)
                 
-                # 初始化会话
+       
                 success = mark_session_initialized(session_id, system_content)
                 if not success:
                     # only record warning, not block the process
@@ -510,10 +510,10 @@ class ChatService:
             if messages is None:
                 return {"success": False, "error": "get session messages failed"}, 500
             
-            # 添加调试日志
+       
             self.logger.info("Messages to OpenAI:\n" + json.dumps(messages, ensure_ascii=False, indent=2))
             
-            # 专门输出系统消息
+         
             if messages and messages[0]["role"] == "system":
                 self.logger.info(
                     "--------------SYSTEM MSG--------------\n" + 
@@ -521,7 +521,7 @@ class ChatService:
                     "\n--------------END SYSTEM--------------"
                 )
             
-            # 7. call OpenAI API - 移除严格JSON格式约束
+        
             response = self.client.chat.completions.create(
                 model=self.model,
                 messages=messages,
@@ -529,15 +529,11 @@ class ChatService:
                 max_tokens=1000
             )
             
-            response_content = response.choices[0].message.content
-            
-             # 9. wrap answer text
+            response_content = response.choices[0].message.content     
             wrapped = self.wrap_plain_text(response_content)
-
-            # 10. 智能生成 follow_up
             wrapped['follow_up'] = self.generate_follow_up(user_question, wrapped['answer'])
 
-            # 11. 返回结构化结果
+           
             result = {
                 "success": True,
                 "response": wrapped,

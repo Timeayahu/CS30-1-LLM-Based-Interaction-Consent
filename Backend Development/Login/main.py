@@ -14,20 +14,20 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# 用户模型
+# user model
 class User(BaseModel):
     username: str
     password: str
 
-# 功能状态模型
+# feature status model
 class VisibilityToggle(BaseModel):
-    username: str  # 管理员用户名
-    feature: str   # 功能名，比如 "extension"
-    visible: bool  # 是否可见
+    username: str  # admin username
+    feature: str   # feature name, like "extension"
+    visible: bool  # whether visible
 
 @app.post("/api/signup")
 async def signup(user: User):
-    # 检查是否存在于任意集合中
+    # check if the user exists in any collection
     existing_user = await users_collection.find_one({"username": user.username})
     existing_admin = await admin_collection.find_one({"username": user.username})
     if existing_user or existing_admin:
@@ -62,12 +62,12 @@ async def login(user: User):
 
 @app.post("/api/toggle_visibility")
 async def toggle_visibility(status: VisibilityToggle):
-    # 验证是否是管理员
+    # check if the user is admin
     admin = await admin_collection.find_one({"username": status.username})
     if not admin:
         raise HTTPException(status_code=403, detail="Not authorized")
 
-    # 更新或插入功能状态
+    # update or insert feature status
     await visibility_collection.update_one(
         {"feature": status.feature},
         {"$set": {"visible": status.visible}},
@@ -79,5 +79,5 @@ async def toggle_visibility(status: VisibilityToggle):
 async def get_visibility(feature: str = "extension"):
     result = await visibility_collection.find_one({"feature": feature})
     if not result:
-        return {"feature": feature, "visible": False}  # 默认不可见
+        return {"feature": feature, "visible": False}  # default not visible
     return {"feature": feature, "visible": result["visible"]}

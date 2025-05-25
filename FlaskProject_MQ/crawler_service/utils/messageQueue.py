@@ -16,14 +16,14 @@ class RabbitMQManager:
         self.channel = self.connection.channel()
 
     def declare_queue(self, exchange_name, queue_name, routing_key):
-        """声明队列（如果不存在则创建）"""
+        """declare queue (create if not exists)"""
         self.channel.exchange_declare(exchange=exchange_name, exchange_type='direct')
         self.channel.queue_declare(queue=queue_name)
         self.channel.queue_bind(exchange=exchange_name, queue=queue_name, routing_key=routing_key)
 
     def send_message(self, exchange_name, queue_name, routing_key, message):
         self.channel.queue_declare(queue=queue_name)
-        """发送消息到指定队列"""
+        """send message to specified queue"""
         self.channel.basic_publish(
             exchange=exchange_name,
             routing_key=routing_key,
@@ -45,5 +45,5 @@ class RabbitMQManager:
         self.channel.start_consuming()
 
     def close(self):
-        """关闭连接"""
+        """close connection"""
         self.connection.close()

@@ -38,7 +38,7 @@ def crawl_privacy_policy():
         if not data or 'url' not in data:
             return jsonify({
                 'success': False,
-                'error': '请求中缺少URL参数'
+                'error': 'missing URL parameter'
             }), 400
         
         url = data['url']

@@ -14,17 +14,17 @@ def create_app():
     app = Flask(__name__)
     CORS(app)  
     
-    # 注册路由
+
     #app.register_blueprint(privacy_bp)
     app.register_blueprint(crawler_bp)
     app.register_blueprint(scheduling_bp)
 
-    app.register_blueprint(chat_bp)  # 注册聊天路由
+    app.register_blueprint(chat_bp)  
     app.register_blueprint(scheduling_local_bp)
     
     @app.route('/')
     def index():
-        return "欢迎使用隐私政策爬取和分析系统，API文档请访问/api/docs"
+        return "Welcome to the privacy policy crawler and analysis system, please visit /api/docs for the API documentation"
     
     return app
 
