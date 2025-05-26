@@ -18,12 +18,13 @@ class GuidedTour {
     this.steps = [];
     this.tourPaused = false;
     this.spotlightOverlays = [];
+    this.keyboardListener = null;
     
     // Steps for logged-in users
     this.loggedInSteps = [
       {
         title: "Welcome to Privacy Policy Assistant!",
-        content: "Let's take a quick tour to show you how to use this powerful tool that helps you understand privacy policies.",
+        content: "Let's take a quick tour to show you how this tool helps you understand privacy policies easily.",
         target: null,
         position: "center",
         autoAction: null,
@@ -31,7 +32,7 @@ class GuidedTour {
       },
       {
         title: "Extension Icon",
-        content: "This is your Privacy Policy Assistant extension icon. Let me show you how to access the settings by clicking it.",
+        content: "This is your Privacy Policy Assistant extension icon. Click it to access settings and features.",
         target: () => this.findExtensionPopup(),
         position: "left",
         autoAction: () => this.simulateExtensionClick(),
@@ -39,7 +40,7 @@ class GuidedTour {
       },
       {
         title: "Finding Privacy Links",
-        content: "When you hover over privacy policy links on any website, our blue icon will appear next to them.",
+        content: "Hover over privacy policy links on any website - our <span style='color: #2196f3; font-weight: bold;'>blue icon</span> will appear next to them.",
         target: () => this.findPrivacyLink(),
         position: "auto",
         autoAction: () => this.simulatePrivacyLinkHover(),
@@ -47,7 +48,7 @@ class GuidedTour {
       },
       {
         title: "Click to Analyze",
-        content: "Now click the blue floating icon 📝 to start analyzing the privacy policy. The AI will read and summarize it for you.",
+        content: "Click the <span style='color: #2196f3; font-weight: bold;'>blue floating icon 📝</span> to start analyzing. AI will read and summarize the policy for you.",
         target: () => this.findFloatingIcon(),
         position: "top",
         autoAction: () => this.simulateIconClick(),
@@ -55,7 +56,7 @@ class GuidedTour {
       },
       {
         title: "Summary Bubbles",
-        content: "The summary appears as colored bubbles. Each color represents the importance level - red for critical, orange for important, yellow for medium, light green for low and green for very low.",
+        content: "Summary appears as colored bubbles by importance: <span style='background: #d32f2f; color: white; padding: 2px 6px; border-radius: 10px; font-size: 11px;'>Critical</span> <span style='background: #f57c00; color: white; padding: 2px 6px; border-radius: 10px; font-size: 11px;'>Important</span> <span style='background: #fbc02d; color: white; padding: 2px 6px; border-radius: 10px; font-size: 11px;'>Medium</span> <span style='background: #689f38; color: white; padding: 2px 6px; border-radius: 10px; font-size: 11px;'>Low</span> <span style='background: #388e3c; color: white; padding: 2px 6px; border-radius: 10px; font-size: 11px;'>Very Low</span>",
         target: () => this.findSummaryContainer(),
         position: "left",
         autoAction: null,
@@ -63,7 +64,7 @@ class GuidedTour {
       },
       {
         title: "Expand for Details",
-        content: "Click on any bubble to expand it to see a brief summary. At the bottom, you can click on ‘View Original Text’ to find the original text, or click on Detail Explanation to bring up a chatbox that explains the bubble in detail!",
+        content: "Click any bubble to expand it. Use <span style='color: #1976d2; font-weight: bold;'>'View Original Text'</span> to see source or <span style='color: #1976d2; font-weight: bold;'>'Detail Explanation'</span> for AI chat.",
         target: () => this.findSummaryItem(),
         position: "right",
         autoAction: () => this.demonstrateBubbleExpansion(),
@@ -71,7 +72,7 @@ class GuidedTour {
       },
       {
         title: "Filter Options",
-        content: "Use these filter buttons to show only the information you care about. You can filter by importance levels.",
+        content: "Use these <span style='color: #1976d2; font-weight: bold;'>color filters</span> to show only the importance levels you care about.",
         target: () => this.findFilterButtons(),
         position: "left",
         autoAction: () => this.demonstrateFiltering(),
@@ -79,7 +80,7 @@ class GuidedTour {
       },
       {
         title: "Chat Feature",
-        content: "Use the chat button to ask specific questions about the privacy policy. The AI will provide personalized answers.",
+        content: "Use the <span style='color: #1976d2; font-weight: bold;'>chat button</span> to ask specific questions about the privacy policy. AI provides personalized answers.",
         target: () => this.findChatButton(),
         position: "left",
         autoAction: () => this.demonstrateChat(),
@@ -88,7 +89,7 @@ class GuidedTour {
       },
       {
         title: "User Profile",
-        content: "Access your profile here to manage your account settings.",
+        content: "Access your <span style='color: #1976d2; font-weight: bold;'>profile</span> to manage account settings.",
         target: () => this.findProfileButton(),
         position: "left",
         autoAction: () => this.demonstrateProfile(),
@@ -96,7 +97,7 @@ class GuidedTour {
       },
       {
         title: "Tour Complete!",
-        content: "You're all set! Start exploring privacy policies with confidence. You can restart this tour anytime from the extension menu.",
+        content: "You're all set! Start exploring privacy policies with confidence. Restart this tour anytime from the extension menu.",
         target: null,
         position: "center",
         autoAction: null,
@@ -108,7 +109,7 @@ class GuidedTour {
     this.loggedOutSteps = [
       {
         title: "Welcome to Privacy Policy Assistant!",
-        content: "Let's take a quick tour to show you how to use this powerful tool that helps you understand privacy policies.",
+        content: "Let's take a quick tour to show you how this tool helps you understand privacy policies easily.",
         target: null,
         position: "center",
         autoAction: null,
@@ -116,7 +117,7 @@ class GuidedTour {
       },
       {
         title: "Extension Icon",
-        content: "This is your Privacy Policy Assistant extension icon. Let me show you how to access the settings by clicking it.",
+        content: "This is your Privacy Policy Assistant extension icon. Click it to access settings and features.",
         target: () => this.findExtensionPopup(),
         position: "left",
         autoAction: () => this.simulateExtensionClick(),
@@ -124,7 +125,7 @@ class GuidedTour {
       },
       {
         title: "Finding Privacy Links",
-        content: "When you hover over privacy policy links on any website, our blue icon will appear next to them.",
+        content: "Hover over privacy policy links on any website - our <span style='color: #2196f3; font-weight: bold;'>blue icon</span> will appear next to them.",
         target: () => this.findPrivacyLink(),
         position: "auto",
         autoAction: () => this.simulatePrivacyLinkHover(),
@@ -132,7 +133,7 @@ class GuidedTour {
       },
       {
         title: "Login Required",
-        content: "To analyze privacy policies, you need to be logged in. Click the blue floating icon 📝 to start the login process.",
+        content: "To analyze privacy policies, you need to be logged in. Click the <span style='color: #2196f3; font-weight: bold;'>blue floating icon 📝</span> to start login.",
         target: () => this.findFloatingIcon(),
         position: "top",
         autoAction: () => this.highlightLoginPage(),
@@ -140,7 +141,7 @@ class GuidedTour {
       },
       {
         title: "Login or Register",
-        content: "Choose 'Login' if you have an account, or 'Register' to create a new one. After registration and login, we'll continue the tour with analysis features.",
+        content: "Choose <span style='color: #1976d2; font-weight: bold;'>'Login'</span> if you have an account, or <span style='color: #1976d2; font-weight: bold;'>'Register'</span> to create one. After login, we'll continue with analysis features.",
         target: () => this.findLoginPage(),
         position: "left",
         autoAction: null,
@@ -149,7 +150,7 @@ class GuidedTour {
       },
       {
         title: "Summary Bubbles",
-        content: "Now that you're logged in, let's continue! The summary appears as colored bubbles. Each color represents the importance level - red for critical, orange for important, yellow for moderate, and green for minor.",
+        content: "Now logged in! Summary appears as colored bubbles by importance: <span style='background: #d32f2f; color: white; padding: 2px 6px; border-radius: 10px; font-size: 11px;'>Critical</span> <span style='background: #f57c00; color: white; padding: 2px 6px; border-radius: 10px; font-size: 11px;'>Important</span> <span style='background: #fbc02d; color: white; padding: 2px 6px; border-radius: 10px; font-size: 11px;'>Medium</span> <span style='background: #689f38; color: white; padding: 2px 6px; border-radius: 10px; font-size: 11px;'>Low</span> <span style='background: #388e3c; color: white; padding: 2px 6px; border-radius: 10px; font-size: 11px;'>Very Low</span>",
         target: () => this.findSummaryContainer(),
         position: "left",
         autoAction: null,
@@ -157,7 +158,7 @@ class GuidedTour {
       },
       {
         title: "Expand for Details",
-        content: "Click any bubble to expand it and see detailed explanations with references to the original text.",
+        content: "Click any bubble to expand it. Use <span style='color: #1976d2; font-weight: bold;'>'View Original Text'</span> to see source or <span style='color: #1976d2; font-weight: bold;'>'Detail Explanation'</span> for AI chat.",
         target: () => this.findSummaryItem(),
         position: "right",
         autoAction: () => this.demonstrateBubbleExpansion(),
@@ -165,7 +166,7 @@ class GuidedTour {
       },
       {
         title: "Filter Options",
-        content: "Use these filter buttons to show only the information you care about. You can filter by importance levels.",
+        content: "Use these <span style='color: #1976d2; font-weight: bold;'>color filters</span> to show only the importance levels you care about.",
         target: () => this.findFilterButtons(),
         position: "left",
         autoAction: () => this.demonstrateFiltering(),
@@ -173,7 +174,7 @@ class GuidedTour {
       },
       {
         title: "Chat Feature",
-        content: "Use the chat button to ask specific questions about the privacy policy. The AI will provide personalized answers.",
+        content: "Use the <span style='color: #1976d2; font-weight: bold;'>chat button</span> to ask specific questions about the privacy policy. AI provides personalized answers.",
         target: () => this.findChatButton(),
         position: "left",
         autoAction: () => this.demonstrateChat(),
@@ -182,7 +183,7 @@ class GuidedTour {
       },
       {
         title: "User Profile",
-        content: "Access your profile here to view your analysis history and manage your account settings.",
+        content: "Access your <span style='color: #1976d2; font-weight: bold;'>profile</span> to manage account settings.",
         target: () => this.findProfileButton(),
         position: "left",
         autoAction: () => this.demonstrateProfile(),
@@ -190,7 +191,7 @@ class GuidedTour {
       },
       {
         title: "Tour Complete!",
-        content: "You're all set! Start exploring privacy policies with confidence. You can restart this tour anytime from the extension menu.",
+        content: "You're all set! Start exploring privacy policies with confidence. Restart this tour anytime from the extension menu.",
         target: null,
         position: "center",
         autoAction: null,
@@ -299,7 +300,7 @@ class GuidedTour {
         clearTimeout(this.resizeTimeout);
         this.resizeTimeout = setTimeout(() => {
           this.updateCurrentStepPositioning();
-        }, 50);
+        }, 100);
       }
     };
     
@@ -404,14 +405,26 @@ class GuidedTour {
 
       case "Chat Feature":
         if (this.currentOperation === 'chat') {
-          targetElement = document.querySelector('#chat-window') || 
-                         document.querySelector('.chat-container') ||
-                         document.querySelector('.chat-popup') ||
-                         document.querySelector('[class*="chat"][class*="window"]') ||
-                         document.querySelector('[class*="chat"][class*="popup"]') ||
-                         document.querySelector('[class*="chat"][class*="modal"]') ||
-                         document.querySelector('[id*="chat"][id*="window"]') ||
-                         document.querySelector('[id*="chat"][id*="popup"]');
+          const chatWindow = document.querySelector('#privacy-chat-window') || 
+                            document.querySelector('#chat-window') || 
+                            document.querySelector('.chat-container') ||
+                            document.querySelector('.chat-popup') ||
+                            document.querySelector('[class*="chat"][class*="window"]') ||
+                            document.querySelector('[class*="chat"][class*="popup"]') ||
+                            document.querySelector('[class*="chat"][class*="modal"]') ||
+                            document.querySelector('[id*="chat"][id*="window"]') ||
+                            document.querySelector('[id*="chat"][id*="popup"]');
+          
+          if (chatWindow) {
+            const rect = chatWindow.getBoundingClientRect();
+            const isVisible = rect.width > 0 && rect.height > 0 && 
+                            window.getComputedStyle(chatWindow).opacity !== '0' &&
+                            window.getComputedStyle(chatWindow).visibility !== 'hidden';
+            
+            if (isVisible) {
+              targetElement = chatWindow;
+            }
+          }
           position = 'left';
         } else {
           targetElement = step.target ? step.target() : null;
@@ -420,15 +433,26 @@ class GuidedTour {
 
       case "User Profile":
         if (this.currentOperation === 'profile') {
-          targetElement = document.querySelector('#profile-popup') || 
-                         document.querySelector('.profile-container') ||
-                         document.querySelector('.privacy-profile-popup') ||
-                         document.querySelector('.profile-popup') ||
-                         document.querySelector('.profile-modal') ||
-                         document.querySelector('[class*="profile"][class*="popup"]') ||
-                         document.querySelector('[class*="profile"][class*="modal"]') ||
-                         document.querySelector('[class*="profile"][class*="window"]') ||
-                         document.querySelector('[id*="profile"][id*="popup"]');
+          const profilePopup = document.querySelector('#profile-popup') || 
+                              document.querySelector('.profile-container') ||
+                              document.querySelector('.privacy-profile-popup') ||
+                              document.querySelector('.profile-popup') ||
+                              document.querySelector('.profile-modal') ||
+                              document.querySelector('[class*="profile"][class*="popup"]') ||
+                              document.querySelector('[class*="profile"][class*="modal"]') ||
+                              document.querySelector('[class*="profile"][class*="window"]') ||
+                              document.querySelector('[id*="profile"][id*="popup"]');
+          
+          if (profilePopup) {
+            const rect = profilePopup.getBoundingClientRect();
+            const isVisible = rect.width > 0 && rect.height > 0 && 
+                            window.getComputedStyle(profilePopup).opacity !== '0' &&
+                            window.getComputedStyle(profilePopup).visibility !== 'hidden';
+            
+            if (isVisible) {
+              targetElement = profilePopup;
+            }
+          }
           position = 'right';
         } else {
           targetElement = step.target ? step.target() : null;
@@ -456,11 +480,47 @@ class GuidedTour {
       requestAnimationFrame(() => {
         this.positionBubble(tempStepConfig, targetElement);
       });
+      
+      // Set up continuous monitoring for chat and profile popups
+      if (step.title === "Chat Feature" || step.title === "User Profile") {
+        this.setupDynamicMonitoring(targetElement, tempStepConfig);
+      }
     } else if (step.position === 'center') {
       this.positionBubble(step);
     } else {
       this.updateStepPositioning(step);
     }
+  }
+
+  setupDynamicMonitoring(targetElement, stepConfig) {
+    if (this.dynamicMonitoringInterval) {
+      clearInterval(this.dynamicMonitoringInterval);
+    }
+    
+    let lastRect = targetElement.getBoundingClientRect();
+    
+    this.dynamicMonitoringInterval = setInterval(() => {
+      if (!this.isActive || !targetElement.isConnected) {
+        clearInterval(this.dynamicMonitoringInterval);
+        this.dynamicMonitoringInterval = null;
+        return;
+      }
+      
+      const currentRect = targetElement.getBoundingClientRect();
+      const hasPositionChanged = 
+        Math.abs(currentRect.left - lastRect.left) > 5 ||
+        Math.abs(currentRect.top - lastRect.top) > 5 ||
+        Math.abs(currentRect.width - lastRect.width) > 5 ||
+        Math.abs(currentRect.height - lastRect.height) > 5;
+      
+      if (hasPositionChanged) {
+        this.createSoftSpotlight(targetElement);
+        requestAnimationFrame(() => {
+          this.positionBubble(stepConfig, targetElement);
+        });
+        lastRect = currentRect;
+      }
+    }, 200);
   }
 
   // Remove resize listener
@@ -475,6 +535,12 @@ class GuidedTour {
     if (this.resizeTimeout) {
       clearTimeout(this.resizeTimeout);
       this.resizeTimeout = null;
+    }
+    
+    // Clear dynamic monitoring
+    if (this.dynamicMonitoringInterval) {
+      clearInterval(this.dynamicMonitoringInterval);
+      this.dynamicMonitoringInterval = null;
     }
   }
 
@@ -679,6 +745,20 @@ class GuidedTour {
         setTimeout(() => {
           this.updateCurrentStepPositioning();
         }, 100);
+      } else if (step.title === "User Profile") {
+        const profileButton = this.findProfileButton();
+        if (profileButton) {
+          this.createSoftSpotlight(profileButton);
+          const tempStepConfig = {
+            position: 'right',
+            title: "User Profile"
+          };
+          this.positionBubble(tempStepConfig, profileButton);
+        } else {
+          setTimeout(() => {
+            this.updateCurrentStepPositioning();
+          }, 50);
+        }
       } else {
         setTimeout(() => {
           this.updateCurrentStepPositioning();
@@ -968,6 +1048,51 @@ class GuidedTour {
         this.endTour();
       });
     }
+    
+    this.addKeyboardListener();
+  }
+
+  addKeyboardListener() {
+    this.removeKeyboardListener();
+    
+    this.keyboardListener = (event) => {
+      if (!this.isActive || !this.bubble) {
+        return;
+      }
+      
+      if (event.key === 'Enter') {
+        if (this.isOperationInProgress) {
+          return;
+        }
+        
+        event.preventDefault();
+        event.stopPropagation();
+        
+        const isLastStep = this.currentStep === this.steps.length - 1;
+        if (isLastStep) {
+          this.endTour();
+        } else {
+          this.nextStep();
+        }
+      } else if (event.key === 'Escape') {
+        if (this.isOperationInProgress) {
+          return;
+        }
+        
+        event.preventDefault();
+        event.stopPropagation();
+        this.endTour();
+      }
+    };
+    
+    document.addEventListener('keydown', this.keyboardListener, true);
+  }
+
+  removeKeyboardListener() {
+    if (this.keyboardListener) {
+      document.removeEventListener('keydown', this.keyboardListener, true);
+      this.keyboardListener = null;
+    }
   }
 
   // Position the bubble relative to target element with improved positioning
@@ -1120,45 +1245,49 @@ class GuidedTour {
       return;
     }
     
-    const rect = target.getBoundingClientRect();
+    target.getBoundingClientRect();
     
-    if (rect.width === 0 || rect.height === 0) {
-      return;
-    }
-    
-    this.removeSpotlightOverlays();
-    
-    const margin = 15;
-    const spotlightLeft = Math.max(0, rect.left - margin);
-    const spotlightTop = Math.max(0, rect.top - margin);
-    const spotlightRight = Math.min(window.innerWidth, rect.right + margin);
-    const spotlightBottom = Math.min(window.innerHeight, rect.bottom + margin);
-    
-    const overlays = [];
-    
-    if (spotlightTop > 0) {
-      const topOverlay = this.createOverlayBlock(0, 0, window.innerWidth, spotlightTop);
-      overlays.push(topOverlay);
-    }
-    
-    if (spotlightBottom < window.innerHeight) {
-      const bottomOverlay = this.createOverlayBlock(0, spotlightBottom, window.innerWidth, window.innerHeight - spotlightBottom);
-      overlays.push(bottomOverlay);
-    }
-    
-    if (spotlightLeft > 0) {
-      const leftOverlay = this.createOverlayBlock(0, spotlightTop, spotlightLeft, spotlightBottom - spotlightTop);
-      overlays.push(leftOverlay);
-    }
-    
-    if (spotlightRight < window.innerWidth) {
-      const rightOverlay = this.createOverlayBlock(spotlightRight, spotlightTop, window.innerWidth - spotlightRight, spotlightBottom - spotlightTop);
-      overlays.push(rightOverlay);
-    }
-    
-    this.spotlightOverlays = overlays;
-    
-    this.currentSpotlightTarget = target;
+    requestAnimationFrame(() => {
+      const rect = target.getBoundingClientRect();
+      
+      if (rect.width === 0 || rect.height === 0) {
+        return;
+      }
+      
+      this.removeSpotlightOverlays();
+      
+      const margin = 15;
+      const spotlightLeft = Math.max(0, rect.left - margin);
+      const spotlightTop = Math.max(0, rect.top - margin);
+      const spotlightRight = Math.min(window.innerWidth, rect.right + margin);
+      const spotlightBottom = Math.min(window.innerHeight, rect.bottom + margin);
+      
+      const overlays = [];
+      
+      if (spotlightTop > 0) {
+        const topOverlay = this.createOverlayBlock(0, 0, window.innerWidth, spotlightTop);
+        overlays.push(topOverlay);
+      }
+      
+      if (spotlightBottom < window.innerHeight) {
+        const bottomOverlay = this.createOverlayBlock(0, spotlightBottom, window.innerWidth, window.innerHeight - spotlightBottom);
+        overlays.push(bottomOverlay);
+      }
+      
+      if (spotlightLeft > 0) {
+        const leftOverlay = this.createOverlayBlock(0, spotlightTop, spotlightLeft, spotlightBottom - spotlightTop);
+        overlays.push(leftOverlay);
+      }
+      
+      if (spotlightRight < window.innerWidth) {
+        const rightOverlay = this.createOverlayBlock(spotlightRight, spotlightTop, window.innerWidth - spotlightRight, spotlightBottom - spotlightTop);
+        overlays.push(rightOverlay);
+      }
+      
+      this.spotlightOverlays = overlays;
+      
+      this.currentSpotlightTarget = target;
+    });
   }
   
   // Create a single overlay block
@@ -1238,6 +1367,8 @@ class GuidedTour {
     this.clearDemonstrationStyles();
     
     this.removeResizeListener();
+    
+    this.removeKeyboardListener();
     
     this.removeErrorDetection();
     
@@ -1492,11 +1623,58 @@ class GuidedTour {
         this.waitForLoginAndResume();
       });
     }
+    
+    this.addKeyboardListener();
+  }
+
+  addKeyboardListener() {
+    this.removeKeyboardListener();
+    
+    this.keyboardListener = (event) => {
+      if (!this.isActive || !this.bubble) {
+        return;
+      }
+      
+      if (event.key === 'Enter') {
+        if (this.isOperationInProgress) {
+          return;
+        }
+        
+        event.preventDefault();
+        event.stopPropagation();
+        
+        const isLastStep = this.currentStep === this.steps.length - 1;
+        if (isLastStep) {
+          this.endTour();
+        } else {
+          this.nextStep();
+        }
+      } else if (event.key === 'Escape') {
+        if (this.isOperationInProgress) {
+          return;
+        }
+        
+        event.preventDefault();
+        event.stopPropagation();
+        this.endTour();
+      }
+    };
+    
+    document.addEventListener('keydown', this.keyboardListener, true);
+  }
+
+  removeKeyboardListener() {
+    if (this.keyboardListener) {
+      document.removeEventListener('keydown', this.keyboardListener, true);
+      this.keyboardListener = null;
+    }
   }
 
   // Pause tour temporarily
   pauseTour() {
     this.isActive = false;
+    
+    this.removeKeyboardListener();
     
     if (this.iconProtectionInterval) {
       clearInterval(this.iconProtectionInterval);
@@ -1839,6 +2017,33 @@ class GuidedTour {
               </svg>
             </div>
             <div style="flex: 1; font-size: 0.95rem;">View Tutorial</div>
+          </div>
+          
+          <div style="
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            background-color: rgba(25, 118, 210, 0.05);
+            transition: background-color 0.2s, transform 0.2s;
+          " onmouseover="this.style.backgroundColor='rgba(25, 118, 210, 0.1)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.backgroundColor='rgba(25, 118, 210, 0.05)'; this.style.transform='translateY(0)'">
+            <div style="
+              width: 24px;
+              height: 24px;
+              margin-right: 12px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              color: #1976d2;
+            ">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                <path d="M9 12l2 2 4-4"></path>
+              </svg>
+            </div>
+            <div style="flex: 1; font-size: 0.95rem;">Privacy & Consent Basics</div>
           </div>
           
           <div style="
@@ -2777,23 +2982,32 @@ class GuidedTour {
                                document.querySelector('[id*="chat"][id*="popup"]');
               
               if (chatWindow && attempts < 15) {
-                // Chat window found, move spotlight and bubble
-                this.createSoftSpotlight(chatWindow);
-                // Create temporary step configuration for positioning
-                const tempStepConfig = {
-                  position: 'left',
-                  title: "Chat Feature"
-                };
-                this.positionBubble(tempStepConfig, chatWindow);
+                const rect = chatWindow.getBoundingClientRect();
+                const isVisible = rect.width > 0 && rect.height > 0 && 
+                                window.getComputedStyle(chatWindow).opacity !== '0' &&
+                                window.getComputedStyle(chatWindow).visibility !== 'hidden';
                 
-                // Universal monitoring system will handle dynamic updates automatically
-                
-                resolve();
+                if (isVisible) {
+                  setTimeout(() => {
+                    const updatedRect = chatWindow.getBoundingClientRect();
+                    if (updatedRect.width > 0 && updatedRect.height > 0) {
+                      this.createSoftSpotlight(chatWindow);
+                      const tempStepConfig = {
+                        position: 'left',
+                        title: "Chat Feature"
+                      };
+                      this.positionBubble(tempStepConfig, chatWindow);
+                    }
+                  }, 200);
+                  resolve();
+                } else {
+                  attempts++;
+                  setTimeout(checkChatWindow, 500);
+                }
               } else if (attempts < 15) {
                 attempts++;
                 setTimeout(checkChatWindow, 500);
               } else {
-                // Timeout, resolve anyway
                 resolve();
               }
             };
@@ -2825,18 +3039,6 @@ class GuidedTour {
     return new Promise((resolve) => {
       const profileButton = this.findProfileButton();
       if (profileButton) {
-        // Set current operation immediately to ensure correct positioning
-        this.currentOperation = 'profile';
-        
-        // Step 1: First highlight the profile button with spotlight and bubble
-        this.createSoftSpotlight(profileButton);
-        // Create temporary step configuration for positioning - always right side
-        const tempStepConfig = {
-          position: 'right',
-          title: "User Profile"
-        };
-        this.positionBubble(tempStepConfig, profileButton);
-        
         // Ensure smooth transitions
         profileButton.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
         
@@ -2865,7 +3067,8 @@ class GuidedTour {
           if (realProfileButton) {
             realProfileButton.click();
             
-            // Step 3: Check for profile popup/page and move spotlight
+            this.currentOperation = 'profile';
+            
             let attempts = 0;
             const checkProfilePopup = () => {
               console.log(`Checking for profile popup, attempt ${attempts + 1}`);
@@ -2882,33 +3085,45 @@ class GuidedTour {
               console.log('Found profile popup:', profilePopup);
               
               if (profilePopup && attempts < 20) {
-                // Profile popup found, move spotlight and bubble immediately
-                console.log('Moving spotlight to profile popup');
-                this.createSoftSpotlight(profilePopup);
-                // Position bubble on right side pointing left to popup
-                const tempStepConfig = {
-                  position: 'right',
-                  title: "User Profile"
-                };
-                this.positionBubble(tempStepConfig, profilePopup);
-                                
-                resolve();
+                const rect = profilePopup.getBoundingClientRect();
+                const isVisible = rect.width > 0 && rect.height > 0 && 
+                                window.getComputedStyle(profilePopup).opacity !== '0' &&
+                                window.getComputedStyle(profilePopup).visibility !== 'hidden';
+                
+                if (isVisible) {
+                  console.log('Moving spotlight to profile popup');
+                  setTimeout(() => {
+                    const updatedRect = profilePopup.getBoundingClientRect();
+                    if (updatedRect.width > 0 && updatedRect.height > 0) {
+                      this.createSoftSpotlight(profilePopup);
+                      const tempStepConfig = {
+                        position: 'right',
+                        title: "User Profile"
+                      };
+                      this.positionBubble(tempStepConfig, profilePopup);
+                    }
+                  }, 200);
+                  resolve();
+                } else {
+                  attempts++;
+                  setTimeout(checkProfilePopup, 300);
+                }
               } else if (attempts < 20) {
                 attempts++;
                 setTimeout(checkProfilePopup, 300);
               } else {
                 console.log('Profile popup not found, creating demo');
-                // No real popup found, create demo
                 this.createDemoProfilePopup();
                 const demoProfile = this.demoElements.profilePopup;
                 if (demoProfile) {
-                  this.createSoftSpotlight(demoProfile);
-                  // Position bubble on right side pointing left to demo popup
-                  const tempStepConfig = {
-                    position: 'right',
-                    title: "User Profile"
-                  };
-                  this.positionBubble(tempStepConfig, demoProfile);
+                  setTimeout(() => {
+                    this.createSoftSpotlight(demoProfile);
+                    const tempStepConfig = {
+                      position: 'right',
+                      title: "User Profile"
+                    };
+                    this.positionBubble(tempStepConfig, demoProfile);
+                  }, 100);
                 }
                 resolve();
               }
@@ -2918,17 +3133,17 @@ class GuidedTour {
             setTimeout(checkProfilePopup, 200);
           } else {
             console.log('No real profile button found, creating demo popup');
-            // No real button, create demo popup directly
             this.createDemoProfilePopup();
             const demoProfile = this.demoElements.profilePopup;
             if (demoProfile) {
-              this.createSoftSpotlight(demoProfile);
-              // Position bubble on right side pointing left to demo popup
-              const tempStepConfig = {
-                position: 'right',
-                title: "User Profile"
-              };
-              this.positionBubble(tempStepConfig, demoProfile);
+              setTimeout(() => {
+                this.createSoftSpotlight(demoProfile);
+                const tempStepConfig = {
+                  position: 'right',
+                  title: "User Profile"
+                };
+                this.positionBubble(tempStepConfig, demoProfile);
+              }, 100);
             }
             resolve();
           }

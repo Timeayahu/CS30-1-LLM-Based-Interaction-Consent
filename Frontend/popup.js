@@ -7,6 +7,9 @@ document.addEventListener('DOMContentLoaded', function() {
   // Get tutorial button
   const tutorialBtn = document.getElementById('tutorial-btn');
   
+  // Get privacy tutorial button
+  const privacyTutorialBtn = document.getElementById('privacy-tutorial-btn');
+  
   // Get guided tour button
   const guidedTourBtn = document.getElementById('guided-tour-btn');
   
@@ -42,6 +45,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // Open tutorial page
     chrome.tabs.create({
       url: chrome.runtime.getURL('tutorial.html')
+    });
+  });
+  
+  // Listen for privacy tutorial button click
+  privacyTutorialBtn.addEventListener('click', function() {
+    // Open privacy tutorial page
+    chrome.tabs.create({
+      url: chrome.runtime.getURL('privacy-tutorial.html')
     });
   });
   
