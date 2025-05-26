@@ -36,6 +36,11 @@ function initMutationObserver() {
           try {
             // Check if the node is an element
             if (node && node.nodeType === Node.ELEMENT_NODE) {
+              // Skip guided tour elements to avoid conflicts
+              if (isGuidedTourElement(node)) {
+                continue;
+              }
+              
               // Enhanced detection for various element types, not just anchor tags
               if (isPossiblePrivacyPolicyElement(node)) {
                 handlePotentialPrivacyLink(node);
@@ -67,6 +72,46 @@ function initMutationObserver() {
   }
 }
 
+// Check if element is part of guided tour to avoid conflicts
+function isGuidedTourElement(element) {
+  if (!element) return false;
+  
+  const guidedTourSelectors = [
+    '#auth-popup',
+    '#auth-overlay', 
+    '.guided-tour-overlay',
+    '.guided-tour-bubble',
+    '.guided-tour-spotlight-block',
+    '.demo-element',
+    '#profile-popup',
+    '#privacy-chat-window',
+    '.privacy-summary-icon.demo-floating-icon'
+  ];
+  
+  for (const selector of guidedTourSelectors) {
+    if (element.matches && element.matches(selector)) {
+      return true;
+    }
+    
+    if (element.closest && element.closest(selector)) {
+      return true;
+    }
+    
+    if (element.id === selector.substring(1)) {
+      return true;
+    }
+    
+    if (element.className && typeof element.className === 'string') {
+      const classes = selector.replace(/[\.\#]/g, '').split(' ');
+      if (classes.some(cls => element.className.includes(cls))) {
+        return true;
+      }
+    }
+  }
+  
+  return false;
+}
+
 // Enhanced function to scan an element and its children for privacy links
 function scanElementForPrivacyLinks(element) {
   try {
@@ -75,11 +120,21 @@ function scanElementForPrivacyLinks(element) {
       return;
     }
     
+    // Skip guided tour elements
+    if (isGuidedTourElement(element)) {
+      return;
+    }
+    
     // Check various element types that could be privacy links
     const potentialElements = element.querySelectorAll('a, span, div, p, button, li, td, th');
     
     for (const el of potentialElements) {
       try {
+        // Skip guided tour elements
+        if (isGuidedTourElement(el)) {
+          continue;
+        }
+        
         if (isPossiblePrivacyPolicyElement(el)) {
           handlePotentialPrivacyLink(el);
         }
@@ -362,6 +417,14 @@ function handleLinkHover(e) {
     if (!isEnabled || !e || !e.target) return;
     
     const element = e.target;
+    
+    // Only skip if this specific element is a tour demo icon or if element is within guided tour UI
+    if (element.classList.contains('tour-demo-icon') || 
+        element.closest('.guided-tour-overlay') || 
+        element.closest('.guided-tour-bubble') ||
+        element.closest('.demo-element')) {
+      return;
+    }
     
     // Get the URL for this element
     const elementUrl = getElementUrl(element);
