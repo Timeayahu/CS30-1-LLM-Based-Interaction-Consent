@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "Privacy Policy Assistant",
-    "version": "2.5.0",
+    "version": "2.5.1",
     "description": "LLM Summarization on Policy Policies",
     "permissions": [
       "activeTab",
@@ -42,7 +42,7 @@
     },
     "web_accessible_resources": [
       {
-        "resources": ["auth.js", "chatbox.js", "tutorial.html", "images/*"],
+        "resources": ["auth.js", "chatbox.js", "tutorial.html", "privacy-tutorial.html", "images/*"],
         "matches": ["<all_urls>"]
       }
     ]
