@@ -19,6 +19,9 @@ class GuidedTour {
     this.tourPaused = false;
     this.spotlightOverlays = [];
     this.keyboardListener = null;
+    this.isUpdatingPosition = false;
+    this.dynamicMonitoringInterval = null;
+    this.resizeTimeout = null;
     
     // Steps for logged-in users
     this.loggedInSteps = [
@@ -224,14 +227,49 @@ class GuidedTour {
     });
   }
 
-  // Start the guided tour
+  // Detect if we're on a Single Page Application (SPA) that might conflict
+  detectSPAFramework() {
+    const indicators = {
+      react: window.React || document.querySelector('[data-reactroot]') || document.querySelector('#root') || 
+             document.querySelector('[id*="react"]') || document.querySelector('[class*="react"]'),
+      angular: window.angular || window.ng || document.querySelector('[ng-app]') || 
+               document.querySelector('[data-ng-app]') || document.querySelector('app-root'),
+      vue: window.Vue || document.querySelector('[id*="vue"]') || document.querySelector('[class*="vue"]') ||
+           document.querySelector('div[data-v-]'),
+      ember: window.Ember || document.querySelector('[class*="ember"]'),
+      svelte: document.querySelector('[class*="svelte"]')
+    };
+    
+    const detectedFrameworks = Object.keys(indicators).filter(framework => indicators[framework]);
+    
+    if (detectedFrameworks.length > 0) {
+      console.log('Detected SPA frameworks:', detectedFrameworks);
+      return detectedFrameworks;
+    }
+    
+    return [];
+  }
+
+  // Enhanced start tour with SPA detection
   async startTour() {
     if (this.isActive) return;
     
-    // First check login status to determine which tour to show
+    // Detect SPA frameworks
+    const frameworks = this.detectSPAFramework();
+    this.isSPA = frameworks.length > 0;
+    
+    if (this.isSPA) {
+      console.log('SPA detected, using enhanced monitoring');
+      // Increase monitoring intervals for SPA sites
+      this.monitoringInterval = 500;
+      this.resizeDebounce = 200;
+    } else {
+      this.monitoringInterval = 300;
+      this.resizeDebounce = 150;
+    }
+    
     this.isLoggedIn = await this.checkLoginStatus();
     
-    // Set appropriate steps based on login status
     if (this.isLoggedIn) {
       this.steps = [...this.loggedInSteps];
       console.log('Starting tour for logged-in user');
@@ -240,16 +278,13 @@ class GuidedTour {
       console.log('Starting tour for logged-out user');
     }
     
-    // Reset tour state
     this.resetStepsToOriginal();
     
-    // Close any existing summary popup before starting
     const existingSummary = document.querySelector('#summary-popup');
     if (existingSummary) {
       const closeBtn = existingSummary.querySelector('button');
       if (closeBtn && (closeBtn.textContent === 'Close' || closeBtn.textContent === '✕')) {
         closeBtn.click();
-        // Wait for close animation
         await new Promise(resolve => setTimeout(resolve, 300));
       }
     }
@@ -259,23 +294,17 @@ class GuidedTour {
     this.isOperationInProgress = false;
     this.loginRequired = false;
     this.tourPaused = false;
+    this.isUpdatingPosition = false;
     
-    // Create overlay and bubble elements
     this.createOverlay();
     this.createBubble();
-    
-    // Add window resize listener
     this.addResizeListener();
-    
-    // Add error detection
     this.addErrorDetection();
     
-    // Show first step - delay to ensure proper centering
     setTimeout(() => {
       this.showStep(0);
     }, 100);
     
-    // Mark tour as seen if this was first install
     if (this.isFirstInstall) {
       this.markTourAsSeen();
     }
@@ -296,231 +325,359 @@ class GuidedTour {
   // Add universal dynamic monitoring for all steps
   addResizeListener() {
     this.resizeListener = () => {
-      if (this.isActive && this.bubble) {
+      if (this.isActive && !this.tourPaused && this.bubble && !this.isUpdatingPosition) {
         clearTimeout(this.resizeTimeout);
+        // Use different debounce times for SPA vs regular sites
+        const debounceTime = this.isSPA ? 200 : 150;
         this.resizeTimeout = setTimeout(() => {
-          this.updateCurrentStepPositioning();
-        }, 100);
+          if (this.isActive && !this.tourPaused && !this.isUpdatingPosition) {
+            this.updateCurrentStepPositioning();
+          }
+        }, debounceTime);
       }
     };
     
-    window.addEventListener('resize', this.resizeListener);
-    window.addEventListener('scroll', this.resizeListener);
+    // Add passive listeners for better performance
+    window.addEventListener('resize', this.resizeListener, { passive: true });
+    window.addEventListener('scroll', this.resizeListener, { passive: true });
+    
+    // Add SPA-specific route change detection
+    if (this.isSPA) {
+      this.routeChangeObserver = new MutationObserver((mutations) => {
+        if (!this.isActive || this.tourPaused) return;
+        
+        let hasRouteChange = false;
+        mutations.forEach((mutation) => {
+          if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+            mutation.addedNodes.forEach((node) => {
+              if (node.nodeType === Node.ELEMENT_NODE && 
+                  (node.querySelector('[class*="route"]') || 
+                   node.querySelector('[class*="page"]') ||
+                   node.id && node.id.includes('app'))) {
+                hasRouteChange = true;
+              }
+            });
+          }
+        });
+        
+        if (hasRouteChange) {
+          this.handleSPARouteChange();
+        }
+      });
+      
+      this.routeChangeObserver.observe(document.body, {
+        childList: true,
+        subtree: true
+      });
+    }
   }
 
   // Universal step positioning update system
   updateCurrentStepPositioning() {
-    const step = this.steps[this.currentStep];
-    if (!step) return;
+    if (!this.isActive || this.tourPaused || this.isUpdatingPosition) return;
+    
+    this.isUpdatingPosition = true;
+    
+    try {
+      const step = this.steps[this.currentStep];
+      if (!step) {
+        this.isUpdatingPosition = false;
+        return;
+      }
 
-    let targetElement = null;
-    let position = step.position;
-    let needsSpotlightUpdate = true;
+      let targetElement = null;
+      let position = step.position;
+      let needsSpotlightUpdate = true;
 
-    // Get current target based on step and operation state
-    switch (step.title) {
-      case "Extension Icon":
-        if (this.currentOperation === 'extensionClick') {
-          // Look for the extension popup
-          const extensionPopup = this.findExtensionPopup();
-          if (extensionPopup) {
-            targetElement = extensionPopup;
-            position = 'left';
+      // Get current target based on step and operation state
+      switch (step.title) {
+        case "Extension Icon":
+          if (this.currentOperation === 'extensionClick') {
+            const extensionPopup = this.findExtensionPopup();
+            if (extensionPopup) {
+              targetElement = extensionPopup;
+              position = 'left';
+            } else {
+              targetElement = step.target ? step.target() : null;
+            }
           } else {
             targetElement = step.target ? step.target() : null;
           }
-        } else {
-          targetElement = step.target ? step.target() : null;
-        }
-        break;
-      case "Login Required":
-        if (this.currentOperation === 'loginPageHighlight') {
-          const loginInterface = document.querySelector('#login-form') ||
-                                document.querySelector('.login-container') ||
-                                document.querySelector('.auth-container') ||
-                                document.querySelector('[class*="login"][class*="modal"]') ||
-                                document.querySelector('[class*="auth"][class*="modal"]') ||
-                                document.querySelector('[id*="login"][id*="modal"]') ||
-                                document.querySelector('form[action*="login"]') ||
-                                document.querySelector('div[class*="signin"]') ||
-                                document.querySelector('div[class*="authentication"]');
-          
-          if (loginInterface) {
-            targetElement = loginInterface;
-            position = 'left';
+          break;
+        case "Login Required":
+          if (this.currentOperation === 'loginPageHighlight') {
+            const authPopup = document.querySelector('#auth-popup');
+            if (authPopup) {
+              targetElement = authPopup;
+              position = 'left';
+            }
           } else {
-            targetElement = step.target ? step.target() : null;
-          }
-        } else {
-          targetElement = step.target ? step.target() : null;
-        }
-        break;
-      case "Login or Register":
-        targetElement = this.findLoginPage();
-        position = 'left';
-        break;
-      case "Click to Analyze":
-        if (this.currentOperation === 'iconClick') {
-          targetElement = document.querySelector('#summary-popup');
-          position = 'left';
-        } else {
-          targetElement = step.target ? step.target() : null;
-          if (!targetElement) {
             const privacyLink = this.findPrivacyLink();
             if (privacyLink) {
-              this.createSoftSpotlight(privacyLink);
-              targetElement = this.findFloatingIcon();
-              position = 'top';
+              if (!this.demoElements.floatingIcon) {
+                this.createDemoFloatingIcon(privacyLink);
+              }
+              const floatingIcon = this.demoElements.floatingIcon;
+              if (floatingIcon) {
+                targetElement = floatingIcon;
+                position = 'top';
+              } else {
+                targetElement = privacyLink;
+                position = 'auto';
+              }
+            } else {
+              targetElement = step.target ? step.target() : null;
+            }
+          }
+          break;
+        case "Login or Register":
+          if (!this.tourPaused) {
+            targetElement = this.findLoginPage();
+            position = 'left';
+          }
+          break;
+        case "Click to Analyze":
+          if (this.currentOperation === 'iconClick') {
+            const summaryPopup = document.querySelector('#summary-popup');
+            if (summaryPopup) {
+              targetElement = summaryPopup;
+              position = 'left';
+            } else {
+              const demoSummary = this.demoElements.summaryContainer;
+              if (demoSummary) {
+                targetElement = demoSummary;
+                position = 'left';
+              }
+            }
+          } else {
+            const privacyLink = this.findPrivacyLink();
+            if (privacyLink) {
+              if (!this.demoElements.floatingIcon) {
+                this.createDemoFloatingIcon(privacyLink);
+              }
+              const floatingIcon = this.demoElements.floatingIcon;
+              if (floatingIcon) {
+                targetElement = floatingIcon;
+                position = 'top';
+              } else {
+                targetElement = privacyLink;
+                position = 'auto';
+              }
+            } else {
+              targetElement = step.target ? step.target() : null;
+            }
+          }
+          break;
+
+        case "Expand for Details":
+          if (this.currentOperation === 'bubbleExpansion') {
+            targetElement = document.querySelector('.expanded-summary') ||
+                           document.querySelector('[class*="expanded"]') ||
+                           document.querySelector('[id*="detail"]');
+            position = 'right';
+          } else {
+            targetElement = step.target ? step.target() : null;
+          }
+          break;
+
+        case "Filter Options":
+          if (this.currentOperation === 'filtering') {
+            const summaryContainer = this.findFilteredContainer();
+            const noResultsMsg = document.querySelector('[class*="no-result"], [class*="empty"], .summary-content');
+            if (summaryContainer) {
+              targetElement = summaryContainer;
+              position = 'left';
+              needsSpotlightUpdate = false;
+            } else if (noResultsMsg) {
+              targetElement = noResultsMsg;
+              position = 'left';
               needsSpotlightUpdate = false;
             }
+          } else {
+            targetElement = step.target ? step.target() : null;
           }
-        }
-        break;
+          break;
 
-      case "Expand for Details":
-        if (this.currentOperation === 'bubbleExpansion') {
-          targetElement = document.querySelector('.expanded-summary') ||
-                         document.querySelector('[class*="expanded"]') ||
-                         document.querySelector('[id*="detail"]');
-          position = 'right';
-        } else {
-          targetElement = step.target ? step.target() : null;
-        }
-        break;
-
-      case "Filter Options":
-        if (this.currentOperation === 'filtering') {
-          const summaryContainer = this.findFilteredContainer();
-          if (summaryContainer) {
-            targetElement = summaryContainer;
+        case "Chat Feature":
+          if (this.currentOperation === 'chat') {
+            const chatWindow = document.querySelector('#privacy-chat-window') || 
+                              document.querySelector('#chat-window') || 
+                              document.querySelector('.chat-container') ||
+                              document.querySelector('.chat-popup') ||
+                              document.querySelector('[class*="chat"][class*="window"]') ||
+                              document.querySelector('[class*="chat"][class*="popup"]') ||
+                              document.querySelector('[class*="chat"][class*="modal"]') ||
+                              document.querySelector('[id*="chat"][id*="window"]') ||
+                              document.querySelector('[id*="chat"][id*="popup"]');
+            
+            if (chatWindow) {
+              const rect = chatWindow.getBoundingClientRect();
+              const isVisible = rect.width > 0 && rect.height > 0 && 
+                              window.getComputedStyle(chatWindow).opacity !== '0' &&
+                              window.getComputedStyle(chatWindow).visibility !== 'hidden';
+              
+              if (isVisible) {
+                targetElement = chatWindow;
+              }
+            }
             position = 'left';
           } else {
-            targetElement = document.querySelector('[class*="no-result"], [class*="empty"], .summary-content');
-            position = 'left';
+            targetElement = step.target ? step.target() : null;
           }
-        } else {
-          targetElement = step.target ? step.target() : null;
-        }
-        break;
+          break;
 
-      case "Chat Feature":
-        if (this.currentOperation === 'chat') {
-          const chatWindow = document.querySelector('#privacy-chat-window') || 
-                            document.querySelector('#chat-window') || 
-                            document.querySelector('.chat-container') ||
-                            document.querySelector('.chat-popup') ||
-                            document.querySelector('[class*="chat"][class*="window"]') ||
-                            document.querySelector('[class*="chat"][class*="popup"]') ||
-                            document.querySelector('[class*="chat"][class*="modal"]') ||
-                            document.querySelector('[id*="chat"][id*="window"]') ||
-                            document.querySelector('[id*="chat"][id*="popup"]');
-          
-          if (chatWindow) {
-            const rect = chatWindow.getBoundingClientRect();
-            const isVisible = rect.width > 0 && rect.height > 0 && 
-                            window.getComputedStyle(chatWindow).opacity !== '0' &&
-                            window.getComputedStyle(chatWindow).visibility !== 'hidden';
+        case "User Profile":
+          if (this.currentOperation === 'profile') {
+            const profilePopup = document.querySelector('#profile-popup') || 
+                                document.querySelector('.profile-container') ||
+                                document.querySelector('.privacy-profile-popup') ||
+                                document.querySelector('.profile-popup') ||
+                                document.querySelector('.profile-modal') ||
+                                document.querySelector('[class*="profile"][class*="popup"]') ||
+                                document.querySelector('[class*="profile"][class*="modal"]') ||
+                                document.querySelector('[class*="profile"][class*="window"]') ||
+                                document.querySelector('[id*="profile"][id*="popup"]');
             
-            if (isVisible) {
-              targetElement = chatWindow;
+            if (profilePopup) {
+              const rect = profilePopup.getBoundingClientRect();
+              const isVisible = rect.width > 0 && rect.height > 0 && 
+                              window.getComputedStyle(profilePopup).opacity !== '0' &&
+                              window.getComputedStyle(profilePopup).visibility !== 'hidden';
+              
+              if (isVisible) {
+                targetElement = profilePopup;
+              }
             }
+            position = 'right';
+          } else {
+            targetElement = step.target ? step.target() : null;
           }
-          position = 'left';
-        } else {
+          break;
+
+        default:
           targetElement = step.target ? step.target() : null;
-        }
-        break;
+          break;
+      }
 
-      case "User Profile":
-        if (this.currentOperation === 'profile') {
-          const profilePopup = document.querySelector('#profile-popup') || 
-                              document.querySelector('.profile-container') ||
-                              document.querySelector('.privacy-profile-popup') ||
-                              document.querySelector('.profile-popup') ||
-                              document.querySelector('.profile-modal') ||
-                              document.querySelector('[class*="profile"][class*="popup"]') ||
-                              document.querySelector('[class*="profile"][class*="modal"]') ||
-                              document.querySelector('[class*="profile"][class*="window"]') ||
-                              document.querySelector('[id*="profile"][id*="popup"]');
-          
-          if (profilePopup) {
-            const rect = profilePopup.getBoundingClientRect();
-            const isVisible = rect.width > 0 && rect.height > 0 && 
-                            window.getComputedStyle(profilePopup).opacity !== '0' &&
-                            window.getComputedStyle(profilePopup).visibility !== 'hidden';
-            
-            if (isVisible) {
-              targetElement = profilePopup;
-            }
-          }
-          position = 'right';
-        } else {
-          targetElement = step.target ? step.target() : null;
-        }
-        break;
-
-      default:
-        targetElement = step.target ? step.target() : null;
-        break;
-    }
-
-    // Update spotlight and bubble if target found
-    if (targetElement && targetElement.isConnected) {
-      if (needsSpotlightUpdate) {
+      // Update spotlight and bubble position
+      if (targetElement && needsSpotlightUpdate) {
         this.createSoftSpotlight(targetElement);
+        
+        // Use setTimeout instead of requestAnimationFrame to prevent blocking
+        setTimeout(() => {
+          if (this.isActive && !this.tourPaused && targetElement.isConnected) {
+            const tempStepConfig = {
+              position: position,
+              title: step.title
+            };
+            this.positionBubble(tempStepConfig, targetElement);
+          }
+          this.isUpdatingPosition = false;
+        }, 50);
+      } else {
+        // Handle center positioning or no target
+        if (step.position === 'center') {
+          this.positionBubble(step);
+        }
+        this.isUpdatingPosition = false;
       }
       
-      // Create temporary step configuration for the positioning call
-      const tempStepConfig = {
-        position: position,
-        title: step.title
-      };
-      
-      // Force a small delay to ensure spotlight is applied before bubble positioning
-      requestAnimationFrame(() => {
-        this.positionBubble(tempStepConfig, targetElement);
-      });
-      
-      // Set up continuous monitoring for chat and profile popups
-      if (step.title === "Chat Feature" || step.title === "User Profile") {
-        this.setupDynamicMonitoring(targetElement, tempStepConfig);
+      // Setup dynamic monitoring for the target element
+      if (targetElement && targetElement.isConnected) {
+        this.setupDynamicMonitoring(targetElement, step);
       }
-    } else if (step.position === 'center') {
-      this.positionBubble(step);
-    } else {
-      this.updateStepPositioning(step);
+      
+    } catch (error) {
+      console.error('Error in updateCurrentStepPositioning:', error);
+      this.isUpdatingPosition = false;
     }
   }
 
   setupDynamicMonitoring(targetElement, stepConfig) {
     if (this.dynamicMonitoringInterval) {
       clearInterval(this.dynamicMonitoringInterval);
+      this.dynamicMonitoringInterval = null;
+    }
+    
+    if (!targetElement || !targetElement.isConnected) {
+      return;
     }
     
     let lastRect = targetElement.getBoundingClientRect();
+    let consecutiveFailures = 0;
+    const maxFailures = 10;
+    const interval = this.isSPA ? 500 : 300;
     
     this.dynamicMonitoringInterval = setInterval(() => {
-      if (!this.isActive || !targetElement.isConnected) {
-        clearInterval(this.dynamicMonitoringInterval);
-        this.dynamicMonitoringInterval = null;
-        return;
+      try {
+        if (!this.isActive || this.tourPaused || !targetElement.isConnected || this.isUpdatingPosition) {
+          clearInterval(this.dynamicMonitoringInterval);
+          this.dynamicMonitoringInterval = null;
+          return;
+        }
+        
+        if (stepConfig.title === "Filter Options" && this.currentOperation === 'filtering') {
+          return;
+        }
+        
+        if (stepConfig.title === "Click to Analyze" && this.currentOperation === 'iconClick') {
+          const summaryPopup = document.querySelector('#summary-popup');
+          if (summaryPopup && targetElement !== summaryPopup) {
+            return;
+          }
+        }
+        
+        const currentRect = targetElement.getBoundingClientRect();
+        
+        const isVisible = currentRect.width > 0 && currentRect.height > 0 && 
+                         window.getComputedStyle(targetElement).opacity !== '0' &&
+                         window.getComputedStyle(targetElement).visibility !== 'hidden';
+        
+        if (!isVisible) {
+          consecutiveFailures++;
+          if (consecutiveFailures >= maxFailures) {
+            clearInterval(this.dynamicMonitoringInterval);
+            this.dynamicMonitoringInterval = null;
+          }
+          return;
+        }
+        
+        const hasPositionChanged = 
+          Math.abs(currentRect.left - lastRect.left) > 5 ||
+          Math.abs(currentRect.top - lastRect.top) > 5 ||
+          Math.abs(currentRect.width - lastRect.width) > 5 ||
+          Math.abs(currentRect.height - lastRect.height) > 5;
+        
+        if (hasPositionChanged && !this.isUpdatingPosition) {
+          this.isUpdatingPosition = true;
+          
+          setTimeout(() => {
+            try {
+              if (this.isActive && !this.tourPaused && targetElement.isConnected) {
+                this.createSoftSpotlight(targetElement);
+                this.positionBubble(stepConfig, targetElement);
+              }
+            } catch (error) {
+              console.error('Error updating position in monitoring:', error);
+            } finally {
+              this.isUpdatingPosition = false;
+            }
+          }, 100);
+          
+          lastRect = currentRect;
+          consecutiveFailures = 0;
+        }
+      } catch (error) {
+        console.error('Error in dynamic monitoring:', error);
+        consecutiveFailures++;
+        
+        if (consecutiveFailures >= maxFailures) {
+          console.warn('Dynamic monitoring stopped due to consecutive failures');
+          clearInterval(this.dynamicMonitoringInterval);
+          this.dynamicMonitoringInterval = null;
+        }
       }
-      
-      const currentRect = targetElement.getBoundingClientRect();
-      const hasPositionChanged = 
-        Math.abs(currentRect.left - lastRect.left) > 5 ||
-        Math.abs(currentRect.top - lastRect.top) > 5 ||
-        Math.abs(currentRect.width - lastRect.width) > 5 ||
-        Math.abs(currentRect.height - lastRect.height) > 5;
-      
-      if (hasPositionChanged) {
-        this.createSoftSpotlight(targetElement);
-        requestAnimationFrame(() => {
-          this.positionBubble(stepConfig, targetElement);
-        });
-        lastRect = currentRect;
-      }
-    }, 200);
+    }, interval);
   }
 
   // Remove resize listener
@@ -541,6 +698,12 @@ class GuidedTour {
     if (this.dynamicMonitoringInterval) {
       clearInterval(this.dynamicMonitoringInterval);
       this.dynamicMonitoringInterval = null;
+    }
+    
+    // Clear SPA route change observer
+    if (this.routeChangeObserver) {
+      this.routeChangeObserver.disconnect();
+      this.routeChangeObserver = null;
     }
   }
 
@@ -736,16 +899,16 @@ class GuidedTour {
       setTimeout(() => {
         this.updateCurrentStepPositioning();
       }, 50);
-    } else {
-      if (step.title === "Click to Analyze") {
-        const privacyLink = this.findPrivacyLink();
-        if (privacyLink) {
-          this.createSoftSpotlight(privacyLink);
-        }
-        setTimeout(() => {
-          this.updateCurrentStepPositioning();
-        }, 100);
-      } else if (step.title === "User Profile") {
+          } else {
+        if (step.title === "Click to Analyze") {
+          const privacyLink = this.findPrivacyLink();
+          if (privacyLink && !this.demoElements.floatingIcon) {
+            this.createDemoFloatingIcon(privacyLink);
+          }
+          setTimeout(() => {
+            this.updateCurrentStepPositioning();
+          }, 150);
+        } else if (step.title === "User Profile") {
         const profileButton = this.findProfileButton();
         if (profileButton) {
           this.createSoftSpotlight(profileButton);
@@ -773,69 +936,97 @@ class GuidedTour {
       
       setTimeout(() => {
         step.autoAction().then(() => {
-          this.isOperationInProgress = false;
-          this.enableNavigation();
-          
-          if (stepIndex === 3 || (this.loginRequired && step.title === "Click to Analyze")) {
+          // Special handling for "Click to Analyze" step
+          if (step.title === "Click to Analyze") {
+            console.log('Click to Analyze action completed, waiting for summary...');
             this.waitForSummaryAndUpdateSpotlight();
+          } else {
+            this.isOperationInProgress = false;
+            this.enableNavigation();
           }
-        }).catch(() => {
+        }).catch((error) => {
+          console.error('Error in auto action:', error);
           this.isOperationInProgress = false;
           this.enableNavigation();
         });
-      }, 1000);
+      }, 800); // Reduced delay
     }
   }
 
-  // Wait for summary popup and update spotlight - improved version with error handling
+  // Wait for summary popup and update spotlight
   waitForSummaryAndUpdateSpotlight() {
     let attempts = 0;
-    const maxAttempts = 30;
-    const timeoutDuration = 15000;
+    const maxAttempts = 20; // Reduced attempts
+    const timeoutDuration = 10000; // Reduced timeout
     
     const overallTimeout = setTimeout(() => {
+      console.warn('Summary popup wait timeout reached');
       this.isOperationInProgress = false;
       this.enableNavigation();
+      
+      // If no summary found, create demo for testing
+      if (!document.querySelector('#summary-popup')) {
+        console.log('Creating demo summary for testing');
+        this.createDemoSummaryContainer();
+        const demoSummary = this.demoElements.summaryContainer;
+        if (demoSummary) {
+          this.createSoftSpotlight(demoSummary);
+          const tempStepConfig = {
+            position: 'left',
+            title: "Click to Analyze"
+          };
+          this.positionBubble(tempStepConfig, demoSummary);
+        }
+      }
     }, timeoutDuration);
     
     const checkSummary = () => {
       try {
         const summaryPopup = document.querySelector('#summary-popup');
-        const errorPopup = document.querySelector('[class*="error"], [id*="error"], .alert, .warning');
-        
-        if (errorPopup && attempts < 5) {
-          clearTimeout(overallTimeout);
-          this.handleError(errorPopup);
-          return;
-        }
         
         if (summaryPopup && attempts < maxAttempts) {
           const hasContent = summaryPopup.querySelector('.summary-content, [class*="bubble"], [class*="summary"]');
           const isLoading = summaryPopup.querySelector('[class*="loading"], [class*="spinner"], .loader');
           
           if (hasContent && !isLoading) {
+            console.log('Summary popup found with content');
             clearTimeout(overallTimeout);
+            this.isOperationInProgress = false;
+            this.enableNavigation();
+            
+            if (this.dynamicMonitoringInterval) {
+              clearInterval(this.dynamicMonitoringInterval);
+              this.dynamicMonitoringInterval = null;
+            }
+            
+            this.isUpdatingPosition = true;
             setTimeout(() => {
-              this.createSoftSpotlight(summaryPopup);
-              const tempStepConfig = {
-                position: 'left',
-                title: "Click to Analyze"
-              };
-              this.positionBubble(tempStepConfig, summaryPopup);
-              
-            }, 500);
+              if (this.isActive && !this.tourPaused) {
+                this.createSoftSpotlight(summaryPopup);
+                const tempStepConfig = {
+                  position: 'left',
+                  title: "Click to Analyze"
+                };
+                this.positionBubble(tempStepConfig, summaryPopup);
+                this.setupDynamicMonitoring(summaryPopup, tempStepConfig);
+              }
+              this.isUpdatingPosition = false;
+            }, 200);
+            return;
           } else if (attempts < maxAttempts) {
             attempts++;
-            setTimeout(checkSummary, 500);
+            setTimeout(checkSummary, 300); // Reduced interval
           } else {
+            console.warn('Summary popup found but no content after max attempts');
             clearTimeout(overallTimeout);
             this.isOperationInProgress = false;
             this.enableNavigation();
           }
         } else if (attempts < maxAttempts) {
           attempts++;
-          setTimeout(checkSummary, 500);
+          setTimeout(checkSummary, 300); // Reduced interval
         } else {
+          console.warn('Summary popup not found after max attempts');
           clearTimeout(overallTimeout);
           this.isOperationInProgress = false;
           this.enableNavigation();
@@ -848,7 +1039,8 @@ class GuidedTour {
       }
     };
     
-    checkSummary();
+    // Start checking immediately
+    setTimeout(checkSummary, 100);
   }
 
   
@@ -1239,7 +1431,7 @@ class GuidedTour {
     }
   }
 
-  // Create spotlight effect using four overlay blocks - most reliable method
+  // Create spotlight effect using four overlay blocks
   createSoftSpotlight(target) {
     if (!target || !target.getBoundingClientRect) {
       return;
@@ -1290,7 +1482,7 @@ class GuidedTour {
     });
   }
   
-  // Create a single overlay block
+  // Create an overlay block
   createOverlayBlock(left, top, width, height) {
     const overlay = document.createElement('div');
     overlay.className = 'guided-tour-spotlight-block';
@@ -1362,21 +1554,83 @@ class GuidedTour {
 
   // End the tour
   endTour() {
+    console.log('Ending guided tour...');
+    
+    // Set all flags to stop operations
     this.isActive = false;
+    this.tourPaused = false;
+    this.isUpdatingPosition = false;
+    this.currentOperation = null;
+    this.isOperationInProgress = false;
     
-    this.clearDemonstrationStyles();
+    // Clear all timeouts and intervals immediately
+    if (this.resizeTimeout) {
+      clearTimeout(this.resizeTimeout);
+      this.resizeTimeout = null;
+    }
     
-    this.removeResizeListener();
-    
-    this.removeKeyboardListener();
-    
-    this.removeErrorDetection();
+    if (this.dynamicMonitoringInterval) {
+      clearInterval(this.dynamicMonitoringInterval);
+      this.dynamicMonitoringInterval = null;
+    }
     
     if (this.iconProtectionInterval) {
       clearInterval(this.iconProtectionInterval);
       this.iconProtectionInterval = null;
     }
     
+    // Remove all event listeners
+    this.removeResizeListener();
+    this.removeKeyboardListener();
+    this.removeErrorDetection();
+    
+    // Stop all monitoring (these are now empty but kept for compatibility)
+    this.stopSummaryPopupMonitoring();
+    this.stopExpandedSummaryMonitoring();
+    this.stopChatWindowMonitoring();
+    this.stopProfilePopupMonitoring();
+    
+    // Remove tour elements with fade out
+    if (this.bubble) {
+      this.bubble.style.opacity = '0';
+      this.bubble.style.transform = 'scale(0.8)';
+      setTimeout(() => {
+        if (this.bubble && this.bubble.parentNode) {
+          this.bubble.remove();
+        }
+        this.bubble = null;
+      }, 300);
+    }
+    
+    if (this.overlay) {
+      this.overlay.style.opacity = '0';
+      setTimeout(() => {
+        if (this.overlay && this.overlay.parentNode) {
+          this.overlay.remove();
+        }
+        this.overlay = null;
+      }, 300);
+    }
+    
+    // Remove spotlight overlays
+    this.removeSpotlightOverlays();
+    
+    // Clean up demo elements
+    Object.values(this.demoElements).forEach(element => {
+      if (element && element.parentNode) {
+        element.remove();
+      }
+    });
+    this.demoElements = {};
+    
+    // Restore any hidden real floating icons from content.js
+    const hiddenRealIcons = document.querySelectorAll('.privacy-summary-icon[data-hidden-by-tour="true"]');
+    hiddenRealIcons.forEach(icon => {
+      icon.removeAttribute('data-hidden-by-tour');
+      icon.style.display = '';
+    });
+    
+    // Remove tour highlights
     document.querySelectorAll('.tour-highlight').forEach(el => {
       el.classList.remove('tour-highlight');
       el.style.removeProperty('box-shadow');
@@ -1384,55 +1638,23 @@ class GuidedTour {
       el.style.removeProperty('z-index');
     });
     
-    this.removeSpotlightOverlays();
+    // Clear demonstration styles
+    this.clearDemonstrationStyles();
     
+    // Restore extension state
     this.restoreExtensionDefaultState();
     
-    Object.values(this.demoElements).forEach(element => {
-      if (element && element.parentNode && !element.classList.contains('preserve-functionality')) {
-        element.remove();
-      }
-    });
-    this.demoElements = {};
-    
-    if (this.realFloatingIcon) {
-      this.realFloatingIcon.style.display = 'block';
-      this.realFloatingIcon.style.visibility = 'visible';
-      this.realFloatingIcon.style.opacity = '1';
-      this.realFloatingIcon = null;
-    }
-    
-    const hiddenIcons = document.querySelectorAll('.privacy-summary-icon[style*="display: none"], .privacy-summary-icon[style*="visibility: hidden"]');
-    hiddenIcons.forEach(icon => {
-      icon.style.display = 'block';
-      icon.style.visibility = 'visible';
-      icon.style.opacity = '1';
-    });
-    
-    // Fade out and remove elements
-    if (this.bubble) {
-      this.bubble.style.opacity = '0';
-      this.bubble.style.transform = 'scale(0.8)';
-    }
-    
-    if (this.overlay) {
-      this.overlay.style.opacity = '0';
-    }
-    
+    // Force cleanup of any remaining tour elements
     setTimeout(() => {
-      if (this.bubble && this.bubble.parentNode) {
-        this.bubble.remove();
-        this.bubble = null;
-      }
-      if (this.overlay && this.overlay.parentNode) {
-        this.overlay.remove();
-        this.overlay = null;
-      }
-      
-      const remainingOverlays = document.querySelectorAll('.guided-tour-overlay');
-      remainingOverlays.forEach(el => el.remove());
-      
-    }, 300);
+      const remainingElements = document.querySelectorAll('.guided-tour-overlay, .guided-tour-bubble, .demo-element');
+      remainingElements.forEach(el => {
+        if (el.parentNode) {
+          el.remove();
+        }
+      });
+    }, 500);
+    
+    console.log('Guided tour ended and cleaned up');
   }
 
   // Restore extension to default state
@@ -1448,11 +1670,6 @@ class GuidedTour {
     if (this.demoElements.profilePopup) {
       this.demoElements.profilePopup.remove();
       delete this.demoElements.profilePopup;
-    }
-    
-    if (this.demoElements.loginPage) {
-      this.demoElements.loginPage.remove();
-      delete this.demoElements.loginPage;
     }
     
     const summaryPopup = document.querySelector('#summary-popup');
@@ -1478,28 +1695,45 @@ class GuidedTour {
   // Add error detection for the tour
   addErrorDetection() {
     this.errorObserver = new MutationObserver((mutations) => {
+      if (!this.isActive || this.tourPaused) return;
+      
       mutations.forEach((mutation) => {
-        mutation.addedNodes.forEach((node) => {
-          if (node.nodeType === 1) {
-            const isError = node.classList && (
-              node.classList.contains('error') ||
-              node.classList.contains('alert') ||
-              node.classList.contains('warning') ||
-              node.id === 'error-popup' ||
-              node.querySelector('.error, .alert, .warning, [class*="error"], [id*="error"]')
-            );
-            
-            if (isError) {
-              this.handleError(node);
+        if (mutation.type === 'childList') {
+          mutation.addedNodes.forEach((node) => {
+            if (node.nodeType === Node.ELEMENT_NODE) {
+              // Check for error elements
+              const errorElement = node.querySelector && (
+                node.querySelector('[class*="error"]') ||
+                node.querySelector('[id*="error"]') ||
+                node.querySelector('.alert') ||
+                node.querySelector('.warning')
+              );
+              
+              if (errorElement || (node.className && node.className.includes('error'))) {
+                this.handleError(errorElement || node);
+              }
+              
+              // Handle SPA route changes
+              if (this.isSPA && (
+                node.querySelector('[class*="route"]') ||
+                node.querySelector('[class*="page"]') ||
+                node.querySelector('[id*="app"]')
+              )) {
+                this.handleSPARouteChange();
+              }
             }
-          }
-        });
+          });
+        }
       });
     });
     
     this.errorObserver.observe(document.body, {
       childList: true,
-      subtree: true
+      subtree: true,
+      attributes: false,
+      attributeOldValue: false,
+      characterData: false,
+      characterDataOldValue: false
     });
   }
 
@@ -1673,12 +1907,24 @@ class GuidedTour {
   // Pause tour temporarily
   pauseTour() {
     this.isActive = false;
+    this.tourPaused = true;
     
     this.removeKeyboardListener();
+    this.removeResizeListener();
     
     if (this.iconProtectionInterval) {
       clearInterval(this.iconProtectionInterval);
       this.iconProtectionInterval = null;
+    }
+    
+    if (this.dynamicMonitoringInterval) {
+      clearInterval(this.dynamicMonitoringInterval);
+      this.dynamicMonitoringInterval = null;
+    }
+    
+    if (this.resizeTimeout) {
+      clearTimeout(this.resizeTimeout);
+      this.resizeTimeout = null;
     }
     
     if (this.bubble) {
@@ -1691,6 +1937,13 @@ class GuidedTour {
     if (this.overlay) {
       this.overlay.style.opacity = '0';
     }
+    
+    // Restore any hidden real floating icons from content.js
+    const hiddenRealIcons = document.querySelectorAll('.privacy-summary-icon[data-hidden-by-tour="true"]');
+    hiddenRealIcons.forEach(icon => {
+      icon.removeAttribute('data-hidden-by-tour');
+      icon.style.display = '';
+    });
     
     setTimeout(() => {
       if (this.bubble && this.bubble.parentNode) {
@@ -1709,10 +1962,18 @@ class GuidedTour {
 
   // Wait for login completion and resume tour
   waitForLoginAndResume() {
+    if (!this.tourPaused) return;
+    
     const checkLoginAndResume = () => {
+      if (!this.tourPaused) return;
+      
       this.checkLoginStatus().then(isLoggedIn => {
+        if (!this.tourPaused) return;
+        
         if (isLoggedIn && !this.isActive) {
           setTimeout(() => {
+            if (!this.tourPaused) return;
+            
             const summaryExists = document.querySelector('#summary-popup') || 
                                  document.querySelector('.summary-content') ||
                                  document.querySelector('[class*="summary"]');
@@ -1745,72 +2006,60 @@ class GuidedTour {
     this.isActive = true;
     this.currentStep = 5;
     
+    this.addResizeListener();
+    
     setTimeout(() => {
       this.showStep(this.currentStep);
     }, 500);
   }
 
-  // Highlight login page for logged-out users - click floating icon and wait for real login interface
+  // Highlight login page for logged-out users
   async highlightLoginPage() {
     return new Promise((resolve) => {
-      const floatingIcon = this.findFloatingIcon();
-      if (floatingIcon) {
-        floatingIcon.style.transform = 'scale(0.95)';
-        setTimeout(() => {
-          floatingIcon.style.transform = 'scale(1.1)';
-          const event = new MouseEvent('click', { bubbles: true });
-          floatingIcon.dispatchEvent(event);
-          
-          this.currentOperation = 'loginPageHighlight';
-          
-          let attempts = 0;
-          const checkLoginInterface = () => {
-            const authPopup = document.querySelector('#auth-popup');
-            if (authPopup) {
-              console.log('Found auth-popup:', authPopup);
-              this.createSoftSpotlight(authPopup);
-              const tempStepConfig = {
-                position: 'left',
-                title: "Login Required"
-              };
-              this.positionBubble(tempStepConfig, authPopup);
-              resolve();
-              return;
-            }
-            
-            const loginInterface = document.querySelector('#login-form') ||
-                                  document.querySelector('.login-container') ||
-                                  document.querySelector('.auth-container') ||
-                                  document.querySelector('[class*="login"][class*="modal"]') ||
-                                  document.querySelector('[class*="auth"][class*="modal"]') ||
-                                  document.querySelector('[id*="login"][id*="modal"]') ||
-                                  document.querySelector('form[action*="login"]') ||
-                                  document.querySelector('div[class*="signin"]') ||
-                                  document.querySelector('div[class*="authentication"]');
-            
-            if (loginInterface && attempts < 20) {
-              console.log('Found real login interface:', loginInterface);
-              this.createSoftSpotlight(loginInterface);
-              const tempStepConfig = {
-                position: 'left',
-                title: "Login Required"
-              };
-              this.positionBubble(tempStepConfig, loginInterface);
-              resolve();
-            } else if (attempts < 20) {
-              attempts++;
-              setTimeout(checkLoginInterface, 500);
-            } else {
-              console.log('Real login interface not found, using fallback');
-              resolve();
-            }
-          };
-          
-          setTimeout(checkLoginInterface, 800);
-        }, 200);
-      } else {
+      const privacyLink = this.findPrivacyLink();
+      if (!privacyLink) {
         resolve();
+        return;
       }
+
+      if (!this.demoElements.floatingIcon) {
+        this.createDemoFloatingIcon(privacyLink);
+      }
+
+      const icon = this.demoElements.floatingIcon;
+      
+      icon.style.transform = 'scale(0.95)';
+      setTimeout(() => {
+        icon.style.transform = 'scale(1.1)';
+        
+        const event = new MouseEvent('click', { bubbles: true });
+        icon.dispatchEvent(event);
+        
+        this.currentOperation = 'loginPageHighlight';
+        
+        let attempts = 0;
+        const checkLoginInterface = () => {
+          const authPopup = document.querySelector('#auth-popup');
+          if (authPopup) {
+            console.log('Found auth-popup:', authPopup);
+            this.createSoftSpotlight(authPopup);
+            const tempStepConfig = {
+              position: 'left',
+              title: "Login Required"
+            };
+            this.positionBubble(tempStepConfig, authPopup);
+            resolve();
+          } else if (attempts < 10) {
+            attempts++;
+            setTimeout(checkLoginInterface, 500);
+          } else {
+            console.log('Auth popup not found after attempts');
+            resolve();
+          }
+        };
+        
+        setTimeout(checkLoginInterface, 300);
+      }, 200);
     });
   }
 
@@ -1830,43 +2079,10 @@ class GuidedTour {
                       document.querySelector('div[class*="signin"]') ||
                       document.querySelector('div[class*="authentication"]');
     
-    if (loginPage) {
-      return loginPage;
-    }
-    
-    return this.createDemoLoginPage();
+    return loginPage;
   }
 
-  createDemoLoginPage() {
-    if (!this.demoElements.loginPage) {
-      this.demoElements.loginPage = document.createElement('div');
-      this.demoElements.loginPage.innerHTML = `
-        <div style="padding: 30px; background: white; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); max-width: 400px;">
-          <h2 style="margin: 0 0 20px 0; color: #1976d2; text-align: center;">Login to Privacy Assistant</h2>
-          <div style="margin-bottom: 15px;">
-            <input type="email" placeholder="Email" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px;">
-          </div>
-          <div style="margin-bottom: 20px;">
-            <input type="password" placeholder="Password" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px;">
-          </div>
-          <div style="display: flex; gap: 10px;">
-            <button class="demo-element" style="flex: 1; padding: 12px; background: #1976d2; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 14px; font-weight: 500;">Login</button>
-            <button class="demo-element" style="flex: 1; padding: 12px; background: #2196f3; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 14px; font-weight: 500;">Register</button>
-          </div>
-        </div>
-      `;
-      this.demoElements.loginPage.style.cssText = `
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 9999999;
-      `;
-      this.demoElements.loginPage.classList.add('demo-element');
-      document.body.appendChild(this.demoElements.loginPage);
-    }
-    return this.demoElements.loginPage;
-  }
+
 
   findExtensionIcon() {
     const extensionBar = document.querySelector('[role="toolbar"]') || 
@@ -2130,7 +2346,6 @@ class GuidedTour {
   }
 
   findPrivacyLink() {
-    // Step 1: Prioritize finding privacy links in the bottom area of the webpage
     const bottomAreaLinks = this.findBottomAreaPrivacyLinks();
     if (bottomAreaLinks.length > 0) {
       const targetLink = bottomAreaLinks[0];
@@ -2138,7 +2353,6 @@ class GuidedTour {
       return targetLink;
     }
     
-    // Step 2: Find privacy links that can trigger floating icon display (using content.js detection logic)
     const iconTriggeredLinks = this.findIconTriggeredPrivacyLinks();
     if (iconTriggeredLinks.length > 0) {
       const targetLink = iconTriggeredLinks[0];
@@ -2146,8 +2360,7 @@ class GuidedTour {
       return targetLink;
     }
     
-    // Step 3: Create demo link as the last fallback
-    return this.createDemoPrivacyLink();
+    return null;
   }
   
   // Find privacy links in the bottom area of the webpage
@@ -2264,49 +2477,75 @@ class GuidedTour {
     return hasPrivacyText && hasPrivacyUrl;
   }
 
-  createDemoPrivacyLink() {
-    if (!this.demoElements.privacyLink) {
-      this.demoElements.privacyLink = document.createElement('a');
-      this.demoElements.privacyLink.href = '#privacy-policy';
-      this.demoElements.privacyLink.textContent = 'Privacy Policy';
-      this.demoElements.privacyLink.style.cssText = `
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        padding: 10px 15px;
-        background: #1976d2;
-        color: white;
-        text-decoration: none;
-        border-radius: 6px;
-        z-index: 9999999;
-        font-size: 14px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-      `;
-      this.demoElements.privacyLink.classList.add('demo-element');
-      document.body.appendChild(this.demoElements.privacyLink);
-    }
-    return this.demoElements.privacyLink;
-  }
+
 
   // Find floating icon
   findFloatingIcon() {
+    // First try to find real floating icon near privacy links
+    const privacyLinks = document.querySelectorAll('a[href*="privacy"], a');
+    for (const link of privacyLinks) {
+      if (this.isPrivacyPolicyLink(link)) {
+        // Look for floating icon near this privacy link
+        const linkRect = link.getBoundingClientRect();
+        const floatingIcons = document.querySelectorAll('.privacy-summary-icon');
+        
+        for (const icon of floatingIcons) {
+          const iconRect = icon.getBoundingClientRect();
+          // Check if icon is near the privacy link (within 100px)
+          const distance = Math.sqrt(
+            Math.pow(iconRect.left - linkRect.right, 2) + 
+            Math.pow(iconRect.top - linkRect.top, 2)
+          );
+          
+          if (distance < 100) {
+            this.realFloatingIcon = icon;
+            return icon;
+          }
+        }
+      }
+    }
+    
+    // Fallback: find any floating icon
     const floatingIcon = document.querySelector('.privacy-summary-icon');
     if (floatingIcon) {
       this.realFloatingIcon = floatingIcon;
       return floatingIcon;
     }
     
-    // Return demo floating icon if real one not found
-    return this.demoElements.floatingIcon || this.createDemoFloatingIcon();
+    return null;
   }
 
-  createDemoFloatingIcon() {
+  createDemoFloatingIcon(privacyLink) {
     if (!this.demoElements.floatingIcon) {
+      // Hide any existing real floating icons from content.js
+      const existingRealIcons = document.querySelectorAll('.privacy-summary-icon:not(.tour-demo-icon)');
+      existingRealIcons.forEach(icon => {
+        icon.dataset.hiddenByTour = 'true';
+        icon.style.display = 'none';
+      });
+      
+      let iconPosition;
+      
+      if (privacyLink) {
+        const linkRect = privacyLink.getBoundingClientRect();
+        iconPosition = {
+          top: `${linkRect.top + window.scrollY}px`,
+          left: `${linkRect.right + 10}px`,
+          position: 'absolute'
+        };
+      } else {
+        iconPosition = {
+          bottom: '80px',
+          right: '80px',
+          position: 'fixed'
+        };
+      }
+      
       this.demoElements.floatingIcon = document.createElement('div');
-      this.demoElements.floatingIcon.className = 'privacy-summary-icon demo-floating-icon';
+      this.demoElements.floatingIcon.className = 'privacy-summary-icon demo-floating-icon tour-demo-icon';
       this.demoElements.floatingIcon.innerHTML = '📝';
       this.demoElements.floatingIcon.style.cssText = `
-        position: fixed;
+        position: ${iconPosition.position};
         width: 32px;
         height: 32px;
         background: linear-gradient(135deg, #1976d2, #2196f3);
@@ -2321,68 +2560,42 @@ class GuidedTour {
         font-size: 16px;
         user-select: none;
         transition: all 0.2s ease-in-out;
-        bottom: 80px;
-        right: 80px;
+        ${iconPosition.top ? `top: ${iconPosition.top};` : ''}
+        ${iconPosition.left ? `left: ${iconPosition.left};` : ''}
+        ${iconPosition.bottom ? `bottom: ${iconPosition.bottom};` : ''}
+        ${iconPosition.right ? `right: ${iconPosition.right};` : ''}
       `;
       this.demoElements.floatingIcon.classList.add('demo-element');
+      
+      this.demoElements.floatingIcon.addEventListener('click', () => {
+        chrome.storage.local.get(['isLoggedIn'], (result) => {
+          if (result.isLoggedIn) {
+            if (window.privacyAuth && typeof window.privacyAuth.handleIconClick === 'function') {
+              window.privacyAuth.handleIconClick();
+            } else {
+              this.createDemoSummaryContainer();
+            }
+          } else {
+            if (window.privacyAuth && typeof window.privacyAuth.showAuthPopup === 'function') {
+              window.privacyAuth.showAuthPopup();
+            } else if (window.privacyAuth && typeof window.privacyAuth.checkLoginStatusAndHandle === 'function') {
+              window.privacyAuth.checkLoginStatusAndHandle();
+            } else {
+              const event = new CustomEvent('showLoginPopup');
+              document.dispatchEvent(event);
+            }
+          }
+        });
+      });
+      
       document.body.appendChild(this.demoElements.floatingIcon);
     }
     return this.demoElements.floatingIcon;
   }
 
-  // Find login buttons
-  findLoginButtons() {
-    const buttons = document.querySelectorAll('button, input[type="submit"], a');
-    const loginButtonCandidates = Array.from(buttons).filter(btn => {
-      const text = btn.textContent.toLowerCase();
-      const ariaLabel = (btn.getAttribute('aria-label') || '').toLowerCase();
-      const title = (btn.getAttribute('title') || '').toLowerCase();
-      return !btn.classList.contains('demo-element') && 
-             (text.includes('login') || text.includes('sign in') || 
-              text.includes('register') || text.includes('sign up') ||
-              ariaLabel.includes('login') || title.includes('login'));
-    });
-    
-    if (loginButtonCandidates.length > 0) {
-      return loginButtonCandidates[0].parentElement;
-    }
-    
-    // Look for real login forms or containers
-    const loginContainer = document.querySelector('#login-form') ||
-                          document.querySelector('.login-container') ||
-                          document.querySelector('.auth-container') ||
-                          document.querySelector('[class*="login"][class*="modal"]') ||
-                          document.querySelector('[class*="auth"][class*="modal"]') ||
-                          document.querySelector('[id*="login"][id*="modal"]') ||
-                          document.querySelector('form[action*="login"]') ||
-                          document.querySelector('div[class*="signin"]') ||
-                          document.querySelector('div[class*="authentication"]');
-    
-    if (loginContainer) return loginContainer;
-    
-    return this.createDemoLoginButtons();
-  }
 
-  createDemoLoginButtons() {
-    if (!this.demoElements.loginButtons) {
-      this.demoElements.loginButtons = document.createElement('div');
-      this.demoElements.loginButtons.innerHTML = `
-        <div style="padding: 15px; background: white; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
-          <button class="demo-element" style="padding: 8px 16px; margin: 5px; background: #1976d2; color: white; border: none; border-radius: 4px; cursor: pointer;">Login</button>
-          <button class="demo-element" style="padding: 8px 16px; margin: 5px; background: #2196f3; color: white; border: none; border-radius: 4px; cursor: pointer;">Register</button>
-        </div>
-      `;
-      this.demoElements.loginButtons.style.cssText = `
-        position: fixed;
-        top: 60px;
-        right: 100px;
-        z-index: 9999999;
-      `;
-      this.demoElements.loginButtons.classList.add('demo-element');
-      document.body.appendChild(this.demoElements.loginButtons);
-    }
-    return this.demoElements.loginButtons;
-  }
+
+
 
   findSummaryContainer() {
     const summaryPopup = document.querySelector('#summary-popup');
@@ -2644,6 +2857,12 @@ class GuidedTour {
         if (!link.dataset.originalBoxShadow) {
           link.dataset.originalBoxShadow = link.style.boxShadow || '';
         }
+        if (!link.dataset.originalPosition) {
+          link.dataset.originalPosition = link.style.position || '';
+        }
+        if (!link.dataset.originalZIndex) {
+          link.dataset.originalZIndex = link.style.zIndex || '';
+        }
         
         // Simulate hover effect with visual feedback
         link.style.transform = 'scale(1.05)';
@@ -2653,9 +2872,8 @@ class GuidedTour {
         const event = new MouseEvent('mouseover', { bubbles: true });
         link.dispatchEvent(event);
         
-        // Create and show floating icon only if not already present
         if (!this.demoElements.floatingIcon && !document.querySelector('.privacy-summary-icon')) {
-          this.createDemoFloatingIcon();
+          this.createDemoFloatingIcon(link);
         }
         
         // Protect demo floating icon from being removed by user mouse movements
@@ -2693,53 +2911,33 @@ class GuidedTour {
 
   async simulateIconClick() {
     return new Promise((resolve) => {
-      const icon = this.findFloatingIcon();
-      
-      if (icon) {
-        // Store original styles before modifying
-        if (!icon.dataset.originalTransform) {
-          icon.dataset.originalTransform = icon.style.transform || '';
-        }
-        if (!icon.dataset.originalBoxShadow) {
-          icon.dataset.originalBoxShadow = icon.style.boxShadow || '';
-        }
-        
-        // Set timeout protection to prevent hanging
-        const timeoutId = setTimeout(() => {
-          this.currentOperation = 'iconClick';
-          resolve();
-        }, 10000);
-        
-        // Simulate click with visual feedback
-        icon.style.transform = 'scale(0.95)';
-        setTimeout(() => {
-          icon.style.transform = 'scale(1.1)';
-          
-          try {
-            // Simulate click event with error handling
-            const event = new MouseEvent('click', { bubbles: true });
-            icon.dispatchEvent(event);
-            
-            this.currentOperation = 'iconClick';
-            
-            // Clear timeout since operation completed
-            clearTimeout(timeoutId);
-            
-            // Add additional delay before resolving to allow for backend processing
-            setTimeout(() => {
-              resolve();
-            }, 1000);
-            
-          } catch (error) {
-            console.error('Error during simulateIconClick:', error);
-            clearTimeout(timeoutId);
-            this.currentOperation = 'iconClick';
-            resolve();
-          }
-        }, 200);
-      } else {
+      const privacyLink = this.findPrivacyLink();
+      if (!privacyLink) {
+        this.createDemoSummaryContainer();
+        this.currentOperation = 'iconClick';
         resolve();
+        return;
       }
+
+      if (!this.demoElements.floatingIcon) {
+        this.createDemoFloatingIcon(privacyLink);
+      }
+
+      const icon = this.demoElements.floatingIcon;
+      
+      icon.style.transform = 'scale(0.95)';
+      setTimeout(() => {
+        icon.style.transform = 'scale(1.1)';
+        
+        const event = new MouseEvent('click', { bubbles: true });
+        icon.dispatchEvent(event);
+        
+        this.currentOperation = 'iconClick';
+        
+        setTimeout(() => {
+          resolve();
+        }, 500);
+      }, 200);
     });
   }
 
@@ -2820,62 +3018,56 @@ class GuidedTour {
 
   async demonstrateFiltering() {
     return new Promise(async (resolve) => {
-      // First, close any expanded bubble summary from step 6
       const expandedSummary = document.querySelector('.expanded-summary');
       if (expandedSummary) {
         const closeBtn = expandedSummary.querySelector('.close-btn') ||
                         expandedSummary.querySelector('button');
         if (closeBtn) {
           closeBtn.click();
-          // Wait for close animation
           await new Promise(resolve => setTimeout(resolve, 300));
         }
       }
       
       const filterElement = this.findFilterButtons();
       if (filterElement) {
-        // Ensure smooth transitions
         filterElement.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
         
-        // Force initial state
         requestAnimationFrame(() => {
           filterElement.style.transform = 'scale(1)';
           filterElement.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';
           
-          // Apply visual feedback with delay
           requestAnimationFrame(() => {
             filterElement.style.transform = 'scale(1.05)';
             filterElement.style.boxShadow = '0 4px 12px rgba(25, 118, 210, 0.4)';
           });
         });
         
-        // Find and click actual filter buttons
         const colorSegments = document.querySelectorAll('.color-segment');
         const numberLabels = document.querySelectorAll('.number-label');
         
         if (colorSegments.length > 0) {
-          // Click the first color segment
           setTimeout(() => {
             colorSegments[0].click();
             this.currentOperation = 'filtering';
             
-            // Wait for filtering to complete, then move spotlight and bubble
+            if (this.dynamicMonitoringInterval) {
+              clearInterval(this.dynamicMonitoringInterval);
+              this.dynamicMonitoringInterval = null;
+            }
+            
             setTimeout(() => {
               const summaryContainer = this.findFilteredContainer();
               if (summaryContainer) {
                 this.createSoftSpotlight(summaryContainer);
-                // Create temporary step configuration for positioning
                 const tempStepConfig = {
                   position: 'left',
                   title: "Filter Options"
                 };
                 this.positionBubble(tempStepConfig, summaryContainer);
               } else {
-                // If no container with bubbles found, show "no results" message area
                 const noResultsMsg = document.querySelector('[class*="no-result"], [class*="empty"], .summary-content');
                 if (noResultsMsg) {
                   this.createSoftSpotlight(noResultsMsg);
-                  // Create temporary step configuration for positioning
                   const tempStepConfig = {
                     position: 'left',
                     title: "Filter Options"
@@ -2884,25 +3076,39 @@ class GuidedTour {
                 }
               }
               resolve();
-            }, 800); // Increased delay for filtering animation
+            }, 800);
           }, 500);
         } else if (numberLabels.length > 0) {
-          // Click the first number label
           setTimeout(() => {
             numberLabels[0].click();
             this.currentOperation = 'filtering';
-            resolve();
+            
+            if (this.dynamicMonitoringInterval) {
+              clearInterval(this.dynamicMonitoringInterval);
+              this.dynamicMonitoringInterval = null;
+            }
+            
+            setTimeout(() => {
+              const summaryContainer = this.findFilteredContainer();
+              if (summaryContainer) {
+                this.createSoftSpotlight(summaryContainer);
+                const tempStepConfig = {
+                  position: 'left',
+                  title: "Filter Options"
+                };
+                this.positionBubble(tempStepConfig, summaryContainer);
+              }
+              resolve();
+            }, 800);
           }, 500);
         } else {
           resolve();
         }
         
-        // Reset visual feedback with smooth transition
         setTimeout(() => {
           filterElement.style.transform = 'scale(1)';
           filterElement.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';
           
-          // Remove transition after animation
           setTimeout(() => {
             filterElement.style.transition = '';
           }, 300);
@@ -3194,112 +3400,361 @@ class GuidedTour {
 
   // Clear all demonstration styles that might be left over
   clearDemonstrationStyles() {
-    const privacyLinks = document.querySelectorAll('a[href*="privacy"], a');
-    privacyLinks.forEach(link => {
-      if (link.dataset.originalTransform !== undefined) {
-        link.style.transform = link.dataset.originalTransform || '';
-        link.removeAttribute('data-original-transform');
-      } else if (link.style.transform) {
-        link.style.removeProperty('transform');
+    try {
+      // Clear all demo element styles
+      Object.values(this.demoElements).forEach(element => {
+        if (element && element.style) {
+          element.style.transition = '';
+          element.style.transform = '';
+          element.style.boxShadow = '';
+          element.style.filter = '';
+          element.style.animation = '';
+          element.style.opacity = '';
+          element.style.visibility = '';
+        }
+      });
+      
+      // Clear styles from real elements that might have been modified
+      const elementsToClean = [
+        '.privacy-summary-icon',
+        '.floating-icon',
+        '.privacy-link',
+        '.summary-item',
+        '.filter-button',
+        '.chat-button',
+        '.profile-button',
+        '.color-segment',
+        '.number-label',
+        'div[style*="border-radius: 25px"]',
+        '[class*="privacy"]',
+        '[id*="privacy"]'
+      ];
+      
+      elementsToClean.forEach(selector => {
+        try {
+          const elements = document.querySelectorAll(selector);
+          elements.forEach(el => {
+            // Restore original values if they exist
+            if (el.dataset.originalTransform !== undefined) {
+              el.style.transform = el.dataset.originalTransform;
+              delete el.dataset.originalTransform;
+            }
+            if (el.dataset.originalBoxShadow !== undefined) {
+              el.style.boxShadow = el.dataset.originalBoxShadow;
+              delete el.dataset.originalBoxShadow;
+            }
+            
+            // Remove any tour-specific styles
+            const propertiesToRemove = [
+              'transition', 'filter', 'animation', 'opacity', 'visibility',
+              'z-index', 'position', 'pointer-events'
+            ];
+            
+            propertiesToRemove.forEach(prop => {
+              if (el.style.getPropertyValue(prop)) {
+                el.style.removeProperty(prop);
+              }
+            });
+            
+            // Remove tour-specific transform and box-shadow if they contain tour values
+            if (el.style.transform && (
+              el.style.transform.includes('scale(1.') || 
+              el.style.transform.includes('translateY(-5px)')
+            )) {
+              el.style.removeProperty('transform');
+            }
+            
+            if (el.style.boxShadow && el.style.boxShadow.includes('rgba(25, 118, 210')) {
+              el.style.removeProperty('box-shadow');
+            }
+          });
+        } catch (selectorError) {
+          console.warn('Error cleaning selector:', selector, selectorError);
+        }
+      });
+      
+      // Clear any remaining tour-specific classes
+      document.querySelectorAll('.tour-highlight, .demo-element').forEach(el => {
+        el.classList.remove('tour-highlight', 'demo-element');
+        
+        // Remove any inline styles that might have been added
+        const stylesToRemove = ['box-shadow', 'position', 'z-index', 'transform'];
+        stylesToRemove.forEach(style => {
+          if (el.style.getPropertyValue(style)) {
+            el.style.removeProperty(style);
+          }
+        });
+      });
+      
+      // Clear privacy link specific styles that might have been added during tour
+      const privacyLinks = document.querySelectorAll('a[href*="privacy"], a');
+      privacyLinks.forEach(link => {
+        if (link.dataset.originalTransform !== undefined) {
+          link.style.transform = link.dataset.originalTransform || '';
+          link.removeAttribute('data-original-transform');
+        } else if (link.style.transform) {
+          link.style.removeProperty('transform');
+        }
+        
+        if (link.dataset.originalBoxShadow !== undefined) {
+          link.style.boxShadow = link.dataset.originalBoxShadow || '';
+          link.removeAttribute('data-original-box-shadow');
+        } else if (link.style.boxShadow) {
+          link.style.removeProperty('box-shadow');
+        }
+        
+        if (link.dataset.originalPosition !== undefined) {
+          link.style.position = link.dataset.originalPosition || '';
+          link.removeAttribute('data-original-position');
+        } else {
+          link.style.removeProperty('position');
+        }
+        
+        if (link.dataset.originalZIndex !== undefined) {
+          link.style.zIndex = link.dataset.originalZIndex || '';
+          link.removeAttribute('data-original-z-index');
+        } else {
+          link.style.removeProperty('z-index');
+        }
+        
+        // Remove any tour-specific spotlight overlays and highlights
+        link.classList.remove('tour-highlight');
+      });
+      
+      // Clear any SPA-specific styles that might cause conflicts
+      if (this.isSPA) {
+        const spaElements = document.querySelectorAll('[data-tour-modified]');
+        spaElements.forEach(el => {
+          el.removeAttribute('data-tour-modified');
+          // Reset any SPA-specific modifications
+          const resetProperties = ['transform', 'transition', 'opacity', 'visibility'];
+          resetProperties.forEach(prop => {
+            if (el.style.getPropertyValue(prop)) {
+              el.style.removeProperty(prop);
+            }
+          });
+        });
       }
       
-      if (link.dataset.originalBoxShadow !== undefined) {
-        link.style.boxShadow = link.dataset.originalBoxShadow || '';
-        link.removeAttribute('data-original-box-shadow');
-      } else if (link.style.boxShadow) {
-        link.style.removeProperty('box-shadow');
-      }
-    });
+    } catch (error) {
+      console.error('Error clearing demonstration styles:', error);
+    }
+  }
+
+  // Handle SPA route changes
+  handleSPARouteChange() {
+    if (!this.isSPA || !this.isActive) return;
     
-    // Clear floating icon styles
-    const floatingIcons = document.querySelectorAll('.privacy-summary-icon, .demo-floating-icon');
-    floatingIcons.forEach(icon => {
-      if (icon.dataset.originalTransform !== undefined) {
-        icon.style.transform = icon.dataset.originalTransform || '';
-        icon.removeAttribute('data-original-transform');
-      } else if (icon.style.transform && icon.style.transform !== 'scale(1)') {
-        icon.style.removeProperty('transform');
+    // Pause tour temporarily during route changes
+    this.tourPaused = true;
+    
+    // Wait for route change to complete, then resume
+    setTimeout(() => {
+      if (this.isActive) {
+        this.tourPaused = false;
+        // Re-check current step positioning after route change
+        this.updateCurrentStepPositioning();
+      }
+    }, 1000);
+  }
+
+  // Enhanced clearDemonstrationStyles for SPA compatibility
+  clearDemonstrationStyles() {
+    try {
+      // Clear all demo element styles
+      Object.values(this.demoElements).forEach(element => {
+        if (element && element.style) {
+          element.style.transition = '';
+          element.style.transform = '';
+          element.style.boxShadow = '';
+          element.style.filter = '';
+          element.style.animation = '';
+          element.style.opacity = '';
+          element.style.visibility = '';
+        }
+      });
+      
+      // Clear styles from real elements that might have been modified
+      const elementsToClean = [
+        '.privacy-summary-icon',
+        '.floating-icon',
+        '.privacy-link',
+        '.summary-item',
+        '.filter-button',
+        '.chat-button',
+        '.profile-button',
+        '.color-segment',
+        '.number-label',
+        'div[style*="border-radius: 25px"]',
+        '[class*="privacy"]',
+        '[id*="privacy"]'
+      ];
+      
+      elementsToClean.forEach(selector => {
+        try {
+          const elements = document.querySelectorAll(selector);
+          elements.forEach(el => {
+            // Restore original values if they exist
+            if (el.dataset.originalTransform !== undefined) {
+              el.style.transform = el.dataset.originalTransform;
+              delete el.dataset.originalTransform;
+            }
+            if (el.dataset.originalBoxShadow !== undefined) {
+              el.style.boxShadow = el.dataset.originalBoxShadow;
+              delete el.dataset.originalBoxShadow;
+            }
+            
+            // Remove any tour-specific styles
+            const propertiesToRemove = [
+              'transition', 'filter', 'animation', 'opacity', 'visibility',
+              'z-index', 'position', 'pointer-events'
+            ];
+            
+            propertiesToRemove.forEach(prop => {
+              if (el.style.getPropertyValue(prop)) {
+                el.style.removeProperty(prop);
+              }
+            });
+            
+            // Remove tour-specific transform and box-shadow if they contain tour values
+            if (el.style.transform && (
+              el.style.transform.includes('scale(1.') || 
+              el.style.transform.includes('translateY(-5px)')
+            )) {
+              el.style.removeProperty('transform');
+            }
+            
+            if (el.style.boxShadow && el.style.boxShadow.includes('rgba(25, 118, 210')) {
+              el.style.removeProperty('box-shadow');
+            }
+          });
+        } catch (selectorError) {
+          console.warn('Error cleaning selector:', selector, selectorError);
+        }
+      });
+      
+      // Clear any remaining tour-specific classes
+      document.querySelectorAll('.tour-highlight, .demo-element').forEach(el => {
+        el.classList.remove('tour-highlight', 'demo-element');
+        
+        // Remove any inline styles that might have been added
+        const stylesToRemove = ['box-shadow', 'position', 'z-index', 'transform'];
+        stylesToRemove.forEach(style => {
+          if (el.style.getPropertyValue(style)) {
+            el.style.removeProperty(style);
+          }
+        });
+      });
+      
+      // Clear any SPA-specific styles that might cause conflicts
+      if (this.isSPA) {
+        const spaElements = document.querySelectorAll('[data-tour-modified]');
+        spaElements.forEach(el => {
+          el.removeAttribute('data-tour-modified');
+          // Reset any SPA-specific modifications
+          const resetProperties = ['transform', 'transition', 'opacity', 'visibility'];
+          resetProperties.forEach(prop => {
+            if (el.style.getPropertyValue(prop)) {
+              el.style.removeProperty(prop);
+            }
+          });
+        });
       }
       
-      if (icon.dataset.originalBoxShadow !== undefined) {
-        icon.style.boxShadow = icon.dataset.originalBoxShadow || '';
-        icon.removeAttribute('data-original-box-shadow');
-      } else if (icon.style.boxShadow) {
-        icon.style.removeProperty('box-shadow');
-      }
-    });
+    } catch (error) {
+      console.error('Error clearing demonstration styles:', error);
+    }
+  }
+
+  // Enhanced method to check if tour should be disabled on problematic sites
+  shouldDisableTour() {
+    const problematicDomains = [
+      'puma.com',
+      'coach.com', 
+      'jbhifi.com.au',
+      'microsoft.com',
+      'nike.com',
+      'adidas.com',
+      'amazon.com',
+      'facebook.com',
+      'instagram.com',
+      'twitter.com',
+      'linkedin.com'
+    ];
     
-    // Clear chat button styles (preserve natural styles, only remove animations)
-    const chatButtons = document.querySelectorAll('.privacy-chat-button, .chat-button');
-    chatButtons.forEach(button => {
-      if (button.style.transform && button.style.transform !== 'scale(1)') {
-        button.style.transform = 'scale(1)';
-      }
-      if (button.style.boxShadow && button.style.boxShadow.includes('rgba(25, 118, 210, 0.5)')) {
-        button.style.boxShadow = '0 2px 8px rgba(25, 118, 210, 0.3)';
-      }
-      if (button.style.transition && button.style.transition.includes('cubic-bezier')) {
-        setTimeout(() => button.style.removeProperty('transition'), 100);
-      }
-    });
+    const currentDomain = window.location.hostname.toLowerCase();
+    const isProblematic = problematicDomains.some(domain => 
+      currentDomain.includes(domain)
+    );
     
-    // Clear profile button styles (preserve natural styles, only remove animations)
-    const profileButtons = document.querySelectorAll('.privacy-profile-button, .profile-button');
-    profileButtons.forEach(button => {
-      if (button.style.transform && button.style.transform !== 'scale(1)') {
-        button.style.transform = 'scale(1)';
-      }
-      if (button.style.boxShadow && button.style.boxShadow.includes('rgba(25, 118, 210, 0.5)')) {
-        button.style.boxShadow = '0 2px 8px rgba(25, 118, 210, 0.3)';
-      }
-      if (button.style.transition && button.style.transition.includes('cubic-bezier')) {
-        setTimeout(() => button.style.removeProperty('transition'), 100);
-      }
-    });
+    // Also check for heavy SPA frameworks that might cause issues
+    const heavySPAIndicators = [
+      window.React && document.querySelector('[data-reactroot]'),
+      window.angular && document.querySelector('[ng-app]'),
+      window.Vue && document.querySelector('[id*="vue"]'),
+      document.querySelector('[class*="next-"]'), // Next.js
+      document.querySelector('[class*="nuxt-"]')  // Nuxt.js
+    ];
     
-    // Clear filter element styles (preserve natural styles, only remove animations)
-    const filterElements = document.querySelectorAll('.color-segment, .number-label');
-    filterElements.forEach(element => {
-      if (element.style.transform && element.style.transform !== 'scale(1)') {
-        element.style.transform = 'scale(1)';
-      }
-      if (element.style.boxShadow && element.style.boxShadow.includes('rgba(25, 118, 210, 0.4)')) {
-        element.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';
-      }
-      if (element.style.transition && element.style.transition.includes('cubic-bezier')) {
-        setTimeout(() => element.style.removeProperty('transition'), 100);
-      }
-    });
+    const hasHeavySPA = heavySPAIndicators.some(indicator => indicator);
     
-    // Clear summary item styles
-    const summaryItems = document.querySelectorAll('div[style*="border-radius: 25px"]');
-    summaryItems.forEach(item => {
-      if (item.dataset.originalTransform !== undefined) {
-        item.style.transform = item.dataset.originalTransform || '';
-        item.removeAttribute('data-original-transform');
-      }
-      if (item.dataset.originalBoxShadow !== undefined) {
-        item.style.boxShadow = item.dataset.originalBoxShadow || '';
-        item.removeAttribute('data-original-box-shadow');
-      }
-    });
+    if ((isProblematic && this.isSPA) || (hasHeavySPA && isProblematic)) {
+      console.warn('Tour disabled on problematic SPA site:', currentDomain);
+      return true;
+    }
     
-    // Clear demo element styles (preserve natural styles, only remove animations)
-    Object.values(this.demoElements).forEach(element => {
-      if (element && element.style) {
-        if (element.style.transform && element.style.transform !== 'scale(1)') {
-          element.style.transition = 'all 0.2s ease';
-          element.style.transform = 'scale(1)';
-          
-          setTimeout(() => {
-            element.style.removeProperty('transition');
-          }, 200);
-        }
-        if (element.style.boxShadow && element.style.boxShadow.includes('rgba(25, 118, 210, 0.5)')) {
-          element.style.boxShadow = '0 2px 8px rgba(25, 118, 210, 0.3)';
+    return false;
+  }
+
+  // Safe tour initialization with SPA checks
+  async safeTourStart() {
+    try {
+      // Check if tour should be disabled
+      if (this.shouldDisableTour()) {
+        console.log('Tour disabled for this site');
+        return false;
+      }
+      
+      // Check if tour is already active
+      if (this.isActive) {
+        console.log('Tour already active');
+        return false;
+      }
+      
+      // Detect SPA frameworks before starting
+      const frameworks = this.detectSPAFramework();
+      this.isSPA = frameworks.length > 0;
+      
+      // Add extra delay for SPA sites to ensure DOM is stable
+      if (this.isSPA) {
+        console.log('SPA detected, waiting for DOM stability...');
+        await new Promise(resolve => setTimeout(resolve, 3000));
+        
+        // Double-check that the page hasn't changed during the delay
+        if (window.location.href !== document.location.href) {
+          console.log('Page changed during initialization, aborting tour');
+          return false;
         }
       }
-    });
+      
+      // Final safety check before starting
+      if (document.readyState !== 'complete') {
+        await new Promise(resolve => {
+          if (document.readyState === 'complete') {
+            resolve();
+          } else {
+            window.addEventListener('load', resolve, { once: true });
+          }
+        });
+      }
+      
+      await this.startTour();
+      return true;
+    } catch (error) {
+      console.error('Error starting tour:', error);
+      this.endTour();
+      return false;
+    }
   }
 }
 
@@ -3340,4 +3795,21 @@ if (typeof chrome !== 'undefined' && chrome.runtime && chrome.runtime.onMessage)
 // Export for testing
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = GuidedTour;
+}
+
+// Export for use in other files
+if (typeof window !== 'undefined') {
+  window.GuidedTour = GuidedTour;
+}
+
+// Auto-initialize for content scripts
+if (typeof chrome !== 'undefined' && chrome.runtime) {
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      window.guidedTour = new GuidedTour();
+    });
+  } else {
+    window.guidedTour = new GuidedTour();
+  }
 } 
