@@ -16,6 +16,7 @@ from models.mongodb_local import (
     mark_session_initialized,
     update_system_message
 )
+from services.chatbox.kb_search import KnowledgeBaseSearch
 
 class ChatService:
     
@@ -31,49 +32,14 @@ class ChatService:
         self.logger = logging.getLogger(__name__)
         self.logger.setLevel(logging.DEBUG)
         
-        # Google search API configuration
-        self.google_api_key = os.environ.get("GOOGLE_API_KEY")
-        self.google_cse_id = os.environ.get("GOOGLE_CSE_ID")
-        if not self.google_api_key or not self.google_cse_id:
-            self.logger.warning("Google search API is not fully configured, the online search function will be unavailable")
-            self.google_search_enabled = False
-        else:
-            self.google_search_enabled = True
-    
-    def google_search(self, query, num_results=3):
-        """execute Google search and return the results"""
-        if not self.google_search_enabled:
-            self.logger.warning("try to use Google search, but API is not configured")
-            return "search function is not configured."
-            
+        # 初始化知识库检索服务
         try:
-            url = "https://www.googleapis.com/customsearch/v1"
-            params = {
-                'key': self.google_api_key,
-                'cx': self.google_cse_id,
-                'q': query,
-                'num': num_results
-            }
-            
-            response = requests.get(url, params=params)
-            response.raise_for_status()
-            search_results = response.json()
-            
-            if 'items' not in search_results:
-                return "no related results found."
-                
-            formatted_results = []
-            for item in search_results['items']:
-                title = item.get('title', '')
-                link = item.get('link', '')
-                snippet = item.get('snippet', '').replace('\n', ' ')
-                formatted_results.append(f"Title: {title}\nLink: {link}\nSnippet: {snippet}\n")
-                
-            return "\n".join(formatted_results)
+            self.kb_search = KnowledgeBaseSearch()
+            self.kb_search_enabled = True
         except Exception as e:
-            self.logger.error(f"Google search error: {str(e)}")
-            return f"Google search error: {str(e)}"
-
+            self.logger.warning(f"Failed to initialize knowledge base search: {str(e)}")
+            self.kb_search_enabled = False
+    
     def format_global_summary(self, policy_id):
         """get global summary"""
         global_summary = "This policy covers data collection, usage, and sharing practices."
@@ -177,7 +143,7 @@ class ChatService:
             return None
 
     def get_system_content(self, policy_id, bubble_context=None):
-        """build the complete system message: include instructions, bubble context, global summary, original policy and internet search"""
+        """build the complete system message: include instructions, bubble context, global summary, original policy"""
         global_summary = self.format_global_summary(policy_id)
         policy_original = self.get_policy_content(policy_id)
 
@@ -185,10 +151,10 @@ class ChatService:
             "You are a privacy-policy expert assistant.",
             "",
             "INFORMATION SOURCES (in order):",
-            "  1. Bubble Context (Category Name + Bubble Summary)",
-            "  2. Global Summary (overall policy overview)",
-            "  3. Original Policy (full policy text)",
-            "  4. Internet Search",
+            "  1. External Privacy Knowledge (relevant privacy regulations and best practices)",
+            "  2. Bubble Context (Category Name + Bubble Summary)",
+            "  3. Global Summary (overall policy overview)",
+            "  4. Original Policy (full policy text)",
             "",
 
             "After formulating an answer, ALWAYS locate the most relevant passage "
@@ -223,10 +189,10 @@ class ChatService:
         parts.extend([
             "Answering procedure:",
             "When answering a user question:",
-            "1. Search Bubble Context & Global Summary first.",
-            "2. If the answer is NOT found, search the Original Policy.",
-            "3. If still not found, request an Internet search.",
-            "4. If none contains the answer, apologise as specified.",
+            "1. First check the External Privacy Knowledge for relevant regulations or guidelines.",
+            "2. Then search Bubble Context & Global Summary.",
+            "3. If the answer is NOT found, search the Original Policy.",
+            "4. If the answer is not found in any source and the user's question is about general privacy-law concepts, provide a concise explanation based on your own knowledge. If still uncertain, apologise.",
             "",
             "ONLY IF the user's question explicitly asks for the original wording "
             "or contains any of these trigger words (case-insensitive): "
@@ -237,6 +203,9 @@ class ChatService:
             "— then locate the most relevant passage in the Original Policy and "
             "quote up to 3 consecutive sentences under the heading === Source excerpt ===.",
             "If the user does NOT ask for the original wording, DO NOT include any excerpt.",
+            "",
+            "When citing privacy regulations or standards from External Privacy Knowledge, "
+            "use the format: [Regulation/Standard: Section/Article]. For example: [GDPR: Article 13] or [CCPA: Section 1798.100].",
             "",
             "---- RESPONSE STYLE GUIDELINES ----",
             "• Answer with short, plain-language paragraphs.",
@@ -295,7 +264,7 @@ class ChatService:
                 - session_id: session ID (optional)
         
         return:
-            dict or tuple(dict, int): dictionary containing AI response and related metadata, may附带HTTP状态码
+            dict or tuple(dict, int): dictionary containing AI response and related metadata
         """
         try:
             # 1. parameter extraction and validation
@@ -376,15 +345,29 @@ class ChatService:
                             update_system_message(session_id, new_system_content)
                             self.logger.info(f"Updated session {session_id} with new bubble context")
             
-            # 5. add user message
+            # 5. 从知识库获取相关信息
+            kb_chunks = []
+            if self.kb_search_enabled:
+                try:
+                    kb_results = self.kb_search.kb_search(user_question, top_k=2)
+                    if kb_results:
+                        kb_chunks = [r["text"] for r in kb_results]
+                        # 将知识库结果添加到用户消息中
+                        kb_formatted = self.kb_search.format_kb_results(kb_results)
+                        knowledge_message = f"### External Privacy Knowledge:\n{kb_formatted}"
+                        add_message_to_session(session_id, "user", knowledge_message)
+                except Exception as e:
+                    self.logger.error(f"Error during knowledge base search: {str(e)}")
+            
+            # 6. add user message
             add_message_to_session(session_id, "user", user_message_content)
             
-            # 6. get full message history
+            # 7. get full message history
             messages = get_session_messages(session_id)
             if messages is None:
                 return {"success": False, "error": "get session messages failed"}, 500
             
-            # 7. call OpenAI API
+            # 8. call OpenAI API
             response = self.client.chat.completions.create(
                 model=self.model,
                 messages=messages,
@@ -394,38 +377,10 @@ class ChatService:
             
             response_content = response.choices[0].message.content
             
-            # 8. check if internet search is needed
-            if "search" in response_content.lower() or "internet search" in response_content.lower():
-                # extract search keywords
-                search_terms = user_question  # use user question as default
-                
-                # try to extract more precise search keywords from the response
-                search_pattern = r"search[：:]\s*([^\n]+)|search[：:]\s*([^\n]+)"
-                search_match = re.search(search_pattern, response_content, re.IGNORECASE)
-                if search_match:
-                    search_terms = search_match.group(1) or search_match.group(2)
-                
-                # execute search
-                search_results = self.google_search(search_terms)
-                
-                # add search results as extra message
-                search_message = f"Search results (keywords: {search_terms}):\n\n{search_results}"
-                add_message_to_session(session_id, "user", search_message)
-                
-                # get messages again and generate final response
-                messages = get_session_messages(session_id)
-                response = self.client.chat.completions.create(
-                    model=self.model,
-                    messages=messages,
-                    temperature=0.7,
-                    max_tokens=1000
-                )
-                response_content = response.choices[0].message.content
-            
             # 9. save AI response to session
             add_message_to_session(session_id, "assistant", response_content)
             
-             # 10. wrap answer text
+            # 10. wrap answer text
             wrapped = self.wrap_plain_text(response_content)
 
             # 11. generate follow_up
@@ -436,7 +391,8 @@ class ChatService:
                 "success": True,
                 "response": wrapped,
                 "session_id": session_id,
-                "policy_id": policy_id
+                "policy_id": policy_id,
+                "kb_chunks": kb_chunks  # 返回使用的知识库片段，方便前端展示
             }
             return result
             
