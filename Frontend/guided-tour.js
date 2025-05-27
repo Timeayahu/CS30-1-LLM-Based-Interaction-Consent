@@ -1590,6 +1590,9 @@ class GuidedTour {
     this.stopChatWindowMonitoring();
     this.stopProfilePopupMonitoring();
     
+    // Clear demonstration styles BEFORE removing elements
+    this.clearDemonstrationStyles();
+    
     // Remove tour elements with fade out
     if (this.bubble) {
       this.bubble.style.opacity = '0';
@@ -1630,28 +1633,56 @@ class GuidedTour {
       icon.style.display = '';
     });
     
-    // Remove tour highlights
+    // Remove tour highlights and force clean all tour-related styles
     document.querySelectorAll('.tour-highlight').forEach(el => {
       el.classList.remove('tour-highlight');
       el.style.removeProperty('box-shadow');
       el.style.removeProperty('position');
       el.style.removeProperty('z-index');
+      el.style.removeProperty('transform');
     });
     
-    // Clear demonstration styles
-    this.clearDemonstrationStyles();
+    // Force clean all privacy links
+    document.querySelectorAll('a[href*="privacy"], a').forEach(link => {
+      link.style.removeProperty('transform');
+      link.style.removeProperty('box-shadow');
+      link.style.removeProperty('position');
+      link.style.removeProperty('z-index');
+      link.classList.remove('tour-highlight');
+      
+      // Remove all data attributes
+      ['originalTransform', 'originalBoxShadow', 'originalPosition', 'originalZIndex'].forEach(attr => {
+        link.removeAttribute(`data-${attr.toLowerCase()}`);
+        link.removeAttribute(`data-original-${attr.toLowerCase().replace(/([A-Z])/g, '-$1')}`);
+      });
+    });
     
     // Restore extension state
     this.restoreExtensionDefaultState();
     
     // Force cleanup of any remaining tour elements
     setTimeout(() => {
-      const remainingElements = document.querySelectorAll('.guided-tour-overlay, .guided-tour-bubble, .demo-element');
+      const remainingElements = document.querySelectorAll('.guided-tour-overlay, .guided-tour-bubble, .demo-element, .tour-demo-icon');
       remainingElements.forEach(el => {
         if (el.parentNode) {
           el.remove();
         }
       });
+      
+      // Final cleanup of any remaining tour styles
+      document.querySelectorAll('*').forEach(el => {
+        if (el.style.transform && el.style.transform.includes('scale(1.05)')) {
+          el.style.removeProperty('transform');
+        }
+        if (el.style.boxShadow && el.style.boxShadow.includes('rgba(25, 118, 210')) {
+          el.style.removeProperty('box-shadow');
+        }
+      });
+      
+      // Trigger a re-scan for privacy links to restore floating icon functionality
+      if (window.privacyExtension && typeof window.privacyExtension.rescanPage === 'function') {
+        window.privacyExtension.rescanPage();
+      }
     }, 500);
     
     console.log('Guided tour ended and cleaned up');
