@@ -4342,6 +4342,53 @@ chrome.storage.local.get(['isEnabled'], (result) => {
 // Initialize and load auth.js
 loadAuthScript();
 
+// Create global privacy extension object for tour integration
+window.privacyExtension = {
+  rescanPage: function() {
+    console.log('Rescanning page for privacy links after tour...');
+    
+    // Reset floating icon state
+    if (floatingIcon) {
+      floatingIcon.remove();
+      floatingIcon = null;
+    }
+    
+    // Reset state variables
+    isIconLocked = false;
+    lastIconPosition = null;
+    currentHoveredLink = null;
+    
+    // Clear any pending timers
+    if (hideIconTimer) {
+      clearTimeout(hideIconTimer);
+      hideIconTimer = null;
+    }
+    
+    if (positionUpdateTimer) {
+      clearTimeout(positionUpdateTimer);
+      positionUpdateTimer = null;
+    }
+    
+    // Clear cache to force fresh detection
+    linkDetectionCache.clear();
+    
+    // Re-scan all elements for privacy links
+    setTimeout(() => {
+      const allElements = document.querySelectorAll('a[href], span, div, p, button, li, td, th');
+      let detectCount = 0;
+      
+      for (const element of allElements) {
+        if (isPossiblePrivacyPolicyElement(element)) {
+          handlePotentialPrivacyLink(element);
+          detectCount++;
+        }
+      }
+      
+      console.log(`Rescan completed, found ${detectCount} privacy policy elements`);
+    }, 100);
+  }
+};
+
 // Enhanced function to check if an element could be a privacy policy link (not just anchor tags)
 function isPossiblePrivacyPolicyElement(element) {
   try {
