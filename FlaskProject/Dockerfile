@@ -43,8 +43,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # 删除现有的ChromeDriver
 RUN rm -f /usr/bin/chromedriver
 
-# 安装135版本的ChromeDriver
-RUN wget -q "https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/135.0.7049.84/linux64/chromedriver-linux64.zip" && \
+# 安装136版本的ChromeDriver，与Chrome 136匹配
+RUN wget -q "https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/136.0.7103.113/linux64/chromedriver-linux64.zip" && \
     unzip chromedriver-linux64.zip && \
     mv chromedriver-linux64/chromedriver /usr/bin/chromedriver && \
     chmod +x /usr/bin/chromedriver && \

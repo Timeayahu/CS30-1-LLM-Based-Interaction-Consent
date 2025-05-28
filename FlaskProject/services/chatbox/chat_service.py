@@ -4,6 +4,7 @@ import json
 import logging
 import traceback
 import requests
+import random
 from openai import OpenAI
 from models.mongodb_local import (
     get_policy_by_id,
@@ -32,7 +33,7 @@ class ChatService:
         self.logger = logging.getLogger(__name__)
         self.logger.setLevel(logging.DEBUG)
         
-        # 初始化知识库检索服务
+        # Initialize knowledge base search service
         try:
             self.kb_search = KnowledgeBaseSearch()
             self.kb_search_enabled = True
@@ -123,7 +124,7 @@ class ChatService:
         try:
             policy_data = get_policy_by_id(policy_id)
             if not policy_data:
-                self.logger.warning(f"找不到ID为{policy_id}的政策")
+                self.logger.warning(f"Policy with ID {policy_id} not found")
                 return None
             
             # check if there is original content
@@ -142,81 +143,289 @@ class ChatService:
             self.logger.error(f"get policy content error: {str(e)}")
             return None
 
+    def get_system_rules(self):
+        """Build system rules - permanent hard rules"""
+        return """You are a privacy-policy expert assistant. YOU MUST ONLY ANSWER PRIVACY-RELATED QUESTIONS.
+
+    CRITICAL DOMAIN RESTRICTION:
+    - You MUST REFUSE to answer questions about poetry, literature, general knowledge, or any non-privacy topics
+    - IMMEDIATELY respond with: "I'm specialized in privacy policy questions. Please ask about data privacy, GDPR, CCPA, or related topics."
+    - DO NOT provide any information outside privacy/data protection domain
+
+    RESPONSE STYLE:
+    Always begin with a short, friendly encouragement (≤ 15 words) before the main answer.
+    Examples: "Great question!", "Good thinking!", "Excellent inquiry!", "That's a thoughtful question!", "Nice question!"
+
+    INFORMATION SOURCES (in priority order):
+    1. External Privacy Knowledge (relevant privacy regulations and best practices)
+    2. Bubble Context (Category Name + Bubble Summary)
+    3. Global Summary (overall policy overview)
+    4. Original Policy (full policy text)
+
+    ANSWERING PROCEDURE:
+    1. FIRST: Check if question is about privacy/data protection. If NOT, decline immediately.
+    2. Check External Privacy Knowledge for relevant regulations or guidelines
+    3. Then search Bubble Context & Global Summary
+    4. If answer NOT found, search the Original Policy
+    5. If answer not found in any source AND question is privacy-related:
+       - Provide concise explanation based on privacy law knowledge
+    6. If still uncertain about privacy matters, apologize
+
+    PRIVACY TOPICS INCLUDE: privacy policies, data protection, GDPR, CCPA, PIPL, personal information, consent, cookies, tracking, data collection, data sharing, user rights, data retention, data security, privacy compliance
+
+    NON-PRIVACY TOPICS TO REFUSE: poetry, literature, general knowledge, science, history, entertainment, sports, cooking, travel, etc.
+
+    SOURCE EXCERPT RULES:
+    ONLY IF user explicitly asks for original wording or uses trigger words:
+    "original policy", "original text", "exact wording", "direct quote", "source excerpt", 
+    "policy excerpt", "quote the policy", "where in the policy", "which clause", 
+    "show me the clause", 
+    — then locate most relevant passage and quote up to 3 consecutive sentences under === Source excerpt ===
+
+    CITATION FORMAT:
+    When citing privacy regulations: [Regulation/Standard: Section/Article]
+    Examples: [GDPR: Article 13] or [CCPA: Section 1798.100]
+
+    LANGUAGE RULE:
+    Always respond in the same language as the user."""
+
+    def get_answer_blueprint(self):
+        """Build answer template blueprint with response level adaptation"""
+        return """## Response-level rules
+        • First judge user question complexity → select appropriate template:
+        - **Level A (Brief)**: Only answer "🤔 Brief Answer" and "📝 Summary", keep within 120 words.
+        - **Level B (Standard)**: Output "🤔 Brief Answer", "📌 Detailed Explanation", and "📝 Summary".
+        - **Level C (In-depth)**: Complete template (including analysis, risk table, excerpt, etc.).
+        • Judgment criteria:
+        - ≤ 1 sentence, only needs facts/definitions/yes-no → Level A
+        - ≤ 3 sentences, or requests general explanation → Level B
+        - Involves multi-level analysis, asks for "reasons/risks/recommendations" → Level C
+
+        ANSWER BLUEPRINT - Follow this conditional Markdown structure:
+
+        ### 🤔 Brief Answer
+        One sentence summarizing the core conclusion.
+
+        {{#if level in ["B","C"]}}
+        ### 📌 Detailed Explanation
+        1. **Key Point 1**: [Specific explanation]
+        2. **Key Point 2**: [Specific explanation]
+        3. **Key Point 3**: [If needed]
+        {{/if}}
+
+        {{#if level == "C"}}
+        ### 🔍 Analysis and Inference
+        - Reasonable inference 1
+        - Reasonable inference 2
+
+        ### ⚠️ Privacy Risks and Recommendations
+        | Risk | Description | Recommendation |
+        |------|-------------|----------------|
+        | [Risk Type] | [Risk Description] | [Specific Recommendation] |
+        {{/if}}
+
+        ### 📝 Summary
+        A natural concluding summary.
+
+        {{#if level == "C" and user triggers original text request}}
+        === Source excerpt ===
+        > [Extract 1-3 sentences from original text]
+        {{/if}}
+
+        STYLE GUIDELINES:
+        • Use short, plain-language paragraphs
+        • Convert bullet lists into smooth sentences
+        • Keep conversational and natural tone
+        • Do NOT expose raw field names like 'Type', 'Details', 'keyword'
+        • For Level A: Maximum 120 words total
+        • For Level B: Maximum 300 words total
+        • For Level C: Maximum 600 words total"""
+
+    def get_thinking_instruction(self):
+        """Build thinking instruction"""
+        return """You MUST think step-by-step internally for at least 3 steps before answering:
+        1. Analyze the question type and required information sources
+        2. Search relevant information from available sources
+        3. Structure the answer according to the blueprint
+
+        Do NOT expose this reasoning process to the user. Only output the final structured answer."""
+
+    def get_fewshot_example(self):
+        """Build Few-shot examples covering three response levels"""
+        examples = [
+            # Level A Example
+            {
+                "question": "What is VIN?",
+                "answer": """Great question! 
+
+### 🤔 Brief Answer
+VIN (Vehicle Identification Number) is a unique 17-character code that identifies each vehicle.
+
+### 📝 Summary
+VIN serves as a vehicle's fingerprint for identification and tracking purposes."""
+            },
+            # Level B Example
+            {
+                "question": "Why does BYD collect VIN numbers?",
+                "answer": """Good thinking! 
+
+### 🤔 Brief Answer
+BYD collects VIN numbers primarily for vehicle registration, warranty management, and customer service support.
+
+### 📌 Detailed Explanation
+1. **Vehicle Registration**: Links the vehicle to user accounts in their mobile app and service systems
+2. **Warranty Management**: Tracks warranty status and service history for each specific vehicle
+3. **Customer Support**: Enables targeted technical support and recall notifications
+
+### 📝 Summary
+VIN collection is a standard automotive practice that enables BYD to provide personalized vehicle services and support."""
+            },
+            # Level C Example
+            {
+                "question": "Please analyze the legality, potential risks, and provide recommendations regarding BYD's VIN collection practices.",
+                "answer": """Excellent inquiry! 
+
+### 🤔 Brief Answer
+                BYD's VIN collection is legally justified for legitimate business purposes but raises privacy concerns regarding location tracking and data sharing.
+
+                ### 📌 Detailed Explanation
+                1. **Legal Basis**: VIN collection falls under legitimate business interests for warranty, safety recalls, and customer service
+                2. **Regulatory Compliance**: Meets automotive industry standards and consumer protection requirements
+                3. **Data Processing**: VIN enables vehicle-specific services, maintenance scheduling, and safety communications
+
+                ### 🔍 Analysis and Inference
+                - VIN data may be combined with GPS location data to create detailed driving profiles
+                - Potential sharing with insurance companies or government agencies for regulatory compliance
+                - Long-term retention could enable comprehensive vehicle usage analysis
+
+                ### ⚠️ Privacy Risks and Recommendations
+                | Risk | Description | Recommendation |
+                |------|-------------|----------------|
+                | Location Tracking | VIN combined with GPS creates movement patterns | Review location sharing settings regularly |
+                | Data Retention | Indefinite storage of vehicle usage data | Request data deletion when selling vehicle |
+                | Third-party Sharing | Potential sharing with insurers or authorities | Read privacy policy carefully for sharing practices |
+
+                ### 📝 Summary
+                While VIN collection serves legitimate automotive purposes, users should monitor associated data practices and exercise available privacy controls."""
+            }
+        ]
+        
+        return examples
+
     def get_system_content(self, policy_id, bubble_context=None):
-        """build the complete system message: include instructions, bubble context, global summary, original policy"""
+        """Build complete system message: using hierarchical role design"""
         global_summary = self.format_global_summary(policy_id)
         policy_original = self.get_policy_content(policy_id)
 
-        parts = [
-            "You are a privacy-policy expert assistant.",
-            "",
-            "INFORMATION SOURCES (in order):",
-            "  1. External Privacy Knowledge (relevant privacy regulations and best practices)",
-            "  2. Bubble Context (Category Name + Bubble Summary)",
-            "  3. Global Summary (overall policy overview)",
-            "  4. Original Policy (full policy text)",
-            "",
-
-            "After formulating an answer, ALWAYS locate the most relevant passage "
-            "in the Original Policy and add it verbatim under a heading "
-            "=== Source excerpt === (max 5 consecutive sentences).",
-            "If no suitable passage exists, write: \"[Original policy excerpt not found]\".",
-            "",
-        ]
-
-        # insert bubble context
+        # Build data sources section
+        data_sources = []
+        
+        # Insert bubble context
         if bubble_context:
-            parts.extend([
+            data_sources.extend([
                 "### Bubble Context:",
                 bubble_context,
                 ""
             ])
 
-        # insert global summary
-        parts.extend([
+        # Insert global summary
+        data_sources.extend([
             "### Global Summary:",
             global_summary,
             ""
         ])
 
-        # insert original policy
+        # Insert original policy
         if policy_original:
-            parts.append("### Original Policy:")
-            parts.append(policy_original)
-            parts.append("")
+            data_sources.append("### Original Policy:")
+            data_sources.append(policy_original)
+            data_sources.append("")
 
-        # answering guidelines
-        parts.extend([
-            "Answering procedure:",
-            "When answering a user question:",
-            "1. First check the External Privacy Knowledge for relevant regulations or guidelines.",
-            "2. Then search Bubble Context & Global Summary.",
-            "3. If the answer is NOT found, search the Original Policy.",
-            "4. If the answer is not found in any source and the user's question is about general privacy-law concepts, provide a concise explanation based on your own knowledge. If still uncertain, apologise.",
-            "",
-            "ONLY IF the user's question explicitly asks for the original wording "
-            "or contains any of these trigger words (case-insensitive): "
-            "\"original policy\", \"original text\", \"exact wording\", \"direct quote\", "
-            "\"source excerpt\", \"policy excerpt\", \"quote the policy\", "
-            "\"where in the policy\", \"which clause\", \"show me the clause\", "
-            "\"原文\", \"原句\", \"原始文本\", \"政策原文\", \"出处\", \"具体怎么写\" "
-            "— then locate the most relevant passage in the Original Policy and "
-            "quote up to 3 consecutive sentences under the heading === Source excerpt ===.",
-            "If the user does NOT ask for the original wording, DO NOT include any excerpt.",
-            "",
-            "When citing privacy regulations or standards from External Privacy Knowledge, "
-            "use the format: [Regulation/Standard: Section/Article]. For example: [GDPR: Article 13] or [CCPA: Section 1798.100].",
-            "",
-            "---- RESPONSE STYLE GUIDELINES ----",
-            "• Answer with short, plain-language paragraphs.",
-            "• Convert any bullet lists or tables in the summary into smooth sentences.",
-            "• Do NOT expose raw field names such as 'Type', 'Details', 'keyword', etc.",
-            "",
-            "Always respond in the same language as the user.",
-            "Keep answers conversational and natural, as if you're having a friendly chat.",
-        ])
+        return "\n".join(data_sources)
 
-        return "\n".join(parts)
+    def estimate_response_level(self, user_question, use_fixed_tokens=False):
+        """Estimate response level based on question complexity"""
+        if use_fixed_tokens:
+            # Use a high fixed value to ensure complete responses
+            return 'AUTO', 1500
+            
+        question_lower = user_question.lower()
+        question_length = len(user_question.split())
+        
+        # Level C indicators
+        level_c_keywords = [
+            'analyze', 'analysis', 'detailed', 'explain why', 'reasons', 'risks', 
+            'recommendations', 'suggest', 'compare', 'evaluate', 'assess',
+            'implications', 'consequences', 'impact', 'legality', 'compliance'
+        ]
+        
+        # Level A indicators  
+        level_a_keywords = [
+            'what is', 'define', 'meaning', 'yes or no', 'true or false',
+            'is it', 'does it', 'can it', 'will it'
+        ]
+        
+        # Check for Level C - increase token limit for complete analysis
+        if any(keyword in question_lower for keyword in level_c_keywords) or question_length > 15:
+            return 'C', 1500  # Further increased for complete analysis with tables
+        
+        # Check for Level A - sufficient for brief answers
+        if any(keyword in question_lower for keyword in level_a_keywords) or question_length <= 5:
+            return 'A', 600   # Further increased to ensure complete brief answers
+            
+        # Default to Level B - sufficient for standard explanations
+        return 'B', 1000     # Further increased to ensure complete explanations
+
+    def build_messages_with_hierarchy(self, policy_id, bubble_context, user_question, session_messages=None):
+        """Build hierarchical message structure"""
+        messages = []
+        
+        # 1. System rules (permanent hard rules)
+        messages.append({
+            "role": "system", 
+            "content": self.get_system_rules()
+        })
+        
+        # 2. Thinking instruction (implicit chain-of-thought)
+        messages.append({
+            "role": "system", 
+            "content": self.get_thinking_instruction()
+        })
+        
+        # 3. Answer template (Assistant-primer)
+        messages.append({
+            "role": "system", 
+            "content": self.get_answer_blueprint()
+        })
+        
+        # 4. Few-shot examples
+        examples = self.get_fewshot_example()
+        for example in examples:
+            messages.append({"role": "user", "content": example["question"]})
+            messages.append({"role": "assistant", "content": example["answer"]})
+        
+        # 5. Data source information
+        data_sources = self.get_system_content(policy_id, bubble_context)
+        if data_sources.strip():
+            messages.append({
+                "role": "system",
+                "content": data_sources
+            })
+        
+        # 6. Historical conversation (if any)
+        if session_messages:
+            # Skip old system messages, only keep user and assistant messages
+            for msg in session_messages:
+                if msg["role"] in ["user", "assistant"]:
+                    messages.append(msg)
+        
+        # 7. Current user question
+        messages.append({
+            "role": "user", 
+            "content": f"Question: {user_question}"
+        })
+        
+        return messages
     
     def generate_follow_up(self, user_question: str, answer: str) -> str:
       
@@ -240,11 +449,103 @@ class ChatService:
         if not follow_up.endswith('?'):
             follow_up = follow_up.rstrip('.') + '?'
         return follow_up
+    
+    def ensure_encouraging_opening(self, text: str, user_question: str) -> str:
+        """Ensure the response starts with an encouraging phrase"""
+        # Define encouraging phrases in English
+        english_encouragements = [
+            "Great question!", "Good thinking!", "Excellent inquiry!", 
+            "That's a thoughtful question!", "Nice question!", "Wonderful question!",
+            "Good point!", "Interesting question!", "Smart question!"
+        ]
         
-    def wrap_plain_text(self, text: str) -> dict:
+        # Check if text already starts with an encouraging phrase
+        text_start = text.strip()[:50].lower()
+        
+        # Common encouraging patterns to check
+        encouraging_patterns = [
+            r'^(great|good|excellent|nice|wonderful|fantastic|smart|interesting)',
+            r'^(that\'s|what a)',
+            r'[!]'  # Contains exclamation mark in first 50 chars
+        ]
+        
+        has_encouragement = any(re.search(pattern, text_start) for pattern in encouraging_patterns)
+        
+        if not has_encouragement:
+            # Add a random encouraging phrase
+            encouragement = random.choice(english_encouragements)
+            return f"{encouragement} \n\n{text}"
+        
+        return text
+    
+    def is_privacy_related_question(self, question: str) -> bool:
+        """Check if the question is related to privacy/data protection"""
+        question_lower = question.lower()
+        
+        # Privacy-related keywords
+        privacy_keywords = [
+            'privacy', 'data', 'gdpr', 'ccpa', 'pipl', 'personal information', 'personal data',
+            'consent', 'cookie', 'tracking', 'collection', 'sharing', 'protection',
+            'user rights', 'data subject', 'controller', 'processor', 'retention',
+            'security', 'breach', 'compliance', 'policy', 'terms', 'agreement',
+            'opt-out', 'opt-in', 'delete', 'access', 'portability', 'rectification'
+        ]
+        
+        # Check if any privacy keyword is present
+        has_privacy_keyword = any(keyword in question_lower for keyword in privacy_keywords)
+        
+        # Non-privacy keywords that should be refused
+        non_privacy_keywords = [
+            'poetry', 'poem', 'literature', 'story', 'novel', 'music', 'song',
+            'recipe', 'cooking', 'travel', 'weather', 'sports', 'game',
+            'movie', 'entertainment', 'science', 'math', 'history'
+        ]
+        
+        # Check if any non-privacy keyword is present
+        has_non_privacy_keyword = any(keyword in question_lower for keyword in non_privacy_keywords)
+        
+        # If it has non-privacy keywords and no privacy keywords, it's not privacy-related
+        if has_non_privacy_keyword and not has_privacy_keyword:
+            return False
+            
+        # If it has privacy keywords, it's privacy-related
+        if has_privacy_keyword:
+            return True
+            
+        # For ambiguous cases, allow it to pass through (let GPT decide)
+        return True
+    
+    def create_privacy_decline_response(self, user_question: str) -> dict:
+        """Create a polite decline response for non-privacy questions"""
+        encouragement = random.choice([
+            "Thanks for your question!", "I appreciate your interest!", "Good question!"
+        ])
+        
+        decline_message = f"""{encouragement}
+
+### 🤔 Brief Answer
+I'm specialized in privacy policy questions. Please ask about data privacy, GDPR, CCPA, or related topics.
+
+### 📝 Summary
+I can help you understand privacy policies, data protection laws, user rights, and compliance matters."""
+        
+        return {
+            "success": True,
+            "response": {
+                "answer": decline_message,
+                "follow_up": "Would you like to ask about privacy or data protection instead?",
+                "source": []
+            }
+        }
+        
+    def wrap_plain_text(self, text: str, user_question: str = "") -> dict:
         """
-        only wrap the original answer, do not generate default follow_up, let _generate_follow_up handle it.
+        Wrap the original answer with encouraging opening if needed
         """
+        # Ensure encouraging opening
+        if user_question:
+            text = self.ensure_encouraging_opening(text, user_question)
+            
         return {
             "answer": text.strip(),
             "follow_up": "",
@@ -277,7 +578,12 @@ class ChatService:
             if not user_question:
                 return {"success": False, "error": "missing user question parameter"}, 400
             
-            # 2. session management - simplify logic to avoid repeated calls
+            # 2. Check if question is privacy-related (early filtering)
+            if not self.is_privacy_related_question(user_question):
+                self.logger.info(f"Non-privacy question declined: {user_question[:50]}...")
+                return self.create_privacy_decline_response(user_question)
+            
+            # 3. session management
             session = get_session(session_id) if session_id else None
             if not session:
                 session_id = create_session(policy_id)
@@ -289,110 +595,86 @@ class ChatService:
             # use the policy_id stored in the session (if not provided)
             if not policy_id and session.get("policy_id"):
                 policy_id = session["policy_id"]
-                
-            # 3. build user message content
-            user_message_content = f"Question: {user_question}"
             
-            # 4. initialize session (only on the first time)
-            if not session.get("initialized", False):
-                # prepare bubble context
-                bubble_context = None
-                if category_name or bubble_summary:
-                    bubble_context = f"Category: {category_name}\nBubble Summary: {bubble_summary}"
-                
-                # build system message content, include global summary and bubble context
-                system_content = self.get_system_content(policy_id, bubble_context)
-                
-                # initialize session
-                success = mark_session_initialized(session_id, system_content)
-                if not success:
-                    # only record warning, not block the process
-                    self.logger.warning(f"Initialize session {session_id} failed, but continue to process the request")
-                    self.logger.info("Try to reinitialize session...")
-                    success = mark_session_initialized(session_id, system_content)
-                    if not success:
-                        self.logger.warning("Retry initialize still failed, continue to process the request without system message")
-            else:
-                # if session is initialized, but the frontend sends new bubble_summary or category_name, update the system message
-                if (category_name or bubble_summary) and session.get("messages"):
-                    # check if there is system message
-                    system_messages = [msg for msg in session["messages"] if msg["role"] == "system"]
-                    
-                    if system_messages:
-                        current_system_msg = system_messages[0]["content"]
-                        
-                        # check the Bubble Context information in the current system message
-                        current_category = ""
-                        current_bubble_summary = ""
-                        
-                        if "### Bubble Context:" in current_system_msg:
-                            bubble_section = current_system_msg.split("### Bubble Context:")[1].split("###")[0].strip()
-                            for line in bubble_section.split("\n"):
-                                if line.startswith("Category:"):
-                                    current_category = line.replace("Category:", "").strip()
-                                elif line.startswith("Bubble Summary:"):
-                                    current_bubble_summary = line.replace("Bubble Summary:", "").strip()
-                        
-                        # check if update is needed
-                        if current_category != category_name or current_bubble_summary != bubble_summary:
-                            # prepare new bubble context
-                            new_bubble_context = f"Category: {category_name}\nBubble Summary: {bubble_summary}"
-                            
-                            # update system message
-                            new_system_content = self.get_system_content(policy_id, new_bubble_context)
-                            
-                            # update system message
-                            update_system_message(session_id, new_system_content)
-                            self.logger.info(f"Updated session {session_id} with new bubble context")
+            # 4. prepare bubble context
+            bubble_context = None
+            if category_name or bubble_summary:
+                bubble_context = f"Category: {category_name}\nBubble Summary: {bubble_summary}"
             
-            # 5. 从知识库获取相关信息
+            # 5. Get relevant information from knowledge base
             kb_chunks = []
+            kb_formatted = ""
             if self.kb_search_enabled:
                 try:
                     kb_results = self.kb_search.kb_search(user_question, top_k=2)
                     if kb_results:
                         kb_chunks = [r["text"] for r in kb_results]
-                        # 将知识库结果添加到用户消息中
                         kb_formatted = self.kb_search.format_kb_results(kb_results)
-                        knowledge_message = f"### External Privacy Knowledge:\n{kb_formatted}"
-                        add_message_to_session(session_id, "user", knowledge_message)
                 except Exception as e:
                     self.logger.error(f"Error during knowledge base search: {str(e)}")
             
-            # 6. add user message
-            add_message_to_session(session_id, "user", user_message_content)
+            # 6. Get historical messages (only user and assistant messages)
+            session_messages = []
+            if session.get("initialized", False):
+                all_messages = get_session_messages(session_id)
+                if all_messages:
+                    # Only keep user and assistant historical conversations
+                    session_messages = [msg for msg in all_messages 
+                                      if msg["role"] in ["user", "assistant"]]
             
-            # 7. get full message history
-            messages = get_session_messages(session_id)
-            if messages is None:
-                return {"success": False, "error": "get session messages failed"}, 500
+            # 7. Build hierarchical message structure
+            messages = self.build_messages_with_hierarchy(
+                policy_id=policy_id,
+                bubble_context=bubble_context,
+                user_question=user_question,
+                session_messages=session_messages
+            )
             
-            # 8. call OpenAI API
+            # 8. If there are knowledge base results, insert before user question
+            if kb_formatted:
+                # Insert knowledge base information before the last user message
+                user_msg = messages.pop()  # Remove user question
+                messages.append({
+                    "role": "system",
+                    "content": f"### External Privacy Knowledge:\n{kb_formatted}"
+                })
+                messages.append(user_msg)  # Re-add user question
+            
+            # 9. Estimate response level and adjust parameters
+            response_level, max_tokens = self.estimate_response_level(user_question, use_fixed_tokens=True)
+            
+            # 10. call OpenAI API with optimized parameters
             response = self.client.chat.completions.create(
                 model=self.model,
                 messages=messages,
-                temperature=0.7,
-                max_tokens=1000
+                temperature=0.25,  # Lower temperature for better format consistency
+                max_tokens=max_tokens,  # Dynamic based on question complexity
+                top_p=1.0
             )
             
             response_content = response.choices[0].message.content
             
-            # 9. save AI response to session
+            # 11. Mark session as initialized and save messages
+            if not session.get("initialized", False):
+                mark_session_initialized(session_id, "hierarchical_structure")
+            
+            # Save user message and AI reply to session
+            add_message_to_session(session_id, "user", f"Question: {user_question}")
             add_message_to_session(session_id, "assistant", response_content)
             
-            # 10. wrap answer text
-            wrapped = self.wrap_plain_text(response_content)
+            # 12. wrap answer text
+            wrapped = self.wrap_plain_text(response_content, user_question)
 
-            # 11. generate follow_up
+            # 13. generate follow_up
             wrapped['follow_up'] = self.generate_follow_up(user_question, wrapped['answer'])
 
-            # 12. return structured result
+            # 14. return structured result
             result = {
                 "success": True,
                 "response": wrapped,
                 "session_id": session_id,
                 "policy_id": policy_id,
-                "kb_chunks": kb_chunks  # 返回使用的知识库片段，方便前端展示
+                "kb_chunks": kb_chunks  # Return knowledge base chunks used for frontend display
             }
             return result
             
@@ -426,7 +708,12 @@ class ChatService:
             if not user_question:
                 return {"success": False, "error": "missing user question parameter"}, 400
             
-            # 2. session management - simplify logic to avoid repeated calls
+            # 2. Check if question is privacy-related (early filtering)
+            if not self.is_privacy_related_question(user_question):
+                self.logger.info(f"Non-privacy question declined: {user_question[:50]}...")
+                return self.create_privacy_decline_response(user_question)
+            
+            # 3. session management
             session = get_session(session_id) if session_id else None
             if not session:
                 session_id = create_session(policy_id)
@@ -438,58 +725,51 @@ class ChatService:
             # use the policy_id stored in the session (if not provided)
             if not policy_id and session.get("policy_id"):
                 policy_id = session["policy_id"]
-                
-            # 3. build user message content 
-            user_message_content = f"Question: {user_question}"
             
-            # 4. initialize session (only on the first time)
-            if not session.get("initialized", False):
-          
-                system_content = self.get_system_content(policy_id)
-                
-       
-                success = mark_session_initialized(session_id, system_content)
-                if not success:
-                    # only record warning, not block the process
-                    self.logger.warning(f"Initialize session {session_id} failed, but continue to process the request")
-                    # try to reinitialize
-                    self.logger.info("Try to reinitialize session...")
-                    success = mark_session_initialized(session_id, system_content)
-                    if not success:
-                        self.logger.warning("Retry initialize still failed, continue to process the request without system message")
+            # 4. Get historical messages (only user and assistant messages)
+            session_messages = []
+            if session.get("initialized", False):
+                all_messages = get_session_messages(session_id)
+                if all_messages:
+                    # Only keep user and assistant historical conversations
+                    session_messages = [msg for msg in all_messages 
+                                      if msg["role"] in ["user", "assistant"]]
             
-            # 5. add user message
-            add_message_to_session(session_id, "user", user_message_content)
+            # 5. Build hierarchical message structure (no bubble context)
+            messages = self.build_messages_with_hierarchy(
+                policy_id=policy_id,
+                bubble_context=None,
+                user_question=user_question,
+                session_messages=session_messages
+            )
             
-            # 6. get full message history
-            messages = get_session_messages(session_id)
-            if messages is None:
-                return {"success": False, "error": "get session messages failed"}, 500
+            # 6. Estimate response level and adjust parameters
+            response_level, max_tokens = self.estimate_response_level(user_question, use_fixed_tokens=True)
             
-       
-            self.logger.info("Messages to OpenAI:\n" + json.dumps(messages, ensure_ascii=False, indent=2))
-            
-         
-            if messages and messages[0]["role"] == "system":
-                self.logger.info(
-                    "--------------SYSTEM MSG--------------\n" + 
-                    messages[0]["content"] + 
-                    "\n--------------END SYSTEM--------------"
-                )
-            
-        
+            # 7. call OpenAI API with optimized parameters
             response = self.client.chat.completions.create(
                 model=self.model,
                 messages=messages,
-                temperature=0.7,
-                max_tokens=1000
+                temperature=0.25,  # Lower temperature for better format consistency
+                max_tokens=max_tokens,  # Dynamic based on question complexity
+                top_p=1.0
             )
             
-            response_content = response.choices[0].message.content     
-            wrapped = self.wrap_plain_text(response_content)
+            response_content = response.choices[0].message.content
+            
+            # 8. Mark session as initialized and save messages
+            if not session.get("initialized", False):
+                mark_session_initialized(session_id, "hierarchical_structure")
+            
+            # Save user message and AI reply to session
+            add_message_to_session(session_id, "user", f"Question: {user_question}")
+            add_message_to_session(session_id, "assistant", response_content)
+            
+            # 9. wrap answer text
+            wrapped = self.wrap_plain_text(response_content, user_question)
             wrapped['follow_up'] = self.generate_follow_up(user_question, wrapped['answer'])
 
-           
+            # 10. return structured result
             result = {
                 "success": True,
                 "response": wrapped,
