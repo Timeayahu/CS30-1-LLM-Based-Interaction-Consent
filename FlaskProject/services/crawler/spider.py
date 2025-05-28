@@ -43,7 +43,7 @@ class WebCrawler:
         
         # 设置Chrome的无头模式
         chrome_options = Options()
-        chrome_options.add_argument("--headless")  # 无界面模式
+        chrome_options.add_argument("--headless=new")  # 使用新的无头模式
         chrome_options.add_argument("--no-sandbox")
         chrome_options.add_argument("--disable-dev-shm-usage")
         chrome_options.add_argument("--disable-gpu")
@@ -51,18 +51,22 @@ class WebCrawler:
 
         # 绕过Selenium检测
         chrome_options.add_argument("--disable-blink-features=AutomationControlled")
+        chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
+        chrome_options.add_experimental_option("useAutomationExtension", False)
 
         # 添加User-Agent伪装成普通浏览器
-        chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36")
+        chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36")
 
-        # 尝试关闭HTTP/2，避免ERR_HTTP2_PROTOCOL_ERROR
+        # 禁用HTTP/2以避免错误
+        chrome_options.add_argument("--disable-http2")
         chrome_options.add_argument("--disable-features=NetworkService,NetworkServiceInProcess")
         
         try:
             # 根据不同环境初始化WebDriver
-            if os.path.exists("/usr/bin/chromium-browser"):  # Colab或Linux环境
-                chrome_options.binary_location = "/usr/bin/chromium-browser"
-                driver = webdriver.Chrome(options=chrome_options)
+            if platform.system() == "Linux" and os.path.exists("/usr/bin/chromedriver"):  # Docker/Linux环境
+                # 直接使用Dockerfile中安装的ChromeDriver
+                service = Service("/usr/bin/chromedriver")
+                driver = webdriver.Chrome(service=service, options=chrome_options)
             else:  # Windows或其他环境，使用webdriver_manager自动管理
                 try:
                     # 尝试使用webdriver_manager自动下载和管理ChromeDriver
