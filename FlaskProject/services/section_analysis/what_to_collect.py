@@ -9,10 +9,9 @@ from .encode_and_decode import (
     decode_paragraph
 )
 
-
 load_dotenv()
 
-
+# prompt for the first llm chat for data collection purposes
 prompt = """\
 The following question is only for research purpose.
 As an expert in information extraction, you will find names of personal data from a privacy policy.
@@ -45,7 +44,7 @@ A name of personal data is:
 {{"Account information": ["name", "email address"], "Device information":["device serial number", "browser type"], ...}}
 """
 
-
+# personal data categories extracted from GDPR
 personal_data_categories = """\
 name: First name and surname or full name that can directly identify an individual.
 identification number: Government-issued numbers like passport numbers, national ID, driver's license numbers, tax IDs, social security numbers.
@@ -71,6 +70,7 @@ psychological profiles and mental state: Personality test results, stress levels
 criminal records or legal cases: Data on past convictions, ongoing legal cases, court orders, police reports.
 """
 
+# sensitivity level definition for the personal data categories, which is inferred from GDPR
 sensitivity_level_definition = {'Level 4': ['identification number', 'biometric data', 'genetic data', 'health data', 'financial data',
                                 'political opinions', 'religious or philosophical_beliefs', 'sexual orientation and sex life',
                                 'trade union membership', 'psychological profiles and mental state', 'criminal records or legal cases'],
@@ -78,6 +78,7 @@ sensitivity_level_definition = {'Level 4': ['identification number', 'biometric 
                                 'Level 2': ['online identifiers', 'location data', 'educational data', 'personal habits and interests'],
                                 'Level 1': ['name', 'contact details']}
 
+# assign a sensitivity level for the personal data categories
 def sensitivity_level(data_type, definition):
     if sum([1 if item in data_type else 0 for item in definition['Level 4']]):
         return 4
@@ -90,23 +91,26 @@ def sensitivity_level(data_type, definition):
     else:
         return 0
 
-
+# response format for the second llm chat for data collection purposes
 response_format = """\
 {"Your profile information": {"type": ["name", "contact details", 
 "photographs and videos"], "summary": "...", "original sentence": "..."}, ...}
 """
 
-
+# analyse the data collection purposes using asyncronous programming
 async def info_collection(text):
     try:
+        # check if the privacy policy is from a specific company that OpenAI avoids to analyze
         sensitive_word, encode_dict = sensitive_word_in_paragraph(text, 3, sensitive_words)
         if sensitive_word != None:
             text = encode_paragraph(text, encode_dict)
         result = []
-        # Call OpenAI API for categorized summary
+        # call the first llm chat for data collection purposes
         model = ChatOpenAI(model="gpt-4o", temperature=0.1, model_kwargs={"response_format": {"type": "json_object"}})
         response = await model.ainvoke([SystemMessage(content=prompt), HumanMessage(content=f"The privacy policy content is:\n {text}")])
+        # parse the response from the first llm chat
         data = json.loads(response.content)
+        # prompt for the second llm chat for data collection purposes
         analyse_prompt = f"""\
         You are required to do the following analysis tasks for only research purpose:
         You will be given personal data types found from a privacy policy, which is {data}
@@ -120,29 +124,36 @@ async def info_collection(text):
         - For "oiginal sentence", you should only include the original text from the document. It should only contain the first sentence in a paragraph
         - the output should be a json object
         """
+        # call the second llm chat for data collection purposes
         response = await model.ainvoke([SystemMessage(content=analyse_prompt), HumanMessage(content=f"The privacy policy is:\n {text}")])
+        # parse the response from the second llm chat
         summary = json.loads(response.content)
+        # process the response from the second llm chat to the desired format
         for key in summary.keys():
             content = summary[key]
             new_content = dict()
+            # add the keyword to the new content
             new_content['keyword'] = key
+            # add the summary to the new content
             new_content['summary'] = "Data to be collected:\n" + ', '.join(data.get(key, [])) + "\n\nData type:\n" + ", ".join(content['type']) + "\n\nSummary:\n" + content['summary']
+            # add the original sentence to the new content
             new_content['context'] = content['original sentence']
+            # add the sensitivity level to the new content
             if "unknown purpose" in new_content['summary']:
                 new_content['importance'] = 5
             else:
                 new_content['importance'] = sensitivity_level(content['type'], sensitivity_level_definition)
+            # add the new content to the result
             result.append(new_content)
-        
+        # if the privacy policy is encoded, decode it
         if sensitive_word != None:
             for content in result:
                 content['keyword'] = decode_paragraph(content['keyword'], encode_dict)
                 content['context'] = decode_paragraph(content['context'], encode_dict)
                 content['summary'] = decode_paragraph(content['summary'], encode_dict)
-
+        # sort the result by the importance 
         result.sort(key=lambda x: x['importance'], reverse=True)
         summary = {'collected_info': result}
-
         return summary
 
     except Exception as e:
