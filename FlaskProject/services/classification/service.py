@@ -1,14 +1,9 @@
 from .llm_classification_service import ClassificationService
-from utils.text_processor import TextProcessor
-import os
-from utils import text_processor
 
-text_processor = text_processor.TextProcessor()
-
+# service for the classification of the privacy policy
 class ClassificationPrivacyService:
     def __init__(self):
         self.classification_service = ClassificationService()
-        self.text_processor = TextProcessor()
 
     def generate_classification_content(self, company_name, html_content, markdown_content):
         try:
@@ -26,16 +21,23 @@ class ClassificationPrivacyService:
                     'error': 'No Markdown content.'
                 }
 
+            # create a dictionary for the privacy policy classification
             privacy_dict = dict()
             privacy_dict['company_name'] = company_name
             privacy_dict['content'] = markdown_content
             privacy_dict['format'] = 'Markdown'
+
+            # call the classification service for the privacy policy            
             classification_content = self.classification_service.classification_privacy_policy(privacy_dict)
+
+            # if the error is in the response, try to classify the privacy policy in HTML format
             if "error" in classification_content:
                 privacy_dict['content'] = html_content
                 privacy_dict['format'] = 'HTML'
                 classification_content = self.classification_service.classification_privacy_policy(privacy_dict)
                 print("Classification Privacy in HTML format")
+                
+                # if the error is in the response, return the error
                 if 'error' in classification_content:
                     classification_content['success'] = False
                     return classification_content

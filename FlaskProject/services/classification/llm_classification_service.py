@@ -10,8 +10,10 @@ from services.section_analysis.encode_and_decode import (
     decode_paragraph
 )
 
+# text processor for processing json strings
 text_processor = text_processor.TextProcessor()
 
+# service for the classification of the privacy policy
 class ClassificationService:
     def __init__(self):
         load_dotenv()
@@ -19,12 +21,22 @@ class ClassificationService:
 
     def classification_privacy_policy(self, privacy_dict):
         results = {}
+
+        # get the content of the privacy policy
         content = privacy_dict['content']
+
+        # check if the privacy policy contains sensitive words
         sensitive_word, encode_dict = sensitive_word_in_paragraph(content, 5, sensitive_words)
         if sensitive_word != None:
             content = encode_paragraph(content, encode_dict)
+
+        # get the company name of the privacy policy
         company_name = privacy_dict['company_name']
+
+        # get the format of the privacy policy
         input_format = privacy_dict['format']
+
+        # prompt for the classification of the privacy policy
         prompt = f"""
             Below is a privacy policy in {input_format} format:
             {content}
@@ -102,11 +114,13 @@ class ClassificationService:
             print(f"Failed to parse JSON for {company_name}, raw response: {result}")
             return {"error": "Invalid JSON response from API"}
         
+        # if the result is empty, add a default result
         for key in result_json.keys():
             if result_json[key] == []:
                 result_json[key] = [{"keyword": "Not found", "summary": "This content is not mentioned in the privacy policy",
                                      "context": "Not mentioned"}]
-                
+
+        # if the privacy policy is encoded, decode it
         if sensitive_word != None:
             for key in result_json.keys():
                 for content in result_json[key]:
