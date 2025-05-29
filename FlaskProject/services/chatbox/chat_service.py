@@ -285,7 +285,7 @@ VIN collection is a standard automotive practice that enables BYD to provide per
                 "question": "Please analyze the legality, potential risks, and provide recommendations regarding BYD's VIN collection practices.",
                 "answer": """Excellent inquiry! 
 
-### 🤔 Brief Answer
+                ### 🤔 Brief Answer
                 BYD's VIN collection is legally justified for legitimate business purposes but raises privacy concerns regarding location tracking and data sharing.
 
                 ### 📌 Detailed Explanation
@@ -352,14 +352,12 @@ VIN collection is a standard automotive practice that enables BYD to provide per
         question_lower = user_question.lower()
         question_length = len(user_question.split())
         
-        # Level C indicators
         level_c_keywords = [
             'analyze', 'analysis', 'detailed', 'explain why', 'reasons', 'risks', 
             'recommendations', 'suggest', 'compare', 'evaluate', 'assess',
             'implications', 'consequences', 'impact', 'legality', 'compliance'
         ]
-        
-        # Level A indicators  
+         
         level_a_keywords = [
             'what is', 'define', 'meaning', 'yes or no', 'true or false',
             'is it', 'does it', 'can it', 'will it'
@@ -482,37 +480,45 @@ VIN collection is a standard automotive practice that enables BYD to provide per
         """Check if the question is related to privacy/data protection"""
         question_lower = question.lower()
         
-        # Privacy-related keywords
-        privacy_keywords = [
-            'privacy', 'data', 'gdpr', 'ccpa', 'pipl', 'personal information', 'personal data',
-            'consent', 'cookie', 'tracking', 'collection', 'sharing', 'protection',
-            'user rights', 'data subject', 'controller', 'processor', 'retention',
-            'security', 'breach', 'compliance', 'policy', 'terms', 'agreement',
-            'opt-out', 'opt-in', 'delete', 'access', 'portability', 'rectification'
+        # Only refuse extremely obvious non-privacy questions
+        # Be very conservative - better to allow than to reject privacy questions
+        obvious_non_privacy_patterns = [
+            # Literature and arts
+            ('write', 'poem'), ('create', 'poetry'), ('compose', 'song'),
+            ('tell', 'story'), ('write', 'novel'), ('create', 'literature'),
+            
+            # Cooking and recipes
+            ('recipe', 'cooking'), ('how to cook'), ('ingredients for'),
+            
+            # Weather and travel
+            ('weather today'), ('temperature in'), ('travel to'),
+            
+            # Math and science problems  
+            ('solve this math'), ('calculate'), ('what is', 'plus'),
+            ('physics problem'), ('chemistry equation'),
+            
+            # Entertainment
+            ('movie recommendation'), ('best films'), ('tv shows'),
+            ('video games'), ('sports scores')
         ]
         
-        # Check if any privacy keyword is present
-        has_privacy_keyword = any(keyword in question_lower for keyword in privacy_keywords)
+        # Check for obvious non-privacy patterns
+        for pattern in obvious_non_privacy_patterns:
+            if isinstance(pattern, tuple):
+                # Check if all keywords in the pattern are present
+                if all(keyword in question_lower for keyword in pattern):
+                    return False
+            else:
+                # Single keyword check
+                if pattern in question_lower:
+                    return False
         
-        # Non-privacy keywords that should be refused
-        non_privacy_keywords = [
-            'poetry', 'poem', 'literature', 'story', 'novel', 'music', 'song',
-            'recipe', 'cooking', 'travel', 'weather', 'sports', 'game',
-            'movie', 'entertainment', 'science', 'math', 'history'
-        ]
-        
-        # Check if any non-privacy keyword is present
-        has_non_privacy_keyword = any(keyword in question_lower for keyword in non_privacy_keywords)
-        
-        # If it has non-privacy keywords and no privacy keywords, it's not privacy-related
-        if has_non_privacy_keyword and not has_privacy_keyword:
-            return False
-            
-        # If it has privacy keywords, it's privacy-related
-        if has_privacy_keyword:
-            return True
-            
-        # For ambiguous cases, allow it to pass through (let GPT decide)
+        # For all other cases, allow the question to pass through
+        # This includes:
+        # - Any mention of policy, data, information, user, account, etc.
+        # - Any ambiguous questions 
+        # - Any questions in privacy policy context
+        # - Better to let GPT handle edge cases than block legitimate questions
         return True
     
     def create_privacy_decline_response(self, user_question: str) -> dict:
@@ -579,9 +585,10 @@ I can help you understand privacy policies, data protection laws, user rights, a
                 return {"success": False, "error": "missing user question parameter"}, 400
             
             # 2. Check if question is privacy-related (early filtering)
-            if not self.is_privacy_related_question(user_question):
-                self.logger.info(f"Non-privacy question declined: {user_question[:50]}...")
-                return self.create_privacy_decline_response(user_question)
+            # Temporarily disabled to ensure all questions can be processed
+            # if not self.is_privacy_related_question(user_question):
+            #     self.logger.info(f"Non-privacy question declined: {user_question[:50]}...")
+            #     return self.create_privacy_decline_response(user_question)
             
             # 3. session management
             session = get_session(session_id) if session_id else None
@@ -709,9 +716,10 @@ I can help you understand privacy policies, data protection laws, user rights, a
                 return {"success": False, "error": "missing user question parameter"}, 400
             
             # 2. Check if question is privacy-related (early filtering)
-            if not self.is_privacy_related_question(user_question):
-                self.logger.info(f"Non-privacy question declined: {user_question[:50]}...")
-                return self.create_privacy_decline_response(user_question)
+            # Temporarily disabled to ensure all questions can be processed
+            # if not self.is_privacy_related_question(user_question):
+            #     self.logger.info(f"Non-privacy question declined: {user_question[:50]}...")
+            #     return self.create_privacy_decline_response(user_question)
             
             # 3. session management
             session = get_session(session_id) if session_id else None
