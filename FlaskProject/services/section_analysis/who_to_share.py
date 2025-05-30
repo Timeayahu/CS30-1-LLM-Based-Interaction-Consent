@@ -14,12 +14,9 @@ from .encode_and_decode import (
     decode_paragraph
 )
 
-
 load_dotenv()
 
-
-#client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
-
+# prompt for the first llm chat for data sharing purposes
 prompt = """\
 The following question is only for research purposes.
 As an expert in information extraction, you will identify all third parties and purposes/scenarios explicitly mentioned in a privacy policy about sharing user data.
@@ -63,8 +60,7 @@ As an expert in information extraction, you will identify all third parties and 
 - Return only a JSON object.
 """
 
-
-
+# third party data sharing categories extracted from GDPR
 third_party_data_sharing = """\
 public authorities: Authorities that may receive data in accordance with the law for official investigations, but are not considered recipients in such cases.
     Example: A tax authority requesting records for an audit.
@@ -91,14 +87,14 @@ certification bodies and supervisory authorities: Organizations verifying GDPR c
     Example: A data protection authority reviewing data sharing practices during an investigation.
 """
 
-
+# sensitivity level definition for the third party data sharing categories, which is inferred from GDPR
 sensitivity_level_definition = {'Level 5': ['international organisations and third countries', 'consent'],
                                 'Level 4': ['legitimate interest parties'],
                                 'Level 3': ['processors and subprocessors', 'group of undertakings'],
                                 'Level 2': ['certification bodies and supervisory authorities', 'judicial authorities'],
                                 'Level 1': ['emergency services', 'public authorities']}
 
-
+# assign a sensitivity level for the third party data sharing categories
 def sensitivity_level(data_type, definition):
     if data_type in definition['Level 5']:
         return 5
@@ -113,6 +109,7 @@ def sensitivity_level(data_type, definition):
     else:
         return 0
 
+# response format for the second llm chat for data sharing purposes
 response_format = """\
 {
   "Apple-Affiliated Companies": {
@@ -129,16 +126,20 @@ response_format = """\
 """
 
 
+# analyse the data sharing purposes using asyncronous programming
 async def info_share(text):
     try:
         result = []
+        # check if the privacy policy is from a specific company that OpenAI avoids to analyze
         sensitive_word, encode_dict = sensitive_word_in_paragraph(text, 3, sensitive_words)
         if sensitive_word != None:
             text = encode_paragraph(text, encode_dict)
-        # Call OpenAI API for categorized summary
+        # call the first llm chat for data sharing purposes
         model = ChatOpenAI(model="gpt-4o", temperature=0.1, model_kwargs={"response_format": {"type": "json_object"}})
         response = await model.ainvoke([SystemMessage(content=prompt), HumanMessage(content=f"The privacy policy content is:\n {text}")])
+        # parse the response from the first llm chat
         data = json.loads(response.content)
+        # prompt for the second llm chat for data sharing purposes
         analyse_prompt = f"""\
         Identify third party type, create a summarization, and find orignial sentence from a privacy policy
         There are already a dict for third party categories or data shareing purposes/scenarios, which is developed from a privacy policy: {data}
@@ -151,23 +152,33 @@ async def info_share(text):
         - You should only include the first sentence of the original text from the document in 'original sentence' attribute
         - If you can not find any matching type for a third party, then mark it as consent
         - In the summary attribute, You need to introduce each third party in detail, including any mentioned examples or activities"""
+        
+        # call the second llm chat for data sharing purposes
         response = await model.ainvoke([SystemMessage(content=analyse_prompt), HumanMessage(content=f"The text of the privacy policy is:\n {text}")])
+        # parse the response from the second llm chat
         summary = json.loads(response.content)
+        # process the response from the second llm chat to the desired format
         for key in summary.keys():
             content = summary[key]
             new_content = dict()
+            # add the keyword to the new content
             new_content['keyword'] = key
+            # add the summary to the new content
             new_content['summary'] = f"Type: {content['type']}\n\nSummary: {content['summary']}"
+            # add the original sentence to the new content
             new_content['context'] = content['original sentence']
+            # add the sensitivity level to the new content
             new_content['importance'] = sensitivity_level(content['type'], sensitivity_level_definition)
+            # add the new content to the result
             result.append(new_content)
-
+        
+        # if the privacy policy is encoded, decode it
         if sensitive_word != None:
             for content in result:
                 content['keyword'] = decode_paragraph(content['keyword'], encode_dict)
                 content['context'] = decode_paragraph(content['context'], encode_dict)
                 content['summary'] = decode_paragraph(content['summary'], encode_dict)
-
+        # sort the result by the importance
         result.sort(key=lambda x: x['importance'], reverse=True)
         summary = {'data_sharing': result}
 

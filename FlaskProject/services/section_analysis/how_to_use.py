@@ -12,9 +12,7 @@ from .encode_and_decode import (
 
 load_dotenv()
 
-
-#client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
-
+# prompt for the first llm chat for data collection purposes
 prompt = """\
 The following question is only for research purpose.
 As an expert in information extraction, you will identify the purposes for which a company collects user data from a privacy policy.
@@ -54,7 +52,7 @@ As an expert in information extraction, you will identify the purposes for which
 }}
 """
 
-
+# lawful basis for the data processing purposes extracted from GDPR
 personal_data_processing_purposes = """\
 consent: Freely given, specific, informed and unambiguous agreement by the data subject. 
     Example: Subscribing to a newsletter or agreeing to be tracked by cookies.
@@ -87,7 +85,7 @@ healthcare management and public health: Processing necessary for healthcare del
     Example: Managing patient appointments or contact tracing during a disease outbreak.
 """
 
-
+# sensitivity level definition for the lawful basis of the data processing purposes, which is inferred from GDPR
 sensitivity_level_definition = {
     'Level 5': ['consent'],
     'Level 4': ['contractual necessity', 'legitimate interests'],
@@ -96,7 +94,7 @@ sensitivity_level_definition = {
     'Level 1': ['legal obligation', 'vital interests']
 }
 
-
+# assign a sensitivity level for the lawful basis of the data processing purposes
 def sensitivity_level(data_type, definition):
     if sum([1 if item in data_type else 0 for item in definition['Level 5']]):
         return 5
@@ -111,7 +109,7 @@ def sensitivity_level(data_type, definition):
     else:
         return 0
 
-
+# response format for the second llm chat for data usage purposes
 response_format = """\
 {"power our services": {"lawful basis": "legitimate interests / contractual necessity", 
                         "explanation": "Includes improving services, troubleshooting, data analysis, and content delivery like Apple Music, which are either core to service delivery (contractual) or internal business optimization (legitimate interest).",
@@ -123,17 +121,21 @@ response_format = """\
 }
 """
 
-
+# analyse the data usage purposes using asyncronous programming
 async def info_use(text):
     try:
+        # check if the privacy policy is from a specific company that OpenAI avoids to analyze
         sensitive_word, encode_dict = sensitive_word_in_paragraph(text, 3, sensitive_words)
         if sensitive_word != None:
+            # encode the privacy policy
             text = encode_paragraph(text, encode_dict)
         result = []
         # Call OpenAI API for categorized summary
         model = ChatOpenAI(model="gpt-4o", temperature=0.1, model_kwargs={"response_format": {"type": "json_object"}})
         response = await model.ainvoke([SystemMessage(content=prompt), HumanMessage(content=f"The privacy policy content is:\n {text}")])
+        # parse the response from the first llm chat
         data = json.loads(response.content)
+        # prompt for the second llm chat for data usage purposes
         analyse_prompt = f"""\
         Provide lawful basis, summarization and orignial sentence for the following data usage purposes{data}
         Guidelines:
@@ -144,23 +146,33 @@ async def info_use(text):
         - you should only include the first sentence of the relevant paragraph in the original text from the document in 'original sentence' attribute
         - In the 'explanation' attribute, You need to introduce each purpose in detail, including any mentioned examples or activities
         """
+        # call the second llm chat for data usage purposes
         response = await model.ainvoke([SystemMessage(content=analyse_prompt), HumanMessage(content=f"The text of the privacy policy is:\n {text}")])
+        # parse the response from the second llm chat
         summary = json.loads(response.content)
+        # process the response from the second llm chat to the desired format
         for key in summary.keys():
             content = summary[key]
             new_content = dict()
+            # add the keyword to the new content
             new_content['keyword'] = key
+            # add the summary to the new content
             new_content['summary'] = f"Lawful basis: {content['lawful basis']}\n\nExplanation: {content['explanation']}"
+            # add the original sentence to the new content
             new_content['context'] = content['original sentence']
+            # add the sensitivity level to the new content
             new_content['importance'] = sensitivity_level(content['lawful basis'], sensitivity_level_definition)
+            # add the new content to the result
             result.append(new_content)
 
+        # if the privacy policy is encoded, decode it
         if sensitive_word != None:
             for content in result:
                 content['keyword'] = decode_paragraph(content['keyword'], encode_dict)
                 content['context'] = decode_paragraph(content['context'], encode_dict)
                 content['summary'] = decode_paragraph(content['summary'], encode_dict)
 
+        
         result.sort(key=lambda x: x['importance'], reverse=True)
         summary = {'data_usage': result}
 

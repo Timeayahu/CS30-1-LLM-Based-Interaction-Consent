@@ -29,6 +29,7 @@ REFRESH_INTERVAL = datetime.timedelta(days=7)
 
 class Scheduling:
     def __init__(self):
+        # initialize the variables
         self.html_content = None
         self.markdown_content = None
         self.sections = {'Collect': None, 'Use': None, 'Share': None}
@@ -37,18 +38,25 @@ class Scheduling:
         self.company_name = None
         self.policy_id = None  
         self.result_queue = queue.Queue()
+
     def get_content(self, data):
+        # get the html content from the data from the frontend (if exists)
         self.html_content = data.get('text', None)
+        # convert the html content to markdown content
         converter = html2text.HTML2Text()
         self.markdown_content = converter.handle(self.html_content)
     def crawler(self, data):
+        # crawl the privacy policy from the website
         result, status = call_crawler.crawl_privacy_policy(data)
         self.result = result
         self.status = status
         self.html_content = result.get('html', None)
         self.markdown_content = result.get('markdown', None)
+
         url = data['url']
+        # get the domain name from the url
         domain = urlparse(url).netloc
+        # get the company name from the domain name
         company_name = domain.split('.')[0]
         self.company_name = company_name
 
@@ -73,10 +81,11 @@ class Scheduling:
         return is_changed
 
     def split(self):
+        # split the html/markdown content into sections
         self.sections = call_split.extract_webpage_content(self.html_content)
   
     def analyse_global(self):
-        # Replace your real function here
+        # analyse the global privacy policy for specific content
         global_processing = call_classification.classify_privacy_global
         result = global_processing(self.company_name, self.html_content, self.markdown_content)
         output = ' '
@@ -86,6 +95,7 @@ class Scheduling:
             output = result['classification_content']
         self.result_queue.put(output)
     async def analyse_sections(self):
+        # analyse the sections of the privacy policy using asyncronous programming
         results = await asyncio.gather(
         info_collection(self.sections['Collect']),
         info_use(self.sections['Use']),
@@ -93,13 +103,14 @@ class Scheduling:
         )
         return results
     def schedule(self, data):
+        # check if the url is provided
         if 'url' in data:
             url = data['url']
             try:
                 # check if the url is already in the database
                 existing_policy = get_policy_by_url(url)
                 if existing_policy:
-
+                    # get the policy_id from the database
                     policy_id = existing_policy["policy_id"] if "policy_id" in existing_policy else existing_policy["_id"]
 
                     # check time interval
@@ -113,7 +124,9 @@ class Scheduling:
                     if time_elapsed < REFRESH_INTERVAL:
                         print(f"Content is recent (updated {time_elapsed.days} days ago), using cached version")
 
+                        # get the summary from the database
                         existing_summary = get_summary(policy_id)
+                        # check if the summary is in the database
                         if existing_summary and "summary_content" in existing_summary:
                             self.policy_id = policy_id
                             return {
@@ -133,8 +146,9 @@ class Scheduling:
                         # no change, update last checked time
                         print(f"Content unchanged, updating last checked time")
                         update_last_checked_time(policy_id)
-
+                        # get the summary from the database
                         existing_summary = get_summary(policy_id)
+                        # check if the summary is in the database
                         if existing_summary and "summary_content" in existing_summary:
                             self.policy_id = policy_id
                             return {
@@ -158,13 +172,27 @@ class Scheduling:
             self.get_content(data)
         else:
             return {"error": "Not valid request!"}
-
+        
+        # analyse the global privacy policy for specific content
+        global_thread = threading.Thread(target=self.analyse_global)
+        global_thread.start()
+        # split the html/markdown content into sections
         self.split()
+        # analyse the sections of the privacy policy using asyncronous programming
         result = asyncio.run(self.analyse_sections())
+        # merge the results
         merged = dict()
         for d in result:
             merged.update(d)
-            
+        # join the global thread
+        global_thread.join()
+        # merge the results with the global result
+        merged.update(self.result_queue.get())
+        # check if the result contains error
+        for key in merged.keys():
+            if not isinstance(merged[key], list):
+                return {'error': merged[key]}, 503
+        # convert the merged results to json
         summary_json = json.dumps(merged, indent=4)
         self.result = {'summary': summary_json}
         self.status = 200
@@ -177,7 +205,7 @@ class Scheduling:
                 print(f"HTML content length: {len(self.html_content) if self.html_content else 0}")
                 print(f"Markdown content length: {len(self.markdown_content) if self.markdown_content else 0}")
                 print(f"current environment variables: MONGODB_HOST={os.getenv('MONGODB_HOST', 'localhost')}, MONGODB_DB={os.getenv('MONGODB_DB', 'CS307')}")
-                
+                # save the policy and summary to the database
                 policy_id = save_policy(
                     url=data['url'],
                     html_content=self.html_content,
@@ -194,7 +222,6 @@ class Scheduling:
                 else:
                     print("save policy failed, no valid id returned")
             except Exception as e:
-                
                 print(f"database save error: {e}")
                 
         return self.result, self.status

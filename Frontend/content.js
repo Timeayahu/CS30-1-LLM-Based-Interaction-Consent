@@ -36,6 +36,11 @@ function initMutationObserver() {
           try {
             // Check if the node is an element
             if (node && node.nodeType === Node.ELEMENT_NODE) {
+              // Skip guided tour elements to avoid conflicts
+              if (isGuidedTourElement(node)) {
+                continue;
+              }
+              
               // Enhanced detection for various element types, not just anchor tags
               if (isPossiblePrivacyPolicyElement(node)) {
                 handlePotentialPrivacyLink(node);
@@ -67,6 +72,46 @@ function initMutationObserver() {
   }
 }
 
+// Check if element is part of guided tour to avoid conflicts
+function isGuidedTourElement(element) {
+  if (!element) return false;
+  
+  const guidedTourSelectors = [
+    '#auth-popup',
+    '#auth-overlay', 
+    '.guided-tour-overlay',
+    '.guided-tour-bubble',
+    '.guided-tour-spotlight-block',
+    '.demo-element',
+    '#profile-popup',
+    '#privacy-chat-window',
+    '.privacy-summary-icon.demo-floating-icon'
+  ];
+  
+  for (const selector of guidedTourSelectors) {
+    if (element.matches && element.matches(selector)) {
+      return true;
+    }
+    
+    if (element.closest && element.closest(selector)) {
+      return true;
+    }
+    
+    if (element.id === selector.substring(1)) {
+      return true;
+    }
+    
+    if (element.className && typeof element.className === 'string') {
+      const classes = selector.replace(/[\.\#]/g, '').split(' ');
+      if (classes.some(cls => element.className.includes(cls))) {
+        return true;
+      }
+    }
+  }
+  
+  return false;
+}
+
 // Enhanced function to scan an element and its children for privacy links
 function scanElementForPrivacyLinks(element) {
   try {
@@ -75,11 +120,21 @@ function scanElementForPrivacyLinks(element) {
       return;
     }
     
+    // Skip guided tour elements
+    if (isGuidedTourElement(element)) {
+      return;
+    }
+    
     // Check various element types that could be privacy links
     const potentialElements = element.querySelectorAll('a, span, div, p, button, li, td, th');
     
     for (const el of potentialElements) {
       try {
+        // Skip guided tour elements
+        if (isGuidedTourElement(el)) {
+          continue;
+        }
+        
         if (isPossiblePrivacyPolicyElement(el)) {
           handlePotentialPrivacyLink(el);
         }
@@ -362,6 +417,14 @@ function handleLinkHover(e) {
     if (!isEnabled || !e || !e.target) return;
     
     const element = e.target;
+    
+    // Only skip if this specific element is a tour demo icon or if element is within guided tour UI
+    if (element.classList.contains('tour-demo-icon') || 
+        element.closest('.guided-tour-overlay') || 
+        element.closest('.guided-tour-bubble') ||
+        element.closest('.demo-element')) {
+      return;
+    }
     
     // Get the URL for this element
     const elementUrl = getElementUrl(element);
@@ -997,6 +1060,25 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         isPrivacyPage: false,
         error: error.message
       });
+    }
+    
+    return true; // Keep message channel open for async response
+  } else if (message.action === "startGuidedTour") {
+    // Handle request to start guided tour
+    console.log("Received request to start guided tour");
+    
+    try {
+      // Check if guided tour is available
+      if (typeof window.guidedTour !== 'undefined' && window.guidedTour) {
+        window.guidedTour.startTour();
+        sendResponse({ success: true });
+      } else {
+        console.warn("Guided tour not available");
+        sendResponse({ success: false, error: "Guided tour not available" });
+      }
+    } catch (error) {
+      console.error("Error starting guided tour:", error);
+      sendResponse({ success: false, error: error.message });
     }
     
     return true; // Keep message channel open for async response
@@ -2410,13 +2492,13 @@ function updatePopup(popup, isLoading, text, isError) {
         { title: "What personal information will be collected?", data: summary.collected_info },
         { title: "What will the personal information be used for?", data: summary.data_usage },
         { title: "Who will have access to your personal information?", data: summary.data_sharing },
-        // { title: "User Access/Edit/Deletion", data: summary.user_access_edit_deletion },
-        // { title: "Data Retention", data: summary.data_retention },
-        // { title: "Data Security", data: summary.data_security },
-        // { title: "International & Specific Audiences", data: summary.international_specific_audiences },
-        // { title: "User Choice & Control", data: summary.user_choice_control },
-        // { title: "Introduction", data: summary.introductory_generic },
-        // { title: "Privacy Contact Information", data: summary.privacy_contact_information }
+        { title: "User Access/Edit/Deletion", data: summary.user_access_edit_deletion },
+        { title: "Data Retention", data: summary.data_retention },
+        { title: "Data Security", data: summary.data_security },
+        { title: "International & Specific Audiences", data: summary.international_specific_audiences },
+        { title: "User Choice & Control", data: summary.user_choice_control },
+        { title: "Introduction", data: summary.introductory_generic },
+        { title: "Privacy Contact Information", data: summary.privacy_contact_information }
       ];
 
       categories.forEach((category, index) => {
@@ -3322,12 +3404,14 @@ function updatePopup(popup, isLoading, text, isError) {
                   
                   // Add hover effect
                   detailExplanationBtn.addEventListener('mouseover', () => {
-                    detailExplanationBtn.style.backgroundColor = `rgba(${hexToRgb(borderColor)}, 0.2)`;
+                    const defaultBorderColor = '#1976d2'; // 使用默认蓝色
+                    detailExplanationBtn.style.backgroundColor = `rgba(${hexToRgb(defaultBorderColor)}, 0.2)`;
                   });
                   
                   // Add mouseout event to reset background color
                   detailExplanationBtn.addEventListener('mouseout', () => {
-                    detailExplanationBtn.style.backgroundColor = `rgba(${hexToRgb(borderColor)}, 0.1)`;
+                    const defaultBorderColor = '#1976d2'; // 使用默认蓝色
+                    detailExplanationBtn.style.backgroundColor = `rgba(${hexToRgb(defaultBorderColor)}, 0.1)`;
                   });
                   
                   // Click Detail Explanation button
@@ -3518,7 +3602,7 @@ function updatePopup(popup, isLoading, text, isError) {
             summary.innerText = item.summary;
             Object.assign(summary.style, {
               fontSize: '14px',
-              marginBottom: '8px',
+              marginBottom: '15px',
               lineHeight: '1.5',
               wordBreak: 'break-word',
               overflowWrap: 'break-word'
@@ -3533,7 +3617,7 @@ function updatePopup(popup, isLoading, text, isError) {
               textDecoration: 'none',
               fontSize: '14px',
               display: 'inline-block',
-              marginBottom: '10px',
+              marginBottom: '20px',
               padding: '6px 12px', 
               backgroundColor: 'rgba(25, 118, 210, 0.1)',
               borderRadius: '4px',
@@ -3599,7 +3683,7 @@ function updatePopup(popup, isLoading, text, isError) {
               textDecoration: 'none',
               fontSize: '14px',
               display: 'inline-block',
-              marginBottom: '10px',
+              marginBottom: '20px',
               marginLeft: '10px',
               padding: '6px 12px', 
               backgroundColor: 'rgba(25, 118, 210, 0.1)',
@@ -3617,12 +3701,14 @@ function updatePopup(popup, isLoading, text, isError) {
             
             // Add hover effect
             detailExplanationBtn.addEventListener('mouseover', () => {
-              detailExplanationBtn.style.backgroundColor = `rgba(${hexToRgb(borderColor)}, 0.2)`;
+              const defaultBorderColor = '#1976d2';
+              detailExplanationBtn.style.backgroundColor = `rgba(${hexToRgb(defaultBorderColor)}, 0.2)`;
             });
             
             // Add mouseout event to reset background color
             detailExplanationBtn.addEventListener('mouseout', () => {
-              detailExplanationBtn.style.backgroundColor = `rgba(${hexToRgb(borderColor)}, 0.1)`;
+              const defaultBorderColor = '#1976d2';
+              detailExplanationBtn.style.backgroundColor = `rgba(${hexToRgb(defaultBorderColor)}, 0.1)`;
             });
             
             // Click Detail Explanation button
@@ -3686,8 +3772,18 @@ function updatePopup(popup, isLoading, text, isError) {
             };
 
             contentContainer.appendChild(summary);
-            contentContainer.appendChild(contextLink);
-            contentContainer.appendChild(detailExplanationBtn);
+            
+            // Check if content is "Not found" - if so, don't show buttons
+            const isNotFound = item.summary && (
+              item.summary.toLowerCase().includes('not found') ||
+              item.keyword.toLowerCase().includes('not found')
+            );
+            
+            if (!isNotFound) {
+              contentContainer.appendChild(contextLink);
+              contentContainer.appendChild(detailExplanationBtn);
+            }
+            
             itemDiv.appendChild(contentContainer);
 
             // Add click expand/collapse functionality
@@ -3696,7 +3792,7 @@ function updatePopup(popup, isLoading, text, isError) {
               isExpanded = !isExpanded;
               arrow.style.transform = isExpanded ? 'rotate(90deg)' : 'rotate(0deg)';
               contentContainer.style.maxHeight = isExpanded ? `${contentContainer.scrollHeight}px` : '0';
-              contentContainer.style.padding = isExpanded ? '10px' : '0 10px';
+              contentContainer.style.padding = isExpanded ? '15px 15px 20px 15px' : '0 15px';
               headerContainer.style.borderBottom = isExpanded ? '1px solid #e0e0e0' : '1px solid transparent';
               
               // Show or hide Detail Explanation button with animation when content expanded
@@ -4245,6 +4341,53 @@ chrome.storage.local.get(['isEnabled'], (result) => {
 
 // Initialize and load auth.js
 loadAuthScript();
+
+// Create global privacy extension object for tour integration
+window.privacyExtension = {
+  rescanPage: function() {
+    console.log('Rescanning page for privacy links after tour...');
+    
+    // Reset floating icon state
+    if (floatingIcon) {
+      floatingIcon.remove();
+      floatingIcon = null;
+    }
+    
+    // Reset state variables
+    isIconLocked = false;
+    lastIconPosition = null;
+    currentHoveredLink = null;
+    
+    // Clear any pending timers
+    if (hideIconTimer) {
+      clearTimeout(hideIconTimer);
+      hideIconTimer = null;
+    }
+    
+    if (positionUpdateTimer) {
+      clearTimeout(positionUpdateTimer);
+      positionUpdateTimer = null;
+    }
+    
+    // Clear cache to force fresh detection
+    linkDetectionCache.clear();
+    
+    // Re-scan all elements for privacy links
+    setTimeout(() => {
+      const allElements = document.querySelectorAll('a[href], span, div, p, button, li, td, th');
+      let detectCount = 0;
+      
+      for (const element of allElements) {
+        if (isPossiblePrivacyPolicyElement(element)) {
+          handlePotentialPrivacyLink(element);
+          detectCount++;
+        }
+      }
+      
+      console.log(`Rescan completed, found ${detectCount} privacy policy elements`);
+    }, 100);
+  }
+};
 
 // Enhanced function to check if an element could be a privacy policy link (not just anchor tags)
 function isPossiblePrivacyPolicyElement(element) {
