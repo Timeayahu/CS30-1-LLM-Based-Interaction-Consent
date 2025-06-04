@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Privacy Policy Assistant</title>
+  <style>
+    body {
+      width: 320px;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    
+    .popup-container {
+      padding: 15px;
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 15px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(25, 118, 210, 0.1);
+    }
+    
+    .title {
+      margin: 0;
+      font-size: 1.3rem;
+      background: linear-gradient(to right, #1565c0, #1976d2, #2196f3);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+    
+    .menu-item {
+      display: flex;
+      align-items: center;
+      padding: 12px 15px;
+      margin-bottom: 8px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.2s;
+      background-color: rgba(25, 118, 210, 0.05);
+    }
+    
+    .menu-item:hover {
+      background-color: rgba(25, 118, 210, 0.1);
+      transform: translateY(-2px);
+    }
+    
+    .menu-icon {
+      width: 24px;
+      height: 24px;
+      margin-right: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #1976d2;
+    }
+    
+    .menu-text {
+      flex: 1;
+      font-size: 0.95rem;
+    }
+    
+    .switch-container {
+      display: flex;
+      align-items: center;
+      padding: 12px 15px;
+      margin-bottom: 8px;
+      border-radius: 8px;
+      background-color: rgba(25, 118, 210, 0.05);
+    }
+    
+    .switch-text {
+      flex: 1;
+      font-size: 0.95rem;
+    }
+    
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 42px;
+      height: 24px;
+    }
+    
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: .3s;
+      border-radius: 24px;
+    }
+    
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .3s;
+      border-radius: 50%;
+    }
+    
+    input:checked + .slider {
+      background-color: #1976d2;
+    }
+    
+    input:checked + .slider:before {
+      transform: translateX(18px);
+    }
+    
+    .footer {
+      font-size: 0.8rem;
+      text-align: center;
+      color: #666;
+      margin-top: 15px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(25, 118, 210, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="popup-container">
+    <div class="header">
+      <h1 class="title">Privacy Policy Assistant</h1>
+    </div>
+    
+    <div class="switch-container">
+      <div class="menu-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+          <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+        </svg>
+      </div>
+      <div class="switch-text">Enable Privacy Policy Analysis</div>
+      <label class="switch">
+        <input type="checkbox" id="toggle-switch" checked>
+        <span class="slider"></span>
+      </label>
+    </div>
+    
+    <div class="menu-item" id="tutorial-btn">
+      <div class="menu-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+          <line x1="12" y1="17" x2="12.01" y2="17"></line>
+        </svg>
+      </div>
+      <div class="menu-text">View Tutorial</div>
+    </div>
+    
+    <div class="menu-item" id="privacy-tutorial-btn">
+      <div class="menu-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          <path d="M9 12l2 2 4-4"></path>
+        </svg>
+      </div>
+      <div class="menu-text">Privacy & Consent Basics</div>
+    </div>
+    
+    <div class="menu-item" id="guided-tour-btn">
+      <div class="menu-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+        </svg>
+      </div>
+      <div class="menu-text">Start Guided Tour</div>
+    </div>
+    
+    <div class="footer">
+      Privacy Policy Assistant helps you understand complex privacy terms
+    </div>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html> 
