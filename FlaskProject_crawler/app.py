@@ -3,18 +3,16 @@ from flask_cors import CORS
 from routes.crawler_routes import crawler_bp
 
 
-
 def create_app():
     app = Flask(__name__)
     CORS(app)  
     
-  
-    #app.register_blueprint(privacy_bp)
+    # register the routes
     app.register_blueprint(crawler_bp)
     
     @app.route('/')
     def index():
-        return "welcome to use privacy policy crawler and analysis system, API documentation please visit /api/docs"
+        return "Welcome to the privacy policy crawling and analysis system, please visit /api/docs for the API documentation"
     
     return app
 
