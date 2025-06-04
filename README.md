@@ -28,12 +28,28 @@ Dataset provided by the client: No, the students need to find dataset.
 Resources provided by the client: nan
 
 
----------------------------------------------------------------------------------
+---
+## How to quickly use our interactive consent reader?
+
+If you want to deploy the project by yourself, you can follow the README.md inside **FlaskProject** to deploy it locally (or **FlaskProject_server** & **FlaskProject_crawler** to deploy it on AWS environment).
+
+But we also provide a quick setup option, which only requires loading the frontend folder to your Chrome Extension (We currently have a server running on AWS).
+
+- **step 1**:  Open the extension page of Chrome
+
+![图片](https://github.com/user-attachments/assets/15655def-8424-4571-8d0c-1d80861f2f56)
+
+- **step 2**:  Turn on the Developer mode on the right top,  and click load unpacked
+
+![图片](https://github.com/user-attachments/assets/dc0b3147-57fb-4f50-81c1-f9c5d83ca9e7)
+
+- **step 3**:  Select the folder "Frontend_Cloud" and confirm
+
+![图片](https://github.com/user-attachments/assets/b466b979-d9f9-4630-8b37-b712308b0a78)
+
+- **step 4**: If you can see this on the Extension configuration page, you have successfully installed the Frontend and you can start explore it!
+
+![图片](https://github.com/user-attachments/assets/fdf0c171-3e7c-48e0-9971-1147a2eec8a7)
 
 
-Main Points (primary)
 
-1. RAG (if necessary)
-2. Prompt Project (key feature)
-3. ReAct (chain inference?)
-4. LangChain (external tools)
