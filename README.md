@@ -43,4 +43,13 @@ But we also provide a quick setup option, which only requires loading the fronte
 
 ![图片](https://github.com/user-attachments/assets/dc0b3147-57fb-4f50-81c1-f9c5d83ca9e7)
 
+- **step 3**:  Select the folder "Frontend_Cloud" and confirm
+
+![图片](https://github.com/user-attachments/assets/b466b979-d9f9-4630-8b37-b712308b0a78)
+
+- **step 4**: If you can see this on the Extension configuration page, you have successfully installed the Frontend and you can start explore it!
+
+![图片](https://github.com/user-attachments/assets/fdf0c171-3e7c-48e0-9971-1147a2eec8a7)
+
+
 
