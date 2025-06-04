@@ -30,10 +30,5 @@ Resources provided by the client: nan
 
 ---------------------------------------------------------------------------------
 
+![图片](https://github.com/user-attachments/assets/15655def-8424-4571-8d0c-1d80861f2f56)
 
-Main Points (primary)
-
-1. RAG (if necessary)
-2. Prompt Project (key feature)
-3. ReAct (chain inference?)
-4. LangChain (external tools)
