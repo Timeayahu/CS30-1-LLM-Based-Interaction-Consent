@@ -1,10 +1,11 @@
 ### docker usage guide
 
 **Install Docker**
-   For Windows (WSL2 recommended):
-      1.Install WSL2 + Ubuntu:
-      https://learn.microsoft.com/en-us/windows/wsl/install
-
+   For Windows (WSL2 recommended): 
+   
+      1.Install WSL2 + Ubuntu: 
+      https://learn.microsoft.com/en-us/windows/wsl/install 
+      
       2.Install Docker Desktop for Windows:
       https://www.docker.com/products/docker-desktop/
 
