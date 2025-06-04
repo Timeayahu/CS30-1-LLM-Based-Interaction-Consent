@@ -1,57 +1,56 @@
+### docker usage guide
+
+1. **Install Docker**
+   It is recommended to use Ubuntu
+   Download Docker: https://www.bilibili.com/video/BV1Zn4y1X7AZ?spm_id_from=333.788.videopod.episodes&vd_source=bba9d41c2e94e3f19b77e8cbac2eff78&p=6
+
+   Enter the terminal and use the command: wsl -d Ubuntu to enter
+
+   After entering, type docker-compose up --build to create the Docker container
+   Type docker ps to check whether the container has started successfully
+   If the container starts normally, open your browser and enter the URL: http://localhost:5000. A page should appear saying: Welcome to the       
+   Privacy Policy Crawling and Analysis System. For API documentation, please visit /api/docs
+
+   The container only needs to be built once. In the future, you can just use docker-compose up -d to restart it.
 
 
-### docker使用指南
+   **Common commands during development:**
+   First-time build and start: docker-compose up --build -d
+
+   Daily development (after building once): docker-compose up -d
+
+   Code modifications: no need to restart, as they are automatically synced to the container
+
+   If you modify requirements/dockerfile or other config files:
+   docker-compose down (stop service) + docker-compose up --build -d
+
+   Temporarily shut down/stop: docker-compose down / docker-compose stop
+
+   View logs: docker-compose logs -f webapp
 
 
-1. **安装Docker**
-   推荐下载ubuntu
-   下载docker：https://www.bilibili.com/video/BV1Zn4y1X7AZ?spm_id_from=333.788.videopod.episodes&vd_source=bba9d41c2e94e3f19b77e8cbac2eff78&p=6
+2. **Common commands**
+   **Image & Container Management Commands**
 
-   进入终端通过命令：wsl -d Ubuntu进入
-
-   进入后输入docker-compose up --build新建docker容器
-   输入docker ps查看容器是否正常启动
-   如果正常启动，那么打开浏览器输入网址：http://localhost:5000应该会弹出一个页面显示：欢迎使用隐私政策爬取和分析系统，API文档请访问/api/docs
-
-   容器构建一次即可。后续只需要docker-compose up -d就可以重新启动。
-
-
-   **开发中常用命令：**
-   第一次构建启动：docker-compose up --build -d
-
-   日常开发（已构建过）：docker-compose up -d
-
-   修改代码：无需重启，因为自动从本地同步到容器
-
-   修改requirement/dockerfile等配置文件：docker-compose down（服务下线）+ docker-compose up --build -d
-
-   暂时关闭/下线：docker-compose down/ docker-compose stop
-
-   查看日志：docker-compose logs -f
-
-
-
-2. **常用命令**
-   **镜像 & 容器管理命令**
-   
-   docker build -t myimage .	手动根据 Dockerfile 构建镜像（开发阶段一般用 docker-compose）
-   docker images	查看已有镜像
-   docker rmi <镜像ID>	删除镜像
-   docker ps -a	查看所有容器（包括停止的）
-   docker rm <容器ID>	删除容器（先停掉再删）
+   docker build -t myimage . Manually build an image using Dockerfile (usually use docker-compose during development)
+   docker images View existing images
+   docker rmi <imageID> Delete image
+   docker ps -a View all containers (including stopped ones)
+   docker rm <containerID> Delete container (stop it first)
    
    
-   **docker-compose 常用命令**
-   
-   docker-compose up	启动容器（如果镜像不存在，会自动 build）
-   docker-compose up --build	重新构建镜像并启动（代码改了必须用这个）
-   docker-compose down	停止并移除容器（保留镜像和卷）
-   docker-compose down --volumes	同时清除数据卷（慎用，数据库也会被清）
-   docker-compose down --rmi all	清除所有容器 + 镜像
-   docker-compose logs -f	实时查看服务输出日志（调试用）
+   **docker-compose Common Commands**
 
-### app.py直接启动
-   也可以用app.py直接启动，方便开发过程中的测试。在最后push前记得用compose down和build两条命令构建好容器方便后续使用。
+   docker-compose up Start container (will auto build if image doesn’t exist)
+   docker-compose up --build Rebuild image and start (must use if code changed)
+   docker-compose down Stop and remove container (keep images and volumes)
+   docker-compose down --volumes Also remove volumes (use with caution; database will be cleared)
+   docker-compose down --rmi all Remove all containers + images
+   docker-compose logs -f Live view of service output logs (for debugging)
+
+### app.py start
+   You can also use app.py to start directly, which is convenient for testing during development.
+   Before pushing, remember to run docker-compose down and docker-compose up --build -d to ensure container is correctly built for future use.
 
 
 ### Run test (docker-compose.test.yml)
