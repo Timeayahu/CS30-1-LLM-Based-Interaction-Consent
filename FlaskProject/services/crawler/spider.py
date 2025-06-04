@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.common.by import By  # 添加By导入，用于find_element
+from selenium.webdriver.common.by import By  # Add By import for find_element usage
 from webdriver_manager.chrome import ChromeDriverManager
 import time
 import html2text
@@ -33,7 +33,7 @@ class WebCrawler:
         
         # set Chrome headless mode
         chrome_options = Options()
-        chrome_options.add_argument("--headless=new")  # 使用新的无头模式
+        chrome_options.add_argument("--headless=new")  # Use new headless mode
         chrome_options.add_argument("--no-sandbox")
         chrome_options.add_argument("--disable-dev-shm-usage")
         chrome_options.add_argument("--disable-gpu")
@@ -44,20 +44,20 @@ class WebCrawler:
         chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
         chrome_options.add_experimental_option("useAutomationExtension", False)
 
-        # 添加User-Agent伪装成普通浏览器
+        # Add User-Agent to masquerade as regular browser
         chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36")
 
-        # 禁用HTTP/2以避免错误
+        # Disable HTTP/2 to avoid errors
         chrome_options.add_argument("--disable-http2")
         chrome_options.add_argument("--disable-features=NetworkService,NetworkServiceInProcess")
         
         try:
-            # 根据不同环境初始化WebDriver
-            if platform.system() == "Linux" and os.path.exists("/usr/bin/chromedriver"):  # Docker/Linux环境
-                # 直接使用Dockerfile中安装的ChromeDriver
+            # Initialize WebDriver according to different environments
+            if platform.system() == "Linux" and os.path.exists("/usr/bin/chromedriver"):  # Docker/Linux environment
+                # Directly use ChromeDriver installed in Dockerfile
                 service = Service("/usr/bin/chromedriver")
                 driver = webdriver.Chrome(service=service, options=chrome_options)
-            else:  # Windows或其他环境，使用webdriver_manager自动管理
+            else:  # Windows or other environments, use webdriver_manager for automatic management
                 try:
                     service = Service(ChromeDriverManager().install())
                     driver = webdriver.Chrome(service=service, options=chrome_options)

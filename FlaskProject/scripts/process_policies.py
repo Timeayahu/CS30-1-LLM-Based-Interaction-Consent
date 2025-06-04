@@ -4,13 +4,13 @@ import argparse
 import logging
 from dotenv import load_dotenv
 
-# 添加项目根目录到路径，以便导入相关模块
+# Add project root directory to path for importing related modules
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from models.mongodb_local import privacy_data, get_policy_by_id, get_policy_by_url
 from services.crawler.text_processor import text_processor
 
-# 配置日志
+# Configure logging
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
@@ -18,43 +18,43 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 def process_single_policy(policy_id):
-    """处理单个政策文档"""
-    logger.info(f"开始处理政策: {policy_id}")
+    """Process a single policy document"""
+    logger.info(f"Starting to process policy: {policy_id}")
     
-    # 获取政策数据
+    # Get policy data
     policy = get_policy_by_id(policy_id)
     if not policy:
-        logger.error(f"找不到政策: {policy_id}")
+        logger.error(f"Policy not found: {policy_id}")
         return False
     
-    # 获取HTML内容
+    # Get HTML content
     html_content = policy.get("html_content") or policy.get("content")
     if not html_content:
-        logger.error(f"政策没有HTML内容: {policy_id}")
+        logger.error(f"Policy has no HTML content: {policy_id}")
         return False
     
-    # 处理政策文本
-    logger.info(f"开始清洗并分块政策文本: {policy_id}")
+    # Process policy text
+    logger.info(f"Starting to clean and chunk policy text: {policy_id}")
     success = text_processor.process_html_to_chunks(policy_id, html_content)
     
     if success:
-        logger.info(f"成功处理政策: {policy_id}")
+        logger.info(f"Successfully processed policy: {policy_id}")
     else:
-        logger.error(f"处理政策失败: {policy_id}")
+        logger.error(f"Failed to process policy: {policy_id}")
     
     return success
 
 def process_all_policies():
-    """处理数据库中的所有政策文档"""
-    logger.info("开始处理所有政策")
+    """Process all policy documents in the database"""
+    logger.info("Starting to process all policies")
     
-    # 获取所有政策
+    # Get all policies
     policies = privacy_data.find({})
     total = privacy_data.count_documents({})
     processed = 0
     success = 0
     
-    logger.info(f"共找到 {total} 个政策文档")
+    logger.info(f"Found {total} policy documents in total")
     
     for policy in policies:
         policy_id = policy.get("_id")
@@ -65,46 +65,46 @@ def process_all_policies():
         if process_single_policy(policy_id):
             success += 1
             
-        # 打印进度
+        # Print progress
         if processed % 10 == 0 or processed == total:
-            logger.info(f"进度: {processed}/{total} ({(processed/total*100):.1f}%), 成功: {success}")
+            logger.info(f"Progress: {processed}/{total} ({(processed/total*100):.1f}%), Success: {success}")
     
-    logger.info(f"处理完成。总计: {total}, 处理: {processed}, 成功: {success}")
+    logger.info(f"Processing completed. Total: {total}, Processed: {processed}, Success: {success}")
     return success
 
 def process_by_url(url):
-    """通过URL处理政策"""
-    logger.info(f"通过URL处理政策: {url}")
+    """Process policy by URL"""
+    logger.info(f"Processing policy by URL: {url}")
     
-    # 查找政策
+    # Find policy
     policy = get_policy_by_url(url)
     if not policy:
-        logger.error(f"找不到URL对应的政策: {url}")
+        logger.error(f"Policy not found for URL: {url}")
         return False
     
     policy_id = policy.get("policy_id") or policy.get("_id")
     return process_single_policy(policy_id)
 
 def main():
-    """主函数，处理命令行参数"""
-    parser = argparse.ArgumentParser(description="处理隐私政策文档，生成文本块和向量嵌入")
+    """Main function to handle command line arguments"""
+    parser = argparse.ArgumentParser(description="Process privacy policy documents to generate text chunks and vector embeddings")
     
     group = parser.add_mutually_exclusive_group(required=True)
-    group.add_argument("-a", "--all", action="store_true", help="处理所有政策")
-    group.add_argument("-i", "--id", help="通过ID处理单个政策")
-    group.add_argument("-u", "--url", help="通过URL处理政策")
+    group.add_argument("-a", "--all", action="store_true", help="Process all policies")
+    group.add_argument("-i", "--id", help="Process a single policy by ID")
+    group.add_argument("-u", "--url", help="Process policy by URL")
     
     args = parser.parse_args()
     
-    # 加载环境变量
+    # Load environment variables
     load_dotenv()
     
-    # 检查OpenAI API密钥
+    # Check OpenAI API key
     if not os.environ.get("OPENAI_API_KEY"):
-        logger.error("未设置OPENAI_API_KEY环境变量")
+        logger.error("OPENAI_API_KEY environment variable not set")
         return 1
     
-    # 根据参数执行相应操作
+    # Execute corresponding operation based on arguments
     if args.all:
         success = process_all_policies()
         return 0 if success > 0 else 1

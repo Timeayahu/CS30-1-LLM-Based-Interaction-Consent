@@ -14,9 +14,7 @@ from ..section_analysis.what_to_collect import info_collection
 from ..section_analysis.how_to_use import info_use
 from ..section_analysis.who_to_share import info_share
 
-from models.mongodb_ec2 import (
-    connect_to_mongodb,
-    close_mongodb_connection,
+from models.mongodb_local import (
     get_policy_by_url,
     save_policy,
     save_summary,
@@ -102,15 +100,12 @@ class Scheduling:
     
 
     def schedule(self, data):
-        client, db, privacy_data = connect_to_mongodb()
-        if client == None:
-            return {'error': 'Database connection failed!'}, 503
         if 'url' in data:
             url = data['url']
 
             try:
                 # check if the url is already in the database
-                existing_policy = get_policy_by_url(url, privacy_data)
+                existing_policy = get_policy_by_url(url)
                 if existing_policy:
 
                     policy_id = existing_policy["policy_id"] if "policy_id" in existing_policy else existing_policy["_id"]
@@ -126,10 +121,9 @@ class Scheduling:
                     if time_elapsed < REFRESH_INTERVAL:
                         print(f"Content is recent (updated {time_elapsed.days} days ago), using cached version")
 
-                        existing_summary = get_summary(policy_id, privacy_data)
+                        existing_summary = get_summary(policy_id)
                         if existing_summary and "summary_content" in existing_summary:
                             self.policy_id = policy_id
-                            close_mongodb_connection(client)
                             return {
                                 'summary': existing_summary["summary_content"],
                                 'policy_id': str(policy_id)
@@ -146,12 +140,11 @@ class Scheduling:
                     if not self.check_content_changed(url, stored_hash):
                         # no change, update last checked time
                         print(f"Content unchanged, updating last checked time")
-                        update_last_checked_time(policy_id, privacy_data)
+                        update_last_checked_time(policy_id)
 
-                        existing_summary = get_summary(policy_id, privacy_data)
+                        existing_summary = get_summary(policy_id)
                         if existing_summary and "summary_content" in existing_summary:
                             self.policy_id = policy_id
-                            close_mongodb_connection(client)
                             return {
                                 'summary': existing_summary["summary_content"],
                                 'policy_id': str(policy_id)
@@ -167,16 +160,13 @@ class Scheduling:
                         print("data from frontend")
                         self.get_content(data)
                     else:
-                        close_mongodb_connection(client)
                         return {"error": "Unable to get the content"}, self.status
 
             except Exception as e:
                 print(f"Error during freshness check: {str(e)}")
-                close_mongodb_connection(client)
                 return {"error": "Error during freshness check!"}, 503
 
         else:
-            close_mongodb_connection(client)
             return {"error": "Not valid request!"}, 400
 
         global_thread = threading.Thread(target=self.analyse_global)
@@ -208,8 +198,7 @@ class Scheduling:
                     url=data['url'],
                     html_content=self.html_content,
                     markdown_content=self.markdown_content,
-                    summary_content=summary_json,
-                    privacy_data=privacy_data
+                    summary_content=summary_json
                 )
                 print(f"save policy and summary result: {policy_id}")
 
@@ -224,5 +213,4 @@ class Scheduling:
 
                 print(f"database save error: {e}")
 
-        close_mongodb_connection(client)
         return self.result, self.status

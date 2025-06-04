@@ -201,7 +201,7 @@ def save_summary(policy_id, summary_content):
         print(f"Save summary failed: {e}")
         return None
 
-# 创建TTL索引，会话不活跃24小时后自动删除
+# create a TTL index, the session will be deleted after 24 hours of inactivity
 chat_sessions.create_index("last_active", expireAfterSeconds=86400)
 
 def generate_session_id():
@@ -210,12 +210,12 @@ def generate_session_id():
 def create_session(policy_id=None, user_id=None):
     session_id = generate_session_id()
     session_data = {
-        "_id": session_id,  # 直接用生成的UUID作为_id
+        "_id": session_id, 
         "user_id": user_id,
         "policy_id": policy_id,
         "created_at": datetime.datetime.now(),
         "last_active": datetime.datetime.now(),
-        "initialized": False,  # 标记是否已初始化系统消息
+        "initialized": False, 
         "messages": []
     }
     chat_sessions.insert_one(session_data)
@@ -230,21 +230,21 @@ def add_message_to_session(session_id, role, content):
     result = chat_sessions.update_one(
         {"_id": session_id},
         {
-            "$push": {"messages": {"$each": [message], "$slice": -50}},  # 只保留最新的50条消息
+            "$push": {"messages": {"$each": [message], "$slice": -50}},  
             "$set": {"last_active": datetime.datetime.now()}
         }
     )
     return result.modified_count > 0
 
 def mark_session_initialized(session_id, system_content):
-    """标记会话已初始化系统消息"""
+    #mark the session as initialized with system message
     message = {
         "role": "system",
         "content": system_content,
         "timestamp": datetime.datetime.now()
     }
     result = chat_sessions.update_one(
-        {"_id": session_id, "initialized": False},  # 确保只初始化一次
+        {"_id": session_id, "initialized": False},  
         {
             "$set": {"initialized": True},
             "$push": {"messages": message}
@@ -253,27 +253,27 @@ def mark_session_initialized(session_id, system_content):
     return result.modified_count > 0
 
 def get_session(session_id):
-    """获取完整会话"""
+    #get the full session
     session = chat_sessions.find_one({"_id": session_id})
     if session:
-        # 处理所有日期时间字段
+        # handle all date time fields
         if "created_at" in session:
             session["created_at"] = session["created_at"].isoformat()
         if "last_active" in session:
             session["last_active"] = session["last_active"].isoformat()
         
-        # 处理消息中的时间戳
+        # handle the timestamp in the messages
         for msg in session.get("messages", []):
             if "timestamp" in msg:
                 msg["timestamp"] = msg["timestamp"].isoformat()
     return session
 
 def get_session_messages(session_id):
-    """获取会话消息"""
+    #get the session messages
     session = chat_sessions.find_one({"_id": session_id})
     if session:
         messages = session.get("messages", [])
-        # 将datetime对象转换为ISO格式字符串
+        # transform the datetime object to ISO format string
         for msg in messages:
             if "timestamp" in msg and isinstance(msg["timestamp"], datetime.datetime):
                 msg["timestamp"] = msg["timestamp"].isoformat()
@@ -281,12 +281,12 @@ def get_session_messages(session_id):
     return None
 
 def update_system_message(session_id, new_system_content):
-    """更新会话中的系统消息内容"""
+    #update the system message content in the session
     try:
         result = chat_sessions.update_one(
             {
                 "_id": session_id,
-                "messages.role": "system"  # 定位到系统消息
+                "messages.role": "system"  
             },
             {
                 "$set": {
@@ -302,7 +302,7 @@ def update_system_message(session_id, new_system_content):
         return False
 
 def close_session(session_id):
-    """关闭会话（可选）"""
+    #close the session (optional)
     return chat_sessions.update_one(
         {"_id": session_id},
         {"$set": {"closed": True}}

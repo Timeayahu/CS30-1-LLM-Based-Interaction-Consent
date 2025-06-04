@@ -144,36 +144,25 @@ class ChatService:
             return None
 
     def get_system_rules(self):
-        """Build system rules - permanent hard rules"""
-        return """You are a privacy-policy expert assistant. YOU MUST ONLY ANSWER PRIVACY-RELATED QUESTIONS.
-
-    CRITICAL DOMAIN RESTRICTION:
-    - You MUST REFUSE to answer questions about poetry, literature, general knowledge, or any non-privacy topics
-    - IMMEDIATELY respond with: "I'm specialized in privacy policy questions. Please ask about data privacy, GDPR, CCPA, or related topics."
-    - DO NOT provide any information outside privacy/data protection domain
+        """Build system rules - flexible assistant rules"""
+        return """You are a helpful and knowledgeable AI assistant. You can answer questions on any topic.
 
     RESPONSE STYLE:
     Always begin with a short, friendly encouragement (≤ 15 words) before the main answer.
     Examples: "Great question!", "Good thinking!", "Excellent inquiry!", "That's a thoughtful question!", "Nice question!"
 
     INFORMATION SOURCES (in priority order):
-    1. External Privacy Knowledge (relevant privacy regulations and best practices)
+    1. External Knowledge (relevant information and best practices)
     2. Bubble Context (Category Name + Bubble Summary)
     3. Global Summary (overall policy overview)
     4. Original Policy (full policy text)
 
     ANSWERING PROCEDURE:
-    1. FIRST: Check if question is about privacy/data protection. If NOT, decline immediately.
-    2. Check External Privacy Knowledge for relevant regulations or guidelines
-    3. Then search Bubble Context & Global Summary
-    4. If answer NOT found, search the Original Policy
-    5. If answer not found in any source AND question is privacy-related:
-       - Provide concise explanation based on privacy law knowledge
-    6. If still uncertain about privacy matters, apologize
-
-    PRIVACY TOPICS INCLUDE: privacy policies, data protection, GDPR, CCPA, PIPL, personal information, consent, cookies, tracking, data collection, data sharing, user rights, data retention, data security, privacy compliance
-
-    NON-PRIVACY TOPICS TO REFUSE: poetry, literature, general knowledge, science, history, entertainment, sports, cooking, travel, etc.
+    1. Check External Knowledge for relevant information or guidelines
+    2. Then search Bubble Context & Global Summary if available
+    3. If answer NOT found, search the Original Policy if available
+    4. If answer not found in any source, provide explanation based on general knowledge
+    5. If still uncertain, apologize and suggest where to find more information
 
     SOURCE EXCERPT RULES:
     ONLY IF user explicitly asks for original wording or uses trigger words:
@@ -183,7 +172,7 @@ class ChatService:
     — then locate most relevant passage and quote up to 3 consecutive sentences under === Source excerpt ===
 
     CITATION FORMAT:
-    When citing privacy regulations: [Regulation/Standard: Section/Article]
+    When citing regulations or standards: [Source: Section/Article]
     Examples: [GDPR: Article 13] or [CCPA: Section 1798.100]
 
     LANGUAGE RULE:
@@ -477,48 +466,9 @@ VIN collection is a standard automotive practice that enables BYD to provide per
         return text
     
     def is_privacy_related_question(self, question: str) -> bool:
-        """Check if the question is related to privacy/data protection"""
-        question_lower = question.lower()
-        
-        # Only refuse extremely obvious non-privacy questions
-        # Be very conservative - better to allow than to reject privacy questions
-        obvious_non_privacy_patterns = [
-            # Literature and arts
-            ('write', 'poem'), ('create', 'poetry'), ('compose', 'song'),
-            ('tell', 'story'), ('write', 'novel'), ('create', 'literature'),
-            
-            # Cooking and recipes
-            ('recipe', 'cooking'), ('how to cook'), ('ingredients for'),
-            
-            # Weather and travel
-            ('weather today'), ('temperature in'), ('travel to'),
-            
-            # Math and science problems  
-            ('solve this math'), ('calculate'), ('what is', 'plus'),
-            ('physics problem'), ('chemistry equation'),
-            
-            # Entertainment
-            ('movie recommendation'), ('best films'), ('tv shows'),
-            ('video games'), ('sports scores')
-        ]
-        
-        # Check for obvious non-privacy patterns
-        for pattern in obvious_non_privacy_patterns:
-            if isinstance(pattern, tuple):
-                # Check if all keywords in the pattern are present
-                if all(keyword in question_lower for keyword in pattern):
-                    return False
-            else:
-                # Single keyword check
-                if pattern in question_lower:
-                    return False
-        
-        # For all other cases, allow the question to pass through
-        # This includes:
-        # - Any mention of policy, data, information, user, account, etc.
-        # - Any ambiguous questions 
-        # - Any questions in privacy policy context
-        # - Better to let GPT handle edge cases than block legitimate questions
+        """Check if the question is related to privacy/data protection - now accepts all questions"""
+        # Allow all questions to pass through
+        # This removes the restriction that only privacy-related questions can be answered
         return True
     
     def create_privacy_decline_response(self, user_question: str) -> dict:
@@ -584,11 +534,10 @@ I can help you understand privacy policies, data protection laws, user rights, a
             if not user_question:
                 return {"success": False, "error": "missing user question parameter"}, 400
             
-            # 2. Check if question is privacy-related (early filtering)
-            # Temporarily disabled to ensure all questions can be processed
-            # if not self.is_privacy_related_question(user_question):
-            #     self.logger.info(f"Non-privacy question declined: {user_question[:50]}...")
-            #     return self.create_privacy_decline_response(user_question)
+            # 2. Check if question is privacy-related (now allows all questions)
+            if not self.is_privacy_related_question(user_question):
+                self.logger.info(f"Question declined: {user_question[:50]}...")
+                return self.create_privacy_decline_response(user_question)
             
             # 3. session management
             session = get_session(session_id) if session_id else None
@@ -715,11 +664,10 @@ I can help you understand privacy policies, data protection laws, user rights, a
             if not user_question:
                 return {"success": False, "error": "missing user question parameter"}, 400
             
-            # 2. Check if question is privacy-related (early filtering)
-            # Temporarily disabled to ensure all questions can be processed
-            # if not self.is_privacy_related_question(user_question):
-            #     self.logger.info(f"Non-privacy question declined: {user_question[:50]}...")
-            #     return self.create_privacy_decline_response(user_question)
+            # 2. Check if question is privacy-related (now allows all questions)
+            if not self.is_privacy_related_question(user_question):
+                self.logger.info(f"Question declined: {user_question[:50]}...")
+                return self.create_privacy_decline_response(user_question)
             
             # 3. session management
             session = get_session(session_id) if session_id else None

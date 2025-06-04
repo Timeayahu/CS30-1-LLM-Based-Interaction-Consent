@@ -28,7 +28,7 @@ class TestCrawlerAPI(unittest.TestCase):
 
         self.assertEqual(status_code, 400)
         self.assertFalse(result['success'])
-        self.assertEqual(result['error'], '请求中缺少URL参数')
+        self.assertEqual(result['error'], 'lack of URL parameter in request')
 
     @patch('services.crawler.call_crawler.crawler_service')
     def test_crawl_privacy_policy_with_error(self, mock_service):
