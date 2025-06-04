@@ -29,6 +29,7 @@ Resources provided by the client: nan
 
 
 ---------------------------------------------------------------------------------
-
+## How to quickly use our interactive consent reader?
+If you want to deploy the project by yourself, you can follow the guide inside 
 ![图片](https://github.com/user-attachments/assets/15655def-8424-4571-8d0c-1d80861f2f56)
 
