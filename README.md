@@ -28,8 +28,12 @@ Dataset provided by the client: No, the students need to find dataset.
 Resources provided by the client: nan
 
 
----------------------------------------------------------------------------------
+---
 ## How to quickly use our interactive consent reader?
-If you want to deploy the project by yourself, you can follow the guide inside 
+
+If you want to deploy the project by yourself, you can follow the README.md inside **FlaskProject** to deploy it locally (or **FlaskProject_server** & **FlaskProject_crawler** to deploy it on AWS environment).
+
+But we also provide a quick setup option, which only requires loading the frontend folder to your Chrome Extension (We currently have a server running on AWS).
+
 ![图片](https://github.com/user-attachments/assets/15655def-8424-4571-8d0c-1d80861f2f56)
 
