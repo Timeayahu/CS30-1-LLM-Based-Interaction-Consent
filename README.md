@@ -35,6 +35,12 @@ If you want to deploy the project by yourself, you can follow the README.md insi
 
 But we also provide a quick setup option, which only requires loading the frontend folder to your Chrome Extension (We currently have a server running on AWS).
 
-- **step 1** Open the extension page of Chrome
+- **step 1**:  Open the extension page of Chrome
+
 ![图片](https://github.com/user-attachments/assets/15655def-8424-4571-8d0c-1d80861f2f56)
+
+- **step 2**:  Turn on the Developer mode on the right top,  and click load unpacked
+
+![图片](https://github.com/user-attachments/assets/dc0b3147-57fb-4f50-81c1-f9c5d83ca9e7)
+
 
