@@ -1,77 +1,119 @@
-### docker usage guide
+# Docker Usage Guide
 
-**Install Docker**
-   For Windows (WSL2 recommended): 
-   
-      1.Install WSL2 + Ubuntu: 
-      https://learn.microsoft.com/en-us/windows/wsl/install 
-      
-      2.Install Docker Desktop for Windows:
-      https://www.docker.com/products/docker-desktop/
+## Install Docker
 
+### For Windows (WSL2 Recommended)
 
-   For macOS or Linux:
-      Download and install Docker Desktop from:
-      https://www.docker.com/products/docker-desktop/
+1. Install WSL2 + Ubuntu  
+   https://learn.microsoft.com/en-us/windows/wsl/install
 
-   After installation, open a terminal and run:
-      docker --version
-      docker-compose --version
+2. Install Docker Desktop for Windows  
+   https://www.docker.com/products/docker-desktop/
 
-**Build and start the project**
-   please run this command in the project root directory (flask project):
-      docker-compose up --build
+> During installation, make sure to enable WSL2 integration.
 
-   Type docker ps to check whether the container has started successfully
+### For macOS or Linux
 
-   If the container starts normally, open your browser and enter the URL: http://localhost:5000. 
+Download and install Docker Desktop from:  
+https://www.docker.com/products/docker-desktop/
 
-   A page should appear saying: Welcome to the Privacy Policy Crawling and Analysis System. For API documentation, please visit /api/docs
-   
-   The container only needs to be built once. In the future, you can just use docker-compose up -d to restart it.
+### Verify Installation
 
-   **Common commands during development:**
-   First-time build and start: docker-compose up --build -d
+After installation, open a terminal and run:
 
-   Daily development (after building once): docker-compose up -d
+- `docker --version`  
+- `docker-compose --version`  
 
-   Code modifications: no need to restart, as they are automatically synced to the container
+You should see the version numbers if installed correctly.
 
-   If you modify requirements/dockerfile or other config files:
-   docker-compose down (stop service) + docker-compose up --build -d
+---
 
-   Temporarily shut down/stop: docker-compose down / docker-compose stop
+## Build and Start the Project
 
-   View logs: docker-compose logs -f webapp
+Navigate to the root directory of the project (where `docker-compose.yml` is located), and run:
 
+- `docker-compose up --build` — builds and starts the containers
 
-   **Common commands**
-   **Image & Container Management Commands**
+To check if the container is running:
 
-   docker build -t myimage . Manually build an image using Dockerfile (usually use docker-compose during development)
-   docker images View existing images
-   docker rmi <imageID> Delete image
-   docker ps -a View all containers (including stopped ones)
-   docker rm <containerID> Delete container (stop it first)
-   
-   
-   **docker-compose Common Commands**
+- `docker ps`
 
-   docker-compose up Start container (will auto build if image doesn’t exist)
-   docker-compose up --build Rebuild image and start (must use if code changed)
-   docker-compose down Stop and remove container (keep images and volumes)
-   docker-compose down --volumes Also remove volumes (use with caution; database will be cleared)
-   docker-compose down --rmi all Remove all containers + images
-   docker-compose logs -f Live view of service output logs (for debugging)
+Then open your browser and visit:  
+`http://localhost:5000`
 
-### app.py start
-   You can also use app.py to start directly, which is convenient for testing during development.
-   Before pushing, remember to run docker-compose down and docker-compose up --build -d to ensure container is correctly built for future use.
+You should see the message:  
+**"Welcome to the Privacy Policy Crawling and Analysis System. For API documentation, please visit /api/docs"**
 
+> You only need to build once. For future runs, use:  
+> `docker-compose up -d`
 
-### Run test (docker-compose.test.yml)
-   Open the terminal, run `docker-compose -f docker-compose.test.yml up --build --abort-on-container-exit`, then start the test process.
+---
 
+## Common Commands During Development
 
+- First-time build and start (detached mode):  
+  `docker-compose up --build -d`
 
+- Daily development start (after initial build):  
+  `docker-compose up -d`
+
+- Code modifications:  
+  No need to restart; changes are auto-synced.
+
+- If you modify `requirements.txt`, `Dockerfile`, or other configuration files:  
+  `docker-compose down`  
+  `docker-compose up --build -d`
+
+- To stop the service:  
+  `docker-compose down`  
+  or  
+  `docker-compose stop`
+
+- View real-time logs:  
+  `docker-compose logs -f webapp`
+
+---
+
+## Docker Commands
+
+### Image & Container Management
+
+- `docker build -t myimage .` — Manually build image from Dockerfile  
+- `docker images` — List all images  
+- `docker rmi <imageID>` — Remove image by ID  
+- `docker ps -a` — List all containers (including stopped ones)  
+- `docker rm <containerID>` — Remove container by ID (must be stopped first)
+
+### docker-compose Management
+
+- `docker-compose up` — Start and auto-build if needed  
+- `docker-compose up --build` — Rebuild and start (use if code/config changed)  
+- `docker-compose down` — Stop and remove containers (keep volumes/images)  
+- `docker-compose down --volumes` — Also remove volumes (⚠️ database will be cleared)  
+- `docker-compose down --rmi all` — Remove all containers and images  
+- `docker-compose logs -f` — View real-time logs of all services
+
+---
+
+## Run app.py Directly (Optional)
+
+For quick testing, you can also start the app using:
+
+- `python app.py`
+
+> Before pushing code, rebuild the container with:  
+> `docker-compose down`  
+> `docker-compose up --build -d`
+
+---
+
+## Run Tests (Optional)
+
+If your project includes a test configuration file:
+
+Run the following in your terminal:
+
+- `docker-compose -f docker-compose.test.yml up --build --abort-on-container-exit`
+
+---
 
