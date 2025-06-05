@@ -29,6 +29,17 @@ Resources provided by the client: nan
 
 
 ---
+## Backend version Explanation
+
+- If you want to deploy this project locally, you need to follow the README.md in **FlaskProject**.
+- If you want to deploy in AWS cloud environment, you need to follow the README.md in **FlaskProject_crawler** and **FlaskProject_server** (deploy both of these two program needs to be deployed, connected through API call).
+
+## Frontend version Explanation
+
+- The **frontend_local** is for the local version of backend (FlaskProject)
+- The **Frontend_Cloud** is for the cloud version of backend (FlaskProject_server and FlaskProject_crawler)
+
+
 ## How to quickly use our interactive consent reader?
 
 If you want to deploy the project by yourself, you can follow the README.md inside **FlaskProject** to deploy it locally (or **FlaskProject_server** & **FlaskProject_crawler** to deploy it on AWS environment).
