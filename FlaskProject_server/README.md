@@ -467,7 +467,7 @@ docker build -t my-app .
 #### Step 3: Run and Test
 
 ```bash
-docker run -d -p 5000:5000 my-app
+docker run -p 5000:5000 my-app
 curl http://localhost:5000     # Or visit EC2_PUBLIC_IP:5000 in your browser
 ```
 
