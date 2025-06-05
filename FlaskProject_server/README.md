@@ -501,6 +501,13 @@ docker tag my-app:latest <aws_account_id>.dkr.ecr.<region>.amazonaws.com/my-app:
 docker push <aws_account_id>.dkr.ecr.<region>.amazonaws.com/my-app:latest
 ```
 
+#### Addition: Clean up
+
+If you want to update your docker image (create a new one), you need to delete the previous version of docker images (to ensure enough space for new one), using:
+
+```bash
+docker system prune -af --volumes
+```
 
 ### 🧠 Notes
 
